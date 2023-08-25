@@ -98,15 +98,38 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|RF-001  | O sistema deve permitir o cadastro de restaurantes.                                                                     | ALTA       |
+|RF-002  | O sistema deve permitir o cadastro de usuários.                                                                         | ALTA       |
+|RF-003  | O sistema deve permitir o login de restaurantes.                                                                        | ALTA       |
+|RF-004  | O sistema deve permitir o login de usuários.                                                                           | ALTA       |
+|RF-005  | O sistema deve permitir a edição dos dados das contas.                                                                  | MÉDIA      |
+|RF-006  | O sistema deve permitir que os restaurantes registrem seus produtos.                                                    | ALTA       |
+|RF-007  | O sistema deve permitir a edição de produtos.                                                                           | MÉDIA      |
+|RF-008  | O sistema deve permitir que os usuários visualizem produtos dos restaurantes.                                           | ALTA       |
+|RF-009  | O sistema deve permitir que o usuário use a câmera para escanear QR-codes de restaurantes parceiros.                    | MÉDIA      |
+|RF-010  | O sistema deve permitir que usuário adicione produtos ao seu carrinho de compra.                                        | ALTA       |
+|RF-011  | O sistema deve permitir que o usuário finalize um pedido com um ou mais produtos.                                       | ALTA       |
+|RF-012  | O sistema deve permitir que os comércios recebam os pedidos em ordem cronológica.                                       | MÉDIA      |
+|RF-013  | O sistema deve identificar geograficamente o local onde o usuário está e sugerir o restaurante para o usuário.           | BAIXA      |
+|RF-014  | O sistema deve sugerir comércios com base no usuário. (Ele não poderá pedir delivery, seriam somente sugestões de visitas)| BAIXA      |
+|RF-015  | O sistema deve permitir que os restaurantes definam horários de funcionamento.                                | MÉDIA      |
+|RF-016  | O sistema deve permitir que os usuários avaliem e comentem sobre os restaurantes e produtos.                   | ALTA       |
+|RF-017  | O sistema deve notificar os usuários quando um pedido estiver pronto ou quando houver atualizações sobre o status do pedido. | ALTA       |
+|RF-018  | O sistema deve permitir que os restaurantes ofereçam promoções ou descontos em produtos específicos.          | MÉDIA      |
+|RF-019  | O sistema deve permitir a busca de restaurantes por nome, localização ou tipo de cozinha.                     | MÉDIA      |
+|RF-020  | O sistema deve permitir que os restaurantes definam um limite máximo de pedidos por dia ou hora.              | BAIXA      |
+|RF-021  | O sistema deve permitir que os usuários marquem restaurantes como favoritos para acesso rápido.               | MÉDIA      |
+|RF-022  | O sistema deve permitir que os restaurantes visualizem estatísticas sobre vendas, produtos mais populares e avaliações. | MÉDIA      |
+
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|RNF-001 | A aplicação deve ser responsiva, permitindo a visualização em diferentes resoluções de dispositivos.             | ALTA       |
+|RNF-002 | A aplicação deve ser desenvolvida em react native.                                                               | ALTA       |
+|RNF-003 | A aplicação deve possuir navegabilidade intuitiva.                                                               | MÉDIA      |
+|RNF-004 | A aplicação deve ser compatível com as versões mais recentes dos principais sistemas operacionais móveis (iOS e Android). | ALTA       |
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
