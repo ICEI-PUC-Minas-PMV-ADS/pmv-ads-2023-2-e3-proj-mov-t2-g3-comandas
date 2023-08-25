@@ -1,24 +1,32 @@
 # Comandas
 
 `CURSO`
+Analise e Desenvolvimento de Sistemas
 
 `DISCIPLINA`
+Projeto: Desenvolvimento de uma Aplicação Móvel em um Ambiente de Negócio
 
 `SEMESTRE`
+3º Semestre
+
+Criação de uma aplicação com a premissa da gestão e operação do sistema de controle da jornada de trabalho, permitindo o registro, o gerenciamento e a emissão de relatórios diretamente na aplicação. Conectando os gestores da empresa aos seus colaboradores.
+
 
 Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Álvaro Soares
+* André Azevedo Ferreira Carvalho
+* Carlos Eduardo Reinis
+* Florisvaldo Alves Moreira Neto
+* Breno Morais Goncalves
+* Vitor Silva Oliveira
 
 ## Orientador
 
-* Nome completo do professor 1
-
+* Mateus Curcino de Lima
+  
 ## Instruções de utilização
 
 Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
