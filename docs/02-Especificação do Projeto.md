@@ -55,9 +55,9 @@ Partindo das informações que as Personas apresentaram, chegou-se à conclusão
 |João Carlos  | Encontrar uma forma de agilizar e facilitar o trabalho dos garçons. | Melhorar o tempo de entrega de refeições dentro do restaurante.               |
 |Karen Luíza  | Poder realizar meu pedido analisando calmamente cada opção disponível, mesmo com o estabelecimento lotado.           | Conseguir analisar e escolher, com mais assertividade, pratos que mais me satisfaçam, sem precisar ficar segurando um garçom em minha mesa por muito tempo  |
 |Alessandro Nogueira  | Poder analisar todas as opções de refeições disponíveis perto de mim, mesmo estando em um lugar desconhecido.         | Economizar meu tempo e conhecer novos lugares sem precisar me locomover para cada uma.               |
-|Raquel Campos  | Conseguir alterar o cardápio sem ter a necessidade de realizar correções toda vez no cardápio físico. |Evitar problemas de confusão por conta de um cardápio com muitas correções e economizar com a impressão de novos |
-|Antonio Gomes.  |Acompanhar a fila de todos pedidos em aberto de uma forma simples, sem necessidade de pendurar papeis nas paredes. |Organizar melhor o processo de produção, evitando erros e confusões  |
-|Suzana Silva.  | Controlar a disponibilidade de mesas em tempo real | Para garantir uma gestão eficiente do espaço do restaurante.|
+|Emily Santos  | Conseguir alterar o cardápio sem ter a necessidade de realizar correções toda vez no cardápio físico. |Evitar problemas de confusão por conta de um cardápio com muitas correções e economizar com a impressão de novos |
+|Marcos Aurélio  |Acompanhar a fila de todos pedidos em aberto de uma forma simples, sem necessidade de pendurar papeis nas paredes. |Organizar melhor o processo de produção, evitando erros e confusões  |
+|Alice Holanda  | Controlar a disponibilidade de mesas em tempo real | Para garantir uma gestão eficiente do espaço do restaurante.|
 
 ## Modelagem do Processo de Negócio 
 
