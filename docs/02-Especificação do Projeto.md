@@ -182,7 +182,7 @@ A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualizaç
 
 Estabeleceu-se também um formato auxiliar que será empregado em todos os requisitos funcionais de maior importância para o projeto, um modelo horizontal, associativo e descritivo com todos vínculos de artefatos, status e estado. A matriz deve contemplar todos os elementos relevantes que fazem parte do sistema e estará em constante atualização durante o desenvolvimento deste projeto, sendo atualizada à medida em que é avançado o projeto.
 
-![matriz de rastreabilidade de requisitos detalhada](https://github.com/creinis/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/c916710ce4b9e4aa8af41f0e1b18a98bb54b7c18/docs/img/00_Matriz_Rastreabilidade_Requisitos_Detalhe.png)
+![matriz de rastreabilidade de requisitos detalhada](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/1cbb35f19683a05f910e1fe1a70540f5e487a6b5/docs/img/00_Matriz_Rastreabilidade_Requisitos_Detalhe.png)
 
 # Gerenciamento de Projeto
 
