@@ -134,17 +134,13 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 
 # Matriz de Rastreabilidade
 
-A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualização dos relacionamento entre requisitos e outros artefatos ou objetos, permitindo a rastreabilidade entre os requisitos e os objetivos de negócio. 
+A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualização dos relacionamento entre requisitos e outros artefatos ou objetos, permitindo a rastreabilidade entre os requisitos e os objetivos de negócio. Com o objetivo de mapear e explicitar as dependências internas e externas do projeto, desenvolvemos uma matriz de rastreabilidade de requisitos (Requirements Traceability Matrix - RTM).
 
-A matriz deve contemplar todos os elementos relevantes que fazem parte do sistema, conforme a figura meramente ilustrativa apresentada a seguir.
+![matriz de rastreabilidade](https://github.com/creinis/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/c916710ce4b9e4aa8af41f0e1b18a98bb54b7c18/docs/img/00_Matriz_Rastreabilidade.png)
 
-![Exemplo de matriz de rastreabilidade](img/02-matriz-rastreabilidade.png)
+Estabeleceu-se também um formato auxiliar que será empregado em todos os requisitos funcionais de maior importância para o projeto, um modelo horizontal, associativo e descritivo com todos vínculos de artefatos, status e estado. A matriz deve contemplar todos os elementos relevantes que fazem parte do sistema e estará em constante atualização durante o desenvolvimento deste projeto, sendo atualizada à medida em que é avançado o projeto.
 
-> **Links Úteis**:
-> - [Artigo Engenharia de Software 13 - Rastreabilidade](https://www.devmedia.com.br/artigo-engenharia-de-software-13-rastreabilidade/12822/)
-> - [Verificação da rastreabilidade de requisitos usando a integração do IBM Rational RequisitePro e do IBM ClearQuest Test Manager](https://developer.ibm.com/br/tutorials/requirementstraceabilityverificationusingrrpandcctm/)
-> - [IBM Engineering Lifecycle Optimization – Publishing](https://www.ibm.com/br-pt/products/engineering-lifecycle-optimization/publishing/)
-
+![matriz de rastreabilidade de requisitos detalhada](https://github.com/creinis/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/c916710ce4b9e4aa8af41f0e1b18a98bb54b7c18/docs/img/00_Matriz_Rastreabilidade_Requisitos_Detalhe.png)
 
 # Gerenciamento de Projeto
 
