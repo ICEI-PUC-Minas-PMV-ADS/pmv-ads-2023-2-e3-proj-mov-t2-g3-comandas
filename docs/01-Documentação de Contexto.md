@@ -8,7 +8,7 @@ A proposta de desenvolver um aplicativo para visualização de cardápios e real
 
 ## Objetivos
 
-A proposta de desenvolver um aplicativo para visualização de cardápios e realização de pedidos em restaurantes e bares tem como objetivo abordar alguns dos problemas centrais enfrentados por clientes e estabelecimentos no setor de hospitalidade. Ao simplificar a experiência do cliente, o aplicativo busca resolver desafios como a demora no atendimento, a ocorrência de erros nas anotações de pedidos e a dificuldade em personalizar as solicitações. Além disso, o aplicativo aborda a lacuna de informações detalhadas nos cardápios físicos, fornecendo aos clientes descrições completas e imagens dos pratos, permitindo-lhes fazer escolhas mais informadas. Ao abordar esses problemas, o aplicativo promete transformar a maneira como os clientes interagem com a culinária e a hospitalidade, melhorando a eficiência operacional dos estabelecimentos e aprimorando a experiência geral dos clientes.
+A nossa proposta de desenvolver um aplicativo dedicado à visualização de cardápios e à realização de pedidos em restaurantes e bares surge com o intuito de confrontar e solucionar os principais desafios que tanto os clientes quanto os estabelecimentos enfrentam no âmbito da hospitalidade. Com a simplificação da jornada do cliente em mente, o nosso aplicativo visa abordar questões essenciais, tais como o tempo excessivo de espera no atendimento, a propensão a erros na tomada de pedidos e a dificuldade associada à personalização das solicitações.
 
 Como objetivos específicos, podemos salientar:
 
