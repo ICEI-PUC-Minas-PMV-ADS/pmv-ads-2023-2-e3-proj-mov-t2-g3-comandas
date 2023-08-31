@@ -1,7 +1,7 @@
 # Plano de Testes de Software
 
 Os requisitos para realização dos testes de software são:
-- Site publicado na Internet https://greenpath.azurewebsites.net/
+- Site publicado na Internet ADICIONAR O LINK FINAL DO APP
 - Navegador da Internet - Chrome, Firefox ou Edge 
 - Conectividade de Internet para acesso às plataformas (APISs) 
 
@@ -15,7 +15,7 @@ Foram feitos testes automatizados e testes manuais, como seguem os resultados ab
 
 Os Testes automatizados foram realizados através de: https://datayze.com/site-navigability-analyzer
 
-Resultado:
+Resultado: IMAGEM ILUSTRATIVA - DEVE SER ATUALIZADA PARA A IMAGEM DO RESULTADO DO TESTE QUANDO O APP ESTIVER DISPONÍVEL
 ![Datayze](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t4-g1-greenpath/blob/da54cc1be16a28f67cf67a9056415704e008486e/docs/img/Navigability_Test.png)
 
 Também foi feito teste de forma manual navegando pela aplicação somente para exemplificar o procedimento manual, visto que, os testes automatizados foram positivos e não apresentaram problemas de navegabilidade na aplicação.
@@ -40,9 +40,10 @@ Todos os links levam à área ou tela esperada.
 Os testes de responsividade foram automatizados por Google: Teste de compatibilidade com dispositivos móveis
 https://search.google.com/test/mobile-friendly?hl=pt
 
-Link para os resultados:
-https://search.google.com/test/mobile-friendly/result?id=5Ok-5SsJAPACr_AADYfJ3w
+Link para os resultados: 
+ADICIONAR O LINK FINAL DO DO TESTE REALIZADO COM O APP
 
+IMAGEM ILUSTRATIVA - DEVE SER ATUALIZADA PARA A IMAGEM DO RESULTADO DO TESTE QUANDO O APP ESTIVER DISPONÍVEL
 ![Google](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t4-g1-greenpath/blob/855517a66609bf4424711da0607326660ae29d87/docs/img/Responsividade_Test.png)
 
 
