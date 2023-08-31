@@ -15,8 +15,9 @@ Foram feitos testes automatizados e testes manuais, como seguem os resultados ab
 
 Os Testes automatizados foram realizados através de: https://datayze.com/site-navigability-analyzer
 
-Resultado: **IMAGEM ILUSTRATIVA - DEVE SER ATUALIZADA PARA A IMAGEM DO RESULTADO DO TESTE QUANDO O APP ESTIVER DISPONÍVEL**
-![Datayze](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t4-g1-greenpath/blob/da54cc1be16a28f67cf67a9056415704e008486e/docs/img/Navigability_Test.png)
+Resultado: 
+**IMAGEM ILUSTRATIVA - DEVE SER ATUALIZADA PARA A IMAGEM DO RESULTADO DO TESTE QUANDO O APP ESTIVER DISPONÍVEL**
+![Datayze](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/2de36aa10a863c6d45574db658e1a67c5264f5fa/docs/img/Teste_Data_Analyzer_01.png)
 
 Também foi feito teste de forma manual navegando pela aplicação somente para exemplificar o procedimento manual, visto que, os testes automatizados foram positivos e não apresentaram problemas de navegabilidade na aplicação.
 
