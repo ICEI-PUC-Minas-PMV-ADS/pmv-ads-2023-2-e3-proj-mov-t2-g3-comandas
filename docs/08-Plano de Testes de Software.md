@@ -1,7 +1,7 @@
 # Plano de Testes de Software
 
 Os requisitos para realização dos testes de software são:
-- Site publicado na Internet ADICIONAR O LINK FINAL DO APP
+- Site publicado na Internet **ADICIONAR O LINK FINAL DO APP**
 - Navegador da Internet - Chrome, Firefox ou Edge 
 - Conectividade de Internet para acesso às plataformas (APISs) 
 
@@ -15,7 +15,7 @@ Foram feitos testes automatizados e testes manuais, como seguem os resultados ab
 
 Os Testes automatizados foram realizados através de: https://datayze.com/site-navigability-analyzer
 
-Resultado: IMAGEM ILUSTRATIVA - DEVE SER ATUALIZADA PARA A IMAGEM DO RESULTADO DO TESTE QUANDO O APP ESTIVER DISPONÍVEL
+Resultado: **IMAGEM ILUSTRATIVA - DEVE SER ATUALIZADA PARA A IMAGEM DO RESULTADO DO TESTE QUANDO O APP ESTIVER DISPONÍVEL**
 ![Datayze](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t4-g1-greenpath/blob/da54cc1be16a28f67cf67a9056415704e008486e/docs/img/Navigability_Test.png)
 
 Também foi feito teste de forma manual navegando pela aplicação somente para exemplificar o procedimento manual, visto que, os testes automatizados foram positivos e não apresentaram problemas de navegabilidade na aplicação.
@@ -25,6 +25,8 @@ Manual:
 
 ### Tela Inicial / Homepage:
 Na tela de Inicio existem os seguintes links para outras telas desta aplicação
+
+**Exemplo de teste manual de navegabilidade - quando a aplicação estiver finalizada este modelo de teste também será renovado.**
 
 - No cabeçalho, à esquerda, existem os links: "Logomarca" e “Inicio”, que ligam a página á homepage; “Empresas” que liga a aplicação à área de busca e resultados de busca de conteúdos de Empresas cadastradas na aplicação; “Vagas” que liga a aplicação à área de busca e resultados de busca de conteúdos de Vagas disponíveis cadastradas na aplicação;
 - No cabeçalho à direita, existe área para a foto do usuário logado com seu nome. Ao clicar sobre a foto é aberto menu de navegação com as opções: “Perfil” ou “Sair”. Ao clicar em sair é direcionado à tela inicial de login. Ao clicar em “Perfil” é direcionado à tela de perfil de usuário;
@@ -41,9 +43,9 @@ Os testes de responsividade foram automatizados por Google: Teste de compatibili
 https://search.google.com/test/mobile-friendly?hl=pt
 
 Link para os resultados: 
-ADICIONAR O LINK FINAL DO DO TESTE REALIZADO COM O APP
+**ADICIONAR O LINK FINAL DO DO TESTE REALIZADO COM O APP**
 
-IMAGEM ILUSTRATIVA - DEVE SER ATUALIZADA PARA A IMAGEM DO RESULTADO DO TESTE QUANDO O APP ESTIVER DISPONÍVEL
+**IMAGEM ILUSTRATIVA - DEVE SER ATUALIZADA PARA A IMAGEM DO RESULTADO DO TESTE QUANDO O APP ESTIVER DISPONÍVEL**
 ![Google](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t4-g1-greenpath/blob/855517a66609bf4424711da0607326660ae29d87/docs/img/Responsividade_Test.png)
 
 
@@ -53,10 +55,10 @@ IMAGEM ILUSTRATIVA - DEVE SER ATUALIZADA PARA A IMAGEM DO RESULTADO DO TESTE QUA
 
 Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
-| Caso de Teste      | CT-01 -      Teste de Login de Usuarios (Candidato ou Empresa)                                                                                                                                                 |
+| Caso de Teste      | CT-01 -      Teste de Login de Usuarios (Cliente ou Restaurante)                                                                                                                                                 |
 |--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  | RF-02; RF-07 -  O site deve permitir o login de usuário, candidatos ou empresas.                                    |
-| Objetivo do Teste      | Verificar se o login de usuarios Candidatos e Empresa ja cadastrados no Banco de Dados é realizado com sucesso.                                                                                   |
+| Requisitos Associados  | RF-03; RF-04 -  O site deve permitir o login de usuários (cliente) e/ou restaurantes (empresas).                                    |
+| Objetivo do Teste      | Verificar se o login de Cliente e Restaurante ja cadastrados no Banco de Dados é realizado com sucesso.                                                                                   |
 | Passos                 | 1) Acessar o site  <br>2) Realizar o Login se ja houver o cadastro existente.  <br>3) Verificar a validação das informações <br>4) Permitir o acesso e verificar dados no Banco de Dados.    |
 | Critérios de Êxito     |    Acesso ao painel de Usuario <br> Comunicação correta entre o Banco de Dados e aplicação.  |
 | Dados de entrada   |                                                                                                                                                                                                             | 
