@@ -56,42 +56,73 @@ Link para os resultados:
 
 Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
-| Caso de Teste      | CT-01 -      Teste de Login de Usuarios (Cliente ou Restaurante)                                                                                                                                                 |
+| Caso de Teste      | CT-001 -      Teste de Login de Usuarios (Cliente ou Restaurante)                                                                                                                                                 |
 |--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  | RF-03; RF-04 -  O site deve permitir o login de usuários (cliente) e/ou restaurantes (empresas).                                    |
+| Requisitos Associados  | RF-003; RF-004 -  O app deve permitir o login de usuários (cliente) e/ou restaurantes (empresas).                                    |
 | Objetivo do Teste      | Verificar se o login de Cliente e Restaurante ja cadastrados no Banco de Dados é realizado com sucesso.                                                                                   |
-| Passos                 | 1) Acessar o site  <br>2) Realizar o Login se ja houver o cadastro existente.  <br>3) Verificar a validação das informações <br>4) Permitir o acesso e verificar dados no Banco de Dados.    |
+| Passos                 | 1) Acessar o app  <br>2) Realizar o Login se ja houver o cadastro existente.  <br>3) Verificar a validação das informações <br>4) Permitir o acesso e verificar dados no Banco de Dados.    |
 | Critérios de Êxito     |    Acesso ao painel de Usuario <br> Comunicação correta entre o Banco de Dados e aplicação.  |
 | Dados de entrada   |                                                                                                                                                                                                             | 
 | Resultado Obtido   |                                                                                                                                                                                                           | 
  
-| Caso de Teste      | CT-02 -      Registro de Novo Usuario - Candidato (Usuário Pessoa Física)                                                                                                                                                 |
+| Caso de Teste      | CT-002 -      Registro de Novo Usuario - Restaurante (empresa)                                                                                                                                                 |
 |--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  | RF-01 -  O site deve permitir que o usuário crie o seu perfil.                                    |
-| Objetivo do Teste      | Verificar se os campos de entrada de dados do Perfíl de usuarios Candidatos estão funcionando corretamente e alimentando o Banco de Dados. |
-| Passos                 | 1) Acessar o site  <br>2) Fazer o cadastro (Novo Usuario) e Cadastrar as demais informações do Perfíl de usuário Pessoa Física (CPF).  <br>3) Verificar a validação das informações <br>4) Permitir o acesso e verificar dados no Banco de Dados.    |
-| Critérios de Êxito     |    Acesso ao painel de Perfil de Usuario - Candidato (Usuário Pessoa Física) <br> Comunicação correta entre o Banco de Dados e aplicação.  |
+| Requisitos Associados  | RF-001 -  O app deve permitir que o usuário Restaurante (empresa) crie o seu perfil; RF-015 - O sistema deve permitir que os restaurantes definam horários de funcionamento.                                    |
+| Objetivo do Teste      | Verificar se todos os campos de entrada de dados do Perfíl de usuario Restaurante (empresa) estão funcionando corretamente e alimentando o Banco de Dados. |
+| Passos                 | 1) Acessar o app  <br>2) Fazer o cadastro (Novo Usuario) e Cadastrar todas as demais informações do Perfíl de usuário Restaurante (empresa). O sistema deve permitir que os restaurantes definam horários de funcionamento. <br>3) Verificar a validação das informações <br>4) Permitir o acesso e verificar dados no Banco de Dados.    |
+| Critérios de Êxito     |    Acesso ao painel de Perfil de Usuario Cliente e Restaurante (empresa) <br> Comunicação correta entre o Banco de Dados e aplicação.  |
 | Dados de entrada   |                                                                                                                                                                                                             | 
 | Resultado Obtido   |                                                                                                                                                                                                           |  
 
 
-| Caso de Teste      | CT-03 -      Registro de Novo Usuario - Empresa (Usuário Pessoa Jurídica)                                   |
+| Caso de Teste      | CT-003 -      Registro de Novo Usuario - Cliente                                    |
 |--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  |  RF-06 -  O site deve permitir que o usuário Empresa crie o seu perfil; & RF-15 - Permitir um mecanismo de selos, onde é possível a empresa ter selos em seu perfil representando quais comprovações de responsabilidade social, ambiental e/ou sustentabilidade, ela possui.  |
-| Objetivo do Teste      | Verificar se os campos de entrada de dados do Perfíl de usuarios Empresas estão funcionando corretamente e alimentando o Banco de Dados.   |
-| Passos                 | 1) Acessar o site  <br>2) Fazer o cadastro (Novo Usuario) e Cadastrar as demais informações do Perfíl de usuário Pessoa Jurídica (CNPJ).  <br>3) Verificar a validação das informações <br>4) Permitir o acesso e verificar dados no Banco de Dados.    |
+| Requisitos Associados  |  RF-002 -  O app deve permitir que o usuário Cliente crie o seu perfil.  |
+| Objetivo do Teste      | Verificar se todos os campos de entrada de dados do Perfíl de usuario Cliente estão funcionando corretamente e alimentando o Banco de Dados.   |
+| Passos                 | 1) Acessar o app  <br>2) Fazer o cadastro (Novo Usuario) e Cadastrar todas as demais informações do Perfíl de usuário Cliente.  <br>3) Verificar a validação das informações <br>4) Permitir o acesso e verificar dados no Banco de Dados.    |
 | Critérios de Êxito     |    Acesso ao painel de Perfil de Usuario - Empresa (Usuário Pessoa Jurídica) <br> Comunicação correta entre o Banco de Dados e aplicação.  |
 | Dados de entrada   |                                                                                                                                                                                                             | 
 | Resultado Obtido   |                                                                                                                                                                                                           | 
  
-| Caso de Teste      | CT-04 – Teste de funcionalidade de Vagas - Empresa (Usuário Pessoa Jurídica)                  |
+| Caso de Teste      | CT-004 – Teste de funcionalidade de Edição dos dados das contas de usuários Cliente               |
 |--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  | RF-008 - O site deve permitir que a empresa possa publicar vagas de trabalho; RF-011 - O site deve exibir vagas de trabalho disponíveis; & RF-004 - O site deve permitir que o usuário demonstre interesse por uma vaga de trabalho publicada e se candidate para a mesma.  |
+| Requisitos Associados  | RF-005 - O sistema deve permitir a edição dos dados das contas de Clientes.  |
+| Objetivo do Teste      | Verificar se o app permite que usuários Clientes possam acessar, editar e salvar as informações de perfíl (cadastro).                                                               |
+| Passos                 | 1) Acessar o app. <br> 2) Fazer login de usuário Cliente. <br>3) Acessar o botão "Editar Perfil".  <br>4) Preencher novos dados em todos os campos de perfíl de Cliente que são editáveis. <br>5) Acessar o botão "Salvar". <br>6) Verificar se a perfil do usuário Cliente foi atualizado com sucesso. <br> 7) Fazer logout de usuário Cliente. <br> 8) Fazer login de usuário Cliente. <br>9) Verificar se a perfil do usuário Cliente foi atualizado com sucesso.                                            |
+| Critérios de Êxito     |   Todos os campos editáveis do perfíl de um usuário Cliente devem poder ser editados e salvos.                                                       |                                      
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                             |                             
+
+
+| Caso de Teste      | CT-005 – Teste de funcionalidade de Edição dos dados das contas de usuários Restaurantes (empresas)               |
+|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  | RF-005 - O sistema deve permitir a edição dos dados das contas de Restaurantes (empresas). RF-015 - O sistema deve permitir que os restaurantes definam horários de funcionamento. |
+| Objetivo do Teste      | Verificar se o app permite que usuários Restaurantes (empresas) possam acessar, editar e salvar as informações de perfíl (cadastro).                                                               |
+| Passos                 | 1) Acessar o app. <br> 2) Fazer login de usuário Restaurante (empresa). <br>3) Acessar o botão "Editar Perfil".  <br>4) Preencher novos dados em todos os campos de perfíl de Restaurante (empresa) que são editáveis. <br>5) Acessar o botão "Salvar". <br>6) Verificar se a perfil do usuário Restaurante (empresa) foi atualizado com sucesso. <br> 7) Fazer logout de usuário Restaurante (empresa). <br> 8) Fazer login de usuário Restaurante (empresa). <br>9) Verificar se a perfil do usuário Restaurante (empresa) foi atualizado com sucesso.                                            |
+| Critérios de Êxito     |   Todos os campos editáveis do perfíl de um usuário Cliente devem poder ser editados e salvos.                                                       |                                      
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                             |                             
+
+
+| Caso de Teste      | CT-006 – Teste de funcionalidade de Registro de Produtos - para Restaurantes (empresas)                  |
+|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  | RF-006 - O sistema deve permitir que os restaurantes registrem seus produtos; RF-007 - O sistema deve permitir a edição de produtos;   |
 | Objetivo do Teste      | Verificar se o aplicativo está dando o retorno esperado na barra de busca considerando as palavras chaves dos usuários. Garantir que a candidatura do usuário seja fácil e intuitiva, permitindo que os usuários tenham pelo acesso ao status da sua candidatura                                                               |
 | Passos                 | 1) Acessar o site por um navegador. <br> 2) Fazer login de uma empresa. <br>3) Acessar o campo "Publicar Vaga".  <br>4) Preencher os campos: Cargo na Empresa; Salário Oferecido; Carga Horária; Área; Selecionar a data de fechamento da vaga; descrição e local. <br>5) Publicar a Vaga. <br>6) Verificar se a vaga foi publicada com sucesso.                                              |
 | Critérios de Êxito     |   A Vaga deve ser publicada com sucesso apresentando todos os campos preenchidos na área de vagas do Site.                                                       |                                      
 | Dados de entrada   |                                                                                                                                                                                                             | 
 | Resultado Obtido   |                                                                                             |                             
+
+
+
+
+
+
+
+
+
+
+
 
 
 | Caso de Teste      | CT-05 – Teste de funcionalidade de Vagas - Candidato (Usuário Pessoa Física)                  |
