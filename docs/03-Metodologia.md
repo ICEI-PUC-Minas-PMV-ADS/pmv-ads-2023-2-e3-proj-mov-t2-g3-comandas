@@ -91,6 +91,9 @@ A plataforma Trello foi escolhida como centro de gerenciamento de tarefas estand
 - **`Em Andamento`:** 
 	Lista as tarefas que estão em desenvolvimento por um ou mais membros da equipe, as tarefas podem ser desenvolvidas individualmente ou coletivamente. Quando um membro da equipe pega uma tarefa da lista A Fazer esta tarefa é automaticamente alocada na lista Em Desenvolvimento, até que o desenvolvedor altere o status da tarefa em questão.
 
+- **`Gerenciamento`:** 
+	Lista de tarefas que devem apresentar constante iteração durante todo o desenvolvimento do projeto, devendo ser gerenciadas por um dos integrantes durante todas as etapas do projeto. 
+
 - **`Concluído`:** 
 	Quando o desenvolvedor finaliza uma tarefa e altera o status da mesma para Concluída o cartão desta tarefa é migrado para esta lista. O desenvolvedor pode ainda solicitar a outros membros da equipe revisão ou teste da tarefa. Com o intuito de melhorar o acompanhamento das atividades para cada etapa do projeto será incluída uma nova coluna de conclusão dos trabalhos, desta forma entende-se que é melhor a visualização das atividades por etapa e das responsabilidades individuais dos integrantes em cada etapa do projeto.
 
