@@ -29,10 +29,10 @@ Na tela de Inicio existem os seguintes links para outras telas desta aplicação
 
 **Exemplo de teste manual de navegabilidade - quando a aplicação estiver finalizada este modelo de teste também será renovado.**
 
-- No cabeçalho, à esquerda, existem os links: "Logomarca" e “Inicio”, que ligam a página á homepage; “Empresas” que liga a aplicação à área de busca e resultados de busca de conteúdos de Empresas cadastradas na aplicação; “Vagas” que liga a aplicação à área de busca e resultados de busca de conteúdos de Vagas disponíveis cadastradas na aplicação;
+- No cabeçalho, à esquerda, existem os links: "Logomarca" e “Inicio”, que ligam a página á homepage; “Restaurantes” que liga a aplicação à área de busca e resultados de busca de Restaurantes e Tipos de Comida cadastradas na aplicação; “Buscar” que liga a aplicação à área de busca e resultados de busca de conteúdos de Restaurantes disponíveis cadastrados na aplicação;
 - No cabeçalho à direita, existe área para a foto do usuário logado com seu nome. Ao clicar sobre a foto é aberto menu de navegação com as opções: “Perfil” ou “Sair”. Ao clicar em sair é direcionado à tela inicial de login. Ao clicar em “Perfil” é direcionado à tela de perfil de usuário;
-- Logo abaixo do cabeçalho existe a área central da aplicação com publicidade da empresa GreenPath e informações sobre a área de atuaçao da empresa e informações da mesma com o intuito de esclarecer aos potenciais novos usuários os campos de atuação da empresa.
-- No rodapé existem informações de Copyright da empresa e link para a Politica de Privacidade de dados da empresa GreenPath, este link liga ao texto Legal expandido; 
+- Logo abaixo do cabeçalho existe a área central da aplicação com publicidade da empresa Comandas e informações sobre a área de atuaçao da empresa e informações da mesma com o intuito de esclarecer aos potenciais novos usuários os campos de atuação da aplicação.
+- No rodapé existem informações de Copyright da aplicação e link para a Politica de Privacidade de dados da empresa Comandas, este link liga ao texto Legal expandido; 
 
 Resultado: 
 Todos os links levam à área ou tela esperada.
