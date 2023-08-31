@@ -79,8 +79,8 @@ A plataforma Trello foi escolhida como centro de gerenciamento de tarefas estand
 
 **Organização:**
 
-- **`Recursos para Projetos`:** 
-	Lista os links de principal acesso para a equipe, como: Google Drive, GitHub, MarvelApp, reunião semanal com a orientadora, e possíveis avisos importantes.
+- **`Informações`:** 
+	Lista os links de principal acesso para a equipe para as ferramentas usadas no projeto, como: Google Drive, GitHub, MarvelApp, reunião semanal com a orientadora, e possíveis avisos importantes.
 
 - **`Backlog`:** 
 	Lista os Requisitos Funcionais a serem desenvolvidos pela equipe de desenvolvimento. 
@@ -88,11 +88,11 @@ A plataforma Trello foi escolhida como centro de gerenciamento de tarefas estand
 - **`A fazer`:** 
 	Recebe todas tarefas a serem executadas na etapa atual de desenvolvimento do projeto. Informações especificas podem ser incorporadas a cada tarefa.
 
-- **`Em desenvolvimento`:** 
+- **`Em Andamento`:** 
 	Lista as tarefas que estão em desenvolvimento por um ou mais membros da equipe, as tarefas podem ser desenvolvidas individualmente ou coletivamente. Quando um membro da equipe pega uma tarefa da lista A Fazer esta tarefa é automaticamente alocada na lista Em Desenvolvimento, até que o desenvolvedor altere o status da tarefa em questão.
 
 - **`Concluído`:** 
-	Quando o desenvolvedor finaliza uma tarefa e altera o status da mesma para Concluída o cartão desta tarefa é migrado para esta lista. O desenvolvedor pode ainda solicitar a outros membros da equipe revisão ou teste da tarefa. Com o intuito de melhorar o acomapnhamento das atividades para cada etapa do projeto será incluída uma nova coluna de conclusão dos trabalhos, desta forma entende-se que é melhor a visualização das atividades por etapa e das responsabilidades individuais dos integrantes em cada etapa do projeto.
+	Quando o desenvolvedor finaliza uma tarefa e altera o status da mesma para Concluída o cartão desta tarefa é migrado para esta lista. O desenvolvedor pode ainda solicitar a outros membros da equipe revisão ou teste da tarefa. Com o intuito de melhorar o acompanhamento das atividades para cada etapa do projeto será incluída uma nova coluna de conclusão dos trabalhos, desta forma entende-se que é melhor a visualização das atividades por etapa e das responsabilidades individuais dos integrantes em cada etapa do projeto.
 
 - **`Em Teste`:** 
 	Lista dedicada a tarefas relativas aos códigos fonte do projeto que devem ser testados por outros membros da equipe a fim de garantir a qualidade do software e atendendo às especificações da metodologia adotada. 
