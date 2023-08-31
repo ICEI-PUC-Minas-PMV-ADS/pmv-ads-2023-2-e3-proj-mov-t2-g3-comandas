@@ -96,7 +96,7 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 | Caso de Teste      | CT-005 – Teste de funcionalidade de Edição dos dados das contas de usuários Restaurantes (empresas)               |
 |--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  | RF-005 - O sistema deve permitir a edição dos dados das contas de Restaurantes (empresas). RF-015 - O sistema deve permitir que os restaurantes definam horários de funcionamento. |
+| Requisitos Associados  | RF-005 - O sistema deve permitir a edição dos dados das contas de Restaurantes (empresas). RF-015 - O sistema deve permitir que os restaurantes definam horários de funcionamento. & RF-020 - O sistema deve permitir que os restaurantes definam um limite máximo de pedidos por dia ou hora.|
 | Objetivo do Teste      | Verificar se o app permite que usuários Restaurantes (empresas) possam acessar, editar e salvar as informações de perfíl (cadastro).                                                               |
 | Passos                 | 1) Acessar o app. <br> 2) Fazer login de usuário Restaurante (empresa). <br>3) Acessar o botão "Editar Perfil".  <br>4) Preencher novos dados em todos os campos de perfíl de Restaurante (empresa) que são editáveis. <br>5) Acessar o botão "Salvar". <br>6) Verificar se a perfil do usuário Restaurante (empresa) foi atualizado com sucesso. <br> 7) Fazer logout de usuário Restaurante (empresa). <br> 8) Fazer login de usuário Restaurante (empresa). <br>9) Verificar se a perfil do usuário Restaurante (empresa) foi atualizado com sucesso.                                            |
 | Critérios de Êxito     |   Todos os campos editáveis do perfíl de um usuário Cliente devem poder ser editados e salvos.                                                       |                                      
@@ -106,14 +106,19 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 | Caso de Teste      | CT-006 – Teste de funcionalidade de Registro de Produtos - para Restaurantes (empresas)                  |
 |--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  | RF-006 - O sistema deve permitir que os restaurantes registrem seus produtos; RF-007 - O sistema deve permitir a edição de produtos;   |
-| Objetivo do Teste      | Verificar se o aplicativo está dando o retorno esperado na barra de busca considerando as palavras chaves dos usuários. Garantir que a candidatura do usuário seja fácil e intuitiva, permitindo que os usuários tenham pelo acesso ao status da sua candidatura                                                               |
+| Requisitos Associados  | RF-006 - O sistema deve permitir que os restaurantes registrem seus produtos; RF-007 - O sistema deve permitir a edição de produtos; & RF-018 - O sistema deve permitir que os restaurantes ofereçam promoções ou descontos em produtos específicos.  |
+| Objetivo do Teste      | Verificar se o app permite o registro de um produto, a alteração de características de um produto já cadastrado, a aplicação de preço e disponibilidade. Verificar se o produto é salvo no banco de dados e se as alterações no produto também são salvas. Verificar se é possível incluir ou retirar um produto cadastrado de uma promoção.                                                              |
 | Passos                 | 1) Acessar o site por um navegador. <br> 2) Fazer login de uma empresa. <br>3) Acessar o campo "Publicar Vaga".  <br>4) Preencher os campos: Cargo na Empresa; Salário Oferecido; Carga Horária; Área; Selecionar a data de fechamento da vaga; descrição e local. <br>5) Publicar a Vaga. <br>6) Verificar se a vaga foi publicada com sucesso.                                              |
 | Critérios de Êxito     |   A Vaga deve ser publicada com sucesso apresentando todos os campos preenchidos na área de vagas do Site.                                                       |                                      
 | Dados de entrada   |                                                                                                                                                                                                             | 
 | Resultado Obtido   |                                                                                             |                             
 
 
+ - Casos para Processo de Compras
+ - Interface do QR code com a loja virtual para baixar o app e/ou acessar o Menu digital
+ - Teste para verificar ordem cronológica de entrada dos pedidos de compra / verificação automatizada do BD PK SERIAL UNIQUE
+ - Testes para sistemas de busca
+ - 
 
 
 
@@ -122,34 +127,21 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 
 
-
-
-
-| Caso de Teste      | CT-05 – Teste de funcionalidade de Vagas - Candidato (Usuário Pessoa Física)                  |
-|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  | RF-011 - O site deve exibir vagas de trabalho disponíveis & RF-004 - O site deve permitir que o usuário demonstre interesse por uma vaga de trabalho publicada e se candidate para a mesma.  |
-| Objetivo do Teste      | Verificar se o aplicativo está dando o retorno esperado na barra de busca considerando as palavras chaves dos usuários. Garantir que a candidatura do usuário seja fácil e intuitiva, permitindo que os usuários tenham pelo acesso ao status da sua candidatura                                                               |
-| Passos                 | 1) Acessar o site por um navegador. <br> 2) Fazer login de usuário Candidato. <br> 4) Acessar a área Vagas. <br> 5) Inserir palavras chaves na barra de pesquisa do site <br>6) Avaliar os resultados da pesquisa <br> 7) Acessar "Ver mais+" para acessar detalhes da vaga. <br> 7) Cadastrar-se na vaga. <br> 8) Verificar se a vaga em questão aparece na lista de "Meus Processos"do usuário logado.                           |
-| Critérios de Êxito     |   Deve apresentar resposta rápidas com uma flexibilidade ampla no sistema de pesquisa usando as palavras chaves de cada usuário.                                                       |                                      
-| Dados de entrada   |                                                                                                                                                                                                             | 
-| Resultado Obtido   |                                                                                             |              
-
-
-| Caso de Teste      | CT-06 – Teste de funcionalidade de geolocalização   |
+| Caso de Teste      | CT-009 – Teste de funcionalidade de geolocalização   |
 |--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  |      RF-011; RF-012; RF-13 - Precisão da localização: é importante verificar se a aplicação está fornecendo informações precisas sobre a localização      do usuário e das vagas mais proximas.  |
+| Requisitos Associados  |      RF-13 - O sistema deve identificar geograficamente o local onde o usuário está e sugerir o restaurante para o usuário. RF-019 - O sistema deve permitir a busca de restaurantes por nome, localização ou tipo de cozinha.  |
 | Objetivo do Teste      | Verificar se a aplicação está respondendo corretamente a mudanças na localização do usuário..                                                                                                                               |
-| Passos                     | 1) Acessar o site por um navegador  <br> 2) Entrar na barra de filtragem <br>  3) selecionar o estado e a cidade desejado                                                                                                    |
-| Critérios de Êxito     |   Exibição das vagas mais proximas da localização desejada do usuario.                                                                                                                                                      |
+| Passos                     | 1) Acessar o app.  <br>2) Fazer login de usuário Cliente. <br>3) Acessar a área de mapas / localização. <br>4) Verificar se aparecem restaurantes (empresas) proximos à localização atual. <br>5) Usar o filtro de resultados para tipo de comida e verificar os resultados apresentados no mapa. <br>6) Usar o filtro de resultados pela distância e verificar os resultados apresentados no mapa.                                                                                                    |
+| Critérios de Êxito     |   Exibição das Restaurantes (empresas) mais proximas da localização desejada do usuario e de acordo com as filtragens selecionadas.                                                                                                                                                      |
 | Dados de entrada   |                                                                                                                                                                                                             | 
 | Resultado Obtido   |                                                                                                                                                                                                           | 
 
 
 
 
-| Caso de Teste      | CT-07 -   Teste de Segurança                                       |
+| Caso de Teste      | CT-010 -   Teste de Segurança                                       |
 |--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Requisitos Associados  |  RF-01; RF-02; RF-03; RF-06; RF-015 - Criptografia: Garantir que as informações dos usuários, como senhas e dados pessoais, estejam criptografadas e protegidas de possíveis invasões.                                    |
+| Requisitos Associados  |  RF-001; RF-002; RF-003; RF-004; RF-005; RF-006; RF-010; RF-011; RF-012; RF-015; RF-017; RF-018; RF-020; RF-022 - Criptografia: Garantir que as informações dos usuários, como senhas e dados pessoais, estejam criptografadas e protegidas de possíveis invasões.                                    |
 | Objetivo do Teste      |  Verificar todas as brechas de possiveis ataques contra o site visando roubar informações dos usuarios.                                                                                  |
 | Passos                     | 1) Analisar o codigo fonte <br> 2) Verificar qual tipo de criptografia esta sendo utilizado no site <br> 3) Realizar testes de penetração <br> 4) Corrigir todas as brechas encontradas   |
 | Critérios de Êxito     |   Plena segurança dos dados pessoais dos usuarios.                  |
