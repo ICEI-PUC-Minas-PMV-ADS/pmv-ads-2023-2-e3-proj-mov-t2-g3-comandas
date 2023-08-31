@@ -102,7 +102,7 @@ O ambiente de gerenciamento de tarefas Trello deste Projeto pode ser acessado em
 
 A Figura abaixo ilustra o gerenciador de tarefas criado: 
  
- ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-1-e2-proj-int-t4-g1-greenpath/blob/35f758bc38132d55242e7065bedd60bab018632a/docs/img/Processo_Trello_screenshot.png)
+ ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/98d6aa7aaae8e42f765dc3aac2762023c16f8aae/docs/img/03_Metodologia_Trello_01.png)
  
 
 ### Ferramentas
