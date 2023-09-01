@@ -82,11 +82,13 @@ Definir um limite máximo de pedidos por dia ou hora.
 Visualiza a fila em ordem cronológica de pedidos realizados pelos Clientes
 (Algoritmo: O App deve inserir na fila o pedido realizado com sucesso pelo Cliente criando uma chave (pk ou fk) referente ao horário; o restaurante deve ter interface para alterar o status do pedido de compra (Recebido, Em espera, Em preparo, Preparativos Finais, Pronto/Aguardando Serviço, Será Servido em breve, Finalizado (já foi servido); O pedido deve ser movido para a lista de estatística, saindo da fila.
 
-Alterar todos os níveis de status de um pedido de compra 
+Alterar todos os níveis de status de um pedido de compra e verificar as alterações na fila de pedidos de compra
 
 Acessar a área exclusiva de administrador do Restaurante para visualizar informações de estatísticas sobre vendas, produtos mais populares, avaliações recebidas pelos usuários e a quantidade de usuários que favoritaram o Restaurante.
 
 Editar informações de cadastro de Cliente, alterar, salvar e verificar as alterações realizadas
+
+Verificar no mapa a marcação do Restaurante pelo endereço / posição georeferenciada
 
 Navegar pelo mapa e encontrar estabelecimentos próximos e anexar em uma lista de favoritos para poder dar indicações de estabelecimentos próximos para os Clientes
 
