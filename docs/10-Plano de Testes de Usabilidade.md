@@ -14,12 +14,15 @@ O formato típico de um item Likert é:
 
 Na aplicação dos testes de usabilidade será utilizada a versão à seguir análoga à escala de Likert:
 
-Nota 	Facilidade de Uso
-5 	O usuário não apresentou erros nem demora.
-4 	O usuário não apresentou erros, mas demorou para a finalização do teste.
-3 	O usuário encontrou um erro não-crítico nos fluxos ou precisou de ajuda simples.
-2 	O usuário encontrou erros não-críticos nos fluxos ou precisou de ajuda.
-1 	O usuário encontrou erros críticos ou obteve valores incorretos em um caso de teste.
+
+| Nota      | Descrição                                                                                        |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  5  |   O usuário não percebeu erros ou demora.                                                              |
+|  4  |   O usuário não percebeu erros, mas demorou para a finalizar a tarefa.                                 |
+|  3  |   O usuário encontrou um erro não-crítico nos fluxos ou precisou de ajuda para finalizar a tarefa.     |
+|  2  |   O usuário encontrou erros não-críticos nos fluxos ou precisou de ajuda.                              |
+|  1  |   O usuário encontrou erros críticos ou obteve valores incorretos em um caso de teste.                 | 
+ 
 
 
 
