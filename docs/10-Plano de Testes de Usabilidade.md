@@ -30,6 +30,10 @@ Na aplicação dos testes de usabilidade será utilizada a versão à seguir an�
 
 ## Plano de Testes de Usabilidade - usuário: Cliente
 
+https://docs.google.com/forms/d/1NiKeW2AgWGGnz6WhSMv3O8QsAt7OSN0j32v0zYGL5fI/edit
+https://docs.google.com/forms/d/e/1FAIpQLScTkUcdmD2Q8eejNsaLpBKhgPyUNLsFCegkV_8CqGTaeAt9MQ/viewform
+
+
 Ler QR code e ser direcionado para a página de download do App / Ver o Menu do restaurante em que esta no momento
 
 Criar cadastro de novo usuário Cliente
