@@ -2,7 +2,7 @@
 
 O teste de usabilidade permite avaliar a qualidade da interface com o usuário final da aplicação interativa. O Plano de Testes de Software é gerado a partir da especificação do sistema e consiste em casos de testes que deverão ser executados quando a implementação estiver parcial ou totalmente pronta.
 
-Para mensurar os testes será aplicada a **Escala de Likert** que é um tipo de escala de resposta psicométrica usada habitualmente em questionários, e é a escala mais usada em pesquisas de opinião. Ao responderem a um questionário baseado nesta escala, os perguntados especificam seu nível de concordância com uma afirmação. Esta escala tem seu nome devido à publicação de um relatório explicando seu uso por Rensis Likert.[1]
+_Para mensurar os testes será aplicada a **Escala de Likert** que é um tipo de escala de resposta psicométrica usada habitualmente em questionários, e é a escala mais usada em pesquisas de opinião. Ao responderem a um questionário baseado nesta escala, os perguntados especificam seu nível de concordância com uma afirmação. Esta escala tem seu nome devido à publicação de um relatório explicando seu uso por Rensis Likert.[1]_
 
 O formato típico de um item Likert é:
 
@@ -17,11 +17,11 @@ Na aplicação dos testes de usabilidade será utilizada a versão à seguir an�
 
 | Nota      | Descrição                                                                                        |
 |--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  5  |   O usuário não percebeu erros ou demora.                                                              |
-|  4  |   O usuário não percebeu erros, mas demorou para a finalizar a tarefa.                                 |
-|  3  |   O usuário encontrou um erro não-crítico nos fluxos ou precisou de ajuda para finalizar a tarefa.     |
-|  2  |   O usuário encontrou erros não-críticos nos fluxos ou precisou de ajuda.                              |
-|  1  |   O usuário encontrou erros críticos ou obteve valores incorretos em um caso de teste.                 | 
+|  5  |   Intuitivo e rápido.                                                              |
+|  4  |   Intuitivo e poderia ser mais rápido                                 |
+|  3  |   Não-intuitivo mas a tarefa pode ser executada como esperado     |
+|  2  |   Não intuitivo e necessitou ajuda para finalizar a tarefa                        |
+|  1  |   A tarefa não pode ser realizada                 | 
  
 
 
