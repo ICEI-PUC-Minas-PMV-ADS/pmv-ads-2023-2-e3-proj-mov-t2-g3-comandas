@@ -12,23 +12,92 @@ O formato típico de um item Likert é:
    4. Concordo parcialmente
    5. Concordo totalmente
 
+<br>
+
 Na aplicação dos testes de usabilidade será utilizada a versão à seguir análoga à escala de Likert:
 
 
 | Nota      | Descrição                                                                                        |
 |--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |  5  |   Intuitivo e rápido.                                                              |
-|  4  |   Intuitivo e poderia ser mais rápido                                 |
-|  3  |   Não-intuitivo mas a tarefa pode ser executada como esperado     |
-|  2  |   Não intuitivo e necessitou ajuda para finalizar a tarefa                        |
-|  1  |   A tarefa não pode ser realizada                 | 
+|  4  |   Intuitivo mas poderia ser mais rápido                                            |
+|  3  |   Não-intuitivo mas a tarefa pode ser executada como esperado                      |
+|  2  |   Não intuitivo e necessitou ajuda para finalizar a tarefa                         |
+|  1  |   A tarefa não pode ser realizada                                                  | 
  
+<br>
+<br>
+
+## Plano de Testes de Usabilidade - usuário: Cliente
+
+Ler QR code e ser direcionado para a página de download do App / Ver o Menu do restaurante em que esta no momento
+
+Criar cadastro de novo usuário Cliente
+
+Login
+
+Navegação pelo Menu do Restaurante (empresa) e visualizar detalhes dos produtos à disposição
+
+Processo de compra: inserir itens desejados no processo de compra e finalizar o pedido de compra
+
+Acessar a área de cliente e verificar o status do pedido de compra
+
+Receber aviso que o pedido esta pronto, disponível para retirada ou na etapa em que será servido à mesa
+
+Navegar pelo mapa e encontrar estabelecimentos próximos
+
+Filtrar estabelecimentos por tipo de comida, tipo de produtos
+
+Avaliar um estabelecimento e publicar um comentário
+
+Favoritar um estabelecimento e verificar a lista de favoritos na área do cliente
+
+Editar informações de cadastro de Cliente, alterar, salvar e verificar as alterações realizadas
+
+Logout
+
+<br>
+<br>
+
+## Plano de Testes de Usabilidade - usuário: Restaurante (empresa)
+
+Criar cadastro de novo usuário Restaurante
+
+Anexar QR code na planilha de cadastro do Restaurante
+
+Definir horário de funcionamento do Restaurante
+
+Login
+
+Criar Menu e sub-Menus (bebidas, sobremesas, entradas, etc..)
+
+Cadastrar produto com todas as características disponíveis na área de cadastro de produto vinculando a um dos sub-Menus
+
+Definir e alterar quantidade máxima de um produto e/ou disponibilidade
+
+Criar e Validar descontos em um produto ou na combinação entre produtos
+
+Definir um limite máximo de pedidos por dia ou hora.
+
+Visualiza a fila em ordem cronológica de pedidos realizados pelos Clientes
+(Algoritmo: O App deve inserir na fila o pedido realizado com sucesso pelo Cliente criando uma chave (pk ou fk) referente ao horário; o restaurante deve ter interface para alterar o status do pedido de compra (Recebido, Em espera, Em preparo, Preparativos Finais, Pronto/Aguardando Serviço, Será Servido em breve, Finalizado (já foi servido); O pedido deve ser movido para a lista de estatística, saindo da fila.
+
+Alterar todos os níveis de status de um pedido de compra 
+
+Acessar a área exclusiva de administrador do Restaurante para visualizar informações de estatísticas sobre vendas, produtos mais populares, avaliações recebidas pelos usuários e a quantidade de usuários que favoritaram o Restaurante.
+
+Editar informações de cadastro de Cliente, alterar, salvar e verificar as alterações realizadas
+
+Navegar pelo mapa e encontrar estabelecimentos próximos e anexar em uma lista de favoritos para poder dar indicações de estabelecimentos próximos para os Clientes
+
+Logout
 
 
 
 
-
-
+<br>
+<br>
+<br>
 
 
 
