@@ -1,11 +1,35 @@
 # Plano de Testes de Usabilidade
 
-O teste de usabilidade permite avaliar a qualidade da interface com o usuário da aplicação interativa. O Plano de Testes de Software é gerado a partir da especificação do sistema e consiste em casos de testes que deverão ser executados quando a implementação estiver parcial ou totalmente pronta.
+O teste de usabilidade permite avaliar a qualidade da interface com o usuário final da aplicação interativa. O Plano de Testes de Software é gerado a partir da especificação do sistema e consiste em casos de testes que deverão ser executados quando a implementação estiver parcial ou totalmente pronta.
 
-As referências abaixo irão auxiliá-lo na geração do artefato "Plano de Testes de Usabilidade".
+Para mensurar os testes será aplicada a **Escala de Likert** que é um tipo de escala de resposta psicométrica usada habitualmente em questionários, e é a escala mais usada em pesquisas de opinião. Ao responderem a um questionário baseado nesta escala, os perguntados especificam seu nível de concordância com uma afirmação. Esta escala tem seu nome devido à publicação de um relatório explicando seu uso por Rensis Likert.[1]
 
-> **Links Úteis**:
-> - [Teste De Usabilidade: O Que É e Como Fazer Passo a Passo (neilpatel.com)](https://neilpatel.com/br/blog/teste-de-usabilidade/)
-> - [Teste de usabilidade: tudo o que você precisa saber! | by Jon Vieira | Aela.io | Medium](https://medium.com/aela/teste-de-usabilidade-o-que-voc%C3%AA-precisa-saber-39a36343d9a6/)
-> - [Planejando testes de usabilidade: o que (e o que não) fazer | iMasters](https://imasters.com.br/design-ux/planejando-testes-de-usabilidade-o-que-e-o-que-nao-fazer/)
-> - [Ferramentas de Testes de Usabilidade](https://www.usability.gov/how-to-and-tools/resources/templates.html)
+O formato típico de um item Likert é:
+
+   1. Discordo totalmente
+   2. Discordo parcialmente
+   3. Indiferente
+   4. Concordo parcialmente
+   5. Concordo totalmente
+
+Na aplicação dos testes de usabilidade será utilizada a versão à seguir análoga à escala de Likert:
+
+Nota 	Facilidade de Uso
+5 	O usuário não apresentou erros nem demora.
+4 	O usuário não apresentou erros, mas demorou para a finalização do teste.
+3 	O usuário encontrou um erro não-crítico nos fluxos ou precisou de ajuda simples.
+2 	O usuário encontrou erros não-críticos nos fluxos ou precisou de ajuda.
+1 	O usuário encontrou erros críticos ou obteve valores incorretos em um caso de teste.
+
+
+
+
+
+
+
+
+
+
+Referências:
+ [Wikipedia - https://pt.wikipedia.org/wiki/Escala_Likert#cite_note-1](https://pt.wikipedia.org/wiki/Escala_Likert)
+ [1] Likert, Rensis (1932), «A Technique for the Measurement of Attitudes», Archives of Psychology, 140: 1-55
