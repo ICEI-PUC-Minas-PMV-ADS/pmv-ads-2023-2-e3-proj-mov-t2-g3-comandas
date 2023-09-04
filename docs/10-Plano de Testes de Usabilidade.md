@@ -30,9 +30,7 @@ Na aplicação dos testes de usabilidade será utilizada a versão à seguir an�
 
 ## Plano de Testes de Usabilidade - usuário: Cliente
 
-https://docs.google.com/forms/d/1NiKeW2AgWGGnz6WhSMv3O8QsAt7OSN0j32v0zYGL5fI/edit
-<br>https://docs.google.com/forms/d/e/1FAIpQLScTkUcdmD2Q8eejNsaLpBKhgPyUNLsFCegkV_8CqGTaeAt9MQ/viewform
-<br>
+
 <br>
 
  - Ler QR code e ser direcionado para a página de download do App / Ver o Menu do restaurante em que esta no momento
@@ -61,8 +59,15 @@ https://docs.google.com/forms/d/1NiKeW2AgWGGnz6WhSMv3O8QsAt7OSN0j32v0zYGL5fI/edi
 
  - Logout
 
- ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/836ae8dd32f638de9b654c1b76149220892b5c09/docs/img/Forms_Clientes_V01.1.pdf)
-
+<br>
+<br>
+ ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/ff453318dc3c66aec2e280f62a1b75a9ed033bf7/docs/img/Forms_Clientes_V01.1.png)
+<br>
+Versão para Edição do Formulário do CTU-01 para usuários Clientes de Restaurantes:
+<br>https://docs.google.com/forms/d/1NiKeW2AgWGGnz6WhSMv3O8QsAt7OSN0j32v0zYGL5fI/edit
+<br>
+Versão para Aplicar o Teste de Usabilidade CTU-01 em usuários Clientes de Restaurantes:
+<br>https://docs.google.com/forms/d/e/1FAIpQLScTkUcdmD2Q8eejNsaLpBKhgPyUNLsFCegkV_8CqGTaeAt9MQ/viewform
 <br>
 <br>
 
