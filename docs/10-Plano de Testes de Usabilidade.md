@@ -59,10 +59,12 @@ Na aplicação dos testes de usabilidade será utilizada a versão à seguir an�
 
  - Logout
 
-<br>
-<br>
- ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/83b50efb347a83776b0048115b12ad5ed3c7e58a/docs/img/03_Metodologia_Trello_02.png)
- 
+
+ ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/f3c78a28803b2f8cda159fb0bdb56a156992ca3c/docs/img/Forms_Clientes_V01.1_pg01.jpg)
+  ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/4dccaf560d59a2f66eeea4edb994ec74ef9239d2/docs/img/Forms_Clientes_V01.1_pg02.jpg)
+   ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/4dccaf560d59a2f66eeea4edb994ec74ef9239d2/docs/img/Forms_Clientes_V01.1_pg03.jpg)
+    ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/4dccaf560d59a2f66eeea4edb994ec74ef9239d2/docs/img/Forms_Clientes_V01.1_pg04.jpg)
+     ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/4dccaf560d59a2f66eeea4edb994ec74ef9239d2/docs/img/Forms_Clientes_V01.1_pg05.jpg)
 <br>
 Versão para Edição do Formulário do CTU-01 para usuários Clientes de Restaurantes:
 <br>https://docs.google.com/forms/d/1NiKeW2AgWGGnz6WhSMv3O8QsAt7OSN0j32v0zYGL5fI/edit
