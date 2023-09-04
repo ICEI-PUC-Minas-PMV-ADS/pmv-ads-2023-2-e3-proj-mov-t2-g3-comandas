@@ -31,72 +31,75 @@ Na aplicação dos testes de usabilidade será utilizada a versão à seguir an�
 ## Plano de Testes de Usabilidade - usuário: Cliente
 
 https://docs.google.com/forms/d/1NiKeW2AgWGGnz6WhSMv3O8QsAt7OSN0j32v0zYGL5fI/edit
-https://docs.google.com/forms/d/e/1FAIpQLScTkUcdmD2Q8eejNsaLpBKhgPyUNLsFCegkV_8CqGTaeAt9MQ/viewform
+<br>https://docs.google.com/forms/d/e/1FAIpQLScTkUcdmD2Q8eejNsaLpBKhgPyUNLsFCegkV_8CqGTaeAt9MQ/viewform
+<br>
+<br>
 
+ - Ler QR code e ser direcionado para a página de download do App / Ver o Menu do restaurante em que esta no momento
 
-Ler QR code e ser direcionado para a página de download do App / Ver o Menu do restaurante em que esta no momento
+ - Criar cadastro de novo usuário Cliente
 
-Criar cadastro de novo usuário Cliente
+ - Login
 
-Login
+ - Navegação pelo Menu do Restaurante (empresa) e visualizar detalhes dos produtos à disposição
 
-Navegação pelo Menu do Restaurante (empresa) e visualizar detalhes dos produtos à disposição
+ - Processo de compra: inserir itens desejados no processo de compra e finalizar o pedido de compra
 
-Processo de compra: inserir itens desejados no processo de compra e finalizar o pedido de compra
+ - Acessar a área de cliente e verificar o status do pedido de compra
 
-Acessar a área de cliente e verificar o status do pedido de compra
+ - Receber aviso que o pedido esta pronto, disponível para retirada ou na etapa em que será servido à mesa
 
-Receber aviso que o pedido esta pronto, disponível para retirada ou na etapa em que será servido à mesa
+ - Navegar pelo mapa e encontrar estabelecimentos próximos
 
-Navegar pelo mapa e encontrar estabelecimentos próximos
+ - Filtrar estabelecimentos por tipo de comida, tipo de produtos
 
-Filtrar estabelecimentos por tipo de comida, tipo de produtos
+ - Avaliar um estabelecimento e publicar um comentário
 
-Avaliar um estabelecimento e publicar um comentário
+ - Favoritar um estabelecimento e verificar a lista de favoritos na área do cliente
 
-Favoritar um estabelecimento e verificar a lista de favoritos na área do cliente
+ - Editar informações de cadastro de Cliente, alterar, salvar e verificar as alterações realizadas
 
-Editar informações de cadastro de Cliente, alterar, salvar e verificar as alterações realizadas
+ - Logout
 
-Logout
+ ![Foto representativa](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/836ae8dd32f638de9b654c1b76149220892b5c09/docs/img/Forms_Clientes_V01.1.pdf)
 
 <br>
 <br>
 
 ## Plano de Testes de Usabilidade - usuário: Restaurante (empresa)
 
-Criar cadastro de novo usuário Restaurante
+ - Criar cadastro de novo usuário Restaurante
 
-Anexar QR code na planilha de cadastro do Restaurante
+ - Anexar QR code na planilha de cadastro do Restaurante
 
-Definir horário de funcionamento do Restaurante
+ - Definir horário de funcionamento do Restaurante
 
-Login
+ - Login
 
-Criar Menu e sub-Menus (bebidas, sobremesas, entradas, etc..)
+ - Criar Menu e sub-Menus (bebidas, sobremesas, entradas, etc..)
 
-Cadastrar produto com todas as características disponíveis na área de cadastro de produto vinculando a um dos sub-Menus
+ - Cadastrar produto com todas as características disponíveis na área de cadastro de produto vinculando a um dos sub-Menus
 
-Definir e alterar quantidade máxima de um produto e/ou disponibilidade
+ - Definir e alterar quantidade máxima de um produto e/ou disponibilidade
 
-Criar e Validar descontos em um produto ou na combinação entre produtos
+ - Criar e Validar descontos em um produto ou na combinação entre produtos
 
-Definir um limite máximo de pedidos por dia ou hora.
+ - Definir um limite máximo de pedidos por dia ou hora.
 
-Visualiza a fila em ordem cronológica de pedidos realizados pelos Clientes
+ - Visualiza a fila em ordem cronológica de pedidos realizados pelos Clientes
 (Algoritmo: O App deve inserir na fila o pedido realizado com sucesso pelo Cliente criando uma chave (pk ou fk) referente ao horário; o restaurante deve ter interface para alterar o status do pedido de compra (Recebido, Em espera, Em preparo, Preparativos Finais, Pronto/Aguardando Serviço, Será Servido em breve, Finalizado (já foi servido); O pedido deve ser movido para a lista de estatística, saindo da fila.
 
-Alterar todos os níveis de status de um pedido de compra e verificar as alterações na fila de pedidos de compra
+ - Alterar todos os níveis de status de um pedido de compra e verificar as alterações na fila de pedidos de compra
 
-Acessar a área exclusiva de administrador do Restaurante para visualizar informações de estatísticas sobre vendas, produtos mais populares, avaliações recebidas pelos usuários e a quantidade de usuários que favoritaram o Restaurante.
+ - Acessar a área exclusiva de administrador do Restaurante para visualizar informações de estatísticas sobre vendas, produtos mais populares, avaliações recebidas pelos usuários e a quantidade de usuários que favoritaram o Restaurante.
 
-Editar informações de cadastro de Cliente, alterar, salvar e verificar as alterações realizadas
+ - Editar informações de cadastro de Cliente, alterar, salvar e verificar as alterações realizadas
 
-Verificar no mapa a marcação do Restaurante pelo endereço / posição georeferenciada
+ - Verificar no mapa a marcação do Restaurante pelo endereço / posição georeferenciada
 
-Navegar pelo mapa e encontrar estabelecimentos próximos e anexar em uma lista de favoritos para poder dar indicações de estabelecimentos próximos para os Clientes
+ - Navegar pelo mapa e encontrar estabelecimentos próximos e anexar em uma lista de favoritos para poder dar indicações de estabelecimentos próximos para os Clientes
 
-Logout
+ - Logout
 
 
 
