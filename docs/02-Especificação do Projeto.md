@@ -63,23 +63,25 @@ Partindo das informações que as Personas apresentaram, chegou-se à conclusão
 
 ### Análise da Situação Atual
 
-Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional. 
+Nossa iniciativa de desenvolver um aplicativo voltado para a visualização de cardápios e pedidos em restaurantes e bares nasce com o propósito de enfrentar e resolver os principais obstáculos enfrentados por clientes e estabelecimentos na área de hospitalidade. Com a simplicidade da experiência do cliente em mente, nosso aplicativo aborda questões fundamentais, como longos tempos de espera no atendimento, erros comuns na anotação de pedidos e as dificuldades associadas à personalização de solicitações. A criação deste aplicativo representa uma resposta estratégica e coesa às necessidades emergentes tanto dos clientes quanto dos estabelecimentos, oferecendo uma solução completa para os desafios enfrentados atualmente por restaurantes e bares. Ao proporcionar rapidez, personalização e informações detalhadas, nossa proposta visa aprimorar a experiência gastronômica e otimizar as operações no setor de hospitalidade.
 
 ### Descrição Geral da Proposta
 
-Apresente aqui uma descrição da sua proposta abordando seus limites e suas ligações com as estratégias e objetivos do negócio. Apresente aqui as oportunidades de melhorias.
+A abordagem para modelar os processos de negócio neste projeto visa principalmente alinhar as estratégias desejadas, destacar o valor de cada processo e promover um entendimento compartilhado sobre o funcionamento das atividades, que servirão como base para o desenvolvimento da aplicação. O objetivo é estabelecer uma prática de melhoria contínua dos processos em toda a organização.
 
-### Processo 1 – NOME DO PROCESSO
+### Processo 1 – Sistema de Compra 
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN. 
+Esse sistema de compra simplifica a forma de como o cliente irá realizar sua refeição do dia, nele contém a forma do cliente achar um restaurante pelo app, efetuar o pedido e reservar uma mesa, caso deseje consumir no local, ou até mesmo apenas retira-lo. 
 
-![Processo 1](img/02-bpmn-proc1.png)
+![IMAGEM 1](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/7b8199f5-01f6-45a3-85a1-9fe3c5b0d3cb)
 
-### Processo 2 – NOME DO PROCESSO
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 2. Em seguida, apresente o modelo do processo 2, descrito no padrão BPMN.
+### Processo 2 – Preparos dos Produtos 
 
-![Processo 2](img/02-bpmn-proc2.png)
+No preparo dos pedidos vemos uma grande praticidade e agilidade por meio do app, que faz o gerenciamento dos pedidos e verifica automaticamente se há ou não disponibilidade de realizar o preparo do pedido. 
+
+![IMAGEM 2](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/006a217a-a24e-4d0c-a75b-13cfc0e390d1)
+
 
 ## Indicadores de Desempenho
 
