@@ -41,6 +41,10 @@ Por ser um fluxo de difícil vizualização disponibilizaremos um pdf para downl
 
 [Wireframe Cliente Telas.pdf](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/files/12640813/Wireframe.Cliente.Telas.pdf) (clique para baixar)
 
+Link para o Wireframe interaetivo
+
+[Wireframe Interativo](https://www.figma.com/file/WIQsNCrYzfaeuzN6XljVvx/Ashop?type=design&node-id=278%3A6660&mode=design&t=QPxvcLayCy9Se8mo-1)
+
 ### Wireframe do restaurante
 
-...
+![Wireframe](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/WireFrame%20restaurantes.png)
