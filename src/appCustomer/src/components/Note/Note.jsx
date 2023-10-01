@@ -26,14 +26,14 @@ export default function Note({ navigation, text_title, text_subtitle, image_link
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        width: '90%',
-        height: 150,
+        width: '85%',
+        height: 130,
         padding: 10,
         overflow: 'hidden',
         justifyContent: 'space-around',
     },
     image: {
-        width: '29%',
+        width: '28%',
         height: '100%',
         borderTopLeftRadius: 15,
         borderBottomLeftRadius: 15, 
@@ -48,14 +48,14 @@ const styles = StyleSheet.create({
     firstInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around'
     },
     logo: {
-        fontSize: 20,
-        color: '#e93e44'
+        fontSize: 17,
+        color: '#e93e44',
+        paddingRight: 20
     },
     icon:{
-        width: '12%',
+        width: '10%',
         aspectRatio: 1/1,
     },
     date: {
@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         color: '#2e2b5e',
-        fontSize: 18
+        fontSize: 16
     },
     textSubTitle: {
         color: '#75759e',
-        fontSize: 16
+        fontSize: 14
     }
 });

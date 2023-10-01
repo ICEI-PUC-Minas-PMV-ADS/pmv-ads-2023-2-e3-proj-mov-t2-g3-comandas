@@ -1,29 +1,26 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View, Button } from 'react-native';
-import Note from '../../components/Note/Note'
+import { Image, StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+
+import BottomBar from '../../components/BottomBar/Index'
 
 export default function Home({ navigation }) {
     return (
         <View style={styles.container}>
-            {/* <Text>Bom dia</Text>
-            <Image
-                source={{
-                    uri: 'https://ih1.redbubble.net/image.3611159929.7215/st,small,507x507-pad,600x600,f8f8f8.jpg',
-                }}
-                style={styles.logo}
-            /> */}
-            <Button 
-                title="QR Code"
-                onPress={() => navigation.navigate("Scan")}
-            />
+            <View style={styles.main}>
+                <Image style={styles.banner} source={require('../../assets/banner.png')} />
+                <Button
+                    title="QR Code"
+                    onPress={() => navigation.navigate("Scan")}
+                />
 
-            <Button 
-                title="Notificações"
-                onPress={() => navigation.navigate("Notifications")}
-            />
+                <Button
+                    title="Notificações"
+                    onPress={() => navigation.navigate("Notifications")}
+                />
+            </View>
 
-            <StatusBar style="auto" />
+            <BottomBar />
         </View>
     );
 }
@@ -31,12 +28,31 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between', // Coloca espaço entre o conteúdo e o BottomBar
+    },
+    main: {
+        width: '100%',
+        flex: 1,
+        alignItems: 'center',
+    },
+    banner: {
+        width: '95%',
+        height: 200,
+        marginTop: 10,
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
     },
     logo: {
         width: 150,
         height: 150,
     },
+    search: {
+        width: '100%',
+        flexDirection: 'row',
+        width: '100%',
+        backgroundColor: 'orange',
+        padding: 10,
+    }
 });
