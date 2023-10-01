@@ -1,7 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import Scanner from '../Scanner/Scanner'
 
 export default function Scan({ navigation }) {
     return (
@@ -11,7 +10,7 @@ export default function Scan({ navigation }) {
             <TouchableOpacity
                 style={styles.scanButton}
                 onPress={() => navigation.navigate("Scanner")}>
-                <Text style={styles.buttonText}>Scan</Text>
+                <Text style={styles.buttonText}>Escanear</Text>
             </TouchableOpacity>
             <StatusBar style="auto" />
         </View>
