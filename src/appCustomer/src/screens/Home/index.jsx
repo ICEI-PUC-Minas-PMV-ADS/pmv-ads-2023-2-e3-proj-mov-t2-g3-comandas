@@ -1,25 +1,17 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import TopBar from '../../components/TopBar/Index'
 
 import BottomBar from '../../components/BottomBar/Index'
 
 export default function Home({ navigation }) {
     return (
         <View style={styles.container}>
+            <TopBar navigation={navigation}/>
             <View style={styles.main}>
                 <Image style={styles.banner} source={require('../../assets/banner.png')} />
-                <Button
-                    title="QR Code"
-                    onPress={() => navigation.navigate("Scan")}
-                />
-
-                <Button
-                    title="Notificações"
-                    onPress={() => navigation.navigate("Notifications")}
-                />
             </View>
-
             <BottomBar />
         </View>
     );

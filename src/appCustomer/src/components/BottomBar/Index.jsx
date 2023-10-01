@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
 
 export default function BottomBar({ navigation }) {
     return (
@@ -17,6 +17,7 @@ export default function BottomBar({ navigation }) {
             <TouchableOpacity>
                 <Image source={require("../../assets/Icone_Perfil.png")}/>
             </TouchableOpacity>
+            < StatusBar/>
         </View >
     );
 }
@@ -28,6 +29,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
-
+        backgroundColor: '#fff'
     },
 });
