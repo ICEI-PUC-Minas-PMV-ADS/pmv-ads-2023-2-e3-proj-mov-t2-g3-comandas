@@ -17,7 +17,6 @@ export default function BottomBar({ navigation }) {
             <TouchableOpacity>
                 <Image source={require("../../assets/Icone_Perfil.png")}/>
             </TouchableOpacity>
-            < StatusBar/>
         </View >
     );
 }
@@ -29,6 +28,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        backgroundColor: '#fff'
     },
 });

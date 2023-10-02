@@ -35,7 +35,7 @@ export default function TopBar({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 120,
+        height: 70,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',

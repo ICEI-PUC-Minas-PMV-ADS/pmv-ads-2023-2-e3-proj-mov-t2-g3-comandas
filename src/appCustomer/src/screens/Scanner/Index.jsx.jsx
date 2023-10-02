@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-export default function App() {
+export default function Scanner({ navigation }) {
     const [hasPermission, setHasPermission] = useState(null);
-    const [scanned, setScanned] = useState(false);
+
+    const width = Dimensions.get('window').width;
+    const height = Dimensions.get('window').height;
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
@@ -16,8 +18,8 @@ export default function App() {
     }, []);
 
     const handleBarCodeScanned = ({ type, data }) => {
-        setScanned(true);
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+        navigation.navigate("Home")
+        alert(height / width);
         console.log(data)
     };
 
@@ -31,10 +33,9 @@ export default function App() {
     return (
         <View style={styles.container}>
             <BarCodeScanner
-                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                onBarCodeScanned={handleBarCodeScanned}
                 style={styles.camera}
             />
-            {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
         </View>
     );
 }
@@ -44,10 +45,14 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center'
     },
     camera: {
-        height: '100%',
-        width: '100%',
-        backgroundColor: 'pink'
+        width: 2.2 * Dimensions.get('window').width,
+        aspectRatio: 1 / 1,
+        backgroundColor: 'orange'
+    },
+    reScan: {
+
     }
 });
