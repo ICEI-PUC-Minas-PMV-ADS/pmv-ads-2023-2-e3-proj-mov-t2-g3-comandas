@@ -1,21 +1,22 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View, Button, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, StyleSheet, ScrollView, View, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import TopBar from '../../components/TopBar/Index';
 import BottomBar from '../../components/BottomBar/Index';
+import banner from '../../assets/banner-2.png'
 
 export default function Home({ navigation }) {
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <TopBar navigation={navigation} />
-            <ScrollView style={{width: '100%'}} contentContainerStyle={styles.scrollContent}>
+            <ScrollView style={{ width: '100%' }} contentContainerStyle={styles.scrollContent}>
                 <View style={styles.main}>
-                    <Image style={styles.banner} source={require('../../assets/banner.png')} />
+                    <Image style={styles.banner} source={banner} />
                 </View>
             </ScrollView>
             <BottomBar />
-        </View>
+            <StatusBar />
+        </SafeAreaView>
     );
 }
 
@@ -36,9 +37,9 @@ const styles = StyleSheet.create({
         width: '95%',
         height: 200,
         marginTop: 10,
-        borderTopLeftRadius: 35,
-        borderBottomLeftRadius: 35,
-        borderBottomRightRadius: 35,
+        borderTopLeftRadius: 25,
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
     },
     logo: {
         width: 150,
