@@ -2,7 +2,7 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import COLORS from '@/constants/colors';
 
-function buttonLargeBottom(props) {
+function ButtonLargeBottom(props) {
   const filledBgColor = props.color || COLORS.primary;
   const outLinedColor = COLORS.neutralMiddGrey;
   const bgColor = props.filled ? filledBgColor : outLinedColor;

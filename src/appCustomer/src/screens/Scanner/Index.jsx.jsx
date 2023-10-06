@@ -19,7 +19,7 @@ export default function Scanner({ navigation }) {
 
     const handleBarCodeScanned = ({ type, data }) => {
         navigation.navigate("Home")
-        alert("Você será redirecionado para o cardápio quando tivermos um.")
+        alert(JSON.parse(data))
     };
 
     if (hasPermission === null) {
