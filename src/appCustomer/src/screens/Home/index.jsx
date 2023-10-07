@@ -4,7 +4,7 @@ import {
     ScrollView,
     SafeAreaView,
     StatusBar,
-    View
+    Image
 } from 'react-native';
 import TopBar from '../../components/TopBar/Index';
 import BottomBar from '../../components/BottomBar/Index';
@@ -26,6 +26,9 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+    img: {
+        height: 300
+    },
     container: {
         flex: 1,
         alignItems: 'center',
