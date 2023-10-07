@@ -46,6 +46,7 @@ export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacin
                 keyExtractor={(item) => item.id.toString()}
                 horizontal
                 pagingEnabled={paging}
+                showsHorizontalScrollIndicator={false}
                 onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
                     useNativeDriver: false
                 })}

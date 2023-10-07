@@ -21,7 +21,7 @@ export default function Home({ navigation }) {
             >
                 <Slider paging={true} data={bannerSlides}/>
                 <Slider paging={false} 
-                    iconsOnDisplay={4} 
+                    iconsOnDisplay={5} 
                     ratioSize={1/1}
                     spacing={4}
                     data={categoriesSlides}
