@@ -16,8 +16,7 @@ export default function Home({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <TopBar navigation={navigation} />
-            <ScrollView style={{ width: '100%' }}
-                contentContainerStyle={styles.scrollContent}
+            <ScrollView style={{ width: '100%' }} contentContainerStyle={styles.scrollContent}
             >
                 <Slider paging={true} data={bannerSlides}/>
                 <Slider paging={false} 
