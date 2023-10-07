@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { StyleSheet, View, FlatList, Image, useWindowDimensions, Animated, TouchableOpacity, Text } from 'react-native';
 
-//data: array de objetos dos icones (obrigatorio ter id, image, link)
-//iconsOnDisplay: quantidade de icones que aparecem na tela ao mesmo tempo
-//ratioSize: proporção do icone (1/1 = icone quadrado, 16/9 = icone retangular)
-//spacing: espaçamento entre os icones
+/*Existem 2 tipos de slider, o que a imagem ocupa a tela inteira e o que várias imagem são exibidas ao mesmo tempo. Paging define o tipo de slider (paging = true => slider de tela inteira) */
+
+//data: array de objetos das imagens do slider (obrigatorio ter id, image(link da imagem), link(link para onde a imagem leva quandp clicada))
+//iconsOnDisplay: quantidade de icones que aparecem na tela ao mesmo tempo (obrigatorio apenas no slider = false)
+//ratioSize: proporção do icone (1/1 = icone quadrado, 16/9 = icone retangular) (obrigatorio apenas no slider = false)
+//spacing: espaçamento entre os icones (opcional)
 
 export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacing }) {
     const { width, height } = useWindowDimensions();

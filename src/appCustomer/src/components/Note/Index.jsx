@@ -1,8 +1,7 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default function Note({ navigation, text_title, text_subtitle, image_link }) {
+export default function Note({ text_title, text_subtitle, image_link }) {
     return (
         <TouchableOpacity  style={styles.container} onPress={() => alert("OK")}>
             <Image 
@@ -26,8 +25,8 @@ export default function Note({ navigation, text_title, text_subtitle, image_link
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        width: '85%',
-        height: 130,
+        width: '100%',
+        height: 150,
         padding: 10,
         overflow: 'hidden',
         justifyContent: 'space-around',
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     logo: {
-        fontSize: 17,
+        fontSize: 20,
         color: '#e93e44',
         paddingRight: 20
     },
@@ -63,10 +62,10 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         color: '#2e2b5e',
-        fontSize: 16
+        fontSize: 18
     },
     textSubTitle: {
         color: '#75759e',
-        fontSize: 14
+        fontSize: 15
     }
 });
