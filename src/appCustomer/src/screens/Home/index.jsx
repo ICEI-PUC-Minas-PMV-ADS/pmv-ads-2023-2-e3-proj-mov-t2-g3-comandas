@@ -3,12 +3,14 @@ import {
     StyleSheet,
     ScrollView,
     SafeAreaView,
-    StatusBar,
-    Image
+    StatusBar
 } from 'react-native';
 import TopBar from '../../components/TopBar/Index';
 import BottomBar from '../../components/BottomBar/Index';
 import Slider from '../../components/Slider/Index'
+
+import bannerSlides from '../../assets/bannerSlides';
+import categoriesSlides from '../../assets/categoriesSlides'
 
 export default function Home({ navigation }) {
     return (
@@ -17,7 +19,13 @@ export default function Home({ navigation }) {
             <ScrollView style={{ width: '100%' }}
                 contentContainerStyle={styles.scrollContent}
             >
-                <Slider />
+                <Slider paging={true} data={bannerSlides}/>
+                <Slider paging={false} 
+                    iconsOnDisplay={4} 
+                    ratioSize={1/1}
+                    spacing={4}
+                    data={categoriesSlides}
+                />
             </ScrollView>
             <BottomBar />
             <StatusBar />
@@ -40,14 +48,6 @@ const styles = StyleSheet.create({
     main: {
         width: '100%',
         alignItems: 'center',
-    },
-    banner: {
-        width: '92%',
-        height: 200,
-        marginTop: 10,
-        borderTopLeftRadius: 25,
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
     },
     logo: {
         width: 150,
