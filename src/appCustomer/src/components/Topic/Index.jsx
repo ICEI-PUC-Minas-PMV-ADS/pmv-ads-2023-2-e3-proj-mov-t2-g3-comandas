@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, useWindowDimensions, Text, Image, TouchableOpacity, FlatList, Animated } from 'react-native';
 import Voucher from '../Voucher/Index';
 
-export default function Topic({ data }) {
+export default function Topic({ data, title }) {
     const { width } = useWindowDimensions();
     const scrollViewRef = useRef(null);
     const scrollX = useRef(new Animated.Value(0)).current;
@@ -44,7 +44,7 @@ export default function Topic({ data }) {
     return (
         <View style={styles.container}>
             <View style={styles.textContainer}>
-                <Text style={styles.title}>Programa Fidelidade</Text>
+                <Text style={styles.title}>{title}</Text>
                 <TouchableOpacity>
                     <Text style={styles.seeMore}>Ver Mais</Text>
                 </TouchableOpacity>

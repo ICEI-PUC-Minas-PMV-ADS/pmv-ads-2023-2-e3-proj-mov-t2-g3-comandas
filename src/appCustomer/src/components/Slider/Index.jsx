@@ -73,7 +73,7 @@ export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacin
                                         styles.dot,
                                         {
                                             color: currentIndex === index ? '#8661ff' : '#aba9a9',
-                                            fontSize: (10/101.34) * height - 62.17
+                                            fontSize: (10/101.34) * height - 62.17,
                                         },
                                     ]}
                                 >
@@ -89,9 +89,6 @@ export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacin
 }
 
 const styles = StyleSheet.create({
-    dot: {
-        // fontSize: 20
-    },
     container: {
         justifyContent: 'center',
         alignItems: 'center',

@@ -26,8 +26,8 @@ export default function Home({ navigation }) {
                     spacing={4}
                     data={categoriesSlides}
                 />
-                <Topic data={bannerSlides}/>
-                <Topic data={bannerSlides}/>
+                <Topic title={"Programa Fidelidade"} data={bannerSlides}/>
+                <Topic title={"Favoritos"} data={bannerSlides}/>
             </ScrollView>
             <BottomBar />
             <StatusBar />
