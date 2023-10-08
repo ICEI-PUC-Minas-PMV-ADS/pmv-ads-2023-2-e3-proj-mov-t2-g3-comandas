@@ -8,9 +8,10 @@ import {
 import TopBar from '../../components/TopBar/Index';
 import BottomBar from '../../components/BottomBar/Index';
 import Slider from '../../components/Slider/Index'
+import Topic from '../../components/Topic/Index';
 
-import bannerSlides from '../../assets/bannerSlides';
-import categoriesSlides from '../../assets/categoriesSlides'
+import bannerSlides from '../../assets/arrays/bannerSlides';
+import categoriesSlides from '../../assets/arrays/categoriesSlides'
 
 export default function Home({ navigation }) {
     return (
@@ -25,6 +26,8 @@ export default function Home({ navigation }) {
                     spacing={4}
                     data={categoriesSlides}
                 />
+                <Topic data={bannerSlides}/>
+                <Topic data={bannerSlides}/>
             </ScrollView>
             <BottomBar />
             <StatusBar />

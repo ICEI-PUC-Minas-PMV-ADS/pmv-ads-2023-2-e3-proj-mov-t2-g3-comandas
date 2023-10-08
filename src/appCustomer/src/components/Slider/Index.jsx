@@ -62,7 +62,7 @@ export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacin
                 )}
             />
             {
-                paging ?
+                paging && data.length > 1 ?
                     (
                         <FlatList
                             style={styles.dotContainer}
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     },
     container: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     image: {
         justifyContent: 'center',

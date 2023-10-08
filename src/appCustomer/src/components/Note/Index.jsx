@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import icone from '../../assets/icon_comandas.png'
 
 export default function Note({ text_title, text_subtitle, image_link }) {
     return (
@@ -9,8 +10,7 @@ export default function Note({ text_title, text_subtitle, image_link }) {
                 source={{ uri: image_link || require('../../assets/adaptive-icon.png')}} />
             <View style={styles.info}>
                 <View style={styles.firstInfo}>
-                    <Image style={styles.icon} source={require('../../assets/adaptive-icon.png')}/>
-                    <Text style={styles.logo}>Comandas</Text>
+                    <Image style={styles.icon} source={icone}/>
                     <Text style={styles.date}>06/04/2023</Text>
                 </View>
                 <View>
@@ -47,25 +47,22 @@ const styles = StyleSheet.create({
     firstInfo: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent : 'space-between'
     },
     logo: {
         fontSize: 20,
         color: '#e93e44',
         paddingRight: 20
     },
-    icon:{
-        width: '10%',
-        aspectRatio: 1/1,
-    },
     date: {
         fontSize: 12
     },
     textTitle: {
         color: '#2e2b5e',
-        fontSize: 18
+        fontSize: 20
     },
     textSubTitle: {
         color: '#75759e',
-        fontSize: 15
+        fontSize: 16
     }
 });
