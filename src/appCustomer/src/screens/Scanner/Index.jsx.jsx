@@ -18,8 +18,15 @@ export default function Scanner({ navigation }) {
     }, []);
 
     const handleBarCodeScanned = ({ type, data }) => {
-        navigation.navigate("Home")
-        alert("Você será redirecionado para o cardápio quando tivermos um.")
+        if (type == 256) {
+            try {
+                navigation.navigate("Home")
+                alert(JSON.parse(data))
+            }
+            catch(e){
+                alert("Este não é um qr code válido")
+            }
+        }
     };
 
     if (hasPermission === null) {
