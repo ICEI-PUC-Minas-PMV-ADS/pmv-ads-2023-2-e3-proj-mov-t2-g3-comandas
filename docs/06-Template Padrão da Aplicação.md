@@ -62,7 +62,6 @@ Descreva as cores principais usadas na aplicação e onde são aplicadas.
   - *Hex Code: #59FF1F*
   - *Uso: Utilizada para sinalizar indicar erros ou alertas importantes ou cores de botões mais secundartios.*
 
-![Inserir imagem das cores aqui]
 
 ## Tipografia
 
@@ -110,4 +109,9 @@ A fonte Montserrat foi escolhida por sua legibilidade e estética moderna, sendo
 Descreva as configurações de sombra usadas nos elementos da UI.
 
 - **Sombra de Elementos:**
-  - *Configurações e onde é aplicada.*
+  - Explicalção de propriedade
+    - shadowColor: Define a cor da sombra. No seu caso, é preto (#000000).
+    - shadowOffset: Define o deslocamento da sombra no eixo x e y. Ambos são definidos como 0 no seu caso.
+    - shadowOpacity: Define a opacidade da sombra. 0.08 é equivalente a 8% de opacidade.
+    - shadowRadius: Define o raio de desfoque da sombra. No seu caso, é 22.
+    - elevation: Esta propriedade é necessária para que a sombra seja exibida em dispositivos Android.
