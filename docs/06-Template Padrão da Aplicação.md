@@ -6,7 +6,7 @@
 - [Sombras](#sombras)
 - [Telas](#telas)
   - [Tela de Login](#tela-de-login)
-  - [Tela de Cadastro](#tela-de-cadastro)
+  - [Tela de Cadastro](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Cadastro.png)
   - [Home](#home)
   - [Voucher](#voucher)
   - [Scan QR Code](#scan-qr-code)
