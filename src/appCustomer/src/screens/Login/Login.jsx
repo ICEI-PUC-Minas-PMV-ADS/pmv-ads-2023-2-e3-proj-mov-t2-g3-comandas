@@ -116,7 +116,7 @@ function Login({ navigation }) {
                 right: 15,
               }}
             >
-              {isPasswordShown == true ? (
+              {isPasswordShown === true ? (
                 <Ionicons
                   name="eye-off"
                   size={24}
