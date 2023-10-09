@@ -10,6 +10,7 @@ import BottomBar from '../../components/BottomBar/Index';
 import Slider from '../../components/Slider/Index'
 import Topic from '../../components/Topic/Index';
 
+import voucherSlides from '../../assets/arrays/vouchers'
 import bannerSlides from '../../assets/arrays/bannerSlides';
 import categoriesSlides from '../../assets/arrays/categoriesSlides'
 
@@ -26,8 +27,8 @@ export default function Home({ navigation }) {
                     spacing={4}
                     data={categoriesSlides}
                 />
-                <Topic data={bannerSlides}/>
-                <Topic data={bannerSlides}/>
+                <Topic data={voucherSlides} title="Programa Fidelidade"/>
+                <Topic data={voucherSlides} title="Favoritos"/>
             </ScrollView>
             <BottomBar />
             <StatusBar />
