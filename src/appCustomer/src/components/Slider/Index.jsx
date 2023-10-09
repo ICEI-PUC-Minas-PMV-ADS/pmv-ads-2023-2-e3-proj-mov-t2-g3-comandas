@@ -13,8 +13,8 @@ export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacin
     const scrollX = useRef(new Animated.Value(0)).current;
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const handleImagePress = ( item ) => {
-        alert('será redireconado para o subitem de "' + item.title.toUpperCase()+ '"');
+    const handleImagePress = (item) => {
+        alert('será redireconado para o subitem de "' + item.title.toUpperCase() + '"');
     };
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacin
         return () => {
             scrollX.removeAllListeners();
         };
-    }, [currentIndex]);
+    }, [currentIndex])
 
     return (
         <View style={[styles.container, { marginVertical: .01 * height }]}>
@@ -40,7 +40,7 @@ export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacin
                     useNativeDriver: false
                 })}
                 renderItem={({ item, index }) => (
-                    <TouchableOpacity  onPress={() => handleImagePress(item)} activeOpacity={1}>
+                    <TouchableOpacity onPress={() => handleImagePress(item)} activeOpacity={1}>
                         {
                             paging ?
                                 <Image
@@ -71,7 +71,10 @@ export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacin
                                 <Text
                                     style={[
                                         styles.dot,
-                                        { color: currentIndex === index ? '#8661ff' : '#aba9a9' },
+                                        {
+                                            color: currentIndex === index ? '#8661ff' : '#aba9a9',
+                                            fontSize: (10/101.34) * height - 62.17,
+                                        },
                                     ]}
                                 >
                                     ●
@@ -86,9 +89,6 @@ export default function Slider({ paging, data, iconsOnDisplay, ratioSize, spacin
 }
 
 const styles = StyleSheet.create({
-    dot: {
-        fontSize: 20
-    },
     container: {
         justifyContent: 'center',
         alignItems: 'center',
