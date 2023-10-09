@@ -1,20 +1,28 @@
 # Template Padrão da Aplicação
 
 ## Índice
-- [Cores](#cores)
-- [Tipografia](#tipografia)
-- [Sombras](#sombras)
+- [Cores](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Color.png)
+- [Tipografia](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Typography.png)
+- [Sombras](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Shadows.png)
 - [Telas](#telas)
+  - [Onboarding](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Onboarding%20%231.png)
+  - [Onboarding 2](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Onboarding%20%232.png)
   - [Tela de Login](#tela-de-login)
   - [Tela de Cadastro](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Cadastro.png)
-  - [Home](#home)
-  - [Voucher](#voucher)
-  - [Scan QR Code](#scan-qr-code)
-  - [Busca](#busca)
-  - [Lugares](#lugares)
+  - [Home](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Home.png)
+  - [Voucher](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Tela%20de%20Fechamento.png)
+  - [Fidelidade](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Tela%20de%20Fechamento.png)
+  - [News](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/News.png)
+  - [Scan QR Code](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Scan%20the%20QR%20code.png)
+  - [Busca 1](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Busca%201.png)
+  - [Busca 2](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Busca%202.png)
+  - [Lugares](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Lugares.png)
   - [Loja Fictícia](#loja-fictícia)
-  - [Pratos Favoritos](#pratos-favoritos)
-  - [Tela de Pagamento](#tela-de-pagamento)
+  - [Loja Fictícia Menu](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Dasmelo%20Menu.png)
+  - [Loja Fictícia Menu Usandd Filtro](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Dasmelo%20Menu%202.png)
+  - [Pratos Favoritos](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Pratos%20favoritos.png)
+  - [Tela de Confirmação](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Tela%20de%20Fechamento.png)
+  - [Perfil](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Perfil.png)
 
 ## Cores
 Descreva as cores principais usadas na aplicação e onde são aplicadas.
