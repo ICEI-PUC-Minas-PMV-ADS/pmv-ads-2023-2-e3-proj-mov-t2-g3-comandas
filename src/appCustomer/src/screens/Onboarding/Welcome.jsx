@@ -17,7 +17,7 @@ function Welcome({ navigation }) {
         />
       </View>
       <Text style={styles.textHeader}>Agilidade e facilidade</Text>
-      <Text style={styles.textBody}>sasasassasaaa</Text>
+      <Text style={styles.textBody}>Adicionar texto comercial explicativo sobre o app</Text>
       <SafeAreaView style={{ marginHorizontal: 22 }}>
         <Button
           title="Começar"
