@@ -213,6 +213,7 @@ function Signup({ navigation }) {
         <Button
           title="Criar Conta"
           filled
+          onPress={() => navigation.navigate('Home')}
           style={{
             marginTop: 91,
             marginBottom: 4,

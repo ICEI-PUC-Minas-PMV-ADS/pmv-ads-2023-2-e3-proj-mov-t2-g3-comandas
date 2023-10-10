@@ -1,4 +1,11 @@
-import { View, Image, StyleSheet, Text, Dimensions } from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  Dimensions,
+  Pressable,
+} from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../../components/Buttons/Button';
@@ -17,7 +24,9 @@ function Welcome({ navigation }) {
         />
       </View>
       <Text style={styles.textHeader}>Agilidade e facilidade</Text>
-      <Text style={styles.textBody}>Adicionar texto comercial explicativo sobre o app</Text>
+      <Text style={styles.textBody}>
+        Adicionar texto comercial explicativo sobre o app
+      </Text>
       <SafeAreaView style={{ marginHorizontal: 22 }}>
         <Button
           title="Começar"
@@ -25,10 +34,33 @@ function Welcome({ navigation }) {
           filled
           style={{
             position: 'fixed',
-            marginTop: 90,
+            marginTop: 70,
             marginBottom: 4,
           }}
         />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginVertical: 18,
+          }}
+        >
+          <Text style={{ fontSize: 16, color: COLORS.black }}>
+            Já tem uma conta? Então{' '}
+          </Text>
+          <Pressable onPress={() => navigation.navigate('Login')}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: COLORS.linkTextGreen,
+                fontWeight: 'bold',
+                marginLeft: 6,
+              }}
+            >
+              faça login.
+            </Text>
+          </Pressable>
+        </View>
       </SafeAreaView>
     </View>
   );
@@ -52,7 +84,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 22,
   },
   textBody: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '400',
     marginTop: 8,
     color: COLORS.grey,
