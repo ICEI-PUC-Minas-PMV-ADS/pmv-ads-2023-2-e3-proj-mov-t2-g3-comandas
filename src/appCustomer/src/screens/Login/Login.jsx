@@ -5,18 +5,61 @@ import {
   Pressable,
   TextInput,
   TouchableOpacity,
+  StatusBar,
+  ActivityIndicator,
+  AsyncStorage,
 } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { StackActions, NavigationActions } from 'react-navigation';
+import PropTypes from 'prop-types'
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
+import api from '../../services/api';
 
-function Login({ navigation }) {
+function Login({ navigation, props }) {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  async function saveUser(user) {
+    await AsyncStorage.setItem('@ListApp:userToken', JSON.stringify(user));
+  }
+
+  async function signIn() {
+    if (username.length === 0) return;
+
+    setLoading(true);
+
+    try {
+      const credentials = {
+        email: username,
+        password,
+      };
+      const response = await api.post('/sessions', credentials);
+      const user = response.data;
+      await saveUser(user);
+
+      const resetAction = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Home' })],
+      });
+
+      setLoading(false);
+
+      props.navigation.dispatch(resetAction);
+    } catch (err) {
+      // console.log(err);
+      setLoading(false);
+      setErrorMessage('Usuário não cadastrado');
+    }
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -65,6 +108,8 @@ function Login({ navigation }) {
           </View>
         </View>
 
+        {!!errorMessage && <Error>{errorMessage}</Error>}
+
         <View style={{ marginTop: 30, marginBottom: 20 }}>
           <View
             style={{
@@ -80,10 +125,12 @@ function Login({ navigation }) {
             <TextInput
               placeholder="Email"
               placeholderTextColor={COLORS.placeholderText}
+              autoCapitalize="none"
+              autoCorrect={false}
               keyboardType="email-address"
-              style={{
-                width: '100%',
-              }}
+              style={{ width: '100%' }}
+              value={username}
+              onChangeText={(username) => setUsername(username)}
             />
           </View>
         </View>
@@ -103,10 +150,12 @@ function Login({ navigation }) {
             <TextInput
               placeholder="Senha"
               placeholderTextColor={COLORS.placeholderText}
+              autoCapitalize="none"
+              autoCorrect={false}
               secureTextEntry={isPasswordShown}
-              style={{
-                width: '100%',
-              }}
+              style={{ width: '100%' }}
+              value={password}
+              onChangeText={(password) => setPassword(password)}
             />
 
             <TouchableOpacity
@@ -148,6 +197,7 @@ function Login({ navigation }) {
         <Button
           title="Login"
           filled
+          onPress={signIn}
           style={{
             marginTop: 260,
             marginBottom: 4,
@@ -262,5 +312,15 @@ function Login({ navigation }) {
     </SafeAreaView>
   );
 }
+
+Login.navigationOptions = () => ({
+  header: null,
+});
+
+Login.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func,
+  }).isRequired,
+};
 
 export default Login;
