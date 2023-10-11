@@ -3,6 +3,7 @@ import {
   Text,
   Image,
   Pressable,
+  StyleSheet,
   TextInput,
   TouchableOpacity,
   AsyncStorage,
@@ -16,32 +17,31 @@ import Checkbox from 'expo-checkbox';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import api from '../../services/api';
-import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 export default function Login({ navigation, props }) {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [, setErrorMessage] = useState(null);
 
   async function saveUser(user) {
     await AsyncStorage.setItem('@ListApp:userToken', JSON.stringify(user));
   }
 
   async function signIn() {
-    if (username.length === 0) return;
+    if (email.length === 0) return;
 
     setLoading(true);
 
     try {
       const credentials = {
-        email: username,
-        password: 
+        email,
+        password,
       };
-      const response = await api.post('/sessions', credentials);
+      const response = await api.post('/user/login', credentials);
       const user = response.data;
       await saveUser(user);
 
@@ -54,71 +54,29 @@ export default function Login({ navigation, props }) {
 
       props.navigation.dispatch(resetAction);
     } catch (err) {
-      // console.log(err);
       setLoading(false);
       setErrorMessage('Usuário não cadastrado');
     }
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-      <View style={{ flex: 1, marginHorizontal: 22, marginTop: 1 }}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.body}>
         <View style={{ marginVertical: 1 }}>
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: 400,
-
-              color: COLORS.black,
-            }}
-          >
-            Hello 🖐️
-          </Text>
-
-          <Text
-            style={{
-              fontSize: 32,
-              fontWeight: 600,
-              color: COLORS.black,
-            }}
-          >
-            Bem Vindo ao
-          </Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={styles.textHello}>Hello 🖐️</Text>
+          <Text style={styles.textWelcome}>Bem Vindo ao</Text>
+          <View style={styles.logoWithText}>
             <Image
+              // eslint-disable-next-line global-require
               source={require('../../assets/Comandas-icon.png')}
-              style={{
-                alignSelf: 'center',
-                height: 50,
-                width: 50,
-                aspectRatio: 1 / 1,
-                marginRight: -6,
-              }}
+              style={styles.imageLogo}
             />
-            <Text
-              style={{
-                fontSize: 34,
-                fontWeight: 600,
-                color: COLORS.primary,
-              }}
-            >
-              omandas
-            </Text>
+            <Text style={styles.textLogo}>omandas</Text>
           </View>
         </View>
 
         <View style={{ marginTop: 30, marginBottom: 20 }}>
-          <View
-            style={{
-              width: '100%',
-              height: 48,
-              backgroundColor: COLORS.neutralLightGrey,
-              borderRadius: 8,
-              alignItems: 'center',
-              justifyContent: 'center',
-              paddingLeft: 22,
-            }}
-          >
+          <View style={styles.textInput}>
             <TextInput
               placeholder="Email"
               placeholderTextColor={COLORS.placeholderText}
@@ -126,24 +84,14 @@ export default function Login({ navigation, props }) {
               autoCorrect={false}
               keyboardType="email-address"
               style={{ width: '100%' }}
-              value={username}
-              onChangeText={(username) => setUsername(username)}
+              value={email}
+              onChangeText={(text) => setEmail(text)}
             />
           </View>
         </View>
 
         <View style={{ marginBottom: 12 }}>
-          <View
-            style={{
-              width: '100%',
-              height: 48,
-              backgroundColor: COLORS.neutralLightGrey,
-              borderRadius: 8,
-              alignItems: 'center',
-              justifyContent: 'center',
-              paddingLeft: 22,
-            }}
-          >
+          <View style={styles.textInput}>
             <TextInput
               placeholder="Senha"
               placeholderTextColor={COLORS.placeholderText}
@@ -152,15 +100,12 @@ export default function Login({ navigation, props }) {
               secureTextEntry={isPasswordShown}
               style={{ width: '100%' }}
               value={password}
-              onChangeText={(password) => setPassword(password)}
+              onChangeText={(text) => setPassword(text)}
             />
 
             <TouchableOpacity
               onPress={() => setIsPasswordShown(!isPasswordShown)}
-              style={{
-                position: 'absolute',
-                right: 15,
-              }}
+              style={styles.eye}
             >
               {isPasswordShown === true ? (
                 <Ionicons
@@ -175,12 +120,7 @@ export default function Login({ navigation, props }) {
           </View>
         </View>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            marginVertical: 9,
-          }}
-        >
+        <View style={styles.checkbox}>
           <Checkbox
             style={{ marginRight: 10 }}
             value={isChecked}
@@ -194,7 +134,7 @@ export default function Login({ navigation, props }) {
         <Button
           title="Login"
           filled
-          onPress={signIn}
+          onPress={() => signIn}
           style={{
             marginTop: 260,
             marginBottom: 4,
@@ -203,27 +143,10 @@ export default function Login({ navigation, props }) {
 
         {/* <SocialLogin /> */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginVertical: 18,
-          }}
-        >
-          <Text style={{ fontSize: 16, color: COLORS.black }}>
-            Não tem conta? Vamos{' '}
-          </Text>
+        <View style={styles.footer}>
+          <Text style={styles.textFooter}>Não tem conta? Vamos </Text>
           <Pressable onPress={() => navigation.navigate('Signup')}>
-            <Text
-              style={{
-                fontSize: 16,
-                color: COLORS.linkTextGreen,
-                fontWeight: 'bold',
-                marginLeft: 6,
-              }}
-            >
-              criar uma conta.
-            </Text>
+            <Text style={styles.textFooterLink}>criar uma conta.</Text>
           </Pressable>
         </View>
       </View>
@@ -240,3 +163,73 @@ Login.propTypes = {
     dispatch: PropTypes.func,
   }).isRequired,
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+  },
+  body: {
+    flex: 1,
+    marginHorizontal: 22,
+    marginTop: 1,
+  },
+  logoWithText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textHello: {
+    fontSize: 16,
+    fontWeight: 400,
+    color: COLORS.black,
+  },
+  textWelcome: {
+    fontSize: 32,
+    fontWeight: 600,
+    color: COLORS.black,
+  },
+  textInput: {
+    width: '100%',
+    height: 48,
+    backgroundColor: COLORS.neutralLightGrey,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 22,
+  },
+  imageLogo: {
+    alignSelf: 'center',
+    height: 50,
+    width: 50,
+    aspectRatio: 1 / 1,
+    marginRight: -6,
+  },
+  textLogo: {
+    fontSize: 34,
+    fontWeight: 600,
+    color: COLORS.primary,
+  },
+  eye: {
+    position: 'absolute',
+    right: 15,
+  },
+  checkbox: {
+    flexDirection: 'row',
+    marginVertical: 9,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 18,
+  },
+  textFooter: {
+    fontSize: 16,
+    color: COLORS.black,
+  },
+  textFooterLink: {
+    fontSize: 16,
+    color: COLORS.linkTextGreen,
+    fontWeight: 'bold',
+    marginLeft: 6,
+  },
+});
