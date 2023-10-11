@@ -5,21 +5,20 @@ import {
   Pressable,
   TextInput,
   TouchableOpacity,
-  StatusBar,
-  ActivityIndicator,
   AsyncStorage,
 } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StackActions, NavigationActions } from 'react-navigation';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import api from '../../services/api';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
-function Login({ navigation, props }) {
+export default function Login({ navigation, props }) {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -40,7 +39,7 @@ function Login({ navigation, props }) {
     try {
       const credentials = {
         email: username,
-        password,
+        password: 
       };
       const response = await api.post('/sessions', credentials);
       const user = response.data;
@@ -107,8 +106,6 @@ function Login({ navigation, props }) {
             </Text>
           </View>
         </View>
-
-        {!!errorMessage && <Error>{errorMessage}</Error>}
 
         <View style={{ marginTop: 30, marginBottom: 20 }}>
           <View
@@ -204,87 +201,8 @@ function Login({ navigation, props }) {
           }}
         />
 
-        {/* PARA LOGIN COM AS REDES SOCIAIS */}
-        {/* Quando ativado alterar marginTop do Buttom para 150 */}
-        {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}>
-                    <View
-                        style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: COLORS.grey,
-                            marginHorizontal: 10
-                        }}
-                    />
-                    <Text style={{ fontSize: 14 }}>Ou faça Login com</Text>
-                    <View
-                        style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: COLORS.neutralMiddGrey,
-                            marginHorizontal: 10
-                        }}
-                    />
-                </View>
+        {/* <SocialLogin /> */}
 
-                <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                }}>
-                    <TouchableOpacity
-                        onPress={() => console.log("Pressed")}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'row',
-                            height: 52,
-                            borderWidth: 1,
-                            borderColor: COLORS.neutralMiddGrey,
-                            marginRight: 4,
-                            borderRadius: 50
-                        }}
-                    >
-                        <Image
-                            source={require("../assets/facebook.png")}
-                            style={{
-                                height: 36,
-                                width: 36,
-                                marginRight: 8
-                            }}
-                            resizeMode='contain'
-                        />
-
-                        <Text>Facebook</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() => console.log("Pressed")}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'row',
-                            height: 52,
-                            borderWidth: 1,
-                            borderColor: COLORS.neutralMiddGrey,
-                            marginRight: 4,
-                            borderRadius: 50
-                        }}
-                    >
-                        <Image
-                            source={require("../assets/google.png")}
-                            style={{
-                                height: 36,
-                                width: 36,
-                                marginRight: 8
-                            }}
-                            resizeMode='contain'
-                        />
-
-                        <Text>Google</Text>
-                    </TouchableOpacity>
-                </View>
- */}
         <View
           style={{
             flexDirection: 'row',
@@ -322,5 +240,3 @@ Login.propTypes = {
     dispatch: PropTypes.func,
   }).isRequired,
 };
-
-export default Login;
