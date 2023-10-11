@@ -6,60 +6,54 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  AsyncStorage,
+  Alert,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StackActions, NavigationActions } from 'react-navigation';
+import { AuthContext } from '@/context/AuthContext';
+import * as Keychain from 'react-native-keychain';
+import { AxiosContext } from '@/context/AxiosContext';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
-import api from '../../services/api';
 import icon from '../../assets/Comandas-icon.png';
 
-
-export default function Login({ navigation, props }) {
+export default function Login({ navigation }) {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [, setErrorMessage] = useState(null);
+  const authContext = useContext(AuthContext);
+  const { publicAxios } = useContext(AxiosContext);
 
-  async function saveUser(user) {
-    await AsyncStorage.setItem('@ListApp:userToken', JSON.stringify(user));
-  }
-
-  async function signIn() {
-    if (email.length === 0) return;
-
-    setLoading(true);
-
+  const onLogin = async () => {
     try {
-      const credentials = {
+      const response = await publicAxios.post('/login', {
         email,
         password,
-      };
-      const response = await api.post('/user/login', credentials);
-      const user = response.data;
-      await saveUser(user);
-
-      const resetAction = StackActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: 'Home' })],
       });
 
-      setLoading(false);
+      const { accessToken, refreshToken } = response.data;
+      authContext.setAuthState({
+        accessToken,
+        refreshToken,
+        authenticated: true,
+      });
 
-      props.navigation.dispatch(resetAction);
-    } catch (err) {
-      setLoading(false);
-      setErrorMessage('Usuário não cadastrado');
+      await Keychain.setGenericPassword(
+        'token',
+        JSON.stringify({
+          accessToken,
+          refreshToken,
+        }),
+      );
+    } catch (error) {
+      Alert.alert('Login Failed', error.response.data.message);
     }
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -68,11 +62,7 @@ export default function Login({ navigation, props }) {
           <Text style={styles.textHello}>Hello 🖐️</Text>
           <Text style={styles.textWelcome}>Bem Vindo ao</Text>
           <View style={styles.logoWithText}>
-            <Image
-              // eslint-disable-next-line global-require
-              source={icon}
-              style={styles.imageLogo}
-            />
+            <Image source={icon} style={styles.imageLogo} />
             <Text style={styles.textLogo}>omandas</Text>
           </View>
         </View>
@@ -136,7 +126,7 @@ export default function Login({ navigation, props }) {
         <Button
           title="Login"
           filled
-          onPress={() => signIn}
+          onPress={() => onLogin}
           style={{
             marginTop: 260,
             marginBottom: 4,

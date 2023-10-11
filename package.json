@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "eslint": "^8.51.0"
+    "axios": "^1.5.1",
+    "axios-auth-refresh": "^3.3.6",
+    "eslint": "^8.51.0",
+    "react-native-keychain": "^8.1.2",
+    "react-native-loading-spinner-overlay": "^3.0.1"
   }
 }

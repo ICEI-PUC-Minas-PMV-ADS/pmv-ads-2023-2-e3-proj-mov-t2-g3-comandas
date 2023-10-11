@@ -30,10 +30,7 @@ function Signup({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View style={{ flex: 1, marginHorizontal: 22 }}>
         <View style={{ marginVertical: -21 }}>
-          <Image
-            source={icon}
-            style={styles.imageStyle}
-          />
+          <Image source={icon} style={styles.imageStyle} />
         </View>
 
         <View style={{ marginTop: 30, marginBottom: 12 }}>
