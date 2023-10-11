@@ -14,6 +14,7 @@ import Checkbox from 'expo-checkbox';
 import { AuthContext } from '../../context/AuthContext';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
+import icon from '../../assets/Comandas-icon.png';
 
 function Signup({ navigation }) {
   const [name, setName] = useState('');
@@ -30,7 +31,7 @@ function Signup({ navigation }) {
       <View style={{ flex: 1, marginHorizontal: 22 }}>
         <View style={{ marginVertical: -21 }}>
           <Image
-            source={require('../../assets/Comandas-icon.png')}
+            source={icon}
             style={styles.imageStyle}
           />
         </View>

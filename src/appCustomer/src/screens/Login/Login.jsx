@@ -17,6 +17,8 @@ import Checkbox from 'expo-checkbox';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import api from '../../services/api';
+import icon from '../../assets/Comandas-icon.png';
+
 
 export default function Login({ navigation, props }) {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -68,7 +70,7 @@ export default function Login({ navigation, props }) {
           <View style={styles.logoWithText}>
             <Image
               // eslint-disable-next-line global-require
-              source={require('../../assets/Comandas-icon.png')}
+              source={icon}
               style={styles.imageLogo}
             />
             <Text style={styles.textLogo}>omandas</Text>
