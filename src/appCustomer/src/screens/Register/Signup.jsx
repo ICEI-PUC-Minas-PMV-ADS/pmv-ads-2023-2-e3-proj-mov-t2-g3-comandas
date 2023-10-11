@@ -6,14 +6,22 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
+import { AuthContext } from '../../context/AuthContext';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 function Signup({ navigation }) {
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const { isLoading, register } = useContext(AuthContext);
+
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   return (
@@ -55,9 +63,9 @@ function Signup({ navigation }) {
             <TextInput
               placeholder="Seu Nome"
               placeholderTextColor={COLORS.placeholderText}
-              style={{
-                width: '100%',
-              }}
+              style={{ width: '100%' }}
+              value={name}
+              onChangeText={(text) => setName(text)}
             />
           </View>
         </View>
@@ -87,9 +95,9 @@ function Signup({ navigation }) {
               placeholder="Email"
               placeholderTextColor={COLORS.placeholderText}
               keyboardType="email-address"
-              style={{
-                width: '100%',
-              }}
+              style={{ width: '100%' }}
+              value={email}
+              onChangeText={(text) => setEmail(text)}
             />
           </View>
         </View>
@@ -120,9 +128,9 @@ function Signup({ navigation }) {
               placeholder="Sua senha"
               placeholderTextColor={COLORS.placeholderText}
               secureTextEntry={isPasswordShown}
-              style={{
-                width: '100%',
-              }}
+              style={{ width: '100%' }}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
             />
 
             <TouchableOpacity
@@ -213,93 +221,17 @@ function Signup({ navigation }) {
         <Button
           title="Criar Conta"
           filled
-          onPress={() => navigation.navigate('Home')}
+          // onPress={() => navigation.navigate('Home')}
+          onPress={() => {
+            register(name, email, password);
+          }}
           style={{
             marginTop: 91,
             marginBottom: 4,
           }}
         />
-        {/* PARA LOGIN COM AS REDES SOCIAIS */}
-        {/* Quando ativado alterar marginTop do Buttom para 150 */}
-        {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}>
-                    <View
-                        style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: COLORS.grey,
-                            marginHorizontal: 10
-                        }}
-                    />
-                    <Text style={{ fontSize: 14 }}>Ou faça Login com</Text>
-                    <View
-                        style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: COLORS.neutralMiddGrey,
-                            marginHorizontal: 10
-                        }}
-                    />
-                </View>
 
-                <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                }}>
-                    <TouchableOpacity
-                        onPress={() => console.log("Pressed")}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'row',
-                            height: 52,
-                            borderWidth: 1,
-                            borderColor: COLORS.neutralMiddGrey,
-                            marginRight: 4,
-                            borderRadius: 50
-                        }}
-                    >
-                        <Image
-                            source={require("../../assets/facebook.png")}
-                            style={{
-                                height: 36,
-                                width: 36,
-                                marginRight: 8
-                            }}
-                            resizeMode='contain'
-                        />
-
-                        <Text>Facebook</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() => console.log("Pressed")}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'row',
-                            height: 52,
-                            borderWidth: 1,
-                            borderColor: COLORS.neutralMiddGrey,
-                            marginRight: 4,
-                            borderRadius: 50
-                        }}
-                    >
-                        <Image
-                            source={require("../../assets/google.png")}
-                            style={{
-                                height: 36,
-                                width: 36,
-                                marginRight: 8
-                            }}
-                            resizeMode='contain'
-                        />
-
-                        <Text>Google</Text>
-                    </TouchableOpacity>
-                </View>
- */}
+        {/* <SocialLogin /> */}
 
         <View
           style={{
