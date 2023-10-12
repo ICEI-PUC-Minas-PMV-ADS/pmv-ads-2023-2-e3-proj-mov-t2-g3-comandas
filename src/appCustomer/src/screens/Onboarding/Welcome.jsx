@@ -10,9 +10,9 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../../components/Buttons/Button';
 import COLORS from '../../constants/colors';
-import onBoarding_img01 from '../../assets/onBoarding_img01.png';
+import OnBoardingImg from '../../assets/onBoarding_img01.png';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 function Welcome({ navigation }) {
   return (
@@ -20,7 +20,7 @@ function Welcome({ navigation }) {
       <View style={styles.container}>
         <Image
           // eslint-disable-next-line global-require
-          source={onBoarding_img01}
+          source={OnBoardingImg}
           style={styles.image}
         />
       </View>

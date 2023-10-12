@@ -8,21 +8,22 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
-import COLORS from '../../constants/colors';
-import Button from '../../components/Buttons/Button';
-import icon from '../../assets/Comandas-icon.png';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from '@/context/UserContext';
 import { login } from '@/services/auth.service';
+import COLORS from '../../constants/colors';
+import Button from '../../components/Buttons/Button';
+import icon from '../../assets/Comandas-icon.png';
 
 function Login() {
   const navigation = useNavigation();
-  const {setSigned, setName} = useUser();
+  const { setSigned, setName } = useUser();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -30,20 +31,20 @@ function Login() {
 
   const handleLogin = () => {
     login({
-        email: email,
-        password: password
-    }).then( res => {
-        console.log(res);
+      email,
+      password,
+    }).then((res) => {
+      // console.log(res);
 
-        if (res && res.user){
-            setSigned(true);
-            setName(res.user.name);
-            AsyncStorage.setItem(@TOKEN_KEY, res.accessToken).then();
-        }else{
-            Alert.alert('Usuário ou Senha inválidos!');
-        }
+      if (res && res.user) {
+        setSigned(true);
+        setName(res.user.name);
+        AsyncStorage.setItem('@TOKEN_KEY', res.accessToken).then();
+      } else {
+        Alert.alert('Usuário ou Senha inválidos!');
+      }
     });
-  }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
