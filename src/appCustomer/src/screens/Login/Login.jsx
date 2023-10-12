@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import React, { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';

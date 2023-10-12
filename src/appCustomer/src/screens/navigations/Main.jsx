@@ -1,8 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import Login from '../Login/Login';
-import Signup from '../Register/Signup';
 import Home from '../Home';
 import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
@@ -13,8 +11,6 @@ const Stack = createNativeStackNavigator();
 function StackNavigation() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={Login} options={{ title: '' }} />
-      <Stack.Screen name="Signup" component={Signup} options={{ title: '' }} />
       <Stack.Screen
         name="Home"
         component={Home}
