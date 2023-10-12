@@ -1,8 +1,12 @@
-/* eslint-disable global-require */
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { useFonts } from 'expo-font';
+// eslint-disable-next-line no-unused-vars
 import * as SplashScreen from 'expo-splash-screen';
 import Routes from '@/screens/routes';
+import UserProvider from '@/context/UserContext';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   //   // Carregando as fontes locais
@@ -25,5 +29,11 @@ export default function App() {
   //   // Chegou aqui então fontsLoaded é true então podemos esconder a Splash
   //   SplashScreen.hideAsync();
 
-  return <Routes />;
+  return (
+    <UserProvider>
+      <NavigationContainer>
+        <Routes />
+      </NavigationContainer>
+    </UserProvider>
+  );
 }

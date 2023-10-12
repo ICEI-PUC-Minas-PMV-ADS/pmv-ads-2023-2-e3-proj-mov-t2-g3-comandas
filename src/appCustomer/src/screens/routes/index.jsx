@@ -18,12 +18,10 @@ function StackNavigation() {
         name="Welcome"
         component={Welcome}
         options={{ title: '' }}
+        // Falar com o grupo para manter o Scan sempre.
+        // O usuário deve ter opção de usar o app sem criar conta, o scan deve sempre estar dispnível para ve o menu do restaurante
       />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ title: '' }} // O usuário deve ter opção de usar o app sem criar conta, o scan deve sempre estar dispnível para ve o menu do restaurante
-      />
+      <Stack.Screen name="Login" component={Login} options={{ title: '' }} />
       <Stack.Screen name="Signup" component={Signup} options={{ title: '' }} />
       <Stack.Screen
         name="Home"

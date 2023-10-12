@@ -10,51 +10,40 @@ import {
 } from 'react-native';
 import React, { useContext, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthContext } from '@/context/AuthContext';
-import * as Keychain from 'react-native-keychain';
-import { AxiosContext } from '@/context/AxiosContext';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
+import { useNavigation } from '@react-navigation/native';
+import { useUser } from '@/context/UserContext';
+import { login } from '@/services/auth.service';
 
-export default function Login({ navigation }) {
+function Login() {
+  const navigation = useNavigation();
+  const {setSigned, setName} = useUser();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const authContext = useContext(AuthContext);
-  const { publicAxios } = useContext(AxiosContext);
+  const handleLogin = () => {
+    login({
+        email: email,
+        password: password
+    }).then( res => {
+        console.log(res);
 
-  const onLogin = async () => {
-    try {
-      const response = await publicAxios.post('/login', {
-        email,
-        password,
-      });
-
-      const { accessToken, refreshToken } = response.data;
-      authContext.setAuthState({
-        accessToken,
-        refreshToken,
-        authenticated: true,
-      });
-
-      await Keychain.setGenericPassword(
-        'token',
-        JSON.stringify({
-          accessToken,
-          refreshToken,
-        }),
-      );
-    } catch (error) {
-      Alert.alert('Login Failed', error.response.data.message);
-    }
-  };
-
+        if (res && res.user){
+            setSigned(true);
+            setName(res.user.name);
+            AsyncStorage.setItem(@TOKEN_KEY, res.accessToken).then();
+        }else{
+            Alert.alert('Usuário ou Senha inválidos!');
+        }
+    });
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
@@ -126,7 +115,7 @@ export default function Login({ navigation }) {
         <Button
           title="Login"
           filled
-          onPress={() => onLogin}
+          onPress={handleLogin}
           style={{
             marginTop: 260,
             marginBottom: 4,
@@ -225,3 +214,5 @@ const styles = StyleSheet.create({
     marginLeft: 6,
   },
 });
+
+export default Login;

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+/* import React, { createContext, useState } from 'react';
 import * as Keychain from 'react-native-keychain';
 
 const AuthContext = createContext(null);
@@ -30,3 +30,4 @@ function AuthProvider({ children }) {
 }
 
 export { AuthContext, AuthProvider };
+ */
