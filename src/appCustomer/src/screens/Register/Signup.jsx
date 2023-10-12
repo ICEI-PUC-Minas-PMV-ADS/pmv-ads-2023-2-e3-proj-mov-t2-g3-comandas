@@ -6,25 +6,47 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from 'react-native';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
-import { AuthContext } from '../../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
+import { register } from '@/services/auth.service';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
 
-function Signup({ navigation }) {
+function Signup() {
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
-  const { isLoading, register } = useContext(AuthContext);
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+
+  const handleRegister = () => {
+    register({
+      name,
+      email,
+      password,
+    }).then((res) => {
+      if (res) {
+        Alert.alert('Usuário cadastrado com sucesso!', [
+          { text: 'OK', onPress: () => navigation.navigate('Login') },
+        ]);
+      } else {
+        Alert.alert(
+          'Atenção',
+          'Usuário não cadastrado!',
+          'Tente novamente ou faça Login',
+        );
+      }
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -133,9 +155,7 @@ function Signup({ navigation }) {
         <Button
           title="Criar Conta"
           filled
-          onPress={() => {
-            register(name, email, password);
-          }}
+          onPress={handleRegister}
           style={{
             marginTop: 91,
             marginBottom: 4,
