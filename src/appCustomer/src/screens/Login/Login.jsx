@@ -7,12 +7,12 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import React, { useState } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
@@ -24,128 +24,125 @@ import icon from '../../assets/Comandas-icon.png';
 
 function Login() {
   const navigation = useNavigation();
-  const { setSigned, setName } = useUser();
+  const { setSigned, setUser } = useUser();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isPasswordShown, setIsPasswordShown] = useState(false);
+  const [isPasswordHide, setIsPasswordHide] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleLogin = () => {
+  function handleLogin() {
     login({
       email,
       password,
-    }).then((res) => {
-      // console.log(res);
-
-      if (res && res.user) {
-        setSigned(true);
-        setName(res.user.name);
-        AsyncStorage.setItem('@TOKEN_KEY', res.accessToken).then();
-      } else {
+    })
+      .then(async (res) => {
+        if (res && res.userInfo && res.userInfo.role === 'customer') {
+          setSigned(true);
+          setUser(res.userInfo);
+          await SecureStore.setItemAsync('TOKEN_KEY', res.accessToken);
+          await SecureStore.setItemAsync(
+            'USER_ID',
+            String(res.userInfo.id),
+          ).catch((err) => console.log('ERRO IN handleLogin ', err));
+          //
+          // Fazer lógica para o que acontecer após Login
+          //
+        } else {
+          Alert.alert('Usuário ou Senha inválidos!');
+        }
+      })
+      .catch(() => {
         Alert.alert('Usuário ou Senha inválidos!');
-      }
-    });
-  };
+      });
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
-        <View style={{ marginVertical: 1 }}>
-          <Text style={styles.textHello}>Hello 🖐️</Text>
-          <Text style={styles.textWelcome}>Bem Vindo ao</Text>
-          <View style={styles.logoWithText}>
-            <Image source={icon} style={styles.imageLogo} />
-            <Text style={styles.textLogo}>omandas</Text>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.wrapper}
+        >
+          <View>
+            <Text style={styles.textHello}>Hello 🖐️</Text>
+            <Text style={styles.textWelcome}>Bem Vindo ao</Text>
+            <View style={styles.logoWithText}>
+              <Image source={icon} style={styles.imageLogo} />
+              <Text style={styles.textLogo}>omandas</Text>
+            </View>
           </View>
-        </View>
 
-        <View style={{ marginTop: 30, marginBottom: 20 }}>
-          <View style={styles.textInput}>
-            <TextInput
-              placeholder="Email"
-              placeholderTextColor={COLORS.placeholderText}
-              autoCapitalize="none"
-              autoCorrect={false}
-              keyboardType="email-address"
-              style={{ width: '100%' }}
-              value={email}
-              onChangeText={(text) => setEmail(text)}
+          <View>
+            <View style={styles.textInput}>
+              <TextInput
+                placeholder="Email"
+                placeholderTextColor={COLORS.placeholderText}
+                autoCapitalize="none"
+                style={{ width: '100%' }}
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+              />
+            </View>
+          </View>
+          <View>
+            <View style={styles.textInput}>
+              <TextInput
+                placeholder="Senha"
+                placeholderTextColor={COLORS.placeholderText}
+                autoCapitalize="none"
+                autoCorrect={false}
+                secureTextEntry={isPasswordHide}
+                style={{ width: '85%' }}
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+              />
+
+              <TouchableOpacity
+                onPress={() => setIsPasswordHide(!isPasswordHide)}
+                style={styles.eye}
+              >
+                {isPasswordHide === true ? (
+                  <Ionicons
+                    name="eye"
+                    size={24}
+                    color={COLORS.placeholderText}
+                  />
+                ) : (
+                  <Ionicons
+                    name="eye-off"
+                    size={24}
+                    color={COLORS.placeholderText}
+                  />
+                )}
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.checkbox}>
+            <Checkbox
+              style={{ marginRight: 10 }}
+              value={isChecked}
+              onValueChange={setIsChecked}
+              color={isChecked ? COLORS.primary : undefined}
             />
+
+            <Text>Salvar dados</Text>
           </View>
-        </View>
+        </KeyboardAvoidingView>
 
-        <View style={{ marginBottom: 12 }}>
-          <View style={styles.textInput}>
-            <TextInput
-              placeholder="Senha"
-              placeholderTextColor={COLORS.placeholderText}
-              autoCapitalize="none"
-              autoCorrect={false}
-              secureTextEntry={isPasswordShown}
-              style={{ width: '100%' }}
-              value={password}
-              onChangeText={(text) => setPassword(text)}
-            />
-
-            <TouchableOpacity
-              onPress={() => setIsPasswordShown(!isPasswordShown)}
-              style={styles.eye}
-            >
-              {isPasswordShown === true ? (
-                <Ionicons
-                  name="eye-off"
-                  size={24}
-                  color={COLORS.placeholderText}
-                />
-              ) : (
-                <Ionicons name="eye" size={24} color={COLORS.placeholderText} />
-              )}
-            </TouchableOpacity>
+        <View>
+          <Button title="Login" filled onPress={() => handleLogin()} />
+          {/* <SocialLogin /> */}
+          <View style={styles.footer}>
+            <Text style={styles.textFooter}>Não tem conta? Vamos </Text>
+            <Pressable onPress={() => navigation.navigate('Signup')}>
+              <Text style={styles.textFooterLink}>criar uma conta.</Text>
+            </Pressable>
           </View>
-        </View>
-
-        <View style={styles.checkbox}>
-          <Checkbox
-            style={{ marginRight: 10 }}
-            value={isChecked}
-            onValueChange={setIsChecked}
-            color={isChecked ? COLORS.primary : undefined}
-          />
-
-          <Text>Salvar dados</Text>
-        </View>
-
-        <Button
-          title="Login"
-          filled
-          onPress={handleLogin}
-          style={{
-            marginTop: 260,
-            marginBottom: 4,
-          }}
-        />
-
-        {/* <SocialLogin /> */}
-
-        <View style={styles.footer}>
-          <Text style={styles.textFooter}>Não tem conta? Vamos </Text>
-          <Pressable onPress={() => navigation.navigate('Signup')}>
-            <Text style={styles.textFooterLink}>criar uma conta.</Text>
-          </Pressable>
         </View>
       </View>
     </SafeAreaView>
   );
 }
-
-Login.navigationOptions = () => ({
-  header: null,
-});
-
-Login.propTypes = {
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func,
-  }).isRequired,
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -154,8 +151,11 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    marginHorizontal: 22,
-    marginTop: 1,
+    padding: 20,
+  },
+  wrapper: {
+    flex: 1,
+    gap: 25,
   },
   logoWithText: {
     flexDirection: 'row',
@@ -163,12 +163,13 @@ const styles = StyleSheet.create({
   },
   textHello: {
     fontSize: 16,
-    fontWeight: 400,
+    fontWeight: '400',
     color: COLORS.black,
+    marginBottom: 10,
   },
   textWelcome: {
     fontSize: 32,
-    fontWeight: 600,
+    fontWeight: '600',
     color: COLORS.black,
   },
   textInput: {
@@ -176,7 +177,6 @@ const styles = StyleSheet.create({
     height: 48,
     backgroundColor: COLORS.neutralLightGrey,
     borderRadius: 8,
-    alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 22,
   },
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   },
   textLogo: {
     fontSize: 34,
-    fontWeight: 600,
+    fontWeight: '600',
     color: COLORS.primary,
   },
   eye: {
@@ -198,7 +198,6 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     flexDirection: 'row',
-    marginVertical: 9,
   },
   footer: {
     flexDirection: 'row',
@@ -213,7 +212,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.linkTextGreen,
     fontWeight: 'bold',
-    marginLeft: 6,
   },
 });
 
