@@ -59,6 +59,7 @@ function Signup() {
             <TextInput
               placeholder="Seu Nome"
               placeholderTextColor={COLORS.placeholderText}
+              autoCapitalize="none"
               style={{ width: '100%' }}
               value={name}
               setValue={setName}
@@ -73,6 +74,7 @@ function Signup() {
             <TextInput
               placeholder="Email"
               placeholderTextColor={COLORS.placeholderText}
+              autoCapitalize="none"
               style={{ width: '100%' }}
               value={email}
               onChangeText={(text) => setEmail(text)}
@@ -89,6 +91,7 @@ function Signup() {
             <TextInput
               placeholder="Sua senha"
               placeholderTextColor={COLORS.placeholderText}
+              autoCapitalize="none"
               secureTextEntry={isPasswordHide}
               style={{ width: '85%' }}
               value={password}
@@ -119,6 +122,7 @@ function Signup() {
             <TextInput
               placeholder="Confirmar a senha"
               placeholderTextColor={COLORS.placeholderText}
+              autoCapitalize="none"
               secureTextEntry={isPasswordHide}
               style={{ width: '85%' }}
               value={passwordRepeat}
