@@ -60,6 +60,7 @@ function Signup() {
               placeholder="Seu Nome"
               placeholderTextColor={COLORS.placeholderText}
               autoCapitalize="none"
+              autoCorrect={false}
               style={{ width: '100%' }}
               value={name}
               setValue={setName}
@@ -75,6 +76,7 @@ function Signup() {
               placeholder="Email"
               placeholderTextColor={COLORS.placeholderText}
               autoCapitalize="none"
+              autoCorrect={false}
               style={{ width: '100%' }}
               value={email}
               onChangeText={(text) => setEmail(text)}
@@ -92,6 +94,7 @@ function Signup() {
               placeholder="Sua senha"
               placeholderTextColor={COLORS.placeholderText}
               autoCapitalize="none"
+              autoCorrect={false}
               secureTextEntry={isPasswordHide}
               style={{ width: '85%' }}
               value={password}
@@ -123,6 +126,7 @@ function Signup() {
               placeholder="Confirmar a senha"
               placeholderTextColor={COLORS.placeholderText}
               autoCapitalize="none"
+              autoCorrect={false}
               secureTextEntry={isPasswordHide}
               style={{ width: '85%' }}
               value={passwordRepeat}

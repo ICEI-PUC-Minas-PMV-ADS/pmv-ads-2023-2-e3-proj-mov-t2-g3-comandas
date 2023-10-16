@@ -45,9 +45,7 @@ function Login() {
             String(res.userInfo.id),
           ).catch((err) => console.log('ERRO IN handleLogin ', err));
           // Fazer lógica para o que acontecer após Login
-          Alert.alert('Login com Sucesso.', null, [
-            { text: 'OK', onPress: () => navigation.navigate('Home') },
-          ]);
+          navigation.navigate('Home');
         } else {
           Alert.alert('Usuário ou Senha inválidos!');
         }
@@ -79,6 +77,7 @@ function Login() {
                 placeholder="Email"
                 placeholderTextColor={COLORS.placeholderText}
                 autoCapitalize="none"
+                autoCorrect={false}
                 style={{ width: '100%' }}
                 value={email}
                 onChangeText={(text) => setEmail(text)}
