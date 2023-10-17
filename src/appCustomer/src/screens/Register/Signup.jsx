@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { register } from '@/services/auth.service';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -26,7 +25,6 @@ function Signup() {
   const [passwordRepeat, setPasswordRepeat] = useState('');
 
   const [isPasswordHide, setIsPasswordHide] = useState(true);
-  const [isChecked, setIsChecked] = useState(false);
 
   function handleRegister() {
     register({
@@ -152,15 +150,8 @@ function Signup() {
       </View>
 
       <View style={styles.checkbox}>
-        <Checkbox
-          style={{ marginRight: 8 }}
-          value={isChecked}
-          onValueChange={setIsChecked}
-          color={isChecked ? COLORS.primary : undefined}
-        />
-
         <Text style={{ width: '100%' }}>
-          Eu concordo com os termos e condições.
+          Registrando-se você concordo com os termos e condições.
         </Text>
       </View>
 
@@ -217,6 +208,7 @@ const styles = StyleSheet.create({
   checkbox: {
     flexDirection: 'row',
     marginVertical: 10,
+    marginHorizontal: 22,
   },
   footer: {
     flexDirection: 'row',
