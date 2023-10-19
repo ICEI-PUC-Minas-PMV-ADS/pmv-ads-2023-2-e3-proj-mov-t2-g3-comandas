@@ -34,6 +34,11 @@ function StackNavigation() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="CheckinRegister"
+        component={CheckinRegister}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="Home"
         component={Home}
         options={{ headerShown: false }}
