@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import Home from '../Home';
+import Home from '../Home/Index';
 import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
 import Notifications from '../Notifications/Index';

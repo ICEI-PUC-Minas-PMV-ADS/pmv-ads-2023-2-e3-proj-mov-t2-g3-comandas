@@ -1,34 +1,44 @@
 {
     "expo": {
-      "name": "comandasCustomer",
-      "slug": "comandasCustomer",
-      "version": "1.0.0",
-      "orientation": "portrait",
-      "icon": "./src/assets/icon.png",
-      "userInterfaceStyle": "light",
-      "splash": {
-        "image": "./src/assets/splash.png",
-        "resizeMode": "contain",
-        "backgroundColor": "#ffffff"
-      },
-      "assetBundlePatterns": [
-        "**/*"
-      ],
-      "ios": {
-        "supportsTablet": true,
-        "config": {
-            "usesNonExemptEncryptation": false
+        "name": "comandasCustomer",
+        "slug": "comandasCustomer",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./src/assets/icon.png",
+        "userInterfaceStyle": "light",
+        "splash": {
+            "image": "./src/assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "supportsTablet": true,
+            "config": {
+                "usesNonExemptEncryptation": false
+            }
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./src/assets/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "packagerOpts": {
+                "config": "metro.config.js",
+                "sourceExts": [
+                    "js",
+                    "json",
+                    "ts",
+                    "tsx",
+                    "cjs"
+                ],
+                "fastRefresh": true
+            }
+        },
+        "web": {
+            "favicon": "./src/assets/favicon.png"
         }
-      },
-      "android": {
-        "adaptiveIcon": {
-          "foregroundImage": "./src/assets/adaptive-icon.png",
-          "backgroundColor": "#ffffff"
-        }
-      },
-      "web": {
-        "favicon": "./src/assets/favicon.png"
-      }
     }
-  }
-  
+}
