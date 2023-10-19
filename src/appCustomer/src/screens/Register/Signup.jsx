@@ -36,7 +36,7 @@ function Signup() {
     })
       .then(() => {
         Alert.alert('Usuário cadastrado com sucesso!', null, [
-          { text: 'OK', onPress: () => navigation.navigate('Login') },
+          { text: 'OK', onPress: () => navigation.navigate('CheckinRegister') },
         ]);
       })
       .catch(() => {

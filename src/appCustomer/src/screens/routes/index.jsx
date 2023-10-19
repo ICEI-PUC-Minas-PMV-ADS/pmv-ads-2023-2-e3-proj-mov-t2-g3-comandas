@@ -4,6 +4,7 @@ import React from 'react';
 import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
+import CheckinRegister from '../Register/CheckinRegister';
 import Home from '../Home';
 import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
@@ -29,6 +30,11 @@ function StackNavigation() {
       <Stack.Screen
         name="Signup"
         component={Signup}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CheckinRegister"
+        component={CheckinRegister}
         options={{ headerShown: false }}
       />
       <Stack.Screen
