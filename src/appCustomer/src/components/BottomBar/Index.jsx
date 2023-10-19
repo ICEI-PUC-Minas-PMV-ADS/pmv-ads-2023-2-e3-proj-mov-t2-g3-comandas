@@ -8,7 +8,7 @@ export default function BottomBar({ navigation }) {
       <TouchableOpacity>
         <Image source={require('../../assets/Home.png')} />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("Search")}>
         <Image source={require('../../assets/Icone_Busca.png')} />
       </TouchableOpacity>
       <TouchableOpacity>

@@ -4,6 +4,7 @@ import React from 'react';
 import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
+import Search from '../Search/index';
 import CheckinRegister from '../Register/CheckinRegister';
 import Home from '../Home';
 import Scan from '../Scan/Index.jsx';
@@ -14,7 +15,7 @@ const Stack = createNativeStackNavigator();
 
 function StackNavigation() {
   return (
-    <Stack.Navigator initialRouteName="Welcome">
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Welcome"
         component={Welcome}
@@ -33,13 +34,13 @@ function StackNavigation() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="CheckinRegister"
-        component={CheckinRegister}
+        name="Home"
+        component={Home}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Home"
-        component={Home}
+        name="Search"
+        component={Search}
         options={{ headerShown: false }}
       />
       <Stack.Screen
