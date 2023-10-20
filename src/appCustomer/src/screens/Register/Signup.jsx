@@ -35,9 +35,7 @@ function Signup() {
       },
     })
       .then(() => {
-        Alert.alert('Usuário cadastrado com sucesso!', null, [
-          { text: 'OK', onPress: () => navigation.navigate('CheckinRegister') },
-        ]);
+        navigation.navigate('CheckinRegister');
       })
       .catch(() => {
         Alert.alert('Usuário não cadastrado!', 'Tente novamente ou faça Login');

@@ -63,7 +63,7 @@ function Login() {
           style={styles.wrapper}
         >
           <View>
-            <Text style={styles.textHello}>Hello 🖐️</Text>
+            <Text style={styles.textHello}>Olá 🖐️</Text>
             <Text style={styles.textWelcome}>Bem Vindo ao</Text>
             <View style={styles.logoWithText}>
               <Image source={icon} style={styles.imageLogo} />

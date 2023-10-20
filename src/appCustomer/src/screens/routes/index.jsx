@@ -4,6 +4,7 @@ import React from 'react';
 import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
+import UserProfile from '../UserProfile/UserProfile';
 import Search from '../Search/index';
 import CheckinRegister from '../Register/CheckinRegister';
 import Home from '../Home';
@@ -37,6 +38,11 @@ function StackNavigation() {
         name="CheckinRegister"
         component={CheckinRegister}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="UserProfile"
+        component={UserProfile}
+        options={{ title: 'Perfil' }}
       />
       <Stack.Screen
         name="Home"
