@@ -5,6 +5,9 @@ import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
 import UserProfile from '../UserProfile/UserProfile';
+import DadosPessoais from '../UserProfile/DadosPessoais';
+import CarteiraDigital from '../UserProfile/CarteiraDigital';
+import Cartoes from '../UserProfile/Cartoes';
 import Search from '../Search/index';
 import CheckinRegister from '../Register/CheckinRegister';
 import CheckoutLogout from '../UserProfile/CheckoutLogout';
@@ -12,6 +15,8 @@ import Home from '../Home';
 import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
 import Notifications from '../Notifications/Index';
+import FaleConosco from '../UserProfile/FaleConosco';
+import Problemas from '../UserProfile/Problemas';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +59,31 @@ function StackNavigation() {
         name="CheckoutLogout"
         component={CheckoutLogout}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CarteiraDigital"
+        component={CarteiraDigital}
+        options={{ title: 'Carteira Digital' }}
+      />
+      <Stack.Screen
+        name="Cartoes"
+        component={Cartoes}
+        options={{ title: 'Cartões' }}
+      />
+      <Stack.Screen
+        name="DadosPessoais"
+        component={DadosPessoais}
+        options={{ title: 'Dados Pessoais' }}
+      />
+      <Stack.Screen
+        name="FaleConosco"
+        component={FaleConosco}
+        options={{ title: 'Fale Conosco' }}
+      />
+      <Stack.Screen
+        name="Problemas"
+        component={Problemas}
+        options={{ title: 'Informe um Problema' }}
       />
       <Stack.Screen
         name="Search"

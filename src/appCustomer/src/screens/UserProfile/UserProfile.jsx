@@ -16,16 +16,18 @@ import AvatarExemple from '../../assets/UserAvatar.png';
 
 const SECTIONS = [
   {
-    header: 'Carteira Digital',
+    header: 'Pagamento',
     icon: 'align-center',
     items: [
       {
+        id: 'carteiraDigital',
         icon: 'dollar-sign',
         color: COLORS.iconGreen,
-        label: 'Saldo',
+        label: 'Carteira Digital',
         type: 'link',
       },
       {
+        id: 'cartoes',
         icon: 'credit-card',
         color: COLORS.iconGreen,
         label: 'Cartões',
@@ -38,12 +40,14 @@ const SECTIONS = [
     icon: 'settings',
     items: [
       {
+        id: 'dadosPessoais',
         icon: 'user',
         color: COLORS.iconBlue,
         label: 'Dados Pessoais',
         type: 'link',
       },
       {
+        id: 'usarLocalizacao',
         icon: 'navigation',
         color: COLORS.iconBlue,
         label: 'Usar Localização',
@@ -63,12 +67,14 @@ const SECTIONS = [
     icon: 'help-circle',
     items: [
       {
+        id: 'faleConosco',
         icon: 'mail',
         color: COLORS.iconBlue,
         label: 'Fale Conosco',
         type: 'link',
       },
       {
+        id: 'problemas',
         icon: 'alert-circle',
         color: COLORS.iconRed,
         label: 'Informe um Problema',
@@ -138,6 +144,21 @@ export default function UserProfile({ navigation }) {
                 key={icon}
                 onPress={() => {
                   // handle onPress
+                  if (id === 'carteiraDigital') {
+                    navigation.navigate('CarteiraDigital');
+                  }
+                  if (id === 'cartoes') {
+                    navigation.navigate('Cartoes');
+                  }
+                  if (id === 'dadosPessoais') {
+                    navigation.navigate('DadosPessoais');
+                  }
+                  if (id === 'faleConosco') {
+                    navigation.navigate('FaleConosco');
+                  }
+                  if (id === 'problemas') {
+                    navigation.navigate('Problemas');
+                  }
                 }}
               >
                 <View style={styles.row}>
