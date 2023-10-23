@@ -7,6 +7,7 @@ import Signup from '../Register/Signup';
 import UserProfile from '../UserProfile/UserProfile';
 import Search from '../Search/index';
 import CheckinRegister from '../Register/CheckinRegister';
+import CheckoutLogout from '../UserProfile/CheckoutLogout';
 import Home from '../Home';
 import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
@@ -47,6 +48,11 @@ function StackNavigation() {
       <Stack.Screen
         name="Home"
         component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CheckoutLogout"
+        component={CheckoutLogout}
         options={{ headerShown: false }}
       />
       <Stack.Screen

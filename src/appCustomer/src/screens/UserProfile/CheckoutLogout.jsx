@@ -7,7 +7,7 @@ import COLORS from '../../constants/colors';
 import Checkin from '../../assets/Checkin.json';
 import Logo from '../../assets/Comandas-icon.png';
 
-export default function CheckinRegister() {
+export default function CheckoutLogout() {
   const navigation = useNavigation();
 
   return (
@@ -34,7 +34,7 @@ export default function CheckinRegister() {
           loop={false}
           marginTop={10}
         />
-        <Text style={styles.textForm}>Conta criada com Sucesso</Text>
+        <Text style={styles.textForm}>Logout com Sucesso!</Text>
         <Animatable.View
           delay={2000}
           animation="fadeInUp"
