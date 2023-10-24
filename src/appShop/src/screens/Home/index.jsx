@@ -5,7 +5,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Text>Bom dia!</Text>
+      <Text>Eu n tenho ideia wdo q to fazendo</Text>
       <Image
         source={{
           uri: 'https://ih1.redbubble.net/image.3611159929.7215/st,small,507x507-pad,600x600,f8f8f8.jpg',
