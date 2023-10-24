@@ -1,16 +1,19 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import qr from '../../assets/qr.png'
+import qr from '../../assets/qr.png';
 
 export default function Scan({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text style={styles.textInfo}>Escaneie o QR para vizualizar o cardápio</Text>
+            <Text style={styles.textInfo}>
+                Escaneie o QR para vizualizar o cardápio
+            </Text>
             <Image source={qr} />
             <TouchableOpacity
                 style={styles.scanButton}
-                onPress={() => navigation.navigate("Scanner")}>
+                onPress={() => navigation.navigate('Scanner')}
+            >
                 <Text style={styles.buttonText}>Escanear</Text>
             </TouchableOpacity>
             <StatusBar style="auto" />
@@ -30,9 +33,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#f3484f',
         padding: 10,
-        borderRadius: 5,
         marginTop: 20,
-        borderRadius: 50
+        borderRadius: 50,
     },
     buttonText: {
         color: 'white',
@@ -44,6 +46,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 24,
         color: '#484572',
-        fontWeight: 'bold'
-    }
+        fontWeight: 'bold',
+    },
 });

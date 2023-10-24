@@ -9,36 +9,36 @@ import Notifications from '../Notifications/Index';
 const Stack = createNativeStackNavigator();
 
 function StackNavigation() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Scan"
-        component={Scan}
-        options={{ title: 'Escanear' }}
-      />
-      <Stack.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{ title: 'Notificações' }}
-      />
-      <Stack.Screen
-        name="Scanner"
-        component={Scanner}
-        options={{ headerShown: false }} // Ocultar a barra de navegação superior
-      />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Scan"
+                component={Scan}
+                options={{ title: 'Escanear' }}
+            />
+            <Stack.Screen
+                name="Notifications"
+                component={Notifications}
+                options={{ title: 'Notificações' }}
+            />
+            <Stack.Screen
+                name="Scanner"
+                component={Scanner}
+                options={{ headerShown: false }} // Ocultar a barra de navegação superior
+            />
+        </Stack.Navigator>
+    );
 }
 
 export default function Routes() {
-  return (
-    <NavigationContainer>
-      <StackNavigation />
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <StackNavigation />
+        </NavigationContainer>
+    );
 }

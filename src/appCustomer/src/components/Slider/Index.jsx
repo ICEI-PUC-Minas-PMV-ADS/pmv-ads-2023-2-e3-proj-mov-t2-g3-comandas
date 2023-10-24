@@ -28,13 +28,15 @@ export default function Slider({
     ratioSize,
     spacing,
 }) {
-
     const { width, height } = useWindowDimensions();
     const scrollX = useRef(new Animated.Value(0)).current;
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleImagePress = (item) => {
-        alert(`será redireconado para o subitem de "${item.title.toUpperCase()}"`);
+        // eslint-disable-next-line no-alert, no-undef
+        alert(
+            `será redireconado para o subitem de "${item.title.toUpperCase()}"`,
+        );
     };
 
     useEffect(() => {
@@ -46,7 +48,7 @@ export default function Slider({
         return () => {
             scrollX.removeAllListeners();
         };
-    }, [currentIndex]);
+    }, [currentIndex, scrollX, width]);
 
     return (
         <View style={[styles.container, { marginVertical: 0.01 * height }]}>
@@ -60,7 +62,7 @@ export default function Slider({
                     [{ nativeEvent: { contentOffset: { x: scrollX } } }],
                     { useNativeDriver: false },
                 )}
-                renderItem={({ item, index }) => (
+                renderItem={({ item }) => (
                     <TouchableOpacity
                         onPress={() => handleImagePress(item)}
                         activeOpacity={1}
@@ -70,7 +72,11 @@ export default function Slider({
                                 source={{ uri: item.image }}
                                 style={[
                                     styles.image,
-                                    { width, height: (width * 9) / 16, resizeMode: 'contain' },
+                                    {
+                                        width,
+                                        height: (width * 9) / 16,
+                                        resizeMode: 'contain',
+                                    },
                                 ]}
                             />
                         ) : (
@@ -80,13 +86,18 @@ export default function Slider({
                                     styles.image,
                                     {
                                         width: (width * 1) / iconsOnDisplay,
-                                        height: (width * 1) / iconsOnDisplay / ratioSize,
+                                        height:
+                                            (width * 1) /
+                                            iconsOnDisplay /
+                                            ratioSize,
                                         marginHorizontal: spacing,
                                     },
                                 ]}
                             />
                         )}
-                        {!paging ? <Text style={styles.text}>{item.title}</Text> : null}
+                        {!paging ? (
+                            <Text style={styles.text}>{item.title}</Text>
+                        ) : null}
                     </TouchableOpacity>
                 )}
             />
@@ -94,12 +105,15 @@ export default function Slider({
                 <FlatList
                     style={styles.dotContainer}
                     data={data}
-                    renderItem={({ item, index }) => (
+                    renderItem={({ index }) => (
                         <Text
                             style={[
                                 styles.dot,
                                 {
-                                    color: currentIndex === index ? '#8661ff' : '#aba9a9',
+                                    color:
+                                        currentIndex === index
+                                            ? '#8661ff'
+                                            : '#aba9a9',
                                     fontSize: (10 / 101.34) * height - 62.17,
                                 },
                             ]}

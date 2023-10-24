@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default function Scanner({ navigation }) {
     const [hasPermission, setHasPermission] = useState(null);
-
-    const width = Dimensions.get('window').width;
-    const height = Dimensions.get('window').height;
 
     useEffect(() => {
         const getBarCodeScannerPermissions = async () => {
@@ -18,13 +15,14 @@ export default function Scanner({ navigation }) {
     }, []);
 
     const handleBarCodeScanned = ({ type, data }) => {
-        if (type == 256) {
+        if (type === 256) {
             try {
-                navigation.navigate("Home")
-                alert(JSON.parse(data))
-            }
-            catch(e){
-                alert("Este não é um qr code válido")
+                navigation.navigate('Home');
+                // eslint-disable-next-line no-alert, no-undef
+                alert(JSON.parse(data));
+            } catch (e) {
+                // eslint-disable-next-line no-alert, no-undef
+                alert('Este não é um qr code válido');
             }
         }
     };
@@ -51,14 +49,12 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     camera: {
         width: 2.2 * Dimensions.get('window').width,
         aspectRatio: 1 / 1,
-        backgroundColor: 'orange'
+        backgroundColor: 'orange',
     },
-    reScan: {
-
-    }
+    reScan: {},
 });
