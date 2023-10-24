@@ -10,33 +10,24 @@ import {
   Switch,
 } from 'react-native';
 import { View, Text } from 'react-native-animatable';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
 const SECTIONS = [
   {
-    header: '',
+    header: 'Pagamento',
     icon: 'align-center',
     items: [
       {
-        icon: 'log-out',
-        color: COLORS.iconRed,
-        label: 'Sair',
-        type: 'link',
-      },
-    ],
-  },
-  {
-    header: 'Carteira Digital',
-    icon: 'align-center',
-    items: [
-      {
+        id: 'carteiraDigital',
         icon: 'dollar-sign',
         color: COLORS.iconGreen,
-        label: 'Saldo',
+        label: 'Carteira Digital',
         type: 'link',
       },
       {
+        id: 'cartoes',
         icon: 'credit-card',
         color: COLORS.iconGreen,
         label: 'Cartões',
@@ -49,15 +40,17 @@ const SECTIONS = [
     icon: 'settings',
     items: [
       {
+        id: 'dadosPessoais',
         icon: 'user',
         color: COLORS.iconBlue,
         label: 'Dados Pessoais',
         type: 'link',
       },
       {
+        id: 'address',
         icon: 'navigation',
         color: COLORS.iconBlue,
-        label: 'Localização',
+        label: 'Endereço & Localização',
         type: 'link',
       },
       {
@@ -74,12 +67,14 @@ const SECTIONS = [
     icon: 'help-circle',
     items: [
       {
+        id: 'faleConosco',
         icon: 'mail',
         color: COLORS.iconBlue,
         label: 'Fale Conosco',
         type: 'link',
       },
       {
+        id: 'problemas',
         icon: 'alert-circle',
         color: COLORS.iconRed,
         label: 'Informe um Problema',
@@ -89,12 +84,10 @@ const SECTIONS = [
   },
 ];
 
-export default function UserProfile() {
+export default function UserProfile({ navigation }) {
   const [form, setForm] = React.useState({
-    darkMode: true,
-    wifi: false,
-    showCollaborators: true,
-    accessibilityMode: false,
+    darkMode: false,
+    usarLocalizacao: true,
   });
 
   return (
@@ -102,62 +95,105 @@ export default function UserProfile() {
       <ScrollView
         style={{ width: '100%' }}
         contentContainerStyle={styles.scrollContent}
-      />
-      <View style={styles.profile}>
-        <TouchableOpacity
-          onPress={() => {
-            // handleUploadPictureOnPress
-          }}
-        >
-          <View style={styles.profileAvatarWrapper}>
-            <Image
-              alt="Profile Picture"
-              source={AvatarExemple}
-              style={styles.profileAvatar}
-            />
-            <View style={styles.profileAction}>
-              <FeatherIcon name="edit-3" size={15} color={COLORS.white} />
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        <Text style={styles.profileName}>Carlos Reinis</Text>
-      </View>
-
-      {SECTIONS.map(({ header, items }) => (
-        <View style={styles.section} key={header}>
-          <Text style={styles.sectionHeader}>{header}</Text>
-
-          {items.map(({ id, label, type, icon, color }) => (
-            <TouchableOpacity
-              key={icon}
-              onPress={() => {
-                // handle onPress
-              }}
-            >
-              <View style={styles.row}>
-                <View style={[styles.rowIcon, { backgroundColor: color }]}>
-                  <FeatherIcon name={icon} color="#fff" size={18} />
-                </View>
-
-                <Text style={styles.rowLabel}>{label}</Text>
-
-                <View style={{ flex: 1 }} />
-
-                {type === 'toggle' && (
-                  <Switch
-                    value={form[id]}
-                    onValueChange={(value) => setForm({ ...form, [id]: value })}
-                  />
-                )}
-                {type === 'link' && (
-                  <FeatherIcon name="chevron-right" color="#0c0c0c" size={22} />
-                )}
+      >
+        <View style={styles.profile}>
+          <TouchableOpacity
+            onPress={() => {
+              // handleUploadPicture
+            }}
+          >
+            <View style={styles.profileAvatarWrapper}>
+              <Image
+                alt="Profile Picture"
+                source={AvatarExemple}
+                style={styles.profileAvatar}
+              />
+              <View style={styles.profileAction}>
+                <FeatherIcon name="edit-3" size={15} color={COLORS.white} />
               </View>
-            </TouchableOpacity>
-          ))}
+            </View>
+          </TouchableOpacity>
+
+          <Text style={styles.profileName}>Carlos Reinis</Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              // handle logout
+              AsyncStorage.clear();
+              navigation.navigate('CheckoutLogout');
+            }}
+          >
+            <View style={styles.logout}>
+              <FeatherIcon
+                name="log-out"
+                size={24}
+                label="Sair"
+                color={COLORS.white}
+              />
+              <Text style={styles.logoutLabel}>Sair</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      ))}
+
+        {SECTIONS.map(({ header, items }) => (
+          <View style={styles.section} key={header}>
+            <Text style={styles.sectionHeader}>{header}</Text>
+
+            {items.map(({ id, label, type, icon, color }) => (
+              <TouchableOpacity
+                key={icon}
+                onPress={() => {
+                  // handle onPress
+                  if (id === 'carteiraDigital') {
+                    navigation.navigate('CarteiraDigital');
+                  }
+                  if (id === 'cartoes') {
+                    navigation.navigate('Cartoes');
+                  }
+                  if (id === 'dadosPessoais') {
+                    navigation.navigate('DadosPessoais');
+                  }
+                  if (id === 'address') {
+                    navigation.navigate('Address');
+                  }
+                  if (id === 'faleConosco') {
+                    navigation.navigate('FaleConosco');
+                  }
+                  if (id === 'problemas') {
+                    navigation.navigate('Problemas');
+                  }
+                }}
+              >
+                <View style={styles.row}>
+                  <View style={[styles.rowIcon, { backgroundColor: color }]}>
+                    <FeatherIcon name={icon} color="#fff" size={18} />
+                  </View>
+
+                  <Text style={styles.rowLabel}>{label}</Text>
+
+                  <View style={{ flex: 1 }} />
+
+                  {type === 'toggle' && (
+                    <Switch
+                      value={form[id]}
+                      onValueChange={(value) =>
+                        setForm({ ...form, [id]: value })
+                      }
+                    />
+                  )}
+                  {type === 'link' && (
+                    <FeatherIcon
+                      name="chevron-right"
+                      color="#0c0c0c"
+                      size={22}
+                    />
+                  )}
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ))}
+      </ScrollView>
       <StatusBar />
     </SafeAreaView>
   );
@@ -205,6 +241,22 @@ const styles = StyleSheet.create({
     bottom: -10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  logout: {
+    backgroundColor: COLORS.iconRed,
+    width: 60,
+    height: 60,
+    marginVertical: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: COLORS.iconRed,
+    borderRadius: 9999,
+    borderWidth: 3,
+  },
+  logoutLabel: {
+    color: COLORS.white,
+    fontSize: 12,
+    fontWeight: '600',
   },
   section: {
     backgroundColor: COLORS.white,

@@ -1,24 +1,29 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import icone from '../../assets/icon_comandas.png'
 
-export default function Note({ text_title, text_subtitle, image_link }) {
+import LongLogo from '../../assets/longLogo.svg';
+
+export default function Note({ myTextTitle, myTextSubtitle, imageLink }) {
     return (
-        <TouchableOpacity  style={styles.container} onPress={() => alert("OK")}>
-            <Image 
-                style={styles.image} 
-                source={{ uri: image_link || require('../../assets/adaptive-icon.png')}} />
+        // eslint-disable-next-line no-alert, no-undef
+        <TouchableOpacity style={styles.container} onPress={() => alert('OK')}>
+            <Image
+                style={styles.image}
+                source={{
+                    uri: imageLink,
+                }}
+            />
             <View style={styles.info}>
                 <View style={styles.firstInfo}>
-                    <Image style={styles.icon} source={icone}/>
+                    <LongLogo />
                     <Text style={styles.date}>06/04/2023</Text>
                 </View>
                 <View>
-                    <Text style={styles.textTitle}>{ text_title }</Text>
-                    <Text style={styles.textSubTitle}>{ text_subtitle }</Text>
+                    <Text style={styles.textTitle}>{myTextTitle}</Text>
+                    <Text style={styles.textSubTitle}>{myTextSubtitle}</Text>
                 </View>
             </View>
-        </TouchableOpacity >
+        </TouchableOpacity>
     );
 }
 
@@ -35,34 +40,29 @@ const styles = StyleSheet.create({
         width: '28%',
         height: '100%',
         borderTopLeftRadius: 15,
-        borderBottomLeftRadius: 15, 
+        borderBottomLeftRadius: 15,
         borderBottomRightRadius: 15,
-        opacity: 0.95
+        opacity: 0.95,
     },
     info: {
         width: '65%',
         height: '100%',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
     },
     firstInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent : 'space-between'
-    },
-    logo: {
-        fontSize: 20,
-        color: '#e93e44',
-        paddingRight: 20
+        justifyContent: 'space-between',
     },
     date: {
-        fontSize: 12
+        fontSize: 12,
     },
     textTitle: {
         color: '#2e2b5e',
-        fontSize: 20
+        fontSize: 20,
     },
     textSubTitle: {
         color: '#75759e',
-        fontSize: 16
-    }
+        fontSize: 16,
+    },
 });
