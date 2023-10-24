@@ -1,8 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import icone from '../../assets/icon_comandas.png';
 
-import logo from '../../assets/adaptive-icon.png';
+import LongLogo from '../../assets/longLogo.svg';
 
 export default function Note({ myTextTitle, myTextSubtitle, imageLink }) {
     return (
@@ -11,12 +10,12 @@ export default function Note({ myTextTitle, myTextSubtitle, imageLink }) {
             <Image
                 style={styles.image}
                 source={{
-                    uri: imageLink || logo,
+                    uri: imageLink,
                 }}
             />
             <View style={styles.info}>
                 <View style={styles.firstInfo}>
-                    <Image style={styles.icon} source={icone} />
+                    <LongLogo />
                     <Text style={styles.date}>06/04/2023</Text>
                 </View>
                 <View>
@@ -54,11 +53,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-    },
-    logo: {
-        fontSize: 20,
-        color: '#e93e44',
-        paddingRight: 20,
     },
     date: {
         fontSize: 12,

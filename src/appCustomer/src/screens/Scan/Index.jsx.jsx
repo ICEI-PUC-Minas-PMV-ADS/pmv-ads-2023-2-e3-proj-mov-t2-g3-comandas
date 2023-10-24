@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import qr from '../../assets/qr.png';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import Qr from '../../assets/qrCode.svg';
 
 export default function Scan({ navigation }) {
     return (
@@ -9,7 +9,7 @@ export default function Scan({ navigation }) {
             <Text style={styles.textInfo}>
                 Escaneie o QR para vizualizar o cardápio
             </Text>
-            <Image source={qr} />
+            <Qr />
             <TouchableOpacity
                 style={styles.scanButton}
                 onPress={() => navigation.navigate('Scanner')}

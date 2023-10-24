@@ -1,16 +1,9 @@
 import React from 'react';
-import {
-    Image,
-    StyleSheet,
-    View,
-    TouchableOpacity,
-    TextInput,
-} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, TextInput } from 'react-native';
 
-import searchIcon from '../../assets/search_blue.png';
-
-import qr from '../../assets/QR_Icon.png';
-import alarm from '../../assets/alarm.png';
+import SearchIcon from '../../assets/SearchIcon.svg';
+import MiniQr from '../../assets/MiniQrCode.svg';
+import Alarm from '../../assets/alarm.svg';
 
 export default function TopBar({ navigation }) {
     const [text, onChangeText] = React.useState('');
@@ -19,7 +12,7 @@ export default function TopBar({ navigation }) {
         <View style={styles.container}>
             <View style={styles.searchContainer}>
                 <TouchableOpacity>
-                    <Image source={searchIcon} />
+                    <SearchIcon />
                 </TouchableOpacity>
                 <TextInput
                     style={styles.searchbar}
@@ -30,12 +23,12 @@ export default function TopBar({ navigation }) {
             </View>
             <View style={styles.icons}>
                 <TouchableOpacity onPress={() => navigation.navigate('Scan')}>
-                    <Image source={qr} />
+                    <MiniQr />
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('Notifications')}
                 >
-                    <Image source={alarm} />
+                    <Alarm />
                 </TouchableOpacity>
             </View>
         </View>

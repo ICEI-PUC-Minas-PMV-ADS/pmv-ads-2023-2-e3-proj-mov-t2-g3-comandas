@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import {
     StyleSheet,
-    Image,
     Text,
     TextInput,
     View,
@@ -11,7 +10,7 @@ import {
 
 // eslint-disable-next-line import/no-unresolved
 import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env';
-import searchIcon from '../../assets/search_blue.png';
+import SearchIcon from '../../assets/SearchIcon.svg';
 
 export default function Search() {
     const [text, onChangeText] = React.useState('');
@@ -41,7 +40,7 @@ export default function Search() {
         <View style={styles.container}>
             <View style={styles.searchContainer}>
                 <TouchableOpacity onPress={() => fetchResults()}>
-                    <Image source={searchIcon} />
+                    <SearchIcon />
                 </TouchableOpacity>
                 <TextInput
                     style={styles.searchbar}

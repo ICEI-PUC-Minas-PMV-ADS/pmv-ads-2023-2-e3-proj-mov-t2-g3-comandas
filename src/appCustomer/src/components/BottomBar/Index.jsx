@@ -1,27 +1,27 @@
 import React from 'react';
-import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
-import HomeIcon from '../../assets/Home.png';
-import BuscaIcon from '../../assets/Icone_Busca.png';
-import PedidosIcon from '../../assets/Pedidos.png';
-import PerfilIcon from '../../assets/Icone_Perfil.png';
+import HomeMenu from '../../assets/HomeMenu.svg';
+import SearchMenu from '../../assets/SearchMenu.svg';
+import OrderMenu from '../../assets/OrderMenu.svg';
+import ProfileMenu from '../../assets/ProfileMenu.svg';
 
 export default function BottomBar({ navigation }) {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                <Image source={HomeIcon} />
+                <HomeMenu />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-                <Image source={BuscaIcon} />
+                <SearchMenu />
             </TouchableOpacity>
             <TouchableOpacity>
-                <Image source={PedidosIcon} />
+                <OrderMenu />
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => navigation.navigate('UserProfile')}
             >
-                <Image source={PerfilIcon} />
+                <ProfileMenu />
             </TouchableOpacity>
         </View>
     );
