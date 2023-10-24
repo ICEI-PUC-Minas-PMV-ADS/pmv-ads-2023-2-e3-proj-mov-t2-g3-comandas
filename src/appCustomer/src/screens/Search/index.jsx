@@ -1,11 +1,9 @@
-import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Image,
   Text,
-  SafeAreaView,
   TextInput,
   View,
   TouchableOpacity,
@@ -15,7 +13,7 @@ import {
 // eslint-disable-next-line import/no-unresolved
 import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env';
 import COLORS from '@/constants/colors';
-import searchBtn from '../../assets/search_blue.png';
+import SearchBtn from '../../assets/SearchIcon.svg';
 
 export default function Search() {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +31,6 @@ export default function Search() {
       });
 
       setSearchResults(data);
-      console.log(JSON.stringify(data, null, 2));
       setIsLoading(false);
     } catch (e) {
       // eslint-disable-next-line no-undef
@@ -54,9 +51,10 @@ export default function Search() {
           {isLoading ? (
             <ActivityIndicator color={COLORS.primary} />
           ) : (
-            <Image
-              source={searchBtn}
-              style={{ tintColor: isLoading ? COLORS.neutrlWhite : null }}
+            <SearchBtn
+              style={{
+                tintColor: isLoading ? COLORS.neutrlWhite : null,
+              }}
             />
           )}
         </TouchableOpacity>
@@ -72,10 +70,51 @@ export default function Search() {
       <View style={styles.viewResults}>
         <FlatList
           data={searchResults}
-          renderItem={({ item, index }) => <Text>{item.name}</Text>}
+          contentContainerStyle={{ gap: 20, padding: 15 }}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              key={item.user_id}
+              style={styles.cardContainer}
+            >
+              <Image
+                style={styles.cardImage}
+                source={{ uri: item.photo_url }}
+              />
+
+              <View style={{ flex: 1, gap: 5 }}>
+                <Text style={styles.cardTitle}>{item.name}</Text>
+
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    gap: 10,
+                    flex: 1,
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text numberOfLines={1} style={styles.cardStar}>
+                    {Number(3 + Math.random() * 2).toPrecision(2)}
+                  </Text>
+                  <Text numberOfLines={1} style={styles.cardText}>
+                    {item.category_name}
+                  </Text>
+
+                  <Text numberOfLines={1} style={styles.cardText}>
+                    {Number(1 + Math.random() * 5).toPrecision(2)} km
+                  </Text>
+                </View>
+
+                <View>
+                  <Text style={styles.cardText}>{item.neighborhood}</Text>
+                  <Text style={styles.cardText}>{item.street}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-          fadingEdgeLength={50}
+          keyExtractor={(item) => item.user_id}
+          fadingEdgeLength={25}
         />
       </View>
     </View>
@@ -101,6 +140,48 @@ const styles = StyleSheet.create({
   },
   viewResults: {
     flex: 1,
-    // backgroundColor: 'lightblue',
+  },
+  cardContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 15,
+    backgroundColor: COLORS.neutrlWhite,
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1,
+
+    elevation: 2,
+  },
+  cardImage: {
+    width: '20%',
+    height: 80,
+    resizeMode: 'contain',
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontFamily: 'MontserratBold',
+  },
+  cardText: {
+    fontSize: 11,
+  },
+  cardStar: {
+    fontSize: 11,
+    fontFamily: 'MontserratBold',
+    // textShadowColor: '#ff9900',
+    // textShadowOffset: {
+    //   width: 0,
+    //   height: 0,
+    // },
+    // textShadowRadius: 1,
+
+    // elevation: 1,
+    color: COLORS.semanticYellow,
   },
 });
