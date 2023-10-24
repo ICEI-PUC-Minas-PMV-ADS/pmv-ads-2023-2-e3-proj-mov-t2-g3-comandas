@@ -9,7 +9,14 @@ export default function Voucher({ voucherImage }) {
         <View style={styles.container}>
             <Image
                 source={voucherBackground}
-                style={[styles.image, { width: width - 20, height: width * 8 / 16, resizeMode: 'contain' }]}
+                style={[
+                    styles.image,
+                    {
+                        width: width - 20,
+                        height: (width * 8) / 16,
+                        resizeMode: 'contain',
+                    },
+                ]}
             />
             <Image
                 source={{ uri: voucherImage }} // Sua imagem por cima

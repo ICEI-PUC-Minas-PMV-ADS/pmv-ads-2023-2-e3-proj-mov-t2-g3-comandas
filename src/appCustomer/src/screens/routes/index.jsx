@@ -116,9 +116,9 @@ function StackNavigation() {
 }
 
 export default function Routes() {
-  return (
-    <NavigationContainer>
-      <StackNavigation />
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <StackNavigation />
+        </NavigationContainer>
+    );
 }

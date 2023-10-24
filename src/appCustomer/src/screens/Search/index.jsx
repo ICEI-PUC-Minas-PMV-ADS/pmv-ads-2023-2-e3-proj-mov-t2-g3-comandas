@@ -1,37 +1,46 @@
-import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
-import React, { useCallback, useState } from 'react';
-import { StyleSheet, Image, Text, SafeAreaView, TextInput, View, TouchableOpacity } from 'react-native';
-import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env'
+import React, { useState } from 'react';
+import {
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+    TouchableOpacity,
+} from 'react-native';
 
-export default function Search({ }) {
+// eslint-disable-next-line import/no-unresolved
+import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env';
+import SearchIcon from '../../assets/SearchIcon.svg';
+
+export default function Search() {
     const [text, onChangeText] = React.useState('');
-    const [searchResults, setSearchResults] = useState([])
+    const [searchResults, setSearchResults] = useState([]);
 
     const fetchResults = async () => {
         try {
-            const { data } = await axios.get(
-                BASE_URL + 'item/list', {
+            const { data } = await axios.get(`${BASE_URL}item/list`, {
                 headers: {
                     'x-api-key': API_KEY,
-                    Authorization: ADMIN_TOKEN
-                }
-            })
+                    Authorization: ADMIN_TOKEN,
+                },
+            });
 
-            let results = data.filter(item => item.name.toLowerCase().includes(text.toLowerCase()))
+            const results = data.filter((item) =>
+                item.name.toLowerCase().includes(text.toLowerCase()),
+            );
 
-            setSearchResults(results)
-            console.log(results)
+            setSearchResults(results);
         } catch (e) {
-            alert(e)
+            // eslint-disable-next-line no-alert, no-undef
+            alert(e);
         }
-    }
+    };
 
     return (
         <View style={styles.container}>
             <View style={styles.searchContainer}>
                 <TouchableOpacity onPress={() => fetchResults()}>
-                    <Image source={require('../../assets/search_blue.png')} />
+                    <SearchIcon />
                 </TouchableOpacity>
                 <TextInput
                     style={styles.searchbar}
@@ -41,9 +50,10 @@ export default function Search({ }) {
                 />
             </View>
             <View style={styles.viewResults}>
-                {
-                    searchResults && searchResults.map(item => <Text key={item.id}>{item.name}</Text>)
-                }
+                {searchResults &&
+                    searchResults.map((item) => (
+                        <Text key={item.id}>{item.name}</Text>
+                    ))}
             </View>
         </View>
     );
@@ -68,6 +78,6 @@ const styles = StyleSheet.create({
     },
     viewResults: {
         flex: 1,
-        backgroundColor: 'lightblue'
-    }
+        backgroundColor: 'lightblue',
+    },
 });
