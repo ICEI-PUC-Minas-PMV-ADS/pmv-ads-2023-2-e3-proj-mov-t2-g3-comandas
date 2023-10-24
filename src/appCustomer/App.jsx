@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import Routes from '@/screens/routes';
 import UserProvider from '@/context/UserContext';
+import LocationProvider from '@/context/LocationContext';
 
 export default function App() {
   //   // Carregando as fontes locais
