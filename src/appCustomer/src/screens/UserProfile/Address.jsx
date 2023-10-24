@@ -1,41 +1,26 @@
+import API from '@/services/webapi.service';
 import COLORS from '@/constants/colors';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import React, { useCallback, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
-import axios from 'axios';
-import { BASE_URL } from '@/services/urls';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
+import React from 'react';
 
-export default function DadosPessoais() {
-  const [userId, setUserId] = useState();
-
-  useFocusEffect(
-    useCallback(() => {
-      async function fetchUsers() {
-        try {
-          const { data } = await axios.get(`${BASE_URL}user/${userId}`, {
-            headers: {
-              Authorization: process.env.ADMIN_TOKEN,
-              'x-api-key': process.env.API_KEY,
-            },
-          });
-          setUserId(data);
-          console.log(data);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      fetchUsers();
-    }, []),
-  );
-
+function Address() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        {userId && userId.map((user) => <Text key={user.id}>{user.name}</Text>)}
+      <View>
+        <Text style={styles.profileName}>Endereço & Localização</Text>
       </View>
     </SafeAreaView>
   );
 }
+
+export default Address;
 
 const styles = StyleSheet.create({
   scrollContent: {

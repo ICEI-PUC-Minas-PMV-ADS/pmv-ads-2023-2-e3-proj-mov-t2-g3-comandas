@@ -45,6 +45,7 @@ function Login() {
             String(res.userInfo.id),
           ).catch((err) => console.log('ERRO IN handleLogin ', err));
           // Fazer lógica para o que acontecer após Login
+
           navigation.navigate('Home');
         } else {
           Alert.alert('Usuário ou Senha inválidos!');

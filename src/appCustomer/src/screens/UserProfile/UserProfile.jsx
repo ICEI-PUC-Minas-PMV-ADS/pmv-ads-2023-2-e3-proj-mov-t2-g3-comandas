@@ -47,11 +47,11 @@ const SECTIONS = [
         type: 'link',
       },
       {
-        id: 'usarLocalizacao',
+        id: 'address',
         icon: 'navigation',
         color: COLORS.iconBlue,
-        label: 'Usar Localização',
-        type: 'toggle',
+        label: 'Endereço & Localização',
+        type: 'link',
       },
       {
         id: 'darkMode',
@@ -86,7 +86,7 @@ const SECTIONS = [
 
 export default function UserProfile({ navigation }) {
   const [form, setForm] = React.useState({
-    darkMode: true,
+    darkMode: false,
     usarLocalizacao: true,
   });
 
@@ -152,6 +152,9 @@ export default function UserProfile({ navigation }) {
                   }
                   if (id === 'dadosPessoais') {
                     navigation.navigate('DadosPessoais');
+                  }
+                  if (id === 'address') {
+                    navigation.navigate('Address');
                   }
                   if (id === 'faleConosco') {
                     navigation.navigate('FaleConosco');

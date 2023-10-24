@@ -17,6 +17,7 @@ import Scanner from '../Scanner/Index.jsx';
 import Notifications from '../Notifications/Index';
 import FaleConosco from '../UserProfile/FaleConosco';
 import Problemas from '../UserProfile/Problemas';
+import Address from '../UserProfile/Address';
 
 const Stack = createNativeStackNavigator();
 
@@ -74,6 +75,11 @@ function StackNavigation() {
         name="DadosPessoais"
         component={DadosPessoais}
         options={{ title: 'Dados Pessoais' }}
+      />
+      <Stack.Screen
+        name="Address"
+        component={Address}
+        options={{ title: 'Endereço & Localização' }}
       />
       <Stack.Screen
         name="FaleConosco"
