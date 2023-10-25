@@ -18,12 +18,13 @@ import Notifications from '../Notifications/Index';
 import FaleConosco from '../UserProfile/FaleConosco';
 import Problemas from '../UserProfile/Problemas';
 import Address from '../UserProfile/Address';
+import Favoritos from '../UserProfile/Favoritos';
 
 const Stack = createNativeStackNavigator();
 
 function StackNavigation() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen
         name="Welcome"
         component={Welcome}
@@ -80,6 +81,11 @@ function StackNavigation() {
         name="Address"
         component={Address}
         options={{ title: 'Endereço & Localização' }}
+      />
+      <Stack.Screen
+        name="Favoritos"
+        component={Favoritos}
+        options={{ title: '' }}
       />
       <Stack.Screen
         name="FaleConosco"

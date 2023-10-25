@@ -19,7 +19,7 @@ function Button(props) {
     >
       <Text
         style={{
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: '600',
           ...{ color: textColor },
         }}
