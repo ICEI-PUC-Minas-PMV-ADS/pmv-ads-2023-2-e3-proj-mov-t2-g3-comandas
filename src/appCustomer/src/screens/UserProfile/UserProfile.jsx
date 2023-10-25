@@ -10,6 +10,7 @@ import {
   Switch,
 } from 'react-native';
 import { View, Text } from 'react-native-animatable';
+import { useUser } from '@/context/UserContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import AvatarExemple from '../../assets/UserAvatar.png';
@@ -54,6 +55,13 @@ const SECTIONS = [
         type: 'link',
       },
       {
+        id: 'favorites',
+        icon: 'heart',
+        color: COLORS.iconBlue,
+        label: 'Restaurantes Favoritos',
+        type: 'link',
+      },
+      {
         id: 'darkMode',
         icon: 'moon',
         color: COLORS.black,
@@ -89,6 +97,7 @@ export default function UserProfile({ navigation }) {
     darkMode: false,
     usarLocalizacao: true,
   });
+  const { user } = useUser();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -114,7 +123,7 @@ export default function UserProfile({ navigation }) {
             </View>
           </TouchableOpacity>
 
-          <Text style={styles.profileName}>Carlos Reinis</Text>
+          <Text style={styles.profileName}>{user.name}</Text>
 
           <TouchableOpacity
             onPress={() => {

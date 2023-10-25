@@ -49,7 +49,7 @@ function StackNavigation() {
       <Stack.Screen
         name="UserProfile"
         component={UserProfile}
-        options={{ title: 'Perfil' }}
+        options={{ title: '' }}
       />
       <Stack.Screen
         name="Home"
@@ -74,7 +74,7 @@ function StackNavigation() {
       <Stack.Screen
         name="DadosPessoais"
         component={DadosPessoais}
-        options={{ title: 'Dados Pessoais' }}
+        options={{ title: '' }}
       />
       <Stack.Screen
         name="Address"
@@ -116,9 +116,9 @@ function StackNavigation() {
 }
 
 export default function Routes() {
-    return (
-        <NavigationContainer>
-            <StackNavigation />
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <StackNavigation />
+    </NavigationContainer>
+  );
 }
