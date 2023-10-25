@@ -57,6 +57,8 @@ module.exports = {
     // Não vamos ter tipos
     'react/require-default-props': 'off',
 
+    'no-alert': 'off',
+
     // 'import/extensions': 'off',
   },
 };

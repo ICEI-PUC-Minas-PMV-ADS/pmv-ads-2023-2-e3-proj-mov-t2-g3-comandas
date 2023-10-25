@@ -9,6 +9,7 @@
     "web": "npx expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/montserrat": "^0.2.3",
     "@expo/vector-icons": "^13.0.0",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-navigation/drawer": "^6.6.3",
@@ -22,6 +23,7 @@
     "expo-checkbox": "~2.4.0",
     "expo-constants": "^14.4.2",
     "expo-font": "~11.4.0",
+    "expo-location": "^16.3.0",
     "expo-secure-store": "~12.3.1",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",

@@ -58,5 +58,6 @@ module.exports = {
     'react/require-default-props': 'off',
 
     // 'import/extensions': 'off',
+    'global-require': 'off',
   },
 };
