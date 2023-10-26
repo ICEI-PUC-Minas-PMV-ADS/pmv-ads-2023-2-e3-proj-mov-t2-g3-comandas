@@ -18,7 +18,7 @@ export default function CheckinRegister() {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+   // <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={styles.container}>
         <View style={styles.containerLogo}>
           <Animatable.Image
@@ -59,7 +59,7 @@ export default function CheckinRegister() {
           </Animatable.View>
         </Animatable.View>
       </ScrollView>
-    </SafeAreaView>
+  //  </SafeAreaView>
   );
 }
 

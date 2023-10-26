@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  ScrollView,
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -43,7 +44,7 @@ function Signup() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View>
         <View>
           <Image source={icon} style={styles.imageStyle} />
@@ -169,7 +170,8 @@ function Signup() {
           <Text style={styles.textFooterLink}>faça login.</Text>
         </Pressable>
       </View>
-    </SafeAreaView>
+    </ScrollView>
+
   );
 }
 
