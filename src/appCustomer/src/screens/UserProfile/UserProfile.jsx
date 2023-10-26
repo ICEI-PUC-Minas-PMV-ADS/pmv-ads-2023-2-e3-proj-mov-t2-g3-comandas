@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { View, Text } from 'react-native-animatable';
 import { useUser } from '@/context/UserContext';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import RBSheet from 'react-native-raw-bottom-sheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import AvatarExemple from '../../assets/UserAvatar.png';
@@ -90,14 +92,31 @@ const SECTIONS = [
       },
     ],
   },
+  {
+    header: 'Excluir',
+    icon: 'align-center',
+    items: [
+      {
+        id: 'delete',
+        icon: 'x',
+        color: COLORS.iconRed,
+        label: 'Excluir Conta',
+        type: 'BottomSheet',
+      },
+    ],
+  },
 ];
 
 export default function UserProfile({ navigation }) {
   const [form, setForm] = React.useState({
+    // fake - não tem Dark Mode criado
     darkMode: false,
-    usarLocalizacao: true,
   });
+  // to get logged user data
   const { user } = useUser();
+  // Action Bottom Sheets
+  const sheetDeleteAccount = React.useRef();
+  const sheetLogoutAccount = React.useRef();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -128,8 +147,7 @@ export default function UserProfile({ navigation }) {
           <TouchableOpacity
             onPress={() => {
               // handle logout
-              AsyncStorage.clear();
-              navigation.navigate('CheckoutLogout');
+              sheetLogoutAccount.current.open();
             }}
           >
             <View style={styles.logout}>
@@ -165,11 +183,17 @@ export default function UserProfile({ navigation }) {
                   if (id === 'address') {
                     navigation.navigate('Address');
                   }
+                  if (id === 'favoritos') {
+                    navigation.navigate('Favoritos');
+                  }
                   if (id === 'faleConosco') {
                     navigation.navigate('FaleConosco');
                   }
                   if (id === 'problemas') {
                     navigation.navigate('Problemas');
+                  }
+                  if (id === 'delete') {
+                    sheetDeleteAccount.current.open();
                   }
                 }}
               >
@@ -202,6 +226,96 @@ export default function UserProfile({ navigation }) {
             ))}
           </View>
         ))}
+        {/* Code for Bottom Sheets */}
+        {/* Delete Account Bottom Sheet */}
+        <RBSheet
+          ref={sheetDeleteAccount}
+          customStyles={{ container: styles.sheet }}
+          height={350}
+          openDuration={450}
+          closeDuration={250}
+        >
+          <View style={styles.sheetHeader}>
+            <Text style={styles.sheetHeaderTitle}>Excluir Conta</Text>
+          </View>
+
+          <View style={styles.sheetBody}>
+            <Text style={styles.sheetBodyText}>
+              Tem certeza que deseja{' '}
+              <Text style={{ fontWeight: '700', color: COLORS.iconRed }}>
+                excluir a sua conta
+              </Text>
+              ?{'\n'}Esta ação não pode ser desfeita!
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => {
+                // Handle onPress Delete Conta
+              }}
+            >
+              <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
+                <Text style={styles.btnText}>Excluir Conta</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => sheetDeleteAccount.current.close()}
+            >
+              <View
+                style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
+              >
+                <Text style={styles.btnText}>Cancelar</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </RBSheet>
+
+        {/* Logout Bottom Sheet */}
+        <RBSheet
+          ref={sheetLogoutAccount}
+          customStyles={{ container: styles.sheet }}
+          height={350}
+          openDuration={450}
+          closeDuration={250}
+        >
+          <View style={styles.sheetHeader}>
+            <Text style={styles.sheetHeaderTitle}>Logout</Text>
+          </View>
+
+          <View style={styles.sheetBody}>
+            <Text style={styles.sheetBodyText}>
+              Tem certeza que deseja{' '}
+              <Text style={{ fontWeight: '700', color: COLORS.iconRed }}>
+                Sair da sua Conta
+              </Text>
+              ?{'\n'}Clique em{' '}
+              <Text style={{ fontWeight: '700', color: COLORS.iconRed }}>
+                Logout
+              </Text>{' '}
+              para Sair.
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => {
+                // Handle onPress Logout Account
+                AsyncStorage.clear();
+                navigation.navigate('CheckoutLogout');
+              }}
+            >
+              <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
+                <Text style={styles.btnText}>Logout</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => sheetLogoutAccount.current.close()}
+            >
+              <View
+                style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
+              >
+                <Text style={styles.btnText}>Cancelar</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </RBSheet>
       </ScrollView>
       <StatusBar />
     </SafeAreaView>
@@ -210,7 +324,7 @@ export default function UserProfile({ navigation }) {
 
 const styles = StyleSheet.create({
   scrollContent: {
-    flexGrow: 1, // Permite que o ScrollView cresça para preencher o espaço disponível
+    flexGrow: 1,
   },
   container: {
     paddingVertical: 20,
@@ -300,5 +414,49 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
+  },
+  // Bottom Sheets Styles
+  sheet: {
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+  },
+  sheetHeader: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderBottomWidth: 1,
+    borderColor: COLORS.greyLineStyle,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sheetHeaderTitle: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: COLORS.iconRed,
+  },
+  sheetBody: {
+    padding: 24,
+  },
+  sheetBodyText: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: '400',
+    color: COLORS.black,
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  btn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginTop: 20,
+  },
+  btnText: {
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '700',
+    color: COLORS.white,
   },
 });

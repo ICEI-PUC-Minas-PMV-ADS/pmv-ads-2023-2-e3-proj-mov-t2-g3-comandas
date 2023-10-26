@@ -2,11 +2,15 @@ const COLORS = {
   white: '#FFFFFF',
   black: '#222222',
   grey: '#CCCCCC',
+  greyDark: '#989898',
+  goldMetalic: '#FFDF00',
 
   primary: '#F35C56',
   secondary: '#272459',
 
+  greyLineStyle: '#e3e3e3',
   placeholderText: '#28282866',
+
   accentBlue: '#272459',
   accentDarkGreen: '#B3FEAF',
   accentLightGreen: '#59FF1F',

@@ -7,8 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
 import React, { useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
@@ -58,10 +56,7 @@ function Login() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.wrapper}
-        >
+        <View style={styles.wrapper}>
           <View>
             <Text style={styles.textHello}>Olá 🖐️</Text>
             <Text style={styles.textWelcome}>Bem Vindo ao</Text>
@@ -119,16 +114,15 @@ function Login() {
           </View>
           <View style={styles.checkbox}>
             <Checkbox
-              style={{ marginRight: 10 }}
+              style={{ marginRight: 6 }}
               value={isChecked}
               onValueChange={setIsChecked}
               color={isChecked ? COLORS.primary : undefined}
             />
 
-            <Text>Salvar dados</Text>
+            <Text style={styles.checkboxText}>Salvar dados</Text>
           </View>
-        </KeyboardAvoidingView>
-
+        </View>
         <View>
           <Button title="Login" filled onPress={() => handleLogin()} />
           {/* <SocialLogin /> */}
@@ -165,7 +159,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     color: COLORS.black,
-    marginBottom: 10,
+    marginBottom: 6,
+    marginLeft: 6,
+    marginTop: 6,
   },
   textWelcome: {
     fontSize: 32,
@@ -198,6 +194,12 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     flexDirection: 'row',
+    marginLeft: 6,
+    verticalAlign: 'middle',
+  },
+  checkboxText: {
+    marginTop: 2,
+    fontSize: 14,
   },
   footer: {
     flexDirection: 'row',
