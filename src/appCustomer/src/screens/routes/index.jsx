@@ -28,7 +28,7 @@ function StackNavigation() {
       <Stack.Screen
         name="Welcome"
         component={Welcome}
-        options={{ title: '' }}
+        options={{ headerShown: false }}
         // Falar com o grupo para manter o QR Scan sempre.
         // O usuário deve ter opção de usar o app sem criar conta, o scan deve sempre estar dispnível para ve o menu do restaurante
       />
