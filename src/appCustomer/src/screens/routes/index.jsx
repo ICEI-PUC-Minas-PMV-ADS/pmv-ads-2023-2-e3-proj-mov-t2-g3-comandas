@@ -65,12 +65,12 @@ function StackNavigation() {
       <Stack.Screen
         name="CarteiraDigital"
         component={CarteiraDigital}
-        options={{ title: 'Carteira Digital' }}
+        options={{ title: '' }}
       />
       <Stack.Screen
         name="Cartoes"
         component={Cartoes}
-        options={{ title: 'Cartões' }}
+        options={{ title: '' }}
       />
       <Stack.Screen
         name="DadosPessoais"
@@ -80,7 +80,7 @@ function StackNavigation() {
       <Stack.Screen
         name="Address"
         component={Address}
-        options={{ title: 'Endereço & Localização' }}
+        options={{ title: '' }}
       />
       <Stack.Screen
         name="Favoritos"
@@ -90,12 +90,12 @@ function StackNavigation() {
       <Stack.Screen
         name="FaleConosco"
         component={FaleConosco}
-        options={{ title: 'Fale Conosco' }}
+        options={{ title: '' }}
       />
       <Stack.Screen
         name="Problemas"
         component={Problemas}
-        options={{ title: 'Informe um Problema' }}
+        options={{ title: '' }}
       />
       <Stack.Screen
         name="Search"

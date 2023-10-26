@@ -101,7 +101,7 @@ const SECTIONS = [
         icon: 'x',
         color: COLORS.iconRed,
         label: 'Excluir Conta',
-        type: 'link',
+        type: 'BottomSheet',
       },
     ],
   },
@@ -112,9 +112,11 @@ export default function UserProfile({ navigation }) {
     // fake - não tem Dark Mode criado
     darkMode: false,
   });
+  // to get logged user data
   const { user } = useUser();
-
-  const sheet = React.useRef();
+  // Action Bottom Sheets
+  const sheetDeleteAccount = React.useRef();
+  const sheetLogoutAccount = React.useRef();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -145,8 +147,7 @@ export default function UserProfile({ navigation }) {
           <TouchableOpacity
             onPress={() => {
               // handle logout
-              AsyncStorage.clear();
-              navigation.navigate('CheckoutLogout');
+              sheetLogoutAccount.current.open();
             }}
           >
             <View style={styles.logout}>
@@ -192,7 +193,7 @@ export default function UserProfile({ navigation }) {
                     navigation.navigate('Problemas');
                   }
                   if (id === 'delete') {
-                    sheet.current.open();
+                    sheetDeleteAccount.current.open();
                   }
                 }}
               >
@@ -225,11 +226,14 @@ export default function UserProfile({ navigation }) {
             ))}
           </View>
         ))}
+        {/* Code for Bottom Sheets */}
+        {/* Delete Account Bottom Sheet */}
         <RBSheet
-          ref={sheet}
+          ref={sheetDeleteAccount}
           customStyles={{ container: styles.sheet }}
           height={350}
-          openDuration={250}
+          openDuration={450}
+          closeDuration={250}
         >
           <View style={styles.sheetHeader}>
             <Text style={styles.sheetHeaderTitle}>Excluir Conta</Text>
@@ -253,8 +257,60 @@ export default function UserProfile({ navigation }) {
                 <Text style={styles.btnText}>Excluir Conta</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => sheet.current.close()}>
-              <View style={[styles.btn, { backgroundColor: COLORS.iconBlue }]}>
+            <TouchableOpacity
+              onPress={() => sheetDeleteAccount.current.close()}
+            >
+              <View
+                style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
+              >
+                <Text style={styles.btnText}>Cancelar</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </RBSheet>
+
+        {/* Logout Bottom Sheet */}
+        <RBSheet
+          ref={sheetLogoutAccount}
+          customStyles={{ container: styles.sheet }}
+          height={350}
+          openDuration={450}
+          closeDuration={250}
+        >
+          <View style={styles.sheetHeader}>
+            <Text style={styles.sheetHeaderTitle}>Logout</Text>
+          </View>
+
+          <View style={styles.sheetBody}>
+            <Text style={styles.sheetBodyText}>
+              Tem certeza que deseja{' '}
+              <Text style={{ fontWeight: '700', color: COLORS.iconRed }}>
+                Sair da sua Conta
+              </Text>
+              ?{'\n'}Clique em{' '}
+              <Text style={{ fontWeight: '700', color: COLORS.iconRed }}>
+                Logout
+              </Text>{' '}
+              para Sair.
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => {
+                // Handle onPress Logout Account
+                AsyncStorage.clear();
+                navigation.navigate('CheckoutLogout');
+              }}
+            >
+              <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
+                <Text style={styles.btnText}>Logout</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => sheetLogoutAccount.current.close()}
+            >
+              <View
+                style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
+              >
                 <Text style={styles.btnText}>Cancelar</Text>
               </View>
             </TouchableOpacity>
@@ -359,7 +415,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginRight: 12,
   },
-  // Raw Bottom Sheet Styles
+  // Bottom Sheets Styles
   sheet: {
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -368,7 +424,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderBottomWidth: 1,
-    borderColor: '#e3e3e3',
+    borderColor: COLORS.greyLineStyle,
     alignItems: 'center',
     justifyContent: 'center',
   },

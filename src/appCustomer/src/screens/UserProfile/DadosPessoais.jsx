@@ -200,7 +200,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: COLORS.placeholderText,
   },
-
   profile: {
     paddingTop: 12,
     paddingHorizontal: 24,
@@ -208,7 +207,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: '#e3e3e3',
+    borderColor: COLORS.greyLineStyle,
   },
   profileHeader: {
     flexDirection: 'row',
@@ -223,7 +222,7 @@ const styles = StyleSheet.create({
   profileHandle: {
     marginTop: 4,
     fontSize: 15,
-    color: '#989898',
+    color: COLORS.greyDark,
   },
   profileAvatar: {
     width: 120,
@@ -252,7 +251,7 @@ const styles = StyleSheet.create({
   content: {
     backgroundColor: COLORS.white,
     borderBottomWidth: 1,
-    borderColor: '#e3e3e3',
+    borderColor: COLORS.greyLineStyle,
   },
   tabs: {
     flexDirection: 'row',
@@ -261,7 +260,7 @@ const styles = StyleSheet.create({
   tabWrapper: {
     flex: 1,
     borderBottomWidth: 2,
-    borderColor: '#e3e3e3',
+    borderColor: COLORS.greyLineStyle,
   },
   tab: {
     flexDirection: 'row',
@@ -279,7 +278,7 @@ const styles = StyleSheet.create({
   },
   rowWrapper: {
     borderTopWidth: 1,
-    borderColor: '#e3e3e3',
+    borderColor: COLORS.greyLineStyle,
   },
   row: {
     flexDirection: 'row',
@@ -288,12 +287,12 @@ const styles = StyleSheet.create({
     height: 60,
   },
   rowLabel: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '500',
     color: COLORS.placeholderText,
   },
   rowValue: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '500',
     color: COLORS.linkTextGreen,
     marginRight: 4,
