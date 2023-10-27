@@ -2,16 +2,16 @@ export default [
     {
         id: 1,
         title: 'hambúrguer',
-        image: 'https://imgur.com/HWTOoUL',
+        image: 'https://i.imgur.com/HWTOoUL.png',
     },
     {
         id: 2,
         title: 'sushi',
-        image: 'https://imgur.com/BFNIlSc',
+        image: 'https://i.imgur.com/ubGMIHp.png',
     },
     {
         id: 3,
         title: 'comida vegana',
-        image: 'https://imgur.com/ubGMIHp',
+        image: 'https://i.imgur.com/BFNIlSc.png',
     },
 ];
