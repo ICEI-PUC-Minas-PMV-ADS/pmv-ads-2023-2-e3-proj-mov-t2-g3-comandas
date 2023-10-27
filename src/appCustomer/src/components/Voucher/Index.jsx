@@ -20,7 +20,7 @@ export default function Voucher({ voucherImage }) {
             />
             <Image
                 source={{ uri: voucherImage }} // Sua imagem por cima
-                style={[styles.overlayImage, { bottom: '20%', left: '10%' }]}
+                style={[styles.overlayImage, { bottom: '20%', left: '14%' }]}
             />
         </View>
     );
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     overlayImage: {
-        width: 100,
-        height: 100,
+        width: 90,
+        height: 90,
         position: 'absolute',
     },
 });

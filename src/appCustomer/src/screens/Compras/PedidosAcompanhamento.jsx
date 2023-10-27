@@ -1,15 +1,19 @@
 import COLORS from '@/constants/colors';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import React from 'react';
 
 function PedidosAcompanhamento() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView>
-        <View>
-          <Text style={styles.profileName}>Acompanhe seus Pedidos:</Text>
-        </View>
-      </ScrollView>
+      <View>
+        <Text style={styles.profileName}>Dashboard de Compras do Usuário</Text>
+      </View>
+      <View>
+        <Text style={styles.profileText}>
+          Página destinada ao acompanhamento do status do pedido de compra do
+          usuário.
+        </Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -33,64 +37,18 @@ const styles = StyleSheet.create({
   },
   profileName: {
     marginTop: 20,
+    marginHorizontal: 24,
     fontSize: 22,
-    fontWeight: '800',
+    fontWeight: '700',
     color: COLORS.linkTextGreen,
     textAlign: 'center',
   },
-  profileAvatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 9999,
-    borderColor: COLORS.linkTextGreen,
-    borderWidth: 0.2,
-  },
-  profileAvatarWrapper: {
-    position: 'relative',
-  },
-  profileAction: {
-    width: 24,
-    height: 24,
-    borderRadius: 9999,
-    backgroundColor: COLORS.linkTextGreen,
-    position: 'absolute',
-    right: -4,
-    bottom: -10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  section: {
-    backgroundColor: COLORS.white,
-    paddingHorizontal: 20,
-  },
-  sectionHeader: {
-    paddingVertical: 8,
-    fontSize: 16,
-    fontWeight: '600',
-    color: COLORS.linkTextGreen,
-    textTransform: 'uppercase',
-    letterSpacing: 1.1,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    height: 50,
-    backgroundColor: COLORS.neutralLightGrey,
-    borderRadius: 15,
-    marginBottom: 12,
-    paddingHorizontal: 12,
-  },
-  rowLabel: {
-    fontSize: 18,
-    color: COLORS.black,
-  },
-  rowIcon: {
-    width: 32,
-    height: 32,
-    borderRadius: 9999,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 12,
+  profileText: {
+    marginTop: 20,
+    marginHorizontal: 24,
+    fontSize: 17,
+    fontWeight: '400',
+    color: COLORS.placeholderText,
+    textAlign: 'center',
   },
 });

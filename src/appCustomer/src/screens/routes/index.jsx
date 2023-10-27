@@ -22,6 +22,7 @@ import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
 import Notifications from '../Notifications/Index';
 import CheckinLogin from '../Login/CheckinLogin';
+import CheckinFaleConosco from '../UserProfile/CheckinFaleConosco';
 
 const Stack = createNativeStackNavigator();
 
@@ -141,9 +142,9 @@ function StackNavigation() {
 }
 
 export default function Routes() {
-    return (
-        <NavigationContainer>
-            <StackNavigation />
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <StackNavigation />
+    </NavigationContainer>
+  );
 }

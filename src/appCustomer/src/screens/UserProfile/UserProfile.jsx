@@ -251,6 +251,10 @@ export default function UserProfile({ navigation }) {
             <TouchableOpacity
               onPress={() => {
                 // Handle onPress Delete Conta
+                // Falta metodo DELETE em User
+                sheetDeleteAccount.current.close();
+                AsyncStorage.clear();
+                navigation.navigate('Welcome');
               }}
             >
               <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
