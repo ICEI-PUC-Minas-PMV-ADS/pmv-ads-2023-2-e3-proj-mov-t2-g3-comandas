@@ -17,14 +17,15 @@ import { MotiView } from 'moti';
 import { Layout } from 'react-native-reanimated';
 import SelectDropdown from 'react-native-select-dropdown';
 import SearchBtn from '../../assets/SearchIcon.svg';
+import ClearBtn from '../../assets/Clear.svg';
 
 function Select({
   placeHolder,
   data,
-  updateFilterKey,
   dropdownStyleLeft,
   isLoading,
-  setFilters,
+  setFilter,
+  filter,
 }) {
   return (
     <SelectDropdown
@@ -45,12 +46,11 @@ function Select({
       }}
       defaultButtonText={placeHolder}
       onSelect={(selectedItem) => {
-        setFilters((prevFilters) => ({
-          ...prevFilters,
-          [updateFilterKey]: selectedItem,
-        }));
+        setFilter(selectedItem);
       }}
-      buttonTextAfterSelection={(selectedItem) => selectedItem}
+      buttonTextAfterSelection={() =>
+        filter.length > 1 ? filter : placeHolder
+      }
       rowTextForSelection={(item) => item}
       search
       searchInputStyle={{ width: 150, paddingHorizontal: 15 }}
@@ -64,24 +64,19 @@ export default function Search() {
   const [searchResults, setSearchResults] = useState([]);
   const [address, setAddress] = useState({});
   const [generalCategory, setGeneralCategory] = useState([]);
-  const [filters, setFilters] = useState({ category: '', city: '', state: '' });
+  const [category, setCategory] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
 
   const fetchResults = async () => {
     try {
-      console.log(
-        `${BASE_URL}shop/list?search=${text}${
-          filters.state ? `&state=${filters.state}` : ''
-        }${filters.city ? `&city=${filters.city}` : ''}${
-          filters.category ? `&categories=${filters.category}` : ''
-        }`,
-      );
       if (text) {
         setIsLoading(true);
         const { data } = await axios.get(
           `${BASE_URL}shop/list?search=${text}${
-            filters.state ? `&state=${filters.state}` : ''
-          }${filters.city ? `&city=${filters.city}` : ''}${
-            filters.category ? `&categories=${filters.category}` : ''
+            state ? `&state=${state}` : ''
+          }${city ? `&city=${city}` : ''}${
+            category ? `&categories=${category}` : ''
           }`,
           {
             headers: {
@@ -147,8 +142,8 @@ export default function Search() {
 
         const categoryName = [];
 
-        data.forEach((category) => {
-          categoryName.push(category.name);
+        data.forEach((resCategory) => {
+          categoryName.push(resCategory.name);
         });
 
         setGeneralCategory(categoryName);
@@ -178,9 +173,16 @@ export default function Search() {
             backgroundColor: isLoading ? COLORS.grey : COLORS.neutrlWhite,
           }}
         >
-          <TouchableOpacity onPress={() => fetchResults()} disabled={isLoading}>
+          <TouchableOpacity
+            onPress={() => fetchResults()}
+            disabled={isLoading}
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+          >
             {isLoading ? (
-              <ActivityIndicator color={COLORS.primary} />
+              <ActivityIndicator
+                color={COLORS.primary}
+                style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+              />
             ) : (
               <SearchBtn
                 style={{
@@ -200,20 +202,28 @@ export default function Search() {
           />
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+          }}
+        >
           <Select
             placeHolder="Categoria"
             data={generalCategory}
             updateFilterKey="category"
             isLoading={isLoading}
-            setFilters={setFilters}
+            setFilter={setCategory}
+            filter={category}
           />
           <Select
             placeHolder="Cidade"
             data={address.cities}
             updateFilterKey="city"
             isLoading={isLoading}
-            setFilters={setFilters}
+            setFilter={setCity}
+            filter={city}
           />
           <Select
             placeHolder="Estado"
@@ -221,14 +231,29 @@ export default function Search() {
             dropdownStyleLeft={50}
             updateFilterKey="state"
             isLoading={isLoading}
-            setFilters={setFilters}
+            setFilter={setState}
+            filter={state}
           />
+          <TouchableOpacity
+            style={{
+              borderRadius: 20,
+              padding: 3,
+              backgroundColor: COLORS.neutralLightGrey,
+            }}
+            onPress={() => {
+              setCategory('');
+              setCity('');
+              setState('');
+            }}
+          >
+            <ClearBtn width={20} height={20} />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.viewResults}>
         <FlatList
           data={searchResults}
-          contentContainerStyle={{ gap: 20, padding: 15, flex: 1 }}
+          contentContainerStyle={{ gap: 20, padding: 15 }}
           renderItem={({ item, index }) => (
             <MotiView
               layout={Layout.stiffness()}
@@ -297,8 +322,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapperContainer: {
-    width: '100%',
-    height: 100,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

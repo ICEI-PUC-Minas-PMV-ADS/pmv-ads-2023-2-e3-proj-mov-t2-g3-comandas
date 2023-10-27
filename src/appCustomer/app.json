@@ -35,7 +35,8 @@
                     "cjs"
                 ],
                 "fastRefresh": true
-            }
+            },
+            "softwareKeyboardLayoutMode":"pan"
         },
         "web": {
             "favicon": "./src/assets/favicon.png"
