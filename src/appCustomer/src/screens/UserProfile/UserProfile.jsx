@@ -183,7 +183,7 @@ export default function UserProfile({ navigation }) {
                   if (id === 'address') {
                     navigation.navigate('Address');
                   }
-                  if (id === 'favoritos') {
+                  if (id === 'favorites') {
                     navigation.navigate('Favoritos');
                   }
                   if (id === 'faleConosco') {
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
   profileAvatar: {
     width: 120,
     height: 120,
-    borderRadius: 9999,
+    borderRadius: 99,
     borderColor: COLORS.linkTextGreen,
     borderWidth: 0.2,
   },
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
   profileAction: {
     width: 24,
     height: 24,
-    borderRadius: 9999,
+    borderRadius: 99,
     backgroundColor: COLORS.linkTextGreen,
     position: 'absolute',
     right: -4,
@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: COLORS.iconRed,
-    borderRadius: 9999,
+    borderRadius: 99,
     borderWidth: 3,
   },
   logoutLabel: {
@@ -410,7 +410,7 @@ const styles = StyleSheet.create({
   rowIcon: {
     width: 32,
     height: 32,
-    borderRadius: 9999,
+    borderRadius: 99,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,

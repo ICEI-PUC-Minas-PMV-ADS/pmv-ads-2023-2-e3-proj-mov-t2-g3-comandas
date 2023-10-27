@@ -4,6 +4,7 @@ const COLORS = {
   grey: '#CCCCCC',
   greyDark: '#989898',
   goldMetalic: '#FFDF00',
+  blueDark: '#16558F',
 
   primary: '#F35C56',
   secondary: '#272459',

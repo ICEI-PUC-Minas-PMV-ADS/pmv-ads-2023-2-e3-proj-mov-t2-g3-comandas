@@ -1,77 +1,252 @@
 import COLORS from '@/constants/colors';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  Switch,
+} from 'react-native';
 import React from 'react';
+import { useUser } from '@/context/UserContext';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+import Wallet from '@/components/Wallet/Wallet';
+
+const SECTIONS = [
+  {
+    header: 'Pagamento',
+    icon: 'align-center',
+    items: [
+      {
+        id: 'firstLine',
+        icon: 'dollar-sign',
+        label: 'Carteira Digital',
+        type: 'toggle',
+      },
+    ],
+  },
+  {
+    header: 'Cartões',
+    icon: 'settings',
+    items: [
+      {
+        id: 'visa',
+        icon: 'credit-card',
+        label: 'Visa',
+        type: 'toggle',
+      },
+      {
+        id: 'mastercard',
+        icon: 'credit-card',
+        label: 'MasterCard',
+        type: 'toggle',
+      },
+    ],
+  },
+  {
+    header: 'Conta na Mesa',
+    icon: 'help-circle',
+    items: [
+      {
+        id: 'contaNaMesaCartao',
+        icon: 'check-square',
+        label: 'Cartão',
+        type: 'toggle',
+      },
+      {
+        id: 'contaNaMesaDinheiro',
+        icon: 'dollar-sign',
+        label: 'Dinheiro',
+        type: 'toggle',
+      },
+    ],
+  },
+  {
+    header: 'Outros',
+    icon: 'bell',
+    items: [
+      {
+        id: 'chamar-servico',
+        icon: 'bell',
+        label: 'Chamar Garçom',
+        type: 'toggle',
+      },
+    ],
+  },
+];
 
 function CarteiraDigital() {
+  // to get logged user data
+  const { user } = useUser();
+  const sheetConfirmPayment = React.useRef();
+  const [form, setForm] = React.useState({
+    // Initial Data Simulated - because now the DB don't have payment data
+    firstLine: 'Escolha abaixo como quer pagar.',
+    visa: true,
+    mastercard: false,
+    contaNaMesaDinheiro: false,
+    contaNaMesaCartao: false,
+  });
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        <Text style={styles.profileName}>Carteira Digital</Text>
-      </View>
+      <ScrollView style={styles.scrollContent}>
+        {/* >>>>>>>>>>Header<<<<<<<<<<<< */}
+        <View style={styles.header} />
+        {/* >>>>>>>>>> Card <<<<<<<<<<<< */}
+        <View style={styles.profile}>
+          <View style={styles.profileHeader}>
+            <Wallet />
+          </View>
+          {/* >>>>>>>>>>Payment Button<<<<<<<<<<<< */}
+          <TouchableOpacity
+            onPress={() => {
+              // handle payment
+              sheetConfirmPayment.current.open();
+            }}
+          >
+            <View style={styles.profileAction}>
+              <Text style={styles.profileActionText}>Pagar</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        {/* >>>>>>>>>>Body<<<<<<<<<<<< */}
+        <View style={styles.content}>
+          {SECTIONS.map(({ header, items }) => (
+            <View style={styles.section} key={header}>
+              <Text style={styles.sectionHeader}>{header}</Text>
+
+              {items.map(({ id, label, type, icon, color }) => (
+                <TouchableOpacity
+                  key={icon}
+                  onPress={() => {
+                    // handle onPress
+                  }}
+                >
+                  <View style={styles.row}>
+                    <View style={[styles.rowIcon, { backgroundColor: color }]}>
+                      <FeatherIcon
+                        name={icon}
+                        color={COLORS.blueDark}
+                        size={18}
+                      />
+                    </View>
+
+                    <Text style={styles.rowLabel}>{label}</Text>
+
+                    <View style={{ flex: 1 }} />
+
+                    {type === 'toggle' && (
+                      <Switch
+                        value={form[id]}
+                        onValueChange={(value) =>
+                          setForm({ ...form, [id]: value })
+                        }
+                      />
+                    )}
+                    {type === 'link' && (
+                      <FeatherIcon
+                        name="chevron-right"
+                        color="#0c0c0c"
+                        size={22}
+                      />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          ))}
+        </View>
+        {/* Code for Bottom Sheets */}
+        {/* Delete Account Bottom Sheet */}
+        <RBSheet
+          ref={sheetConfirmPayment}
+          customStyles={{ container: styles.sheet }}
+          height={350}
+          openDuration={450}
+          closeDuration={250}
+        >
+          <View style={styles.sheetHeader}>
+            <Text style={styles.sheetHeaderTitle}>Confirme o Pagamento</Text>
+          </View>
+
+          <View style={styles.sheetBody}>
+            <Text style={styles.sheetBodyText}>
+              {user.name}, você confirma o pagamento com{' '}
+              <Text style={{ fontWeight: '700', color: COLORS.blueDark }}>
+                Forma de Pgto
+              </Text>
+              ?
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => sheetConfirmPayment.current.close()}
+            >
+              <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
+                <Text style={styles.btnText}>Cancelar</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => sheetConfirmPayment.current.close()}
+            >
+              <View
+                style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
+              >
+                <Text style={styles.btnText}>Confirmar</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </RBSheet>
+      </ScrollView>
     </SafeAreaView>
   );
 }
-
 export default CarteiraDigital;
 
 const styles = StyleSheet.create({
   scrollContent: {
-    flexGrow: 1, // Permite que o ScrollView cresça para preencher o espaço disponível
+    flexGrow: 1,
   },
   container: {
     paddingVertical: 20,
     flexGrow: 1,
   },
+  header: {
+    paddingHorizontal: 24,
+    marginBottom: 12,
+  },
   profile: {
+    paddingTop: 12,
+    paddingBottom: 24,
     backgroundColor: COLORS.white,
-    padding: 18,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: COLORS.greyLineStyle,
+  },
+  profileHeader: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: -20,
-  },
-  profileName: {
-    marginTop: 20,
-    fontSize: 22,
-    fontWeight: '800',
-    color: COLORS.linkTextGreen,
-    textAlign: 'center',
-  },
-  profileAvatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 9999,
-    borderColor: COLORS.linkTextGreen,
-    borderWidth: 0.2,
-  },
-  profileAvatarWrapper: {
-    position: 'relative',
+    justifyContent: 'flex-start',
   },
   profileAction: {
-    width: 24,
-    height: 24,
-    borderRadius: 9999,
+    marginTop: 16,
+    marginHorizontal: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    flexDirection: 'row',
     backgroundColor: COLORS.linkTextGreen,
-    position: 'absolute',
-    right: -4,
-    bottom: -10,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 50,
   },
-  logout: {
-    backgroundColor: COLORS.iconRed,
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderColor: COLORS.iconRed,
-    borderRadius: 9999,
-    borderWidth: 3,
-  },
-  logoutLabel: {
-    color: COLORS.white,
-    fontSize: 12,
+  profileActionText: {
+    fontSize: 18,
     fontWeight: '600',
+    color: COLORS.white,
+    marginRight: 8,
   },
   section: {
     backgroundColor: COLORS.white,
@@ -85,6 +260,10 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 1.1,
   },
+  rowWrapper: {
+    borderTopWidth: 1,
+    borderColor: COLORS.greyLineStyle,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -97,14 +276,64 @@ const styles = StyleSheet.create({
   },
   rowLabel: {
     fontSize: 18,
-    color: COLORS.black,
+    fontWeight: '600',
+    color: COLORS.placeholderText,
+  },
+  rowValue: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: COLORS.linkTextGreen,
   },
   rowIcon: {
     width: 32,
     height: 32,
-    borderRadius: 9999,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 12,
+    marginRight: 6,
+  },
+
+  // Bottom Sheets Styles
+  sheet: {
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+  },
+  sheetHeader: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderBottomWidth: 1,
+    borderColor: COLORS.greyLineStyle,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sheetHeaderTitle: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: COLORS.linkTextGreen,
+  },
+  sheetBody: {
+    padding: 24,
+  },
+  sheetBodyText: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: '400',
+    color: COLORS.black,
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  btn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginTop: 20,
+  },
+  btnText: {
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '700',
+    color: COLORS.white,
   },
 });
