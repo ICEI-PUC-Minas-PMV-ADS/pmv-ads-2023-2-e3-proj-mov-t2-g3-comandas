@@ -7,7 +7,7 @@ import COLORS from '../../constants/colors';
 import Checkin from '../../assets/Checkin.json';
 import Logo from '../../assets/Comandas-icon.png';
 
-export default function CheckinRegister() {
+export default function CheckinPayment() {
   const navigation = useNavigation();
 
   return (
@@ -45,18 +45,21 @@ export default function CheckinRegister() {
             loop={false}
             marginTop={10}
           />
-          <Text style={styles.textForm}>Conta criada com Sucesso</Text>
+          <Text style={styles.textForm}>
+            Pagamento Efetuado com Sucesso.{' '}
+            <Text style={{ color: COLORS.linkTextGreen }}>{'\n'}Obrigado!</Text>
+          </Text>
           <Animatable.View
             delay={2000}
             animation="fadeInUp"
-            onAnimationEnd={() => navigation.navigate('Login')}
+            onAnimationEnd={() => navigation.navigate('PedidosAcompanhamento')}
             style={styles.footer}
           >
             <Text style={styles.textFooter}>
-              Caso não seja redirecionado para a tela de Login em alguns
-              instantes
+              Caso não seja redirecionado para a tela de Acompanhamento de
+              Pedidos de Compra em alguns instantes
             </Text>
-            <Pressable onPress={() => navigation.navigate('Login')}>
+            <Pressable onPress={() => navigation.navigate('CarteiraDigital')}>
               <Text style={styles.textFooterLink}>Clique Aqui.</Text>
             </Pressable>
           </Animatable.View>

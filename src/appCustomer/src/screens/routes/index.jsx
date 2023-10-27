@@ -9,8 +9,8 @@ import DadosPessoais from '../UserProfile/DadosPessoais';
 import CarteiraDigital from '../UserProfile/CarteiraDigital';
 import Cartoes from '../UserProfile/Cartoes';
 import Search from '../Search/index';
-import CheckinRegister from '../Register/CheckinRegister';
 import CheckoutLogout from '../UserProfile/CheckoutLogout';
+import CheckinPayment from '../UserProfile/CheckinPayment';
 import Home from '../Home';
 import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
@@ -19,6 +19,8 @@ import FaleConosco from '../UserProfile/FaleConosco';
 import Problemas from '../UserProfile/Problemas';
 import Address from '../UserProfile/Address';
 import Favoritos from '../UserProfile/Favoritos';
+import PedidosAcompanhamento from '../Compras/PedidosAcompanhamento';
+import CheckinRegister from '../Register/CheckinRegister';
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +74,17 @@ function StackNavigation() {
         component={Cartoes}
         options={{ title: '' }}
       />
+      <Stack.Screen
+        name="PedidosAcompanhamento"
+        component={PedidosAcompanhamento}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="CheckinPayment"
+        component={CheckinPayment}
+        options={{ title: '' }}
+      />
+
       <Stack.Screen
         name="DadosPessoais"
         component={DadosPessoais}
