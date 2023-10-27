@@ -22,6 +22,7 @@ import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
 import Notifications from '../Notifications/Index';
 import CheckinLogin from '../Login/CheckinLogin';
+import CheckinFaleConosco from '../UserProfile/CheckinFaleConosco';
 
 const Stack = createNativeStackNavigator();
 
@@ -110,6 +111,11 @@ function StackNavigation() {
         name="FaleConosco"
         component={FaleConosco}
         options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="CheckinFaleConosco"
+        component={CheckinFaleConosco}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Problemas"
