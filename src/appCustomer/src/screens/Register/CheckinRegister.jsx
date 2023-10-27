@@ -21,48 +21,7 @@ export default function CheckinRegister() {
           resizeMode="contain"
         />
       </View>
-      return (
-      <View style={styles.container}>
-        <View style={styles.containerLogo}>
-          <Animatable.Image
-            style={styles.image}
-            delay={100}
-            animation="flipInY"
-            source={Logo}
-            resizeMode="contain"
-          />
-        </View>
 
-        <Animatable.View
-          delay={700}
-          animation="fadeInUp"
-          style={styles.containerForm}
-        >
-          <LottieView
-            style={styles.checkInLottie}
-            source={Checkin}
-            autoPlay
-            loop={false}
-            marginTop={10}
-          />
-          <Text style={styles.textForm}>Conta criada com Sucesso</Text>
-          <Animatable.View
-            delay={2000}
-            animation="fadeInUp"
-            onAnimationEnd={() => navigation.navigate('Login')}
-            style={styles.footer}
-          >
-            <Text style={styles.textFooter}>
-              Caso não seja redirecionado para a tela de Login em alguns
-              instantes
-            </Text>
-            <Pressable onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.textFooterLink}>Clique Aqui.</Text>
-            </Pressable>
-          </Animatable.View>
-        </Animatable.View>
-      </View>
-      );
       <Animatable.View
         delay={700}
         animation="fadeInUp"
@@ -130,6 +89,7 @@ const styles = StyleSheet.create({
   },
   textForm: {
     fontSize: 26,
+    marginHorizontal: 12,
     fontWeight: '600',
     color: COLORS.black,
     textAlign: 'center',

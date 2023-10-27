@@ -297,6 +297,7 @@ export default function UserProfile({ navigation }) {
             <TouchableOpacity
               onPress={() => {
                 // Handle onPress Logout Account
+                sheetLogoutAccount.current.close();
                 AsyncStorage.clear();
                 navigation.navigate('CheckoutLogout');
               }}

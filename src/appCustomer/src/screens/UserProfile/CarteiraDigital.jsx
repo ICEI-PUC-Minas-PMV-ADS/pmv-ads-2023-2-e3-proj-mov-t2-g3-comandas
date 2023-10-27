@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import { useUser } from '@/context/UserContext';
+import { useNavigation } from '@react-navigation/native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import Wallet from '@/components/Wallet/Wallet';
@@ -78,6 +79,7 @@ const SECTIONS = [
 ];
 
 function CarteiraDigital() {
+  const navigation = useNavigation();
   // to get logged user data
   const { user } = useUser();
   const sheetConfirmPayment = React.useRef();
@@ -190,7 +192,10 @@ function CarteiraDigital() {
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => sheetConfirmPayment.current.close()}
+              onPress={() => {
+                sheetConfirmPayment.current.close();
+                navigation.navigate('CheckinPayment');
+              }}
             >
               <View
                 style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
