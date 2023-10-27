@@ -43,7 +43,7 @@ function Login() {
             String(res.userInfo.id),
           ).catch((err) => console.log('ERRO IN handleLogin ', err));
           // Fazer lógica para o que acontecer após Login
-          navigation.navigate('Home');
+          navigation.navigate('CheckinLogin');
         } else {
           Alert.alert('Usuário ou Senha inválidos!');
         }

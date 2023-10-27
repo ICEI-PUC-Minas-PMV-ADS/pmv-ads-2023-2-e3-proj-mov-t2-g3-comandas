@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
   },
   textForm: {
     fontSize: 26,
+    marginHorizontal: 12,
     fontWeight: '600',
     color: COLORS.black,
     textAlign: 'center',
