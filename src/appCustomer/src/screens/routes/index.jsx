@@ -4,23 +4,24 @@ import React from 'react';
 import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
+import CheckinRegister from '../Register/CheckinRegister';
 import UserProfile from '../UserProfile/UserProfile';
+import CheckoutLogout from '../UserProfile/CheckoutLogout';
 import DadosPessoais from '../UserProfile/DadosPessoais';
 import CarteiraDigital from '../UserProfile/CarteiraDigital';
-import Cartoes from '../UserProfile/Cartoes';
-import Search from '../Search/index';
-import CheckoutLogout from '../UserProfile/CheckoutLogout';
 import CheckinPayment from '../UserProfile/CheckinPayment';
-import Home from '../Home';
-import Scan from '../Scan/Index.jsx';
-import Scanner from '../Scanner/Index.jsx';
-import Notifications from '../Notifications/Index';
+import Cartoes from '../UserProfile/Cartoes';
 import FaleConosco from '../UserProfile/FaleConosco';
 import Problemas from '../UserProfile/Problemas';
 import Address from '../UserProfile/Address';
 import Favoritos from '../UserProfile/Favoritos';
 import PedidosAcompanhamento from '../Compras/PedidosAcompanhamento';
-import CheckinRegister from '../Register/CheckinRegister';
+import Search from '../Search/index';
+import Home from '../Home';
+import Scan from '../Scan/Index.jsx';
+import Scanner from '../Scanner/Index.jsx';
+import Notifications from '../Notifications/Index';
+import CheckinLogin from '../Login/CheckinLogin';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,11 @@ function StackNavigation() {
       <Stack.Screen
         name="Login"
         component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CheckinLogin"
+        component={CheckinLogin}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -82,7 +88,7 @@ function StackNavigation() {
       <Stack.Screen
         name="CheckinPayment"
         component={CheckinPayment}
-        options={{ title: '' }}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
