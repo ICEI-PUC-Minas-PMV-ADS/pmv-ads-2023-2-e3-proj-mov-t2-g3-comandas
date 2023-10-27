@@ -113,6 +113,11 @@ function StackNavigation() {
         options={{ title: '' }}
       />
       <Stack.Screen
+        name="CheckinFaleConosco"
+        component={CheckinFaleConosco}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="Problemas"
         component={Problemas}
         options={{ title: '' }}
