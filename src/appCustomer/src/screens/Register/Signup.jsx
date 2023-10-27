@@ -9,6 +9,7 @@ import {
   Alert,
   ScrollView,
   SafeAreaView,
+  useWindowDimensions,
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -26,6 +27,8 @@ function Signup() {
   const [passwordRepeat, setPasswordRepeat] = useState('');
 
   const [isPasswordHide, setIsPasswordHide] = useState(true);
+
+  const { height } = useWindowDimensions();
 
   function handleRegister() {
     register({
@@ -45,139 +48,141 @@ function Signup() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={styles.container}>
-        <View>
+      <ScrollView>
+        <View style={styles.container}>
           <View>
-            <Image source={icon} style={styles.imageStyle} />
-          </View>
+            <View>
+              <Image source={icon} style={styles.imageStyle} />
+            </View>
 
-          <View>
-            <Text style={styles.textLableInput}>Nome</Text>
-            <View style={styles.textInput}>
-              <TextInput
-                placeholder="Seu Nome"
-                placeholderTextColor={COLORS.placeholderText}
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={{ width: '100%' }}
-                value={name}
-                setValue={setName}
-                onChangeText={(text) => setName(text)}
-              />
+            <View>
+              <Text style={styles.textLableInput}>Nome</Text>
+              <View style={styles.textInput}>
+                <TextInput
+                  placeholder="Seu Nome"
+                  placeholderTextColor={COLORS.placeholderText}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  style={{ width: '100%' }}
+                  value={name}
+                  setValue={setName}
+                  onChangeText={(text) => setName(text)}
+                />
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.textLableInput}>Email</Text>
+              <View style={styles.textInput}>
+                <TextInput
+                  placeholder="Email"
+                  placeholderTextColor={COLORS.placeholderText}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  style={{ width: '100%' }}
+                  value={email}
+                  onChangeText={(text) => setEmail(text)}
+                />
+              </View>
             </View>
           </View>
 
           <View>
-            <Text style={styles.textLableInput}>Email</Text>
-            <View style={styles.textInput}>
-              <TextInput
-                placeholder="Email"
-                placeholderTextColor={COLORS.placeholderText}
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={{ width: '100%' }}
-                value={email}
-                onChangeText={(text) => setEmail(text)}
-              />
+            <View>
+              <Text style={styles.textLableInput}>Senha</Text>
+
+              <View style={styles.textInput}>
+                <TextInput
+                  placeholder="Sua senha"
+                  placeholderTextColor={COLORS.placeholderText}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  secureTextEntry={isPasswordHide}
+                  style={{ width: '85%' }}
+                  value={password}
+                  onChangeText={(text) => setPassword(text)}
+                />
+
+                <TouchableOpacity
+                  onPress={() => setIsPasswordHide(!isPasswordHide)}
+                  style={styles.eye}
+                >
+                  {isPasswordHide === true ? (
+                    <Ionicons
+                      name="eye"
+                      size={24}
+                      color={COLORS.placeholderText}
+                    />
+                  ) : (
+                    <Ionicons
+                      name="eye-off"
+                      size={24}
+                      color={COLORS.placeholderText}
+                    />
+                  )}
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.textLableInput}>Confirmar Senha</Text>
+
+              <View style={styles.textInput}>
+                <TextInput
+                  placeholder="Confirmar a senha"
+                  placeholderTextColor={COLORS.placeholderText}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  secureTextEntry={isPasswordHide}
+                  style={{ width: '85%' }}
+                  value={passwordRepeat}
+                  onChangeText={(text) => setPasswordRepeat(text)}
+                />
+
+                <TouchableOpacity
+                  onPress={() => setIsPasswordHide(!isPasswordHide)}
+                  style={styles.eye}
+                >
+                  {isPasswordHide === true ? (
+                    <Ionicons
+                      name="eye"
+                      size={24}
+                      color={COLORS.placeholderText}
+                    />
+                  ) : (
+                    <Ionicons
+                      name="eye-off"
+                      size={24}
+                      color={COLORS.placeholderText}
+                    />
+                  )}
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
 
-        <View>
-          <View>
-            <Text style={styles.textLableInput}>Senha</Text>
-
-            <View style={styles.textInput}>
-              <TextInput
-                placeholder="Sua senha"
-                placeholderTextColor={COLORS.placeholderText}
-                autoCapitalize="none"
-                autoCorrect={false}
-                secureTextEntry={isPasswordHide}
-                style={{ width: '85%' }}
-                value={password}
-                onChangeText={(text) => setPassword(text)}
-              />
-
-              <TouchableOpacity
-                onPress={() => setIsPasswordHide(!isPasswordHide)}
-                style={styles.eye}
-              >
-                {isPasswordHide === true ? (
-                  <Ionicons
-                    name="eye"
-                    size={24}
-                    color={COLORS.placeholderText}
-                  />
-                ) : (
-                  <Ionicons
-                    name="eye-off"
-                    size={24}
-                    color={COLORS.placeholderText}
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
+          <View style={styles.checkbox}>
+            <Text style={{ width: '100%' }}>
+              Registrando-se você concordo com os termos e condições.
+            </Text>
           </View>
 
-          <View>
-            <Text style={styles.textLableInput}>Confirmar Senha</Text>
+          <Button
+            title="Criar Conta"
+            filled
+            onPress={() => handleRegister()}
+            style={{
+              marginTop: height < 1300 ? '5%' : '35%',
+            }}
+          />
+          {/* <SocialLogin /> */}
 
-            <View style={styles.textInput}>
-              <TextInput
-                placeholder="Confirmar a senha"
-                placeholderTextColor={COLORS.placeholderText}
-                autoCapitalize="none"
-                autoCorrect={false}
-                secureTextEntry={isPasswordHide}
-                style={{ width: '85%' }}
-                value={passwordRepeat}
-                onChangeText={(text) => setPasswordRepeat(text)}
-              />
-
-              <TouchableOpacity
-                onPress={() => setIsPasswordHide(!isPasswordHide)}
-                style={styles.eye}
-              >
-                {isPasswordHide === true ? (
-                  <Ionicons
-                    name="eye"
-                    size={24}
-                    color={COLORS.placeholderText}
-                  />
-                ) : (
-                  <Ionicons
-                    name="eye-off"
-                    size={24}
-                    color={COLORS.placeholderText}
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
+          <View style={styles.footer}>
+            <Text style={styles.textFooter}>Já tem uma conta? Então </Text>
+            <Pressable onPress={() => navigation.navigate('Login')}>
+              <Text style={styles.textFooterLink}>faça login.</Text>
+            </Pressable>
           </View>
-        </View>
-
-        <View style={styles.checkbox}>
-          <Text style={{ width: '100%' }}>
-            Registrando-se você concordo com os termos e condições.
-          </Text>
-        </View>
-
-        <Button
-          title="Criar Conta"
-          filled
-          onPress={() => handleRegister()}
-          style={{
-            marginTop: '35%',
-          }}
-        />
-        {/* <SocialLogin /> */}
-
-        <View style={styles.footer}>
-          <Text style={styles.textFooter}>Já tem uma conta? Então </Text>
-          <Pressable onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.textFooterLink}>faça login.</Text>
-          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>
