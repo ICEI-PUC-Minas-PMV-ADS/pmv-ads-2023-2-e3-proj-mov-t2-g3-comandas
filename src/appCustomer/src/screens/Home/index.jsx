@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, ScrollView, SafeAreaView, StatusBar } from 'react-native';
+import COLORS from '@/constants/colors';
 import TopBar from '../../components/TopBar/Index';
 import BottomBar from '../../components/BottomBar/Index';
 import Slider from '../../components/Slider/Index';
@@ -14,6 +15,7 @@ export default function Home({ navigation }) {
         <SafeAreaView style={styles.container}>
             <TopBar navigation={navigation} />
             <ScrollView
+                showsVerticalScrollIndicator={false}
                 style={{ width: '100%' }}
                 contentContainerStyle={styles.scrollContent}
             >
@@ -42,6 +44,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
+        backgroundColor: COLORS.neutralWhite,
     },
     scrollContent: {
         flexGrow: 1, // Permite que o ScrollView cresça para preencher o espaço disponível
