@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import voucherBackground from '../../assets/vouchers/Voucher.png';
 
-export default function Voucher({ voucherImage, voucherTitle }) {
+export default function Voucher({ voucherImage, product, voucherTitle }) {
     const { width } = useWindowDimensions();
 
     return (
@@ -28,7 +28,8 @@ export default function Voucher({ voucherImage, voucherTitle }) {
                 source={{ uri: voucherImage }} // Sua imagem por cima
                 style={styles.overlayImage}
             />
-            <Text style={styles.Text}>{voucherTitle.toUpperCase()}</Text>
+            <Text style={styles.titleText}>{voucherTitle.toUpperCase()}</Text>
+            <Text style={styles.productText}>{product.toUpperCase()}</Text>
         </View>
     );
 }
@@ -45,7 +46,14 @@ const styles = StyleSheet.create({
         bottom: '14%',
         right: '8%',
     },
-    Text: {
+    titleText: {
+        position: 'absolute',
+        bottom: '42%',
+        left: '14%',
+        fontSize: 15,
+        color: '#FFF',
+    },
+    productText: {
         position: 'absolute',
         bottom: '26%',
         left: '14%',

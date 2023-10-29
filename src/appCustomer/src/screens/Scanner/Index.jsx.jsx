@@ -34,12 +34,28 @@ export default function Scanner({ navigation }) {
         return <Text>No access to camera</Text>;
     }
 
+    const delimiterSize = Dimensions.get('window').width / 1.8;
+
     return (
         <View style={styles.container}>
             <BarCodeScanner
                 onBarCodeScanned={handleBarCodeScanned}
                 style={styles.camera}
             />
+            <View style={styles.overlay}>
+                <View
+                    style={{
+                        width: delimiterSize,
+                        height: delimiterSize,
+                        borderWidth: 2, // Espessura da borda
+                        borderColor: '#FFF', // Cor da borda transparente
+                        borderStyle: 'solid',
+                        position: 'absolute',
+                        top: -580,
+                        left: 95,
+                    }}
+                />
+            </View>
         </View>
     );
 }
@@ -51,10 +67,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    overlay: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+    },
     camera: {
         width: 2.2 * Dimensions.get('window').width,
         aspectRatio: 1 / 1,
         backgroundColor: 'orange',
     },
-    reScan: {},
 });

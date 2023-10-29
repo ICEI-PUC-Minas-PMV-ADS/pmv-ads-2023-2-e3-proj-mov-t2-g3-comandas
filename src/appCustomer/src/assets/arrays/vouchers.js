@@ -2,7 +2,7 @@ export default [
     {
         id: 1,
         title: 'hambúrguer',
-        image: 'https://i.imgur.com/K5TUAj5.png',
+        image: 'https://imgur.com/iTws7ZQ.png',
     },
     {
         id: 2,
