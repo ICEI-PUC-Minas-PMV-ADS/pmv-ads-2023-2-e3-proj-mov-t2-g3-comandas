@@ -85,7 +85,8 @@ export default function Topic({ data, title }) {
                         >
                             <Voucher
                                 voucherImage={item.image}
-                                voucherTitle={item.title}
+                                product={item.title}
+                                voucherTitle={title}
                             />
                         </TouchableOpacity>
                     )}

@@ -27,7 +27,7 @@ export default function Home({ navigation }) {
                     spacing={4}
                     data={categoriesSlides}
                 />
-                <Topic data={voucherSlides} title="Programa Fidelidade" />
+                <Topic data={voucherSlides} title="Entrega Grátis" />
                 <Topic data={voucherSlides} title="Favoritos" />
             </ScrollView>
             <BottomBar navigation={navigation} />
