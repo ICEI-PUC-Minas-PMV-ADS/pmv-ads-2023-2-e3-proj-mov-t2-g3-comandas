@@ -24,7 +24,7 @@ export default function Topic({ data, title }) {
     };
 
     const scrollToRight = () => {
-        if (currentIndex < data.length - 1 && data.length != 1) {
+        if (currentIndex < data.length - 1 && data.length !== 1) {
             const newIndex = currentIndex + 1;
             setCurrentIndex(newIndex);
             const newX = newIndex * width;
@@ -53,6 +53,7 @@ export default function Topic({ data, title }) {
             clearInterval(scrollInterval);
             scrollX.removeAllListeners();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentIndex]);
 
     return (
@@ -77,12 +78,15 @@ export default function Topic({ data, title }) {
                             useNativeDriver: false,
                         },
                     )}
-                    renderItem={({ item, index }) => (
+                    renderItem={({ item }) => (
                         <TouchableOpacity
                             onPress={() => handleImagePress(item)}
                             activeOpacity={1}
                         >
-                            <Voucher voucherImage={item.image} />
+                            <Voucher
+                                voucherImage={item.image}
+                                voucherTitle={item.title}
+                            />
                         </TouchableOpacity>
                     )}
                 />

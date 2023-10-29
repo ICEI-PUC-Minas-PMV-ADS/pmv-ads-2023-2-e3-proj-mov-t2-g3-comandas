@@ -17,6 +17,6 @@ export default [
     {
         id: 4,
         title: 'pizza',
-        image: 'https://i.imgur.com/5jRhAjc.png',
+        image: 'https://imgur.com/IT4ka4i.png',
     },
 ];

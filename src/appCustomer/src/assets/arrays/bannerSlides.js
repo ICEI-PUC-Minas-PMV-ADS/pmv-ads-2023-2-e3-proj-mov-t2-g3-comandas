@@ -1,13 +1,13 @@
 export default [
     {
         id: 1,
-        title: 'Fresh Meat',
-        image: 'https://i.imgur.com/xj7hJyM.png',
+        title: 'Pizza',
+        image: 'https://i.imgur.com/vxrH9NX.png',
     },
     {
         id: 2,
-        title: 'Pizza',
-        image: 'https://i.imgur.com/vxrH9NX.png',
+        title: 'Fresh Meat',
+        image: 'https://i.imgur.com/xj7hJyM.png',
     },
     {
         id: 3,

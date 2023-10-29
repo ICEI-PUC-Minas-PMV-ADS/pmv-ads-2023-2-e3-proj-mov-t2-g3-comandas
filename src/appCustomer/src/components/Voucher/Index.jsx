@@ -1,8 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, useWindowDimensions, Image } from 'react-native';
-import voucherBackground from '../../assets/vouchers/default.png';
+import {
+    StyleSheet,
+    View,
+    useWindowDimensions,
+    Image,
+    Text,
+} from 'react-native';
+import voucherBackground from '../../assets/vouchers/Voucher.png';
 
-export default function Voucher({ voucherImage }) {
+export default function Voucher({ voucherImage, voucherTitle }) {
     const { width } = useWindowDimensions();
 
     return (
@@ -20,8 +26,9 @@ export default function Voucher({ voucherImage }) {
             />
             <Image
                 source={{ uri: voucherImage }} // Sua imagem por cima
-                style={[styles.overlayImage, { bottom: '20%', left: '14%' }]}
+                style={styles.overlayImage}
             />
+            <Text style={styles.Text}>{voucherTitle.toUpperCase()}</Text>
         </View>
     );
 }
@@ -32,8 +39,17 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     overlayImage: {
-        width: 90,
-        height: 90,
+        width: '25%',
+        aspectRatio: '1/1',
         position: 'absolute',
+        bottom: '14%',
+        right: '8%',
+    },
+    Text: {
+        position: 'absolute',
+        bottom: '26%',
+        left: '14%',
+        fontSize: 25,
+        color: '#FFF',
     },
 });
