@@ -1,24 +1,73 @@
+import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env';
 import COLORS from '@/constants/colors';
+import { useUser } from '@/context/UserContext';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { FlatList } from 'react-native';
 
-function PedidosAcompanhamento() {
+import axios from 'axios';
+
+
+const OrderList = () => {
+    const [items, setItems] = useState([]);
+    const { user } = useUser();
+  
+    useEffect(() => {
+        // Função para buscar itens da API
+        const fetchItemsFromAPI = async () => {
+        
+      try {
+        const response = await axios.get(BASE_URL + "customer/" + user.id + "/order", {
+          headers: {
+            'x-api-key': API_KEY,
+            Authorization: ADMIN_TOKEN
+          }
+        });
+        setItems(response.data);
+    
+        
+      } catch (error) {
+        console.error('Erro ao buscar itens da API', error);
+      }
+    };
+
+    fetchItemsFromAPI();
+  }, []);
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        <Text style={styles.profileName}>Dashboard de Compras do Usuário</Text>
-      </View>
-      <View>
-        <Text style={styles.profileText}>
-          Página destinada ao acompanhamento do status do pedido de compra do
-          usuário.
-        </Text>
-      </View>
-    </SafeAreaView>
+    <View>
+      <Text>Lista de Itens da API:</Text>
+      <FlatList
+        data={items}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => <Text>{item.total} {item.note}</Text>}
+      />
+    </View>
   );
-}
+};
 
-export default PedidosAcompanhamento;
+export default OrderList;
+
+
+// function PedidosAcompanhamento() {
+//     const { user } = useUser();
+//   return (
+//     <SafeAreaView style={{ flex: 1 }}>
+//       <View>
+//       <Text  style={styles.profileName}>Pedidos - {user.name}  </Text>
+//         <Text style={styles.profileName}>Dashboard de Compras do Usuário</Text>
+//       </View>
+//       <View>
+//         <Text style={styles.profileText}>
+//           Página destinada ao acompanhamento do status do pedido de compra do
+//           usuário.
+//         </Text>
+//       </View>
+//     </SafeAreaView>
+//   );
+// }
+
+//export default PedidosAcompanhamento;
 
 const styles = StyleSheet.create({
   scrollContent: {
