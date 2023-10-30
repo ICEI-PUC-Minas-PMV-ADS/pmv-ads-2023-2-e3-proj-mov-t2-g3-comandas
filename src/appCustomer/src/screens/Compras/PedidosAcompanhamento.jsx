@@ -32,8 +32,8 @@ const OrderList = () => {
             console.log('No data received from the API.');
           }
         } catch (error) {
-            if(error?.response?.status){
-
+            if(error?.response?.status === 404){
+            console.log("Sem items");
             }
             else{
             console.error('Erro ao buscar itens da API', error);
