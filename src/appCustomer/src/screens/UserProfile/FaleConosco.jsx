@@ -108,7 +108,7 @@ function FaleConosco() {
           <Text style={styles.headerText}>
             {'   '}
             Se você tem alguma{' '}
-            <Text style={{ color: COLORS.linkTextGreen, fontWeight: '500' }}>
+            <Text style={{ color: COLORS.primary, fontWeight: '500' }}>
               dúvida, sugestão, comentário ou reclamação,
             </Text>{' '}
             por favor, escreva abaixo e envie à nossa equipe. Teremos todo o
@@ -127,7 +127,7 @@ function FaleConosco() {
                   key={index}
                   style={[
                     styles.tabWrapper,
-                    isActive && { borderBottomColor: COLORS.linkTextGreen },
+                    isActive && { borderBottomColor: COLORS.primary },
                   ]}
                 >
                   <TouchableOpacity onPress={() => setValue(index)}>
@@ -136,7 +136,7 @@ function FaleConosco() {
                         style={
                           (styles.tabText,
                           {
-                            color: isActive ? COLORS.linkTextGreen : '#6b7280',
+                            color: isActive ? COLORS.primary : '#6b7280',
                           })
                         }
                       >
@@ -171,6 +171,7 @@ function FaleConosco() {
               editable
               multiline
               numberOfLines={12}
+              height={90}
               maxLength={250}
               onChangeText={(text) => onChangeText(text)}
               value={value}
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     fontSize: 22,
     fontWeight: '700',
-    color: COLORS.linkTextGreen,
+    color: COLORS.primary,
     textAlign: 'center',
   },
   headerText: {
@@ -288,7 +289,7 @@ const styles = StyleSheet.create({
   rowValue: {
     fontSize: 16,
     fontWeight: '500',
-    color: COLORS.linkTextGreen,
+    color: COLORS.primary,
     marginRight: 4,
   },
   textInput: {
@@ -300,7 +301,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
     flexDirection: 'row',
-    backgroundColor: COLORS.linkTextGreen,
+    backgroundColor: COLORS.primary,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 50,

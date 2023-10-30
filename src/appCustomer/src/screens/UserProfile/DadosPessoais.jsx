@@ -8,9 +8,11 @@ import {
   Image,
   TouchableOpacity,
   Switch,
+  TextInput,
 } from 'react-native';
 import React from 'react';
 import { useUser } from '@/context/UserContext';
+import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
@@ -66,6 +68,8 @@ export default function DadosPessoais() {
     }),
     [value],
   );
+  // Action Bottom Sheets
+  const sheetEditProfile = React.useRef();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -93,7 +97,8 @@ export default function DadosPessoais() {
           {/* >>>>>>>>>>Edit Button<<<<<<<<<<<< */}
           <TouchableOpacity
             onPress={() => {
-              // handleUploadPicture
+              // handleEditUserProfile
+              sheetEditProfile.current.open();
             }}
           >
             <View style={styles.profileAction}>
@@ -164,18 +169,73 @@ export default function DadosPessoais() {
                     onValueChange={(val) => setForm({ ...form, [id]: val })}
                   />
                 )}
-
-                {['links', 'input'].includes(type) && (
-                  <FeatherIcon
-                    name="chevron-right"
-                    color={COLORS.placeholderText}
-                    size={20}
-                  />
-                )}
               </View>
             </View>
           ))}
         </View>
+
+        {/* Code for Bottom Sheets */}
+        {/* Edit/UpDate Profile Bottom Sheet */}
+        <RBSheet
+          ref={sheetEditProfile}
+          customStyles={{ container: styles.sheet }}
+          height={550}
+          openDuration={350}
+          closeDuration={250}
+        >
+          <View style={styles.sheetHeader}>
+            <Text style={styles.sheetHeaderTitle}>Editar Conta</Text>
+          </View>
+
+          <View style={styles.sheetBody}>
+            {items.map(({ label, type, id, icon }, index) => (
+              <View key={index}>
+                <View style={styles.rowEditSheet}>
+                  <FeatherIcon
+                    style={{ padding: 8 }}
+                    name={icon}
+                    size={18}
+                    color={COLORS.placeholderText}
+                  />
+                  <Text style={styles.rowLabel}>{label}</Text>
+
+                  <View style={{ flex: 1 }} />
+                  {type === 'input' && (
+                    <TextInput style={styles.rowValue} onChangeText="">
+                      {form[id]}
+                    </TextInput>
+                  )}
+
+                  {type === 'toggle' && (
+                    <Switch
+                      trackColor={{ true: COLORS.linkTextGreen }}
+                      value={form[id]}
+                      onValueChange={(val) => setForm({ ...form, [id]: val })}
+                    />
+                  )}
+                </View>
+              </View>
+            ))}
+          </View>
+          <View style={styles.profile}>
+            <TouchableOpacity
+              onPress={() => {
+                // handleUpdateUserProfile
+                sheetEditProfile.current.close();
+              }}
+            >
+              <View style={styles.profileAction}>
+                <Text style={styles.profileActionText}>Salvar Alterações</Text>
+                <FeatherIcon name="save" size={16} color={COLORS.white} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => sheetEditProfile.current.close()}>
+              <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
+                <Text style={styles.btnText}>Cancelar</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </RBSheet>
       </ScrollView>
     </SafeAreaView>
   );
@@ -286,6 +346,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     height: 60,
   },
+  rowEditSheet: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    height: 50,
+    backgroundColor: COLORS.neutralLightGrey,
+    borderRadius: 15,
+    marginBottom: 12,
+    paddingHorizontal: 12,
+  },
   rowLabel: {
     fontSize: 16,
     fontWeight: '500',
@@ -296,5 +366,49 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: COLORS.linkTextGreen,
     marginRight: 4,
+  },
+  // Bottom Sheets Styles
+  sheet: {
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+  },
+  sheetHeader: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderBottomWidth: 1,
+    borderColor: COLORS.greyLineStyle,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sheetHeaderTitle: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: COLORS.iconRed,
+  },
+  sheetBody: {
+    padding: 24,
+  },
+  sheetBodyText: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: '400',
+    color: COLORS.black,
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  btn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginTop: 20,
+  },
+  btnText: {
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '700',
+    color: COLORS.white,
   },
 });

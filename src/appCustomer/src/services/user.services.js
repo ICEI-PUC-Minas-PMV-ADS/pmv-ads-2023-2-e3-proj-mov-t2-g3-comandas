@@ -1,9 +1,12 @@
+import { useUser } from '@/context/UserContext';
 import API from './webapi.service';
 import { BASE_URL } from './urls';
 
-export const getUser = async (userId) => {
+const { user } = useUser();
+
+export const getUser = async () => {
   try {
-    return await API.get(`${BASE_URL}/user/${userId}`).then(
+    return await API.get(`${BASE_URL}/user/${user}`).then(
       (response) => response.data,
       (error) => {
         console.log(error);
@@ -16,9 +19,11 @@ export const getUser = async (userId) => {
   }
 };
 
-export const updateUser = async (userId) => {
+export const updateUser = async () => {
+  const { user } = useUser();
+
   try {
-    return await API.put(`${BASE_URL}/user/update/${userId}`).then(
+    return await API.put(`${BASE_URL}/user/update`).then(
       (response) => response.data,
       (error) => {
         console.log(error);

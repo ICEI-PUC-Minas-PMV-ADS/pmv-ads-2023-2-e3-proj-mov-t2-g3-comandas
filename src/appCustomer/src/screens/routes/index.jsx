@@ -28,7 +28,7 @@ const Stack = createNativeStackNavigator();
 
 function StackNavigation() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen
         name="Welcome"
         component={Welcome}
@@ -97,6 +97,7 @@ function StackNavigation() {
         component={DadosPessoais}
         options={{ title: '' }}
       />
+
       <Stack.Screen
         name="Address"
         component={Address}
