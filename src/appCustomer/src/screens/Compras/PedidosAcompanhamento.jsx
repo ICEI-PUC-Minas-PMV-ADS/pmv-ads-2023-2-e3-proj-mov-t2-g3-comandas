@@ -44,16 +44,28 @@ const OrderList = () => {
     fetchItemsFromAPI();
   }, []);
 
+if(items.length === 0){
+
   return (
     <View>
-      <Text>Lista de Itens da API:</Text>
-      <FlatList
-        data={items}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({ item }) => <Text>{item.total} {item.note}</Text>}
-      />
+      <Text>Usuario nao possue items comprados</Text>
     </View>
   );
+}
+
+else{
+
+    return (
+      <View>
+        <Text>Lista de items que o usuario comprou:</Text>
+        <FlatList
+          data={items}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => <Text>{item.total} {item.note}</Text>}
+        />
+      </View>
+    );
+  }
 };
 
 export default OrderList;
