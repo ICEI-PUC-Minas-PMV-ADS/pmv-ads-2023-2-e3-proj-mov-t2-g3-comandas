@@ -18,6 +18,7 @@ import { Layout } from 'react-native-reanimated';
 import SelectDropdown from 'react-native-select-dropdown';
 import SearchBtn from '../../assets/SearchIcon.svg';
 import ClearBtn from '../../assets/Clear.svg';
+import Star from '../../assets/Star.svg';
 
 function Select({
   placeHolder,
@@ -60,7 +61,7 @@ function Select({
 
 export default function Search() {
   const [isLoading, setIsLoading] = useState(false);
-  const [text, onChangeText] = React.useState('');
+  const [text, setText] = React.useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [address, setAddress] = useState({});
   const [generalCategory, setGeneralCategory] = useState([]);
@@ -163,14 +164,15 @@ export default function Search() {
     <View style={styles.container}>
       <View
         style={{
-          padding: 10,
+          paddingHorizontal: 15,
+          paddingVertical: 10,
           backgroundColor: isLoading ? COLORS.grey : COLORS.neutrlWhite,
         }}
       >
         <View
           style={{
             ...styles.searchContainer,
-            backgroundColor: isLoading ? COLORS.grey : COLORS.neutrlWhite,
+            // backgroundColor: isLoading ? COLORS.grey : COLORS.neutrlWhite,
           }}
         >
           <TouchableOpacity
@@ -184,19 +186,16 @@ export default function Search() {
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
               />
             ) : (
-              <SearchBtn
-                style={{
-                  tintColor: isLoading ? COLORS.neutrlWhite : null,
-                }}
-              />
+              <SearchBtn fill={COLORS.primary} />
             )}
           </TouchableOpacity>
 
           <TextInput
             style={styles.searchbar}
-            onChangeText={onChangeText}
+            cursorColor={COLORS.primary}
+            onChangeText={setText}
             value={text}
-            placeholder="Buscar"
+            placeholder="Buscar..."
             editable={!isLoading}
             onSubmitEditing={(event) => fetchResults(event.nativeEvent.text)}
           />
@@ -244,6 +243,7 @@ export default function Search() {
               setCategory('');
               setCity('');
               setState('');
+              setText('');
             }}
           >
             <ClearBtn width={20} height={20} />
@@ -271,6 +271,7 @@ export default function Search() {
               <TouchableOpacity
                 style={styles.cardContainer}
                 activeOpacity={0.25}
+                onPress={() => console.log(item.user_id)}
               >
                 <Image
                   style={styles.cardImage}
@@ -289,7 +290,8 @@ export default function Search() {
                     }}
                   >
                     <Text numberOfLines={1} style={styles.cardStar}>
-                      {Number(3 + Math.random() * 2).toPrecision(2)}
+                      {Number(3 + Math.random() * 2).toPrecision(2)}{' '}
+                      <Star width={10} height={10} />
                     </Text>
                     <Text numberOfLines={1} style={styles.cardText}>
                       {item.category_name}
@@ -340,11 +342,15 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     width: '100%',
-    height: 60,
+    height: 50,
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
+    backgroundColor: COLORS.neutralLightGrey,
+    borderRadius: 20,
+    borderTopEndRadius: 3,
+    marginVertical: 10,
   },
   searchbar: {
     width: '80%',
@@ -368,6 +374,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 16,
+    // color: COLORS.primary,
     fontFamily: 'MontserratBold',
   },
   cardText: {
@@ -384,6 +391,6 @@ const styles = StyleSheet.create({
     // textShadowRadius: 1,
 
     // elevation: 1,
-    color: COLORS.semanticYellow,
+    color: COLORS.primary,
   },
 });

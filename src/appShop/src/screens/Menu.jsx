@@ -8,45 +8,45 @@ import PedidosContainer from '../components/PedidosContainer';
 import { Padding, Color } from '../../GlobalStyles';
 
 function Menu() {
-  return (
-    <View style={[styles.menu, styles.menuFlexBox]}>
-      <BarraLateral
-        dimensions={require('../assets/comandas-degrade-1@3x.png')}
-      />
-      <View style={[styles.frameParent, styles.menuFlexBox]}>
-        <ContainerForm
-          imageDimensions={require('../assets/71@3x.png')}
-          imageDimensionsText={require('../assets/notif1@3x.png')}
-          imageCode={require('../assets/image1@3x.png')}
-          imageCodeText={require('../assets/471@3x.png')}
-        />
-        <Categorias />
-        <MenuContainer />
-      </View>
-      <PedidosContainer />
-    </View>
-  );
+    return (
+        <View style={[styles.menu, styles.menuFlexBox]}>
+            <BarraLateral
+                dimensions={require('../assets/comandas-degrade-1.png')}
+            />
+            <View style={[styles.frameParent, styles.menuFlexBox]}>
+                <ContainerForm
+                    imageDimensions={require('../assets/71.png')}
+                    imageDimensionsText={require('../assets/notif1.png')}
+                    imageCode={require('../assets/image1.png')}
+                    imageCodeText={require('../assets/471.png')}
+                />
+                <Categorias />
+                <MenuContainer />
+            </View>
+            <PedidosContainer />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  menuFlexBox: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  frameParent: {
-    width: 824,
-    height: 838,
-    paddingHorizontal: 0,
-    paddingVertical: Padding.p_5xl,
-  },
-  menu: {
-    backgroundColor: Color.colorWhitesmoke_200,
-    flex: 1,
-    width: '100%',
-    height: 900,
-    flexDirection: 'row',
-  },
+    menuFlexBox: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        overflow: 'hidden',
+    },
+    frameParent: {
+        width: 824,
+        height: 838,
+        paddingHorizontal: 0,
+        paddingVertical: Padding.p_5xl,
+    },
+    menu: {
+        backgroundColor: Color.colorWhitesmoke_200,
+        flex: 1,
+        width: '100%',
+        height: 900,
+        flexDirection: 'row',
+    },
 });
 
 export default Menu;
