@@ -23,13 +23,23 @@ const OrderList = () => {
             Authorization: ADMIN_TOKEN
           }
         });
-        setItems(response.data);
-    
         
-      } catch (error) {
-        console.error('Erro ao buscar itens da API', error);
-      }
-    };
+        if (Array.isArray(response.data) && response.data.length > 0) {
+            // Check if the response data is an array with elements
+            setItems(response.data);
+          } else {
+            // Handle the case where no data is returned or the data is an empty array
+            console.log('No data received from the API.');
+          }
+        } catch (error) {
+            if(error?.response?.status){
+
+            }
+            else{
+            console.error('Erro ao buscar itens da API', error);
+            }
+        }
+      };
 
     fetchItemsFromAPI();
   }, []);
