@@ -97,7 +97,6 @@ function StackNavigation() {
                 component={DadosPessoais}
                 options={{ title: '' }}
             />
-
             <Stack.Screen
                 name="Address"
                 component={Address}
