@@ -136,7 +136,7 @@ export default function Shop({ route, navigation }) {
         )}
         renderStickyHeader={() => (
           <FlatList
-            style={{ height: 50, backgroundColor: COLORS.neutrlWhite }}
+            style={{ height: 50, backgroundColor: COLORS.neutralWhite }}
             contentContainerStyle={{
               flex: 1,
               justifyContent: 'space-evenly',
@@ -212,7 +212,7 @@ export default function Shop({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.neutrlWhite,
+    backgroundColor: COLORS.neutralWhite,
   },
   profileContainer: {
     flexDirection: 'row',

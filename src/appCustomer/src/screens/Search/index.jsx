@@ -166,13 +166,13 @@ export default function Search({ navigation }) {
         style={{
           paddingHorizontal: 15,
           paddingVertical: 10,
-          backgroundColor: isLoading ? COLORS.grey : COLORS.neutrlWhite,
+          backgroundColor: isLoading ? COLORS.grey : COLORS.neutralWhite,
         }}
       >
         <View
           style={{
             ...styles.searchContainer,
-            // backgroundColor: isLoading ? COLORS.grey : COLORS.neutrlWhite,
+            // backgroundColor: isLoading ? COLORS.grey : COLORS.neutralWhite,
           }}
         >
           <TouchableOpacity
@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     borderRadius: 15,
-    backgroundColor: COLORS.neutrlWhite,
+    backgroundColor: COLORS.neutralWhite,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
