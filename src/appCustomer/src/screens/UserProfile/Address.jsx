@@ -15,29 +15,38 @@ import { useNavigation } from '@react-navigation/native';
 import { registerUserAddress } from '@/services/auth.service';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import MapWindow from '@/components/MapViewerWindow/MapWindow';
+// import PropTypes from 'prop-types';
 
 function Address() {
     const { user } = useUser();
     const navigation = useNavigation();
     const [street, setStreet] = useState('');
-    const [number, setNumber] = useState([]);
+    const [number, setNumber] = useState();
     const [neighborhood, setNeighborhood] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
-    const [zipcode, setZipcode] = useState([]);
+    const [zipcode, setZipcode] = useState();
+
+    /* const ProtoTypes = {
+        street: PropTypes.string,
+        number: PropTypes.number,
+        neighborhood: PropTypes.string,
+        city: PropTypes.string,
+        state: PropTypes.string,
+        country: PropTypes.string,
+        zipcode: PropTypes.number,
+    }; */
 
     function handleRegisterUserAddress() {
         registerUserAddress({
-            userAddressInfo: {
-                street: setStreet,
-                number: setNumber,
-                neighborhood: setNeighborhood,
-                city: setCity,
-                state: setState,
-                country: setCountry,
-                zipcode: setZipcode,
-            },
+            street,
+            number,
+            neighborhood,
+            city,
+            state,
+            country,
+            zipcode,
         })
             .then(() => {
                 navigation.navigate('UserProfile');
@@ -77,7 +86,6 @@ function Address() {
                             <TextInput
                                 placeholder="Rua"
                                 placeholderTextColor={COLORS.placeholderText}
-                                autoCapitalize="none"
                                 autoCorrect={false}
                                 style={{ width: '100%' }}
                                 value={street}
@@ -100,12 +108,11 @@ function Address() {
                             <TextInput
                                 placeholder="No"
                                 placeholderTextColor={COLORS.placeholderText}
-                                autoCapitalize="none"
                                 autoCorrect={false}
                                 style={{ width: '100%' }}
                                 value={number}
                                 setValue={setNumber}
-                                onChangeText={(text) => setNumber(text)}
+                                onChangeText={() => setNumber()}
                             />
                         </View>
                     </View>
@@ -123,7 +130,6 @@ function Address() {
                             <TextInput
                                 placeholder="Bairro"
                                 placeholderTextColor={COLORS.placeholderText}
-                                autoCapitalize="none"
                                 autoCorrect={false}
                                 style={{ width: '100%' }}
                                 value={neighborhood}
@@ -146,7 +152,6 @@ function Address() {
                             <TextInput
                                 placeholder="Cidade"
                                 placeholderTextColor={COLORS.placeholderText}
-                                autoCapitalize="none"
                                 autoCorrect={false}
                                 style={{ width: '100%' }}
                                 value={city}
@@ -169,7 +174,6 @@ function Address() {
                             <TextInput
                                 placeholder="Estado"
                                 placeholderTextColor={COLORS.placeholderText}
-                                autoCapitalize="none"
                                 autoCorrect={false}
                                 style={{ width: '100%' }}
                                 value={state}
@@ -192,7 +196,6 @@ function Address() {
                             <TextInput
                                 placeholder="País"
                                 placeholderTextColor={COLORS.placeholderText}
-                                autoCapitalize="none"
                                 autoCorrect={false}
                                 style={{ width: '100%' }}
                                 value={country}
@@ -215,12 +218,11 @@ function Address() {
                             <TextInput
                                 placeholder="CEP"
                                 placeholderTextColor={COLORS.placeholderText}
-                                autoCapitalize="none"
                                 autoCorrect={false}
                                 style={{ width: '100%' }}
                                 value={zipcode}
                                 setValue={setZipcode}
-                                onChangeText={(text) => setZipcode(text)}
+                                onChangeText={() => setZipcode()}
                             />
                         </View>
                     </View>
