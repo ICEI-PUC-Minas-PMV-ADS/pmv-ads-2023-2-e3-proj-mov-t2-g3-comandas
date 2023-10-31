@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-parallax-scroll-view/src/index.js b/node_modules/react-native-parallax-scroll-view/src/index.js
+index 8787b6f..7cd1f6d 100644
+--- a/node_modules/react-native-parallax-scroll-view/src/index.js
++++ b/node_modules/react-native-parallax-scroll-view/src/index.js
+@@ -157,7 +157,7 @@ class ParallaxScrollView extends Component {
+    * Expose `ScrollView` API so this component is composable with any component that expects a `ScrollView`.
+    */
+ 	getScrollResponder() {
+-		return this.refs[SCROLLVIEW_REF]._component.getScrollResponder()
++		return this.refs[SCROLLVIEW_REF].getScrollResponder()
+ 	}
+ 	getScrollableNode() {
+ 		return this.getScrollResponder().getScrollableNode()

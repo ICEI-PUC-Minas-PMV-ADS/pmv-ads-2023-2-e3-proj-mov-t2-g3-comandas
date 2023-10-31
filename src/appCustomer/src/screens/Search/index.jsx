@@ -59,7 +59,7 @@ function Select({
   );
 }
 
-export default function Search() {
+export default function Search({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = React.useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -271,7 +271,11 @@ export default function Search() {
               <TouchableOpacity
                 style={styles.cardContainer}
                 activeOpacity={0.25}
-                onPress={() => console.log(item.user_id)}
+                onPress={() =>
+                  navigation.navigate('Shop', {
+                    shopId: item.user_id,
+                  })
+                }
               >
                 <Image
                   style={styles.cardImage}
