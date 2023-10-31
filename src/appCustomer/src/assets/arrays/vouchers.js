@@ -2,7 +2,7 @@ export default [
     {
         id: 1,
         title: 'hambúrguer',
-        image: 'https://i.imgur.com/K5TUAj5.png',
+        image: 'https://imgur.com/iTws7ZQ.png',
     },
     {
         id: 2,
@@ -17,6 +17,6 @@ export default [
     {
         id: 4,
         title: 'pizza',
-        image: 'https://i.imgur.com/5jRhAjc.png',
+        image: 'https://imgur.com/IT4ka4i.png',
     },
 ];

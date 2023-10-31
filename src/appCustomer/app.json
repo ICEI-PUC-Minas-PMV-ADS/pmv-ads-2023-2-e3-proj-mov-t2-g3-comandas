@@ -11,9 +11,7 @@
             "resizeMode": "contain",
             "backgroundColor": "#ffffff"
         },
-        "assetBundlePatterns": [
-            "**/*"
-        ],
+        "assetBundlePatterns": ["**/*"],
         "ios": {
             "supportsTablet": true,
             "config": {
@@ -21,22 +19,19 @@
             }
         },
         "android": {
+            "permissions": [
+                "CAMERA"
+            ],
             "adaptiveIcon": {
                 "foregroundImage": "./src/assets/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
             },
             "packagerOpts": {
                 "config": "metro.config.js",
-                "sourceExts": [
-                    "js",
-                    "json",
-                    "ts",
-                    "tsx",
-                    "cjs"
-                ],
+                "sourceExts": ["js", "json", "ts", "tsx", "cjs"],
                 "fastRefresh": true
             },
-            "softwareKeyboardLayoutMode":"pan"
+            "softwareKeyboardLayoutMode": "pan"
         },
         "web": {
             "favicon": "./src/assets/favicon.png"

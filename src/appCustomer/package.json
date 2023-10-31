@@ -25,6 +25,7 @@
     "expo-constants": "^14.4.2",
     "expo-font": "~11.4.0",
     "expo-location": "~16.1.0",
+    "expo-permissions": "~14.2.1",
     "expo-secure-store": "~12.3.1",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",

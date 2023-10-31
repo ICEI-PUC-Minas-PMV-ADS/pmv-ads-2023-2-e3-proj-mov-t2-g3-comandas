@@ -73,8 +73,9 @@ export default function Slider({
                                 style={[
                                     styles.image,
                                     {
-                                        width,
-                                        height: (width * 9) / 16,
+                                        width: width * 0.95,
+                                        height: (width * 7) / 16,
+                                        marginHorizontal: 0.025 * width,
                                         resizeMode: 'contain',
                                     },
                                 ]}
@@ -135,6 +136,7 @@ const styles = StyleSheet.create({
     },
     image: {
         justifyContent: 'center',
+        alignItems: 'center',
     },
     text: {
         textAlign: 'center',

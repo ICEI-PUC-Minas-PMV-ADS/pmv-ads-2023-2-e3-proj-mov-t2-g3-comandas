@@ -1,13 +1,123 @@
 import COLORS from '@/constants/colors';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import React from 'react';
+import { useUser } from '@/context/UserContext';
+import { useNavigation } from '@react-navigation/native';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+import logoComandas from '../../assets/Comandas-icon.png';
+
+const SECTIONS = [
+  {
+    items: [
+      { id: 'name', icon: 'user', label: 'Nome', type: 'input' },
+      { id: 'email', icon: 'mail', label: 'Email', type: 'input' },
+      {
+        id: 'duvida',
+        icon: 'edit',
+        label: 'Descreva abaixo o Problema Técnico.',
+        type: 'input',
+      },
+    ],
+  },
+];
 
 function Problemas() {
+  const navigation = useNavigation();
+  const { user } = useUser();
+  const [form] = React.useState({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+  });
+  const [value] = React.useState(0);
+  const [onChangeText] = React.useState();
+  const { items } = React.useMemo(
+    () => ({
+      tabs: SECTIONS.map(({ header }) => ({
+        header,
+      })),
+      items: SECTIONS[value].items,
+    }),
+    [value],
+  );
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        <Text style={styles.profileName}>Informe um Problema</Text>
-      </View>
+      <ScrollView>
+        <View style={styles.logoArea}>
+          <Image source={logoComandas} style={styles.imageStyle} />
+        </View>
+        <View>
+          <Text style={styles.headerName}>Informe um Problema</Text>
+        </View>
+        <View>
+          <Text style={styles.headerText}>
+            {'   '}
+            Se você esta a passar por algum{' '}
+            <Text style={{ color: COLORS.iconRed, fontWeight: '500' }}>
+              problema técnico,
+            </Text>{' '}
+            aguarde alguns instantes e tente novamente. Se o problema persistir,
+            por favor, escreva abaixo e envie à nossa equipe. Teremos todo o
+            prazer em atendê-lo naquilo que for possível. {'\n'}
+          </Text>
+        </View>
+        {/* >>>>>>>>>>Body<<<<<<<<<<<< */}
+        {items.map(({ label, type, id, icon }, index) => (
+          <View key={index} style={styles.rowWrapper}>
+            <View style={styles.row}>
+              <FeatherIcon
+                style={{ padding: 8 }}
+                name={icon}
+                size={18}
+                color={COLORS.placeholderText}
+              />
+              <Text style={styles.rowLabel}>{label}</Text>
+
+              <View style={{ flex: 1 }} />
+              {type === 'input' && (
+                <Text style={styles.rowValue}>{form[id]}</Text>
+              )}
+            </View>
+          </View>
+        ))}
+        <View style={styles.textInput}>
+          <TextInput
+            editable
+            multiline
+            height={110}
+            numberOfLines={12}
+            maxLength={250}
+            onChangeText={(text) => onChangeText(text)}
+            value={value}
+            style={{ padding: 10 }}
+          />
+        </View>
+        {/* >>>>>>>>>> Send Button <<<<<<<<<<<< */}
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              // handleUploadPicture
+              navigation.navigate('CheckinFaleConosco');
+            }}
+          >
+            <View style={styles.btnAction}>
+              <Text style={styles.btnActionText}>Enviar</Text>
+              <FeatherIcon name="edit-3" size={16} color={COLORS.white} />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -21,90 +131,87 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
     flexGrow: 1,
+    textAlign: 'justify',
   },
-  profile: {
+  logoArea: {
+    marginTop: 24,
+  },
+  imageStyle: {
+    alignSelf: 'center',
+    height: 75,
+    width: 75,
+    aspectRatio: 1 / 1,
+  },
+  header: {
+    flex: 1,
+    textAlign: 'justify',
     backgroundColor: COLORS.white,
     padding: 18,
-    alignItems: 'center',
     justifyContent: 'center',
     marginBottom: -20,
   },
-  profileName: {
-    marginTop: 20,
+  headerName: {
+    marginVertical: 16,
+    marginHorizontal: 24,
     fontSize: 22,
-    fontWeight: '800',
-    color: COLORS.linkTextGreen,
+    fontWeight: '700',
+    color: COLORS.primary,
     textAlign: 'center',
   },
-  profileAvatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 9999,
-    borderColor: COLORS.linkTextGreen,
-    borderWidth: 0.2,
-  },
-  profileAvatarWrapper: {
-    position: 'relative',
-  },
-  profileAction: {
-    width: 24,
-    height: 24,
-    borderRadius: 9999,
-    backgroundColor: COLORS.linkTextGreen,
-    position: 'absolute',
-    right: -4,
-    bottom: -10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logout: {
-    backgroundColor: COLORS.iconRed,
-    width: 60,
-    height: 60,
+  headerText: {
+    textAlign: 'justify',
+    color: COLORS.greyDark,
     marginVertical: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderColor: COLORS.iconRed,
-    borderRadius: 9999,
-    borderWidth: 3,
+    marginHorizontal: 24,
+    fontSize: 17,
+    fontWeight: '400',
+    lineHeight: 22,
   },
-  logoutLabel: {
-    color: COLORS.white,
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  section: {
+  content: {
     backgroundColor: COLORS.white,
-    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderColor: COLORS.greyLineStyle,
   },
-  sectionHeader: {
-    paddingVertical: 8,
-    fontSize: 16,
-    fontWeight: '600',
-    color: COLORS.linkTextGreen,
-    textTransform: 'uppercase',
-    letterSpacing: 1.1,
+
+  rowWrapper: {
+    borderTopWidth: 1,
+    borderColor: COLORS.greyLineStyle,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    paddingHorizontal: 24,
     height: 50,
-    backgroundColor: COLORS.neutralLightGrey,
-    borderRadius: 15,
-    marginBottom: 12,
-    paddingHorizontal: 12,
   },
   rowLabel: {
-    fontSize: 18,
-    color: COLORS.black,
+    fontSize: 16,
+    fontWeight: '500',
+    color: COLORS.placeholderText,
   },
-  rowIcon: {
-    width: 32,
-    height: 32,
-    borderRadius: 9999,
+  rowValue: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: COLORS.primary,
+    marginRight: 4,
+  },
+  textInput: {
+    backgroundColor: COLORS.white,
+  },
+  btnAction: {
+    marginHorizontal: 12,
+    marginVertical: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    flexDirection: 'row',
+    backgroundColor: COLORS.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 12,
+    borderRadius: 50,
+  },
+  btnActionText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.white,
+    marginRight: 8,
   },
 });
