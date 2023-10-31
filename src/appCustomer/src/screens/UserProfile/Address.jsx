@@ -66,9 +66,6 @@ function Address() {
                     <View style={styles.profileHeader}>
                         <MapWindow />
                     </View>
-                    <Text style={styles.profileHeader}>
-                        {user.name} Cadastre seu endereço
-                    </Text>
                 </View>
 
                 {/* >>>>>>>>>>Body<<<<<<<<<<<< */}
