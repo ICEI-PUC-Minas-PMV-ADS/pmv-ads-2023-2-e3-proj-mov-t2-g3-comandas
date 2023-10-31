@@ -27,70 +27,70 @@ import CheckinFaleConosco from '../UserProfile/CheckinFaleConosco';
 const Stack = createNativeStackNavigator();
 
 function StackNavigation() {
-  return (
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen
-        name="Welcome"
-        component={Welcome}
-        options={{ headerShown: false }}
-        // Falar com o grupo para manter o QR Scan sempre.
-        // O usuário deve ter opção de usar o app sem criar conta, o scan deve sempre estar dispnível para ve o menu do restaurante
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CheckinLogin"
-        component={CheckinLogin}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Signup"
-        component={Signup}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CheckinRegister"
-        component={CheckinRegister}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="UserProfile"
-        component={UserProfile}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CheckoutLogout"
-        component={CheckoutLogout}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CarteiraDigital"
-        component={CarteiraDigital}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="Cartoes"
-        component={Cartoes}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="PedidosAcompanhamento"
-        component={PedidosAcompanhamento}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="CheckinPayment"
-        component={CheckinPayment}
-        options={{ headerShown: false }}
-      />
+    return (
+        <Stack.Navigator initialRouteName="Welcome">
+            <Stack.Screen
+                name="Welcome"
+                component={Welcome}
+                options={{ headerShown: false }}
+                // Falar com o grupo para manter o QR Scan sempre.
+                // O usuário deve ter opção de usar o app sem criar conta, o scan deve sempre estar dispnível para ve o menu do restaurante
+            />
+            <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CheckinLogin"
+                component={CheckinLogin}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Signup"
+                component={Signup}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CheckinRegister"
+                component={CheckinRegister}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="UserProfile"
+                component={UserProfile}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CheckoutLogout"
+                component={CheckoutLogout}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CarteiraDigital"
+                component={CarteiraDigital}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="Cartoes"
+                component={Cartoes}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="PedidosAcompanhamento"
+                component={PedidosAcompanhamento}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="CheckinPayment"
+                component={CheckinPayment}
+                options={{ headerShown: false }}
+            />
 
       <Stack.Screen
         name="DadosPessoais"
@@ -148,9 +148,9 @@ function StackNavigation() {
 }
 
 export default function Routes() {
-  return (
-    <NavigationContainer>
-      <StackNavigation />
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <StackNavigation />
+        </NavigationContainer>
+    );
 }
