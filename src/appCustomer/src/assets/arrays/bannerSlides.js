@@ -12,6 +12,6 @@ export default [
     {
         id: 3,
         title: 'Cookie',
-        image: 'https://i.imgur.com/SjvPpgj.png',
+        image: 'https://imgur.com/y0IptlU.png',
     },
 ];
