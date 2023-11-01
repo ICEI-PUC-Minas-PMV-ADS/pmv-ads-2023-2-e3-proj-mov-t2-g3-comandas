@@ -7,13 +7,17 @@ import {
   ScrollView,
   TouchableOpacity,
   Switch,
+  Pressable,
 } from 'react-native';
 import React from 'react';
 import { useUser } from '@/context/UserContext';
 import { useNavigation } from '@react-navigation/native';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import Wallet from '@/components/Wallet/Wallet';
+import Checkin from '../../assets/Checkin.json';
 
 const SECTIONS = [
   {
@@ -82,7 +86,7 @@ function CarteiraDigital() {
   const navigation = useNavigation();
   // to get logged user data
   const { user } = useUser();
-  const sheetConfirmPayment = React.useRef();
+
   const [form, setForm] = React.useState({
     // Initial Data Simulated - because now the DB don't have payment data
     firstLine: 'Escolha abaixo como quer pagar.',
@@ -91,6 +95,8 @@ function CarteiraDigital() {
     contaNaMesaDinheiro: false,
     contaNaMesaCartao: false,
   });
+  const sheetConfirmPayment = React.useRef();
+  const sheetCheckinPayment = React.useRef();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -163,47 +169,105 @@ function CarteiraDigital() {
           ))}
         </View>
         {/* Code for Bottom Sheets */}
-        {/* Delete Account Bottom Sheet */}
+        {/* CheckIn Payment Animation Bottom Sheet */}
+        <RBSheet
+          ref={sheetCheckinPayment}
+          customStyles={{ container: styles.sheet }}
+          height={650}
+          openDuration={350}
+          closeDuration={250}
+        >
+          <View style={styles.containerPayConfirm}>
+            <View style={styles.containerLogoPayConfirm} />
+
+            <Animatable.View
+              delay={700}
+              animation="fadeInUp"
+              style={styles.containerFormPayConfirm}
+            >
+              <LottieView
+                style={styles.checkInLottie}
+                source={Checkin}
+                autoPlay
+                loop={false}
+                marginTop={10}
+              />
+              <Text style={styles.textForm}>
+                Pagamento Efetuado com Sucesso.
+                <Text style={{ color: COLORS.linkTextGreen }}>
+                  {'\n'}Obrigado!
+                </Text>
+              </Text>
+              <Animatable.View
+                delay={2000}
+                animation="fadeInUp"
+                onAnimationEnd={() => {
+                  sheetCheckinPayment.current.close();
+                  navigation.navigate('PedidosAcompanhamento');
+                }}
+                style={styles.footer}
+              >
+                <Text style={styles.textFooter}>
+                  Caso não seja redirecionado para a tela de Acompanhamento de
+                  Pedidos em alguns instantes
+                </Text>
+                <Pressable
+                  onPress={() => navigation.navigate('CarteiraDigital')}
+                >
+                  <Text style={styles.textFooterLink}>Clique Aqui.</Text>
+                </Pressable>
+              </Animatable.View>
+            </Animatable.View>
+          </View>
+        </RBSheet>
+
+        {/* Payment Confirmation Bottom Sheet */}
         <RBSheet
           ref={sheetConfirmPayment}
           customStyles={{ container: styles.sheet }}
-          height={350}
-          openDuration={450}
+          height={450}
+          openDuration={350}
           closeDuration={250}
+          // onClose={() => sheetCheckinPayment.current.open()}
         >
-          <View style={styles.sheetHeader}>
-            <Text style={styles.sheetHeaderTitle}>Confirme o Pagamento</Text>
-          </View>
+          <Animatable.View delay={200}>
+            <View style={styles.sheetHeader}>
+              <Text style={styles.sheetHeaderTitle}>Confirme o Pagamento</Text>
+            </View>
 
-          <View style={styles.sheetBody}>
-            <Text style={styles.sheetBodyText}>
-              {user.name}, você confirma o pagamento com{' '}
-              <Text style={{ fontWeight: '700', color: COLORS.blueDark }}>
-                Forma de Pgto
+            <View style={styles.sheetBody}>
+              <Text style={styles.sheetBodyText}>
+                {user.name}, você confirma o pagamento com{' '}
+                <Text style={{ fontWeight: '700', color: COLORS.blueDark }}>
+                  Forma de Pgto
+                </Text>
+                ?
               </Text>
-              ?
-            </Text>
 
-            <TouchableOpacity
-              onPress={() => sheetConfirmPayment.current.close()}
-            >
-              <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
-                <Text style={styles.btnText}>Cancelar</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                sheetConfirmPayment.current.close();
-                navigation.navigate('CheckinPayment');
-              }}
-            >
-              <View
-                style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
+              <TouchableOpacity
+                onPress={() => sheetConfirmPayment.current.close()}
               >
-                <Text style={styles.btnText}>Confirmar</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+                <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
+                  <Text style={styles.btnText}>Cancelar</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  sheetConfirmPayment.current.close();
+                  sheetCheckinPayment.current.open();
+                }}
+              >
+                <View
+                  style={[
+                    styles.btn,
+                    { backgroundColor: COLORS.linkTextGreen },
+                  ]}
+                >
+                  <Text style={styles.btnText}>Confirmar</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </Animatable.View>
         </RBSheet>
       </ScrollView>
     </SafeAreaView>
@@ -218,6 +282,27 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
     flexGrow: 1,
+  },
+  containerLogo: {
+    flex: 2,
+    opacity: 0.5,
+  },
+  image: {
+    // height: 120,
+    alignSelf: 'center',
+    height: 75,
+    width: 75,
+    aspectRatio: 1 / 1,
+    marginTop: 70,
+  },
+  containerForm: {
+    flex: 5,
+    width: '100%',
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
   },
   header: {
     paddingHorizontal: 24,
@@ -340,5 +425,60 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontWeight: '700',
     color: COLORS.white,
+  },
+  // CheckIn Payment Bottom Sheet
+  containerPayConfirm: {
+    flex: 1,
+    backgroundColor: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  containerLogoPayConfirm: {
+    flex: 2,
+    opacity: 0.5,
+  },
+  imagePayConfirm: {
+    // height: 120,
+    alignSelf: 'center',
+    height: 75,
+    width: 75,
+    aspectRatio: 1 / 1,
+    marginTop: 70,
+  },
+  containerFormPayConfirm: {
+    flex: 5,
+    width: '100%',
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+  checkInLottie: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 150,
+    width: 150,
+  },
+  textForm: {
+    fontSize: 26,
+    marginHorizontal: 12,
+    fontWeight: '600',
+    color: COLORS.black,
+    textAlign: 'center',
+  },
+  footer: {
+    justifyContent: 'center',
+    marginHorizontal: 40,
+    marginTop: 200,
+  },
+  textFooter: {
+    fontSize: 14,
+    color: COLORS.black,
+  },
+  textFooterLink: {
+    fontSize: 16,
+    color: COLORS.linkTextGreen,
+    fontWeight: 'bold',
   },
 });
