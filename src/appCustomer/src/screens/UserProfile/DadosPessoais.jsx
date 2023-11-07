@@ -9,11 +9,13 @@ import {
     TouchableOpacity,
     Switch,
     TextInput,
+    Alert,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { useUser } from '@/context/UserContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { UpdateUser } from '@/services/user.services';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
 const SECTIONS = [
@@ -66,6 +68,10 @@ const SECTIONS = [
 
 export default function DadosPessoais() {
     const { user } = useUser();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState();
+
     const [form, setForm] = React.useState({
         id: user.id,
         name: user.name,
@@ -85,6 +91,22 @@ export default function DadosPessoais() {
     );
     // Action Bottom Sheets
     const sheetEditProfile = React.useRef();
+
+    function handleUpdateUser() {
+        UpdateUser({
+            id: user.id,
+            name,
+            email,
+            phoneNumber: Number(),
+        })
+            .then(() => {
+                Alert.alert('Alterações realizadas com Sucesso!');
+                sheetEditProfile.current.close();
+            })
+            .catch(() => {
+                Alert.alert('Alterações não foram salvas!', 'Tente novamente.');
+            });
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -242,28 +264,46 @@ export default function DadosPessoais() {
                                     <Text style={styles.rowLabel}>{label}</Text>
 
                                     <View style={{ flex: 1 }} />
-                                    {type === 'input' && (
+                                    {type === 'input' && label === 'Nome' && (
                                         <TextInput
                                             style={styles.rowValue}
-                                            onChangeText={() => {
-                                                // handleUpdateUser
-                                            }}
+                                            autoCorrect={false}
+                                            value={name}
+                                            setValue={setName}
+                                            onChangeText={(text) =>
+                                                setName(text)
+                                            }
                                         >
                                             {form[id]}
                                         </TextInput>
                                     )}
-
-                                    {type === 'toggle' && (
-                                        <Switch
-                                            trackColor={{
-                                                true: COLORS.linkTextGreen,
-                                            }}
-                                            value={form[id]}
-                                            onValueChange={(val) =>
-                                                setForm({ ...form, [id]: val })
+                                    {type === 'input' && label === 'Email' && (
+                                        <TextInput
+                                            style={styles.rowValue}
+                                            autoCorrect={false}
+                                            value={email}
+                                            setValue={setEmail}
+                                            onChangeText={(text) =>
+                                                setEmail(text)
                                             }
-                                        />
+                                        >
+                                            {form[id]}
+                                        </TextInput>
                                     )}
+                                    {type === 'input' &&
+                                        label === 'Celular' && (
+                                            <TextInput
+                                                style={styles.rowValue}
+                                                autoCorrect={false}
+                                                value={phoneNumber}
+                                                setValue={setPhoneNumber}
+                                                onChangeText={() =>
+                                                    setPhoneNumber(Number)
+                                                }
+                                            >
+                                                {form[id]}
+                                            </TextInput>
+                                        )}
                                 </View>
                             </View>
                         ))}
@@ -272,6 +312,7 @@ export default function DadosPessoais() {
                         <TouchableOpacity
                             onPress={() => {
                                 // handleUpdateUserProfile
+                                handleUpdateUser();
                                 sheetEditProfile.current.close();
                             }}
                         >

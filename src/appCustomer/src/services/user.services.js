@@ -42,7 +42,7 @@ export const UpdateUser = async () => {
     }
 };
 
-/* export const deleteGasto = async (id) => {
+/* export const deleteUser = async (id) => {
     try {
         return await axios
             .delete(`${BASE_URL}user/${id}`, {

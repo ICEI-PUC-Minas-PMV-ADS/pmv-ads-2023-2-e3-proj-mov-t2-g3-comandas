@@ -28,27 +28,18 @@ function Address() {
     const [country, setCountry] = useState('');
     const [zipcode, setZipcode] = useState();
 
-    /* const ProtoTypes = {
-        street: PropTypes.string,
-        number: PropTypes.number,
-        neighborhood: PropTypes.string,
-        city: PropTypes.string,
-        state: PropTypes.string,
-        country: PropTypes.string,
-        zipcode: PropTypes.number,
-    }; */
-
     function handleRegisterUserAddress() {
         registerUserAddress({
             street,
-            number,
+            number: Number(),
             neighborhood,
             city,
             state,
             country,
-            zipcode,
+            zipcode: Number(),
         })
             .then(() => {
+                Alert.alert('Endereço cadastrado com Sucesso!');
                 navigation.navigate('UserProfile');
             })
             .catch(() => {
@@ -105,11 +96,12 @@ function Address() {
                             <TextInput
                                 placeholder="No"
                                 placeholderTextColor={COLORS.placeholderText}
+                                keyboardType="numeric"
                                 autoCorrect={false}
                                 style={{ width: '100%' }}
-                                value={number}
+                                value={Number}
                                 setValue={setNumber}
-                                onChangeText={() => setNumber()}
+                                onChangeText={() => setNumber(Number)}
                             />
                         </View>
                     </View>
@@ -215,11 +207,12 @@ function Address() {
                             <TextInput
                                 placeholder="CEP"
                                 placeholderTextColor={COLORS.placeholderText}
+                                keyboardType="numeric"
                                 autoCorrect={false}
                                 style={{ width: '100%' }}
                                 value={zipcode}
                                 setValue={setZipcode}
-                                onChangeText={() => setZipcode()}
+                                onChangeText={() => setZipcode(Number)}
                             />
                         </View>
                     </View>
