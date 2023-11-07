@@ -5,6 +5,8 @@ import React, { useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
 import {
   useFonts,
+  Montserrat_500Medium,
+  Montserrat_600SemiBold,
   Montserrat_300Light,
   Montserrat_400Regular,
   Montserrat_700Bold,
@@ -13,13 +15,17 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import Routes from '@/screens/routes';
 import UserProvider from '@/context/UserContext';
+import { LogBox } from 'react-native';
+import ignoreWarnings from 'ignore-warnings';
 // import LocationProvider from '@/context/LocationContext';
 
 export default function App() {
   // Carregando as fontes
   const [fontsLoaded] = useFonts({
-    MontserratThin: Montserrat_300Light,
+    MontserratLight: Montserrat_300Light,
     MontserratRegular: Montserrat_400Regular,
+    MontserratMedium: Montserrat_500Medium,
+    MontserratSemiBold: Montserrat_600SemiBold,
     MontserratBold: Montserrat_700Bold,
   });
 
@@ -35,6 +41,12 @@ export default function App() {
 
   // Chegou aqui então fontsLoaded é true então podemos esconder a Splash
   SplashScreen.hideAsync();
+
+  ignoreWarnings('warn', ['ViewPropTypes']);
+
+  LogBox.ignoreLogs([
+    "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
+  ]);
 
   return (
     <UserProvider>

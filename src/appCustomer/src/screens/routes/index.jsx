@@ -1,6 +1,7 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
@@ -23,133 +24,181 @@ import Scanner from '../Scanner/Index.jsx';
 import Notifications from '../Notifications/Index';
 import CheckinLogin from '../Login/CheckinLogin';
 import CheckinFaleConosco from '../UserProfile/CheckinFaleConosco';
+import Shop from '../Shop';
+import BackArrow from '../../assets/BackArrow.svg';
+import MenuBar from '../../assets/MenuBar.svg';
+
+function LeftButton({ onPress }) {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        paddingHorizontal: 15,
+      }}
+    >
+      <BackArrow />
+    </TouchableOpacity>
+  );
+}
+
+function RightButton({ onPress }) {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        paddingHorizontal: 15,
+      }}
+    >
+      <MenuBar />
+    </TouchableOpacity>
+  );
+}
 
 const Stack = createNativeStackNavigator();
 
 function StackNavigation() {
-    return (
-        <Stack.Navigator initialRouteName="Welcome">
-            <Stack.Screen
-                name="Welcome"
-                component={Welcome}
-                options={{ headerShown: false }}
-                // Falar com o grupo para manter o QR Scan sempre.
-                // O usuário deve ter opção de usar o app sem criar conta, o scan deve sempre estar dispnível para ve o menu do restaurante
-            />
-            <Stack.Screen
-                name="Login"
-                component={Login}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="CheckinLogin"
-                component={CheckinLogin}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="Signup"
-                component={Signup}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="CheckinRegister"
-                component={CheckinRegister}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="UserProfile"
-                component={UserProfile}
-                options={{ title: '' }}
-            />
-            <Stack.Screen
-                name="Home"
-                component={Home}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="CheckoutLogout"
-                component={CheckoutLogout}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="CarteiraDigital"
-                component={CarteiraDigital}
-                options={{ title: '' }}
-            />
-            <Stack.Screen
-                name="Cartoes"
-                component={Cartoes}
-                options={{ title: '' }}
-            />
-            <Stack.Screen
-                name="PedidosAcompanhamento"
-                component={PedidosAcompanhamento}
-                options={{ title: '' }}
-            />
-            <Stack.Screen
-                name="CheckinPayment"
-                component={CheckinPayment}
-                options={{ headerShown: false }}
-            />
+  const navigation = useNavigation();
 
-            <Stack.Screen
-                name="DadosPessoais"
-                component={DadosPessoais}
-                options={{ title: '' }}
-            />
-            <Stack.Screen
-                name="Address"
-                component={Address}
-                options={{ title: '' }}
-            />
-            <Stack.Screen
-                name="Favoritos"
-                component={Favoritos}
-                options={{ title: '' }}
-            />
-            <Stack.Screen
-                name="FaleConosco"
-                component={FaleConosco}
-                options={{ title: '' }}
-            />
-            <Stack.Screen
-                name="CheckinFaleConosco"
-                component={CheckinFaleConosco}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="Problemas"
-                component={Problemas}
-                options={{ title: '' }}
-            />
-            <Stack.Screen
-                name="Search"
-                component={Search}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="Scan"
-                component={Scan}
-                options={{ title: 'Escanear' }}
-            />
-            <Stack.Screen
-                name="Notifications"
-                component={Notifications}
-                options={{ title: 'Notificações' }}
-            />
-            <Stack.Screen
-                name="Scanner"
-                component={Scanner}
-                options={{ headerShown: false }} // Ocultar a barra de navegação superior
-            />
-        </Stack.Navigator>
-    );
+  return (
+    <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Screen
+        name="Welcome"
+        component={Welcome}
+        options={{ headerShown: false }}
+        // Falar com o grupo para manter o QR Scan sempre.
+        // O usuário deve ter opção de usar o app sem criar conta, o scan deve sempre estar dispnível para ve o menu do restaurante
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CheckinLogin"
+        component={CheckinLogin}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={Signup}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CheckinRegister"
+        component={CheckinRegister}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="UserProfile"
+        component={UserProfile}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CheckoutLogout"
+        component={CheckoutLogout}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CarteiraDigital"
+        component={CarteiraDigital}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="Cartoes"
+        component={Cartoes}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="PedidosAcompanhamento"
+        component={PedidosAcompanhamento}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="CheckinPayment"
+        component={CheckinPayment}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="DadosPessoais"
+        component={DadosPessoais}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="Address"
+        component={Address}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="Favoritos"
+        component={Favoritos}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="FaleConosco"
+        component={FaleConosco}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="CheckinFaleConosco"
+        component={CheckinFaleConosco}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Problemas"
+        component={Problemas}
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Shop"
+        component={Shop}
+        options={{
+          animation: 'slide_from_right',
+          headerShadowVisible: false,
+          headerTitle: '',
+          headerTitleAlign: 'center',
+          headerLeft: () => <LeftButton onPress={() => navigation.goBack()} />,
+          headerBackButtonMenuEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="Scan"
+        component={Scan}
+        options={{ title: 'Escanear' }}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{ title: 'Notificações' }}
+      />
+      <Stack.Screen
+        name="Scanner"
+        component={Scanner}
+        options={{ headerShown: false }} // Ocultar a barra de navegação superior
+      />
+    </Stack.Navigator>
+  );
 }
 
 export default function Routes() {
-    return (
-        <NavigationContainer>
-            <StackNavigation />
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <StackNavigation />
+    </NavigationContainer>
+  );
 }

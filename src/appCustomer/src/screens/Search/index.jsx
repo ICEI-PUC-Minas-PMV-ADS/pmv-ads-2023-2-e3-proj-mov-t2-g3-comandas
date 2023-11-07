@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   StyleSheet,
   Image,
@@ -15,69 +15,34 @@ import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env';
 import COLORS from '@/constants/colors';
 import { MotiView } from 'moti';
 import { Layout } from 'react-native-reanimated';
-import SelectDropdown from 'react-native-select-dropdown';
 import SearchBtn from '../../assets/SearchIcon.svg';
 import ClearBtn from '../../assets/Clear.svg';
 import Star from '../../assets/Star.svg';
+import Select from './Select';
 
-function Select({
-  placeHolder,
-  data,
-  dropdownStyleLeft,
-  isLoading,
-  setFilter,
-  filter,
-}) {
-  return (
-    <SelectDropdown
-      data={data}
-      disabled={isLoading}
-      buttonStyle={{
-        borderRadius: 20,
-        height: 25,
-        width: 85,
-        backgroundColor: COLORS.neutralLightGrey,
-      }}
-      buttonTextStyle={{ color: COLORS.secondary, fontSize: 12 }}
-      rowStyle={{ width: 150 }}
-      dropdownStyle={{
-        width: 150,
-        borderRadius: 15,
-        left: dropdownStyleLeft ? `${dropdownStyleLeft}%` : 0,
-      }}
-      defaultButtonText={placeHolder}
-      onSelect={(selectedItem) => {
-        setFilter(selectedItem);
-      }}
-      buttonTextAfterSelection={() =>
-        filter.length > 1 ? filter : placeHolder
-      }
-      rowTextForSelection={(item) => item}
-      search
-      searchInputStyle={{ width: 150, paddingHorizontal: 15 }}
-    />
-  );
-}
-
-export default function Search() {
+export default function Search({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [text, setText] = React.useState('');
+  const [text, setText] = React.useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [address, setAddress] = useState({});
   const [generalCategory, setGeneralCategory] = useState([]);
-  const [category, setCategory] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
+  const [category, setCategory] = useState(null);
+  const [city, setCity] = useState(null);
+  const [state, setState] = useState(null);
+  const $stateSelect = useRef();
+  const $citySelect = useRef();
+  const $categorySelect = useRef();
 
   const fetchResults = async () => {
     try {
-      if (text) {
+      if (text || state || city || category >= 0) {
         setIsLoading(true);
+
         const { data } = await axios.get(
-          `${BASE_URL}shop/list?search=${text}${
+          `${BASE_URL}/shop/list?${text ? `search=${text}` : ''}${
             state ? `&state=${state}` : ''
           }${city ? `&city=${city}` : ''}${
-            category ? `&categories=${category}` : ''
+            category >= 0 ? `&categories=${category + 1}` : ''
           }`,
           {
             headers: {
@@ -142,9 +107,11 @@ export default function Search() {
         });
 
         const categoryName = [];
+        // const categoryId = [];
 
         data.forEach((resCategory) => {
           categoryName.push(resCategory.name);
+          //   categoryId.push(resCategory.id);
         });
 
         setGeneralCategory(categoryName);
@@ -166,13 +133,13 @@ export default function Search() {
         style={{
           paddingHorizontal: 15,
           paddingVertical: 10,
-          backgroundColor: isLoading ? COLORS.grey : COLORS.neutrlWhite,
+          backgroundColor: isLoading ? COLORS.grey : COLORS.neutralWhite,
         }}
       >
         <View
           style={{
             ...styles.searchContainer,
-            // backgroundColor: isLoading ? COLORS.grey : COLORS.neutrlWhite,
+            // backgroundColor: isLoading ? COLORS.grey : COLORS.neutralWhite,
           }}
         >
           <TouchableOpacity
@@ -209,29 +176,30 @@ export default function Search() {
           }}
         >
           <Select
+            reference={$categorySelect}
             placeHolder="Categoria"
             data={generalCategory}
             updateFilterKey="category"
             isLoading={isLoading}
             setFilter={setCategory}
-            filter={category}
+            setIndex
           />
           <Select
+            reference={$citySelect}
             placeHolder="Cidade"
             data={address.cities}
             updateFilterKey="city"
             isLoading={isLoading}
             setFilter={setCity}
-            filter={city}
           />
           <Select
+            reference={$stateSelect}
             placeHolder="Estado"
             data={address.states}
             dropdownStyleLeft={50}
             updateFilterKey="state"
             isLoading={isLoading}
             setFilter={setState}
-            filter={state}
           />
           <TouchableOpacity
             style={{
@@ -240,10 +208,14 @@ export default function Search() {
               backgroundColor: COLORS.neutralLightGrey,
             }}
             onPress={() => {
-              setCategory('');
-              setCity('');
-              setState('');
-              setText('');
+              setCategory(null);
+              setCity(null);
+              setState(null);
+              setText(null);
+              setSearchResults(null);
+              $categorySelect.current.reset();
+              $citySelect.current.reset();
+              $stateSelect.current.reset();
             }}
           >
             <ClearBtn width={20} height={20} />
@@ -271,7 +243,11 @@ export default function Search() {
               <TouchableOpacity
                 style={styles.cardContainer}
                 activeOpacity={0.25}
-                onPress={() => console.log(item.user_id)}
+                onPress={() =>
+                  navigation.navigate('Shop', {
+                    shopId: item.user_id,
+                  })
+                }
               >
                 <Image
                   style={styles.cardImage}
@@ -329,7 +305,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     borderRadius: 15,
-    backgroundColor: COLORS.neutrlWhite,
+    backgroundColor: COLORS.neutralWhite,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

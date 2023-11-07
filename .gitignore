@@ -1,1 +1,5 @@
 node_modules
+
+.prettierrc.cjs
+src/appCustomer/.prettierrc.cjs
+src/appShop/.prettierrc.cjs

@@ -1,32 +1,30 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
-import SearchIcon from '../../assets/SearchIcon.svg';
+import * as Animatable from 'react-native-animatable';
+import Logo from '../../assets/Comandas-icon.png';
 import MiniQr from '../../assets/MiniQrCode.svg';
 import Alarm from '../../assets/alarm.svg';
 
 export default function TopBar({ navigation }) {
-  const [text, onChangeText] = React.useState('');
-
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <TouchableOpacity>
-          <SearchIcon />
-        </TouchableOpacity>
-        <TextInput
-          style={styles.searchbar}
-          onChangeText={onChangeText}
-          value={text}
-          placeholder="Buscar"
+        <Animatable.Image
+          style={styles.image}
+          delay={100}
+          animation="flipInY"
+          source={Logo}
+          resizeMode="contain"
         />
       </View>
       <View style={styles.icons}>
-        <TouchableOpacity onPress={() => navigation.navigate('Scan')}>
-          <MiniQr />
-        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
           <Alarm />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Scan')}>
+          <MiniQr />
         </TouchableOpacity>
       </View>
     </View>
@@ -44,7 +42,6 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
   },
   icons: {
     width: '20%',
@@ -55,5 +52,12 @@ const styles = StyleSheet.create({
     width: '60%',
     height: '100%',
     paddingLeft: 20,
+  },
+  image: {
+    // height: 120,
+    alignSelf: 'center',
+    height: 35,
+    width: 35,
+    aspectRatio: 1 / 1,
   },
 });
