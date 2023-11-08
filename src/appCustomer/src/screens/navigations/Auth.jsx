@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
@@ -35,3 +35,4 @@ function Main() {
 }
 
 export default Main;
+ */

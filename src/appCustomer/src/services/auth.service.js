@@ -1,3 +1,4 @@
+import { useUser } from '@/context/UserContext';
 import API from './webapi.service';
 
 export async function register(param) {
@@ -33,17 +34,18 @@ export async function login(param) {
 }
 
 export async function updateUser(param) {
-    try {
-        const { data } = await API.put(`/user/update`, param);
-        return data;
-    } catch (error) {
-        console.log(
-            `ERROR IN updateUserAuthService => [${
-                error?.response?.status
-            }]\n ${JSON.stringify(error?.response?.data, null, 2)}`,
-        );
-        throw error;
-    }
+  const { user } = useUser;
+  try {
+    const { data } = await API.put(`/user/update`, param);
+    return data;
+  } catch (error) {
+    console.log(
+      `ERROR IN updateUserAuthService => [${
+        error?.response?.status
+      }]\n ${JSON.stringify(error?.response?.data, null, 2)}`,
+    );
+    throw error;
+  }
 }
 
 export async function registerUserAddress(param) {
