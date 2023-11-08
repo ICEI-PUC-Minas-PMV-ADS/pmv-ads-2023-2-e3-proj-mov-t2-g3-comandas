@@ -33,21 +33,6 @@ export async function login(param) {
   }
 }
 
-export async function updateUser(param) {
-  const { user } = useUser;
-  try {
-    const { data } = await API.put(`/user/update`, param);
-    return data;
-  } catch (error) {
-    console.log(
-      `ERROR IN updateUserAuthService => [${
-        error?.response?.status
-      }]\n ${JSON.stringify(error?.response?.data, null, 2)}`,
-    );
-    throw error;
-  }
-}
-
 export async function registerUserAddress(param) {
   try {
     const { data } = await API.post(`/address/create`, param);

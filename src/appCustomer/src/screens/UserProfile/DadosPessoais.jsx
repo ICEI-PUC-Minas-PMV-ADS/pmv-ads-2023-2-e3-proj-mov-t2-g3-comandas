@@ -15,7 +15,6 @@ import React, { useState, useMemo } from 'react';
 import { useUser } from '@/context/UserContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { updateUser } from '@/services/auth.service';
 import { UpdateUser } from '@/services/user.services';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
@@ -102,15 +101,14 @@ export default function DadosPessoais() {
   const sheetEditProfile = React.useRef();
 
   function handleUpdateUser() {
-    updateUser({
-      id: user.id,
+    UpdateUser({
+      // id: user.id,
       name,
       email,
       phoneNumber: Number(),
       birthday,
     })
       .then(() => {
-        UpdateUser();
         Alert.alert('Alterações realizadas com Sucesso!');
         sheetEditProfile.current.close();
       })

@@ -23,7 +23,7 @@ export const UpdateUser = async () => {
   const { user } = useUser();
   try {
     return await axios
-      .put(`${BASE_URL}/${user}/update`, {
+      .put(`${BASE_URL}/${user.id}/update`, {
         headers: {
           'x-api-key': API_KEY,
           Authorization: ADMIN_TOKEN,

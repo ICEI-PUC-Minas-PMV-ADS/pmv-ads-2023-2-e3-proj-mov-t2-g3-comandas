@@ -24,7 +24,7 @@ function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState(Number);
   const [photoUrl, setPhotoUrl] = useState('');
   const [birthday, setBirthday] = useState('');
 
@@ -34,12 +34,12 @@ function Signup() {
 
   function handleRegister() {
     register({
-      birthday,
-      photoUrl,
+      birthday: { birthday },
+      photoUrl: { photoUrl },
       userInfo: {
         name,
         email,
-        phoneNumber: Number(),
+        phoneNumber,
         password,
       },
     })
@@ -109,7 +109,7 @@ function Signup() {
                   style={{ width: '100%' }}
                   value={phoneNumber}
                   setValue={setPhoneNumber}
-                  onChangeText={(text) => setPhoneNumber(text)}
+                  onChangeText={() => setPhoneNumber()}
                 />
               </View>
             </View>

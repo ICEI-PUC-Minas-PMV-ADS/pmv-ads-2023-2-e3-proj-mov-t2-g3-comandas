@@ -68,18 +68,6 @@ const SECTIONS = [
       },
     ],
   },
-  {
-    header: 'Outros',
-    icon: 'bell',
-    items: [
-      {
-        id: 'chamar-servico',
-        icon: 'bell',
-        label: 'Chamar Garçom',
-        type: 'toggle',
-      },
-    ],
-  },
 ];
 
 function CarteiraDigital() {
@@ -128,42 +116,28 @@ function CarteiraDigital() {
               <Text style={styles.sectionHeader}>{header}</Text>
 
               {items.map(({ id, label, type, icon, color }) => (
-                <TouchableOpacity
-                  key={icon}
-                  onPress={() => {
-                    // handle onPress
-                  }}
-                >
-                  <View style={styles.row}>
-                    <View style={[styles.rowIcon, { backgroundColor: color }]}>
-                      <FeatherIcon
-                        name={icon}
-                        color={COLORS.blueDark}
-                        size={18}
-                      />
-                    </View>
-
-                    <Text style={styles.rowLabel}>{label}</Text>
-
-                    <View style={{ flex: 1 }} />
-
-                    {type === 'toggle' && (
-                      <Switch
-                        value={form[id]}
-                        onValueChange={(value) =>
-                          setForm({ ...form, [id]: value })
-                        }
-                      />
-                    )}
-                    {type === 'link' && (
-                      <FeatherIcon
-                        name="chevron-right"
-                        color="#0c0c0c"
-                        size={22}
-                      />
-                    )}
+                <View style={styles.row}>
+                  <View style={[styles.rowIcon, { backgroundColor: color }]}>
+                    <FeatherIcon
+                      name={icon}
+                      color={COLORS.blueDark}
+                      size={18}
+                    />
                   </View>
-                </TouchableOpacity>
+
+                  <Text style={styles.rowLabel}>{label}</Text>
+
+                  <View style={{ flex: 1 }} />
+
+                  {type === 'toggle' && (
+                    <Switch
+                      value={form[id]}
+                      onValueChange={(value) =>
+                        setForm({ ...form, [id]: value })
+                      }
+                    />
+                  )}
+                </View>
               ))}
             </View>
           ))}

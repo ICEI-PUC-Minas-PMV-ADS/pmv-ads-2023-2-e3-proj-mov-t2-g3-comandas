@@ -21,12 +21,12 @@ function Address() {
   const { user } = useUser();
   const navigation = useNavigation();
   const [street, setStreet] = useState('');
-  const [number, setNumber] = useState();
+  const [number, setNumber] = useState(Number);
   const [neighborhood, setNeighborhood] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  const [zipcode, setZipcode] = useState();
+  const [zipcode, setZipcode] = useState(Number);
 
   function handleRegisterUserAddress() {
     registerUserAddress({
@@ -101,7 +101,7 @@ function Address() {
                 style={{ width: '100%' }}
                 value={number}
                 setValue={setNumber}
-                onChangeText={() => setNumber(Number)}
+                onChangeText={(text) => setNumber(text)}
               />
             </View>
           </View>
