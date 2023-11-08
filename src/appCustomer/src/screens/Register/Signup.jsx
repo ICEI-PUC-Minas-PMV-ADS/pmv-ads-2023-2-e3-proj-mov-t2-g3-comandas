@@ -24,7 +24,9 @@ function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [photoUrl, setPhotoUrl] = useState('');
+  const [birthday, setBirthday] = useState('');
 
   const [isPasswordHide, setIsPasswordHide] = useState(true);
 
@@ -32,9 +34,12 @@ function Signup() {
 
   function handleRegister() {
     register({
+      birthday,
+      photoUrl,
       userInfo: {
         name,
         email,
+        phoneNumber: Number(),
         password,
       },
     })
@@ -56,10 +61,12 @@ function Signup() {
             </View>
 
             <View>
-              <Text style={styles.textLableInput}>Nome</Text>
+              <Text style={styles.textLableInput}>
+                Nome <Text style={{ color: COLORS.primary }}>*</Text>
+              </Text>
               <View style={styles.textInput}>
                 <TextInput
-                  placeholder="Seu Nome"
+                  placeholder="Nome"
                   placeholderTextColor={COLORS.placeholderText}
                   autoCapitalize="none"
                   autoCorrect={false}
@@ -72,16 +79,71 @@ function Signup() {
             </View>
 
             <View>
-              <Text style={styles.textLableInput}>Email</Text>
+              <Text style={styles.textLableInput}>
+                Email <Text style={{ color: COLORS.primary }}>*</Text>
+              </Text>
               <View style={styles.textInput}>
                 <TextInput
                   placeholder="Email"
                   placeholderTextColor={COLORS.placeholderText}
                   autoCapitalize="none"
                   autoCorrect={false}
+                  keyboardType="email-address"
                   style={{ width: '100%' }}
                   value={email}
+                  setValue={setEmail}
                   onChangeText={(text) => setEmail(text)}
+                />
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.textLableInput}>Celular</Text>
+              <View style={styles.textInput}>
+                <TextInput
+                  placeholder="Celular"
+                  placeholderTextColor={COLORS.placeholderText}
+                  autoCapitalize="none"
+                  keyboardType="phone-pad"
+                  autoCorrect={false}
+                  style={{ width: '100%' }}
+                  value={phoneNumber}
+                  setValue={setPhoneNumber}
+                  onChangeText={(text) => setPhoneNumber(text)}
+                />
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.textLableInput}>Aniversário</Text>
+              <View style={styles.textInput}>
+                <TextInput
+                  placeholder="Data do aniversário"
+                  placeholderTextColor={COLORS.placeholderText}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  keyboardType="number-pad"
+                  style={{ width: '100%' }}
+                  value={birthday}
+                  setValue={setBirthday}
+                  onChangeText={(text) => setBirthday(text)}
+                />
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.textLableInput}>Foto Avatar</Text>
+              <View style={styles.textInput}>
+                <TextInput
+                  placeholder="Upload da foto do perfíl"
+                  placeholderTextColor={COLORS.placeholderText}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  keyboardType="url"
+                  style={{ width: '100%' }}
+                  value={photoUrl}
+                  setValue={setPhotoUrl}
+                  onChangeText={(text) => setPhotoUrl(text)}
                 />
               </View>
             </View>
@@ -89,11 +151,13 @@ function Signup() {
 
           <View>
             <View>
-              <Text style={styles.textLableInput}>Senha</Text>
+              <Text style={styles.textLableInput}>
+                Senha <Text style={{ color: COLORS.primary }}>*</Text>
+              </Text>
 
               <View style={styles.textInput}>
                 <TextInput
-                  placeholder="Sua senha"
+                  placeholder="Senha"
                   placeholderTextColor={COLORS.placeholderText}
                   autoCapitalize="none"
                   autoCorrect={false}
@@ -123,47 +187,12 @@ function Signup() {
                 </TouchableOpacity>
               </View>
             </View>
-
-            <View>
-              <Text style={styles.textLableInput}>Confirmar Senha</Text>
-
-              <View style={styles.textInput}>
-                <TextInput
-                  placeholder="Confirmar a senha"
-                  placeholderTextColor={COLORS.placeholderText}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  secureTextEntry={isPasswordHide}
-                  style={{ width: '85%' }}
-                  value={passwordRepeat}
-                  onChangeText={(text) => setPasswordRepeat(text)}
-                />
-
-                <TouchableOpacity
-                  onPress={() => setIsPasswordHide(!isPasswordHide)}
-                  style={styles.eye}
-                >
-                  {isPasswordHide === true ? (
-                    <Ionicons
-                      name="eye"
-                      size={24}
-                      color={COLORS.placeholderText}
-                    />
-                  ) : (
-                    <Ionicons
-                      name="eye-off"
-                      size={24}
-                      color={COLORS.placeholderText}
-                    />
-                  )}
-                </TouchableOpacity>
-              </View>
-            </View>
           </View>
 
           <View style={styles.checkbox}>
             <Text style={{ width: '100%' }}>
               Registrando-se você concordo com os termos e condições.
+              <Text style={styles.obsText}>{'\n'}* Campos obrigatórios.</Text>
             </Text>
           </View>
 
@@ -223,6 +252,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 10,
     marginHorizontal: 22,
+  },
+  obsText: {
+    fontSize: 12,
+    color: COLORS.primary,
+    flexDirection: 'row',
+    marginVertical: 10,
+    lineHeight: 24,
   },
   footer: {
     flexDirection: 'row',

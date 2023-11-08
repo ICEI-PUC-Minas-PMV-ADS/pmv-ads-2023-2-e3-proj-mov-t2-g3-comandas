@@ -11,11 +11,12 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useUser } from '@/context/UserContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { updateUser } from '@/services/auth.service';
+import { UpdateUser } from '@/services/user.services';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
 const SECTIONS = [
@@ -30,6 +31,12 @@ const SECTIONS = [
         id: 'phoneNumber',
         icon: 'phone',
         label: 'Celular',
+        type: 'input',
+      },
+      {
+        id: 'birthday',
+        icon: 'calendar',
+        label: 'Aniversário',
         type: 'input',
       },
     ],
@@ -71,15 +78,17 @@ export default function DadosPessoais() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState();
+  const [birthday, setBirthday] = useState();
 
-  const [form, setForm] = React.useState({
+  const [form, setForm] = useState({
     id: user.id,
     name: user.name,
     email: user.email,
     phoneNumber: user.phoneNumber,
+    birthday: user.birthday,
   });
-  const [value, setValue] = React.useState(0);
-  const { tabs, items } = React.useMemo(
+  const [value, setValue] = useState(0);
+  const { tabs, items } = useMemo(
     () => ({
       tabs: SECTIONS.map(({ header, icon }) => ({
         header,
@@ -98,8 +107,10 @@ export default function DadosPessoais() {
       name,
       email,
       phoneNumber: Number(),
+      birthday,
     })
       .then(() => {
+        UpdateUser();
         Alert.alert('Alterações realizadas com Sucesso!');
         sheetEditProfile.current.close();
       })
@@ -215,7 +226,7 @@ export default function DadosPessoais() {
           ))}
         </View>
 
-        {/* Code for Bottom Sheets */}
+        {/* Bottom Sheets */}
         {/* Edit/UpDate Profile Bottom Sheet */}
         <RBSheet
           ref={sheetEditProfile}
@@ -270,6 +281,17 @@ export default function DadosPessoais() {
                       value={phoneNumber}
                       setValue={setPhoneNumber}
                       onChangeText={() => setPhoneNumber(Number)}
+                    >
+                      {form[id]}
+                    </TextInput>
+                  )}
+                  {type === 'input' && label === 'Aniversário' && (
+                    <TextInput
+                      style={styles.rowValue}
+                      autoCorrect={false}
+                      value={birthday}
+                      setValue={setBirthday}
+                      onChangeText={(text) => setBirthday(text)}
                     >
                       {form[id]}
                     </TextInput>
