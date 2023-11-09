@@ -17,7 +17,7 @@ import Routes from '@/screens/routes';
 import UserProvider from '@/context/UserContext';
 import { LogBox } from 'react-native';
 import ignoreWarnings from 'ignore-warnings';
-// import LocationProvider from '@/context/LocationContext';
+import LocationProvider from '@/context/LocationContext';
 
 export default function App() {
   // Carregando as fontes
@@ -49,8 +49,10 @@ export default function App() {
   ]);
 
   return (
-    <UserProvider>
-      <Routes />
-    </UserProvider>
+    <LocationProvider>
+      <UserProvider>
+        <Routes />
+      </UserProvider>
+    </LocationProvider>
   );
 }

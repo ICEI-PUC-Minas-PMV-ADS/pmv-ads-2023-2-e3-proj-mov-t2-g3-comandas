@@ -15,6 +15,7 @@ import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { register } from '@/services/auth.service';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
@@ -24,9 +25,9 @@ function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(Number);
-  const [photoUrl, setPhotoUrl] = useState('');
-  const [birthday, setBirthday] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(null);
+  const [birthday, setBirthday] = useState(new Date());
 
   const [isPasswordHide, setIsPasswordHide] = useState(true);
 
@@ -34,12 +35,15 @@ function Signup() {
 
   function handleRegister() {
     register({
-      birthday: { birthday },
-      photoUrl: { photoUrl },
+      customerInfo: {
+        birthday,
+        photoUrl,
+      },
+
       userInfo: {
         name,
         email,
-        phoneNumber,
+        phoneNumber: Number(phoneNumber),
         password,
       },
     })
@@ -103,13 +107,12 @@ function Signup() {
                 <TextInput
                   placeholder="Celular"
                   placeholderTextColor={COLORS.placeholderText}
-                  autoCapitalize="none"
                   keyboardType="phone-pad"
                   autoCorrect={false}
                   style={{ width: '100%' }}
                   value={phoneNumber}
                   setValue={setPhoneNumber}
-                  onChangeText={() => setPhoneNumber()}
+                  onChangeText={setPhoneNumber}
                 />
               </View>
             </View>
@@ -117,16 +120,10 @@ function Signup() {
             <View>
               <Text style={styles.textLableInput}>Aniversário</Text>
               <View style={styles.textInput}>
-                <TextInput
-                  placeholder="Data do aniversário"
-                  placeholderTextColor={COLORS.placeholderText}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="number-pad"
-                  style={{ width: '100%' }}
+                <RNDateTimePicker
+                  mode="date"
                   value={birthday}
-                  setValue={setBirthday}
-                  onChangeText={(text) => setBirthday(text)}
+                  onChange={(event, date) => setBirthday(date)}
                 />
               </View>
             </View>

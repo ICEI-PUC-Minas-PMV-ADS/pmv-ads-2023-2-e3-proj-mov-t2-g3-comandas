@@ -15,6 +15,7 @@ import React, { useState, useMemo } from 'react';
 import { useUser } from '@/context/UserContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { UpdateUser } from '@/services/user.services';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
@@ -76,8 +77,8 @@ export default function DadosPessoais() {
   const { user } = useUser();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [birthday, setBirthday] = useState();
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [birthday, setBirthday] = useState(new Date());
 
   const [form, setForm] = useState({
     id: user.id,
@@ -102,10 +103,10 @@ export default function DadosPessoais() {
 
   function handleUpdateUser() {
     UpdateUser({
-      // id: user.id,
+      id: user.id,
       name,
       email,
-      phoneNumber: Number(),
+      phoneNumber: Number(phoneNumber),
       birthday,
     })
       .then(() => {
@@ -276,23 +277,19 @@ export default function DadosPessoais() {
                     <TextInput
                       style={styles.rowValue}
                       autoCorrect={false}
+                      keyboardType="phone-pad"
                       value={phoneNumber}
-                      setValue={setPhoneNumber}
-                      onChangeText={() => setPhoneNumber(Number)}
+                      onChangeText={setPhoneNumber}
                     >
                       {form[id]}
                     </TextInput>
                   )}
                   {type === 'input' && label === 'Aniversário' && (
-                    <TextInput
-                      style={styles.rowValue}
-                      autoCorrect={false}
+                    <RNDateTimePicker
+                      mode="date"
                       value={birthday}
-                      setValue={setBirthday}
-                      onChangeText={(text) => setBirthday(text)}
-                    >
-                      {form[id]}
-                    </TextInput>
+                      onChange={(event, date) => setBirthday(date)}
+                    />
                   )}
                 </View>
               </View>

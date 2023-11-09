@@ -9,7 +9,7 @@ import {
   Switch,
   Pressable,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { useUser } from '@/context/UserContext';
 import { useNavigation } from '@react-navigation/native';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -74,7 +74,7 @@ function CarteiraDigital() {
   const navigation = useNavigation();
   // to get logged user data
   const { user } = useUser();
-
+  const [selectedCard, setSelectedCard] = useState('visa');
   const [form, setForm] = React.useState({
     // Initial Data Simulated - because now the DB don't have payment data
     firstLine: 'Escolha abaixo como quer pagar.',
@@ -128,9 +128,10 @@ function CarteiraDigital() {
                   <Text style={styles.rowLabel}>{label}</Text>
 
                   <View style={{ flex: 1 }} />
-
+                  {console.log(form[id])}
                   {type === 'toggle' && (
                     <Switch
+                      disabled={form[id] === selectedCard}
                       value={form[id]}
                       onValueChange={(value) =>
                         setForm({ ...form, [id]: value })
