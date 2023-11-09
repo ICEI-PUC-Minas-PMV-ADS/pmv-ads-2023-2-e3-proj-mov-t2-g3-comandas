@@ -45,6 +45,7 @@
     "react-native-gesture-handler": "~2.12.0",
     "react-native-keychain": "^8.1.2",
     "react-native-loading-spinner-overlay": "^3.0.1",
+    "react-native-maps": "^1.8.0",
     "react-native-parallax-scroll-view": "^0.21.3",
     "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-reanimated": "~3.3.0",

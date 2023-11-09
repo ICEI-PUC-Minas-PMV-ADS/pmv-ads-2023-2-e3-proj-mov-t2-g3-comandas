@@ -108,7 +108,7 @@ function Signup() {
                   placeholder="Celular"
                   placeholderTextColor={COLORS.placeholderText}
                   keyboardType="phone-pad"
-                  autoCorrect={false}
+                  inputMode="tel"
                   style={{ width: '100%' }}
                   value={phoneNumber}
                   setValue={setPhoneNumber}

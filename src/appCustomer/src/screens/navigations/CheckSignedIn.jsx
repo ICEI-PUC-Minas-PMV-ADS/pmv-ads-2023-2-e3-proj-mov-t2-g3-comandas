@@ -1,4 +1,4 @@
-/* import React from 'react';
+import React from 'react';
 import { useUser } from '../../context/UserContext';
 import Main from '../routes/index';
 import Auth from './Auth';
@@ -21,4 +21,4 @@ function CheckSignedIn = () => {
 }
 
 export default CheckSignedIn;
- */
+

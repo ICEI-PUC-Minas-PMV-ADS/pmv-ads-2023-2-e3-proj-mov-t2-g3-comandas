@@ -14,30 +14,10 @@ import { useUser } from '@/context/UserContext';
 import { useNavigation } from '@react-navigation/native';
 import { registerUserAddress } from '@/services/auth.service';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import MapWindow from '@/components/MapViewerWindow/MapWindow';
-// import PropTypes from 'prop-types';
 
 function Address() {
-  const { user } = useUser();
-  const navigation = useNavigation();
-  const [street, setStreet] = useState('');
-  const [number, setNumber] = useState(Number);
-  const [neighborhood, setNeighborhood] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-  const [zipcode, setZipcode] = useState(Number);
-
   function handleRegisterUserAddress() {
-    registerUserAddress({
-      street,
-      number: Number(),
-      neighborhood,
-      city,
-      state,
-      country,
-      zipcode: Number(),
-    })
+    registerUserAddress({})
       .then(() => {
         Alert.alert('Endereço cadastrado com Sucesso!');
         navigation.navigate('UserProfile');
@@ -53,169 +33,9 @@ function Address() {
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={styles.scrollContent}>
         {/* >>>>>>>>>>Edit Head<<<<<<<<<<<< */}
-        <View style={styles.profile}>
-          <View style={styles.profileHeader}>
-            <MapWindow />
-          </View>
-        </View>
 
         {/* >>>>>>>>>>Body<<<<<<<<<<<< */}
         <View style={styles.content}>
-          <View style={styles.row}>
-            <View
-              style={[
-                styles.rowIcon,
-                { backgroundColor: COLORS.placeholderText },
-              ]}
-            >
-              <FeatherIcon name="edit-3" color="#fff" size={15} />
-            </View>
-            <View style={styles.rowLabel}>
-              <TextInput
-                placeholder="Rua"
-                placeholderTextColor={COLORS.placeholderText}
-                autoCorrect={false}
-                style={{ width: '100%' }}
-                value={street}
-                setValue={setStreet}
-                onChangeText={(text) => setStreet(text)}
-              />
-            </View>
-          </View>
-
-          <View style={styles.row}>
-            <View
-              style={[
-                styles.rowIcon,
-                { backgroundColor: COLORS.placeholderText },
-              ]}
-            >
-              <FeatherIcon name="edit-3" color="#fff" size={15} />
-            </View>
-            <View style={styles.rowLabel}>
-              <TextInput
-                placeholder="No"
-                placeholderTextColor={COLORS.placeholderText}
-                keyboardType="numeric"
-                autoCorrect={false}
-                style={{ width: '100%' }}
-                value={number}
-                setValue={setNumber}
-                onChangeText={(text) => setNumber(text)}
-              />
-            </View>
-          </View>
-
-          <View style={styles.row}>
-            <View
-              style={[
-                styles.rowIcon,
-                { backgroundColor: COLORS.placeholderText },
-              ]}
-            >
-              <FeatherIcon name="edit-3" color="#fff" size={15} />
-            </View>
-            <View style={styles.rowLabel}>
-              <TextInput
-                placeholder="Bairro"
-                placeholderTextColor={COLORS.placeholderText}
-                autoCorrect={false}
-                style={{ width: '100%' }}
-                value={neighborhood}
-                setValue={setNeighborhood}
-                onChangeText={(text) => setNeighborhood(text)}
-              />
-            </View>
-          </View>
-
-          <View style={styles.row}>
-            <View
-              style={[
-                styles.rowIcon,
-                { backgroundColor: COLORS.placeholderText },
-              ]}
-            >
-              <FeatherIcon name="edit-3" color="#fff" size={15} />
-            </View>
-            <View style={styles.rowLabel}>
-              <TextInput
-                placeholder="Cidade"
-                placeholderTextColor={COLORS.placeholderText}
-                autoCorrect={false}
-                style={{ width: '100%' }}
-                value={city}
-                setValue={setCity}
-                onChangeText={(text) => setCity(text)}
-              />
-            </View>
-          </View>
-
-          <View style={styles.row}>
-            <View
-              style={[
-                styles.rowIcon,
-                { backgroundColor: COLORS.placeholderText },
-              ]}
-            >
-              <FeatherIcon name="edit-3" color="#fff" size={15} />
-            </View>
-            <View style={styles.rowLabel}>
-              <TextInput
-                placeholder="Estado"
-                placeholderTextColor={COLORS.placeholderText}
-                autoCorrect={false}
-                style={{ width: '100%' }}
-                value={state}
-                setValue={setState}
-                onChangeText={(text) => setState(text)}
-              />
-            </View>
-          </View>
-
-          <View style={styles.row}>
-            <View
-              style={[
-                styles.rowIcon,
-                { backgroundColor: COLORS.placeholderText },
-              ]}
-            >
-              <FeatherIcon name="edit-3" color="#fff" size={15} />
-            </View>
-            <View style={styles.rowLabel}>
-              <TextInput
-                placeholder="País"
-                placeholderTextColor={COLORS.placeholderText}
-                autoCorrect={false}
-                style={{ width: '100%' }}
-                value={country}
-                setValue={setCountry}
-                onChangeText={(text) => setCountry(text)}
-              />
-            </View>
-          </View>
-
-          <View style={styles.row}>
-            <View
-              style={[
-                styles.rowIcon,
-                { backgroundColor: COLORS.placeholderText },
-              ]}
-            >
-              <FeatherIcon name="edit-3" color="#fff" size={15} />
-            </View>
-            <View style={styles.rowLabel}>
-              <TextInput
-                placeholder="CEP"
-                placeholderTextColor={COLORS.placeholderText}
-                keyboardType="numeric"
-                autoCorrect={false}
-                style={{ width: '100%' }}
-                value={zipcode}
-                setValue={setZipcode}
-                onChangeText={() => setZipcode(Number)}
-              />
-            </View>
-          </View>
           {/* >>>>>>>>>>Edit Button<<<<<<<<<<<< */}
           <View style={styles.profile}>
             <TouchableOpacity

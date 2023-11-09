@@ -15,6 +15,7 @@ import React, { useState, useMemo } from 'react';
 import { useUser } from '@/context/UserContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { UpdateUser } from '@/services/user.services';
 import AvatarExemple from '../../assets/UserAvatar.png';
@@ -230,7 +231,7 @@ export default function DadosPessoais() {
         <RBSheet
           ref={sheetEditProfile}
           customStyles={{ container: styles.sheet }}
-          height={550}
+          height={600}
           openDuration={350}
           closeDuration={250}
         >
