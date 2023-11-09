@@ -9,13 +9,19 @@ import {
   Alert,
   ScrollView,
   SafeAreaView,
+  StatusBar,
   useWindowDimensions,
+  Platform,
+  ActivityIndicator,
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { register } from '@/services/auth.service';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+import RNDateTimePicker, {
+  DateTimePickerAndroid,
+} from '@react-native-community/datetimepicker';
+import * as Animatable from 'react-native-animatable';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
@@ -28,12 +34,15 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
   const [birthday, setBirthday] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isPasswordHide, setIsPasswordHide] = useState(true);
 
   const { height } = useWindowDimensions();
 
   function handleRegister() {
+    setIsLoading(true);
+
     register({
       customerInfo: {
         birthday,
@@ -50,13 +59,77 @@ function Signup() {
       .then(() => {
         navigation.navigate('CheckinRegister');
       })
-      .catch(() => {
-        Alert.alert('Usuário não cadastrado!', 'Tente novamente ou faça Login');
-      });
+      .catch((error) => {
+        // eslint-disable-next-line default-case
+        switch (error?.response?.status) {
+          case 400:
+            Alert.alert(
+              'Email deve ser válido!',
+              'Todos campos devem ser preenchidos!',
+            );
+            break;
+          case 409:
+            Alert.alert(
+              'Usuário existente!',
+              'Um usuários com o mesmo Email já está cadastrado!',
+            );
+            break;
+        }
+      })
+      .finally(() => setIsLoading(false));
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        backgroundColor: COLORS.neutralWhite,
+      }}
+    >
+      {isLoading ? (
+        <Animatable.View
+          animation="fadeIn"
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            justifyContent: 'flex-end',
+            position: 'absolute',
+            width: '100%',
+            height: '110%',
+            zIndex: 100,
+          }}
+        >
+          <Animatable.View
+            delay={250}
+            animation="fadeInUp"
+            style={{
+              height: '35%',
+              backgroundColor: COLORS.neutralWhite,
+              borderTopLeftRadius: 35,
+              borderTopRightRadius: 35,
+              padding: 15,
+              gap: 50,
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: 'MontserratRegular',
+                fontSize: 26,
+                textAlign: 'center',
+              }}
+            >
+              Criando conta...
+            </Text>
+            <ActivityIndicator
+              color={COLORS.primary}
+              style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+              size="large"
+            />
+          </Animatable.View>
+        </Animatable.View>
+      ) : null}
+
       <ScrollView>
         <View style={styles.container}>
           <View>
@@ -119,13 +192,31 @@ function Signup() {
 
             <View>
               <Text style={styles.textLableInput}>Aniversário</Text>
-              <View style={styles.textInput}>
+              {/* O datePicker funciona nativamente apenas no Ios
+            para android é preciso modificações */}
+              {Platform.OS === 'android' ? (
+                <TouchableOpacity
+                  onPress={() =>
+                    DateTimePickerAndroid.open({
+                      mode: 'date',
+                      value: birthday,
+                      onChange: (event, date) =>
+                        event.type === 'set' ? setBirthday(date) : null,
+                    })
+                  }
+                >
+                  <View style={styles.textInput}>
+                    <Text>{birthday.toLocaleDateString()}</Text>
+                  </View>
+                </TouchableOpacity>
+              ) : (
                 <RNDateTimePicker
                   mode="date"
                   value={birthday}
+                  style={{ width: 25, height: 50 }}
                   onChange={(event, date) => setBirthday(date)}
                 />
-              </View>
+              )}
             </View>
 
             <View>

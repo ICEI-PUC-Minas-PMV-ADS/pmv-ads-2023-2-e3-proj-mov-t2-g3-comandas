@@ -10,11 +10,15 @@ export default function LocationProvider({ children }) {
   const [location, setLocation] = useState(null);
 
   async function requestLocationPermissions() {
-    const { granted } = await requestForegroundPermissionsAsync();
+    try {
+      const { granted } = await requestForegroundPermissionsAsync();
 
-    if (granted) {
-      const currentLocation = await getCurrentPositionAsync();
-      setLocation(currentLocation);
+      if (granted) {
+        const currentLocation = await getCurrentPositionAsync();
+        setLocation(currentLocation);
+      }
+    } catch (error) {
+      console.log('Usuario recusou permissao de localizacao');
     }
   }
 

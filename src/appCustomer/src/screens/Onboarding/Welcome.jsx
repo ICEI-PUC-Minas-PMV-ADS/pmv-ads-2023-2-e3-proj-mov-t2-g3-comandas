@@ -37,7 +37,7 @@ function Welcome({ navigation }) {
             filled
             style={{
               position: 'fixed',
-              marginTop: 70,
+              marginTop: 60,
               marginBottom: 4,
             }}
           />
