@@ -1,3 +1,4 @@
+import { useUser } from '@/context/UserContext';
 import API from './webapi.service';
 
 export async function register(param) {

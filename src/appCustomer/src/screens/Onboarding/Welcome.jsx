@@ -45,7 +45,7 @@ function Welcome({ navigation }) {
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
-              marginVertical: 18,
+              marginVertical: 10,
             }}
           >
             <Text style={{ fontSize: 16, color: COLORS.black }}>
@@ -61,6 +61,28 @@ function Welcome({ navigation }) {
                 }}
               >
                 faça login.
+              </Text>
+            </Pressable>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}
+          >
+            <Text style={{ fontSize: 16, color: COLORS.black }}>
+              Ou continue como{' '}
+            </Text>
+            <Pressable onPress={() => navigation.navigate('Home')}>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: COLORS.linkTextGreen,
+                  fontWeight: 'bold',
+                  marginLeft: 6,
+                }}
+              >
+                Visitante.
               </Text>
             </Pressable>
           </View>

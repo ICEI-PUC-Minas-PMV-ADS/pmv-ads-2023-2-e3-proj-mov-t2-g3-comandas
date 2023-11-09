@@ -35,7 +35,7 @@ export default function CheckinFaleConosco() {
           marginTop={10}
         />
         <Text style={styles.textForm}>
-          Pagamento Efetuado com Sucesso.
+          Mensagem enviada com Sucesso. Aguarde contato de nossa Equipe.
           <Text style={{ color: COLORS.linkTextGreen }}>{'\n'}Obrigado!</Text>
         </Text>
         <Animatable.View

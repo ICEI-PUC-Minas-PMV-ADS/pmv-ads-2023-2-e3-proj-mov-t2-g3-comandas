@@ -15,6 +15,7 @@ import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { register } from '@/services/auth.service';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
@@ -24,7 +25,9 @@ function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(null);
+  const [birthday, setBirthday] = useState(new Date());
 
   const [isPasswordHide, setIsPasswordHide] = useState(true);
 
@@ -32,9 +35,15 @@ function Signup() {
 
   function handleRegister() {
     register({
+      customerInfo: {
+        birthday,
+        photoUrl,
+      },
+
       userInfo: {
         name,
         email,
+        phoneNumber: Number(phoneNumber),
         password,
       },
     })
@@ -56,10 +65,12 @@ function Signup() {
             </View>
 
             <View>
-              <Text style={styles.textLableInput}>Nome</Text>
+              <Text style={styles.textLableInput}>
+                Nome <Text style={{ color: COLORS.primary }}>*</Text>
+              </Text>
               <View style={styles.textInput}>
                 <TextInput
-                  placeholder="Seu Nome"
+                  placeholder="Nome"
                   placeholderTextColor={COLORS.placeholderText}
                   autoCapitalize="none"
                   autoCorrect={false}
@@ -72,16 +83,64 @@ function Signup() {
             </View>
 
             <View>
-              <Text style={styles.textLableInput}>Email</Text>
+              <Text style={styles.textLableInput}>
+                Email <Text style={{ color: COLORS.primary }}>*</Text>
+              </Text>
               <View style={styles.textInput}>
                 <TextInput
                   placeholder="Email"
                   placeholderTextColor={COLORS.placeholderText}
                   autoCapitalize="none"
                   autoCorrect={false}
+                  keyboardType="email-address"
                   style={{ width: '100%' }}
                   value={email}
+                  setValue={setEmail}
                   onChangeText={(text) => setEmail(text)}
+                />
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.textLableInput}>Celular</Text>
+              <View style={styles.textInput}>
+                <TextInput
+                  placeholder="Celular"
+                  placeholderTextColor={COLORS.placeholderText}
+                  keyboardType="phone-pad"
+                  inputMode="tel"
+                  style={{ width: '100%' }}
+                  value={phoneNumber}
+                  setValue={setPhoneNumber}
+                  onChangeText={setPhoneNumber}
+                />
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.textLableInput}>Aniversário</Text>
+              <View style={styles.textInput}>
+                <RNDateTimePicker
+                  mode="date"
+                  value={birthday}
+                  onChange={(event, date) => setBirthday(date)}
+                />
+              </View>
+            </View>
+
+            <View>
+              <Text style={styles.textLableInput}>Foto Avatar</Text>
+              <View style={styles.textInput}>
+                <TextInput
+                  placeholder="Upload da foto do perfíl"
+                  placeholderTextColor={COLORS.placeholderText}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  keyboardType="url"
+                  style={{ width: '100%' }}
+                  value={photoUrl}
+                  setValue={setPhotoUrl}
+                  onChangeText={(text) => setPhotoUrl(text)}
                 />
               </View>
             </View>
@@ -89,11 +148,13 @@ function Signup() {
 
           <View>
             <View>
-              <Text style={styles.textLableInput}>Senha</Text>
+              <Text style={styles.textLableInput}>
+                Senha <Text style={{ color: COLORS.primary }}>*</Text>
+              </Text>
 
               <View style={styles.textInput}>
                 <TextInput
-                  placeholder="Sua senha"
+                  placeholder="Senha"
                   placeholderTextColor={COLORS.placeholderText}
                   autoCapitalize="none"
                   autoCorrect={false}
@@ -123,47 +184,12 @@ function Signup() {
                 </TouchableOpacity>
               </View>
             </View>
-
-            <View>
-              <Text style={styles.textLableInput}>Confirmar Senha</Text>
-
-              <View style={styles.textInput}>
-                <TextInput
-                  placeholder="Confirmar a senha"
-                  placeholderTextColor={COLORS.placeholderText}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  secureTextEntry={isPasswordHide}
-                  style={{ width: '85%' }}
-                  value={passwordRepeat}
-                  onChangeText={(text) => setPasswordRepeat(text)}
-                />
-
-                <TouchableOpacity
-                  onPress={() => setIsPasswordHide(!isPasswordHide)}
-                  style={styles.eye}
-                >
-                  {isPasswordHide === true ? (
-                    <Ionicons
-                      name="eye"
-                      size={24}
-                      color={COLORS.placeholderText}
-                    />
-                  ) : (
-                    <Ionicons
-                      name="eye-off"
-                      size={24}
-                      color={COLORS.placeholderText}
-                    />
-                  )}
-                </TouchableOpacity>
-              </View>
-            </View>
           </View>
 
           <View style={styles.checkbox}>
             <Text style={{ width: '100%' }}>
               Registrando-se você concordo com os termos e condições.
+              <Text style={styles.obsText}>{'\n'}* Campos obrigatórios.</Text>
             </Text>
           </View>
 
@@ -223,6 +249,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 10,
     marginHorizontal: 22,
+  },
+  obsText: {
+    fontSize: 12,
+    color: COLORS.primary,
+    flexDirection: 'row',
+    marginVertical: 10,
+    lineHeight: 24,
   },
   footer: {
     flexDirection: 'row',

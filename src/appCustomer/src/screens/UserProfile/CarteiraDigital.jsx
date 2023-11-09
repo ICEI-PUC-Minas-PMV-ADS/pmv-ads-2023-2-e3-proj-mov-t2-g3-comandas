@@ -9,7 +9,7 @@ import {
   Switch,
   Pressable,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { useUser } from '@/context/UserContext';
 import { useNavigation } from '@react-navigation/native';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -68,25 +68,13 @@ const SECTIONS = [
       },
     ],
   },
-  {
-    header: 'Outros',
-    icon: 'bell',
-    items: [
-      {
-        id: 'chamar-servico',
-        icon: 'bell',
-        label: 'Chamar Garçom',
-        type: 'toggle',
-      },
-    ],
-  },
 ];
 
 function CarteiraDigital() {
   const navigation = useNavigation();
   // to get logged user data
   const { user } = useUser();
-
+  const [selectedCard, setSelectedCard] = useState('visa');
   const [form, setForm] = React.useState({
     // Initial Data Simulated - because now the DB don't have payment data
     firstLine: 'Escolha abaixo como quer pagar.',
@@ -128,42 +116,29 @@ function CarteiraDigital() {
               <Text style={styles.sectionHeader}>{header}</Text>
 
               {items.map(({ id, label, type, icon, color }) => (
-                <TouchableOpacity
-                  key={icon}
-                  onPress={() => {
-                    // handle onPress
-                  }}
-                >
-                  <View style={styles.row}>
-                    <View style={[styles.rowIcon, { backgroundColor: color }]}>
-                      <FeatherIcon
-                        name={icon}
-                        color={COLORS.blueDark}
-                        size={18}
-                      />
-                    </View>
-
-                    <Text style={styles.rowLabel}>{label}</Text>
-
-                    <View style={{ flex: 1 }} />
-
-                    {type === 'toggle' && (
-                      <Switch
-                        value={form[id]}
-                        onValueChange={(value) =>
-                          setForm({ ...form, [id]: value })
-                        }
-                      />
-                    )}
-                    {type === 'link' && (
-                      <FeatherIcon
-                        name="chevron-right"
-                        color="#0c0c0c"
-                        size={22}
-                      />
-                    )}
+                <View style={styles.row}>
+                  <View style={[styles.rowIcon, { backgroundColor: color }]}>
+                    <FeatherIcon
+                      name={icon}
+                      color={COLORS.blueDark}
+                      size={18}
+                    />
                   </View>
-                </TouchableOpacity>
+
+                  <Text style={styles.rowLabel}>{label}</Text>
+
+                  <View style={{ flex: 1 }} />
+                  {console.log(form[id])}
+                  {type === 'toggle' && (
+                    <Switch
+                      disabled={form[id] === selectedCard}
+                      value={form[id]}
+                      onValueChange={(value) =>
+                        setForm({ ...form, [id]: value })
+                      }
+                    />
+                  )}
+                </View>
               ))}
             </View>
           ))}
