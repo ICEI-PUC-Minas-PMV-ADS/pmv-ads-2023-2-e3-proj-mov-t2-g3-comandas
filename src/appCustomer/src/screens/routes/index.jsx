@@ -1,7 +1,7 @@
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
@@ -27,6 +27,7 @@ import CheckinFaleConosco from '../UserProfile/CheckinFaleConosco';
 import Shop from '../Shop';
 import BackArrow from '../../assets/BackArrow.svg';
 import MenuBar from '../../assets/MenuBar.svg';
+import ItemDetails from '../Shop/ItemDetails';
 
 function LeftButton({ onPress }) {
   return (
@@ -40,22 +41,6 @@ function LeftButton({ onPress }) {
       }}
     >
       <BackArrow />
-    </TouchableOpacity>
-  );
-}
-
-function RightButton({ onPress }) {
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={{
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        paddingHorizontal: 15,
-      }}
-    >
-      <MenuBar />
     </TouchableOpacity>
   );
 }
@@ -174,6 +159,15 @@ function StackNavigation() {
           headerTitleAlign: 'center',
           headerLeft: () => <LeftButton onPress={() => navigation.goBack()} />,
           headerBackButtonMenuEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="ItemDetails"
+        component={ItemDetails}
+        options={{
+          animation: 'fade',
+          presentation: 'transparentModal',
+          headerShown: false,
         }}
       />
       <Stack.Screen
