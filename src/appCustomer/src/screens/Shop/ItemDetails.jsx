@@ -10,7 +10,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import { useUser } from '@/context/UserContext';
+import { useCart } from '@/context/CartContext';
 import imgPlaceholder from '../../assets/PizzariaBackground.jpg';
 import BannerPlaceholder from '../../assets/ItemBannerPlaceholder.svg';
 import Plus from '../../assets/Plus.svg';
@@ -19,8 +19,8 @@ import CartPlus from '../../assets/CartPlus.svg';
 
 export default function ItemDetails({ navigation, route }) {
   // TODO Verificar se existe tableId nos params (usuário entrou pelo qrCode, se sim, adicionar ao tableId lá em baixo)
-  const { item } = route.params;
-  const { addCartItem } = useUser();
+  const { item, shop } = route.params;
+  const { addCartItem } = useCart();
   const { width, height } = useWindowDimensions();
   const [intervalId, setIntervalId] = useState(null);
   const [itemQuantity, setItemQuantity] = useState(1);
@@ -104,7 +104,14 @@ export default function ItemDetails({ navigation, route }) {
             <TouchableOpacity
               style={styles.modalAddCart}
               onPress={async () =>
-                addCartItem(item.id, itemQuantity, item.price, item.shopId)
+                addCartItem(
+                  shop,
+                  item.id,
+                  item.name,
+                  itemQuantity,
+                  item.price,
+                  item.photo_url,
+                )
               }
             >
               <Text style={styles.modalTotalCart}>
