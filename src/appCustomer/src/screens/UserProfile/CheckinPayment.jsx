@@ -6,7 +6,6 @@ import * as Animatable from 'react-native-animatable';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import COLORS from '../../constants/colors';
 import Checkin from '../../assets/Checkin.json';
-import Logo from '../../assets/Comandas-icon.png';
 
 export default function CheckinPayment() {
   const navigation = useNavigation();
@@ -27,16 +26,6 @@ export default function CheckinPayment() {
 
       <View style={styles.sheetBody}>
         <View style={styles.container}>
-          <View style={styles.containerLogo}>
-            <Animatable.Image
-              style={styles.image}
-              delay={100}
-              animation="flipInY"
-              source={Logo}
-              resizeMode="contain"
-            />
-          </View>
-
           <Animatable.View
             delay={700}
             animation="fadeInUp"
@@ -58,7 +47,10 @@ export default function CheckinPayment() {
             <Animatable.View
               delay={2000}
               animation="fadeInUp"
-              onAnimationEnd={() => navigation.navigate('Home')}
+              onAnimationEnd={() => {
+                sheetCheckinPayment.current.close();
+                navigation.navigate('PedidosAcompanhamento');
+              }}
               style={styles.footer}
             >
               <Text style={styles.textFooter}>

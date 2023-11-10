@@ -8,6 +8,7 @@
     "react-native-animatable": "^1.3.3",
     "react-native-keychain": "^8.1.2",
     "react-native-loading-spinner-overlay": "^3.0.1",
-    "undefined": "react-native-vector-icons/Feather"
+    "undefined": "react-native-vector-icons/Feather",
+    "react-native-maps": "1.7.1"
   }
 }

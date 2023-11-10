@@ -6,67 +6,54 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-  Switch,
   Pressable,
+  Alert,
 } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import { useUser } from '@/context/UserContext';
 import { useNavigation } from '@react-navigation/native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
-import FeatherIcon from 'react-native-vector-icons/Feather';
 import Wallet from '@/components/Wallet/Wallet';
+import CustomSwitchGroup from '@/components/SwitchToggle/CustomSwitchGroup';
 import Checkin from '../../assets/Checkin.json';
 
-const SECTIONS = [
+const data = [
   {
-    header: 'Pagamento',
-    icon: 'align-center',
-    items: [
-      {
-        id: 'firstLine',
-        icon: 'dollar-sign',
-        label: 'Carteira Digital',
-        type: 'toggle',
-      },
-    ],
+    header: 'Carteira',
+    id: 'carteira',
+    icon: 'dollar-sign',
+    text: 'Carteira Digital',
+    type: 'toggle',
   },
   {
-    header: 'Cartões',
-    icon: 'settings',
-    items: [
-      {
-        id: 'visa',
-        icon: 'credit-card',
-        label: 'Visa',
-        type: 'toggle',
-      },
-      {
-        id: 'mastercard',
-        icon: 'credit-card',
-        label: 'MasterCard',
-        type: 'toggle',
-      },
-    ],
+    header: 'Cartão de Crédito',
+    id: 'visa',
+    icon: 'credit-card',
+    text: 'Visa',
+    type: 'toggle',
   },
   {
-    header: 'Conta na Mesa',
-    icon: 'help-circle',
-    items: [
-      {
-        id: 'contaNaMesaCartao',
-        icon: 'check-square',
-        label: 'Cartão',
-        type: 'toggle',
-      },
-      {
-        id: 'contaNaMesaDinheiro',
-        icon: 'dollar-sign',
-        label: 'Dinheiro',
-        type: 'toggle',
-      },
-    ],
+    header: 'Cartão de Crédito',
+    id: 'mastercard',
+    icon: 'credit-card',
+    text: 'MasterCard',
+    type: 'toggle',
+  },
+  {
+    header: 'Chamar Garçom',
+    id: 'contaNaMesaCartao',
+    icon: 'check-square',
+    text: 'Cartão',
+    type: 'toggle',
+  },
+  {
+    header: 'Chamar Garçom',
+    id: 'contaNaMesaDinheiro',
+    icon: 'dollar-sign',
+    text: 'Dinheiro',
+    type: 'toggle',
   },
 ];
 
@@ -74,33 +61,43 @@ function CarteiraDigital() {
   const navigation = useNavigation();
   // to get logged user data
   const { user } = useUser();
-  const [selectedCard, setSelectedCard] = useState('visa');
-  const [form, setForm] = React.useState({
-    // Initial Data Simulated - because now the DB don't have payment data
-    firstLine: 'Escolha abaixo como quer pagar.',
-    visa: true,
-    mastercard: false,
-    contaNaMesaDinheiro: false,
-    contaNaMesaCartao: false,
-  });
+
+  const onSwitchChange = (itemIdx) => {
+    console.log('Clicked', itemIdx);
+  };
+
   const sheetConfirmPayment = React.useRef();
   const sheetCheckinPayment = React.useRef();
+
+  const showConfirmDialog = () =>
+    Alert.alert('Atenção!', 'Você confirma o Pagamento?', [
+      {
+        text: 'Sim',
+        onPress: () => {
+          sheetCheckinPayment.current.open();
+        },
+      },
+      {
+        text: 'Não',
+      },
+    ]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={styles.scrollContent}>
         {/* >>>>>>>>>>Header<<<<<<<<<<<< */}
         <View style={styles.header} />
-        {/* >>>>>>>>>> Card <<<<<<<<<<<< */}
+        {/* >>>>>>>>>> Bank Card <<<<<<<<<<<< */}
         <View style={styles.profile}>
           <View style={styles.profileHeader}>
             <Wallet />
           </View>
           {/* >>>>>>>>>>Payment Button<<<<<<<<<<<< */}
+
           <TouchableOpacity
             onPress={() => {
               // handle payment
-              sheetConfirmPayment.current.open();
+              showConfirmDialog();
             }}
           >
             <View style={styles.profileAction}>
@@ -110,89 +107,69 @@ function CarteiraDigital() {
         </View>
 
         {/* >>>>>>>>>>Body<<<<<<<<<<<< */}
-        <View style={styles.content}>
-          {SECTIONS.map(({ header, items }) => (
-            <View style={styles.section} key={header}>
-              <Text style={styles.sectionHeader}>{header}</Text>
-
-              {items.map(({ id, label, type, icon, color }) => (
-                <View style={styles.row}>
-                  <View style={[styles.rowIcon, { backgroundColor: color }]}>
-                    <FeatherIcon
-                      name={icon}
-                      color={COLORS.blueDark}
-                      size={18}
-                    />
-                  </View>
-
-                  <Text style={styles.rowLabel}>{label}</Text>
-
-                  <View style={{ flex: 1 }} />
-                  {console.log(form[id])}
-                  {type === 'toggle' && (
-                    <Switch
-                      disabled={form[id] === selectedCard}
-                      value={form[id]}
-                      onValueChange={(value) =>
-                        setForm({ ...form, [id]: value })
-                      }
-                    />
-                  )}
-                </View>
-              ))}
-            </View>
-          ))}
+        <View style={styles.container}>
+          <View style={styles.switchGroupHeader}>
+            <Text style={styles.switchGroupTextHeader}>
+              {' '}
+              Selecione a forma de Pagamento Desejada
+            </Text>
+          </View>
+          <CustomSwitchGroup values={data} onPress={onSwitchChange} />
         </View>
         {/* Code for Bottom Sheets */}
         {/* CheckIn Payment Animation Bottom Sheet */}
         <RBSheet
           ref={sheetCheckinPayment}
-          customStyles={{ container: styles.sheet }}
+          customStyles={{ containerBottonSheet: styles.sheet }}
           height={650}
-          openDuration={350}
+          openDuration={450}
           closeDuration={250}
         >
-          <View style={styles.containerPayConfirm}>
-            <View style={styles.containerLogoPayConfirm} />
+          <View style={styles.sheetHeader}>
+            <Text style={styles.sheetHeaderTitle}>Atenção!</Text>
+          </View>
 
-            <Animatable.View
-              delay={700}
-              animation="fadeInUp"
-              style={styles.containerFormPayConfirm}
-            >
-              <LottieView
-                style={styles.checkInLottie}
-                source={Checkin}
-                autoPlay
-                loop={false}
-                marginTop={10}
-              />
-              <Text style={styles.textForm}>
-                Pagamento Efetuado com Sucesso.
-                <Text style={{ color: COLORS.linkTextGreen }}>
-                  {'\n'}Obrigado!
-                </Text>
-              </Text>
+          <View style={styles.sheetBody}>
+            <View style={styles.containerBottonSheet}>
               <Animatable.View
-                delay={2000}
+                delay={700}
                 animation="fadeInUp"
-                onAnimationEnd={() => {
-                  sheetCheckinPayment.current.close();
-                  navigation.navigate('PedidosAcompanhamento');
-                }}
-                style={styles.footer}
+                style={styles.containerForm}
               >
-                <Text style={styles.textFooter}>
-                  Caso não seja redirecionado para a tela de Acompanhamento de
-                  Pedidos em alguns instantes
+                <LottieView
+                  style={styles.checkInLottie}
+                  source={Checkin}
+                  autoPlay
+                  loop={false}
+                  marginTop={10}
+                />
+                <Text style={styles.textForm}>
+                  Pagamento Efetuado com Sucesso.
+                  <Text style={{ color: COLORS.linkTextGreen }}>
+                    {'\n'}Obrigado!
+                  </Text>
                 </Text>
-                <Pressable
-                  onPress={() => navigation.navigate('CarteiraDigital')}
+                <Animatable.View
+                  delay={2000}
+                  animation="fadeInUp"
+                  onAnimationEnd={() => {
+                    sheetCheckinPayment.current.close();
+                    navigation.navigate('PedidosAcompanhamento');
+                  }}
+                  style={styles.footer}
                 >
-                  <Text style={styles.textFooterLink}>Clique Aqui.</Text>
-                </Pressable>
+                  <Text style={styles.textFooter}>
+                    Caso não seja redirecionado para a tela de Acompanhamento de
+                    Pedidos em alguns instantes
+                  </Text>
+                  <Pressable
+                    onPress={() => navigation.navigate('CarteiraDigital')}
+                  >
+                    <Text style={styles.textFooterLink}>Clique Aqui.</Text>
+                  </Pressable>
+                </Animatable.View>
               </Animatable.View>
-            </Animatable.View>
+            </View>
           </View>
         </RBSheet>
 
@@ -255,15 +232,25 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   container: {
-    paddingVertical: 20,
+    paddingVertical: 5,
     flexGrow: 1,
+  },
+  switchGroupHeader: {
+    backgroundColor: COLORS.white,
+
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+  },
+  switchGroupTextHeader: {
+    color: COLORS.linkTextGreen,
+    fontSize: 16,
+    lineHeight: 24,
   },
   containerLogo: {
     flex: 2,
     opacity: 0.5,
   },
   image: {
-    // height: 120,
     alignSelf: 'center',
     height: 75,
     width: 75,
@@ -313,6 +300,7 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     marginRight: 8,
   },
+
   section: {
     backgroundColor: COLORS.white,
     paddingHorizontal: 20,
@@ -401,33 +389,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: COLORS.white,
   },
+
   // CheckIn Payment Bottom Sheet
-  containerPayConfirm: {
+  containerBottonSheet: {
     flex: 1,
     backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  containerLogoPayConfirm: {
-    flex: 2,
-    opacity: 0.5,
-  },
-  imagePayConfirm: {
-    // height: 120,
-    alignSelf: 'center',
-    height: 75,
-    width: 75,
-    aspectRatio: 1 / 1,
-    marginTop: 70,
-  },
-  containerFormPayConfirm: {
-    flex: 5,
-    width: '100%',
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
   },
   checkInLottie: {
     justifyContent: 'center',

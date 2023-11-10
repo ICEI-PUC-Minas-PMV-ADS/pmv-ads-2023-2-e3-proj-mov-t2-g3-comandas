@@ -15,7 +15,7 @@
         "ios": {
             "supportsTablet": true,
             "config": {
-                "usesNonExemptEncryptation": false
+                
             }
         },
         "android": {
@@ -26,11 +26,7 @@
                 "foregroundImage": "./src/assets/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
             },
-            "packagerOpts": {
-                "config": "metro.config.js",
-                "sourceExts": ["js", "json", "ts", "tsx", "cjs"],
-                "fastRefresh": true
-            },
+            
             "softwareKeyboardLayoutMode": "pan"
         },
         "web": {

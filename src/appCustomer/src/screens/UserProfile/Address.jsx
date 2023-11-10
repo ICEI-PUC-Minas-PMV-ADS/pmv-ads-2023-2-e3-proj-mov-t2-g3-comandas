@@ -6,12 +6,12 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-  TextInput,
   Alert,
 } from 'react-native';
-import React, { useState } from 'react';
-import { useUser } from '@/context/UserContext';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import MapView from 'react-native-maps';
+// import { useUser } from '@/context/UserContext';
+// import { useNavigation } from '@react-navigation/native';
 import { registerUserAddress } from '@/services/auth.service';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
@@ -20,7 +20,7 @@ function Address() {
     registerUserAddress({})
       .then(() => {
         Alert.alert('Endereço cadastrado com Sucesso!');
-        navigation.navigate('UserProfile');
+        // navigation.navigate('UserProfile');
       })
       .catch(() => {
         Alert.alert(
@@ -29,11 +29,14 @@ function Address() {
         );
       });
   }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={styles.scrollContent}>
         {/* >>>>>>>>>>Edit Head<<<<<<<<<<<< */}
-
+        <View style={styles.mapContainer}>
+          <MapView style={styles.map} />
+        </View>
         {/* >>>>>>>>>>Body<<<<<<<<<<<< */}
         <View style={styles.content}>
           {/* >>>>>>>>>>Edit Button<<<<<<<<<<<< */}
@@ -69,6 +72,13 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingVertical: 24,
+  },
+  mapContainer: {
+    flex: 1,
+  },
+  map: {
+    width: '100%',
+    height: '100%',
   },
   header: {
     paddingHorizontal: 24,
