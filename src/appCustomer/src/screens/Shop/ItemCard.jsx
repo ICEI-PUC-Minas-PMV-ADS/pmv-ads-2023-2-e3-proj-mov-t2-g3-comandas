@@ -2,9 +2,8 @@ import React from 'react';
 import { View } from 'react-native-animatable';
 import Category from './Category';
 import Item from './Item';
-import acaiPlaceHolder from '../../assets/AcaiBackground.png';
 
-export default function ItemCard({ data, location }) {
+export default function ItemCard({ data, location, navigation }) {
   return Object.entries(data).map(([category, items]) => (
     <View
       onLayout={(event) => {
@@ -20,8 +19,10 @@ export default function ItemCard({ data, location }) {
           title={itemInfo.name}
           description={itemInfo.description}
           price={itemInfo.price}
-          image={itemInfo.photo_url ?? acaiPlaceHolder}
+          image={itemInfo.photo_url}
           key={itemInfo.id}
+          navigation={navigation}
+          item={itemInfo}
         />
       ))}
     </View>

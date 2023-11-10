@@ -1,5 +1,5 @@
 import COLORS from '@/constants/colors';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,9 +15,8 @@ import {
 import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import StarComponent from '@/assets/StarComponent';
-import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
-import acaiPlaceHolder from '../../assets/AcaiBackground.png';
+import GeneralCategoryBanner from '@/assets/GeneralCategoryBanner';
 import Clock from '../../assets/Clock.svg';
 import ItemCard from './ItemCard';
 
@@ -31,73 +30,71 @@ export default function Shop({ route, navigation }) {
   const categoryLocation = [];
   const $scrollViewRef = useRef();
 
-  useFocusEffect(
-    useCallback(() => {
-      async function fetchMenu() {
-        try {
-          setIsLoading(true);
-          const { data } = await axios.get(`${BASE_URL}shop/${shopId}/menu`, {
-            headers: {
-              'x-api-key': API_KEY,
-              Authorization: ADMIN_TOKEN,
-            },
-          });
+  useEffect(() => {
+    async function fetchMenu() {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get(`${BASE_URL}shop/${shopId}/menu`, {
+          headers: {
+            'x-api-key': API_KEY,
+            Authorization: ADMIN_TOKEN,
+          },
+        });
 
-          const categoryNames = new Set(
-            data.map((item) =>
-              item && item.category && item.category.name
-                ? item.category.name
-                : null,
-            ),
-          );
+        const categoryNames = new Set(
+          data.map((item) =>
+            item && item.category && item.category.name
+              ? item.category.name
+              : null,
+          ),
+        );
 
-          const formattedData = {};
+        const formattedData = {};
 
-          data.forEach((menuItem) => {
-            const categoryName =
-              menuItem && menuItem.category && menuItem.category.name
-                ? menuItem.category.name
-                : 'uncategorized';
+        data.forEach((menuItem) => {
+          const categoryName =
+            menuItem && menuItem.category && menuItem.category.name
+              ? menuItem.category.name
+              : 'uncategorized';
 
-            if (!formattedData[categoryName]) {
-              formattedData[categoryName] = [];
-            }
-            formattedData[categoryName].push(menuItem);
-          });
+          if (!formattedData[categoryName]) {
+            formattedData[categoryName] = [];
+          }
+          formattedData[categoryName].push(menuItem);
+        });
 
-          setItemCategory(categoryNames);
-          setMenu(formattedData);
-        } catch (error) {
-          // eslint-disable-next-line no-undef
-          alert(error);
-        } finally {
-          setIsLoading(false);
-        }
+        setItemCategory(categoryNames);
+        setMenu(formattedData);
+      } catch (error) {
+        // eslint-disable-next-line no-undef
+        alert(error);
+      } finally {
+        setIsLoading(false);
       }
+    }
 
-      async function fetchShop() {
-        try {
-          setIsLoading(true);
-          const { data } = await axios.get(`${BASE_URL}user/${shopId}`, {
-            headers: {
-              'x-api-key': API_KEY,
-              Authorization: ADMIN_TOKEN,
-            },
-          });
+    async function fetchShop() {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get(`${BASE_URL}user/${shopId}`, {
+          headers: {
+            'x-api-key': API_KEY,
+            Authorization: ADMIN_TOKEN,
+          },
+        });
 
-          setShop(data);
-        } catch (error) {
-          // eslint-disable-next-line no-undef
-          alert(error);
-        } finally {
-          setIsLoading(false);
-        }
+        setShop(data);
+      } catch (error) {
+        // eslint-disable-next-line no-undef
+        alert(error);
+      } finally {
+        setIsLoading(false);
       }
+    }
 
-      fetchShop();
-      fetchMenu();
-    }, [shopId]),
-  );
+    fetchShop();
+    fetchMenu();
+  }, [shopId]);
 
   if (isLoading)
     return (
@@ -115,12 +112,13 @@ export default function Shop({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* {console.log(GeneralCategoryBanner.at(shop.categories[0]?.id).image)} */}
       <ParallaxScrollView
         ref={$scrollViewRef}
         showsVerticalScrollIndicator={false}
         parallaxHeaderHeight={200}
         onScroll={(e) => {
-          if (e.nativeEvent.contentOffset.y >= 250)
+          if (e.nativeEvent.contentOffset.y >= 120)
             navigation.setOptions({
               headerTitle: shop.userInfo && shop.userInfo.name,
             });
@@ -128,12 +126,19 @@ export default function Shop({ route, navigation }) {
             navigation.setOptions({ headerTitle: '' });
           }
         }}
-        renderBackground={() => (
-          <Image
-            source={acaiPlaceHolder}
-            style={{ width, height: 210, resizeMode: 'cover' }}
-          />
-        )}
+        renderBackground={() =>
+          shop &&
+          shop?.categories?.length > 0 && (
+            <Image
+              source={{
+                // eslint-disable-next-line no-unsafe-optional-chaining
+                uri: GeneralCategoryBanner.at(shop.categories[0]?.id - 1)
+                  ?.image,
+              }}
+              style={{ width, height: 210, resizeMode: 'cover' }}
+            />
+          )
+        }
         renderStickyHeader={() => (
           <FlatList
             style={{ height: 50, backgroundColor: COLORS.neutralWhite }}
@@ -189,8 +194,14 @@ export default function Shop({ route, navigation }) {
                   </Text>
                 </View>
                 <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                  <StarComponent rating={3.45} />
-                  <Text style={styles.profileStarCount}>3,45</Text>
+                  {shop.rating > 0 ? (
+                    <>
+                      <StarComponent rating={shop.rating} />
+                      <Text style={styles.profileStarCount}>{shop.rating}</Text>
+                    </>
+                  ) : (
+                    <Text style={styles.profileNewShop}>Novidade !</Text>
+                  )}
                 </View>
               </View>
               <Image
@@ -201,7 +212,11 @@ export default function Shop({ route, navigation }) {
               />
             </View>
 
-            <ItemCard data={menu} location={categoryLocation} />
+            <ItemCard
+              navigation={navigation}
+              data={menu}
+              location={categoryLocation}
+            />
           </View>
         </View>
       </ParallaxScrollView>
@@ -229,12 +244,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.secondary,
   },
+  profileNewShop: {
+    fontFamily: 'MontserratSemiBold',
+    fontSize: 14,
+    color: COLORS.primary,
+  },
   profileImage: {
     width: 50,
     height: 50,
     resizeMode: 'cover',
     borderRadius: 999,
-    borderColor: 'purple',
-    borderWidth: 2,
+    borderColor: COLORS.primary,
+    borderWidth: StyleSheet.hairlineWidth,
   },
 });

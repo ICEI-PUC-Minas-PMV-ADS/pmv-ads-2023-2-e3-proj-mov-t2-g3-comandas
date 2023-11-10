@@ -31,7 +31,7 @@ export default function Select({
       }}
       defaultButtonText={placeHolder}
       onSelect={(selectedItem, index) => {
-        setFilter(setIndex ? index : selectedItem);
+        setFilter(setIndex ? index + 1 : selectedItem);
       }}
       buttonTextAfterSelection={(selectedItem) => selectedItem ?? placeHolder}
       rowTextForSelection={(item) => item}
