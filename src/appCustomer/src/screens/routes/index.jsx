@@ -66,7 +66,9 @@ function StackNavigation() {
       <Stack.Screen
         name="UserProfile"
         component={UserProfile}
-        options={{ title: '' }}
+        options={{
+          title: '',
+        }}
       />
       <Stack.Screen
         name="Home"

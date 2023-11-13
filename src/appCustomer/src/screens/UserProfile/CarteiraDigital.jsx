@@ -6,17 +6,13 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
   Alert,
 } from 'react-native';
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import LottieView from 'lottie-react-native';
-import * as Animatable from 'react-native-animatable';
 import Wallet from '@/components/Wallet/Wallet';
 import CustomSwitchGroup from '@/components/SwitchToggle/CustomSwitchGroup';
-import LoadingBottomSheet from '@/components/BottomSheet/LoadingBottomSheet';
-import Checkin from '../../assets/Checkin.json';
+import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
 
 const data = [
   {
@@ -114,7 +110,7 @@ function CarteiraDigital() {
         </View>
         {/* >>>>CheckIn Payment Animation Bottom Sheet<<<< */}
         {isLoading ? (
-          <LoadingBottomSheet
+          <LoadingBSheet
             headerText="Processando Pagamento..."
             welcomeBackText="Aprovado!"
             route={() => navigation.navigate('PedidosAcompanhamento')}
@@ -133,37 +129,6 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 5,
     flexGrow: 1,
-  },
-  switchGroupHeader: {
-    backgroundColor: COLORS.white,
-
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-  },
-  switchGroupTextHeader: {
-    color: COLORS.linkTextGreen,
-    fontSize: 16,
-    lineHeight: 24,
-  },
-  containerLogo: {
-    flex: 2,
-    opacity: 0.5,
-  },
-  image: {
-    alignSelf: 'center',
-    height: 75,
-    width: 75,
-    aspectRatio: 1 / 1,
-    marginTop: 70,
-  },
-  containerForm: {
-    flex: 5,
-    width: '100%',
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
   },
   header: {
     paddingHorizontal: 24,
@@ -199,128 +164,14 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     marginRight: 8,
   },
-
-  section: {
+  switchGroupHeader: {
     backgroundColor: COLORS.white,
-    paddingHorizontal: 20,
-  },
-  sectionHeader: {
-    paddingVertical: 8,
-    fontSize: 16,
-    fontWeight: '600',
-    color: COLORS.linkTextGreen,
-    textTransform: 'uppercase',
-    letterSpacing: 1.1,
-  },
-  rowWrapper: {
-    borderTopWidth: 1,
-    borderColor: COLORS.greyLineStyle,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    height: 50,
-    backgroundColor: COLORS.neutralLightGrey,
-    borderRadius: 15,
-    marginBottom: 12,
-    paddingHorizontal: 12,
-  },
-  rowLabel: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: COLORS.placeholderText,
-  },
-  rowValue: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: COLORS.linkTextGreen,
-  },
-  rowIcon: {
-    width: 32,
-    height: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 6,
-  },
-
-  // Bottom Sheets Styles
-  sheet: {
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-  },
-  sheetHeader: {
-    paddingVertical: 14,
     paddingHorizontal: 24,
-    borderBottomWidth: 1,
-    borderColor: COLORS.greyLineStyle,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingVertical: 12,
   },
-  sheetHeaderTitle: {
-    fontSize: 28,
-    fontWeight: '700',
+  switchGroupTextHeader: {
     color: COLORS.linkTextGreen,
-  },
-  sheetBody: {
-    padding: 24,
-  },
-  sheetBodyText: {
     fontSize: 16,
     lineHeight: 24,
-    fontWeight: '400',
-    color: COLORS.black,
-    marginBottom: 24,
-    textAlign: 'center',
-  },
-  btn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 50,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginTop: 20,
-  },
-  btnText: {
-    fontSize: 18,
-    lineHeight: 24,
-    fontWeight: '700',
-    color: COLORS.white,
-  },
-
-  // CheckIn Payment Bottom Sheet
-  containerBottonSheet: {
-    flex: 1,
-    backgroundColor: 'grey',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkInLottie: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 150,
-    width: 150,
-  },
-  textForm: {
-    fontSize: 22,
-    marginHorizontal: 12,
-    fontWeight: '600',
-    color: COLORS.black,
-    textAlign: 'center',
-  },
-  footer: {
-    justifyContent: 'center',
-    marginHorizontal: 40,
-    marginTop: 200,
-  },
-  textFooter: {
-    fontSize: 14,
-    color: COLORS.black,
-  },
-  textFooterLink: {
-    fontSize: 16,
-    color: COLORS.linkTextGreen,
-    fontWeight: 'bold',
   },
 });

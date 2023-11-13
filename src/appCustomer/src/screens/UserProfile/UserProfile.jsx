@@ -16,7 +16,7 @@ import { useUser } from '@/context/UserContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import LoadingBottomSheet from '@/components/BottomSheet/LoadingBottomSheet';
+import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
 const SECTIONS = [
@@ -119,9 +119,6 @@ export default function UserProfile({ navigation }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // Action Bottom Sheets
-  const sheetDeleteAccount = React.useRef();
-
   const showConfirmDialog = () =>
     Alert.alert('Atenção!', 'Deseja Sair da sua Conta?', [
       {
@@ -143,7 +140,7 @@ export default function UserProfile({ navigation }) {
       >
         {/* >>>>>Logout Bottom Sheet<<<<< */}
         {isLoading ? (
-          <LoadingBottomSheet
+          <LoadingBSheet
             headerText="Saindo da Conta..."
             welcomeBackText="Sua conta esta segura!"
             route={() => navigation.navigate('Login')}

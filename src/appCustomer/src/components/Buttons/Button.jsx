@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
 import COLORS from '../../constants/colors';

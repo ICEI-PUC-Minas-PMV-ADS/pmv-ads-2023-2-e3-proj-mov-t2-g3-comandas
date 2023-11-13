@@ -1,18 +1,12 @@
-import {
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-  useWindowDimensions,
-} from 'react-native';
+/* eslint-disable react/destructuring-assignment */
+import { StyleSheet, Text, ActivityIndicator } from 'react-native';
 import React from 'react';
 import * as Animatable from 'react-native-animatable';
 import COLORS from '@/constants/colors';
 import LottieView from 'lottie-react-native';
 import Checkin from '../../assets/Checkin.json';
 
-export default function LoadingBottomSheet(props) {
-  const { height } = useWindowDimensions();
-
+export default function LoadingBSheet(props) {
   return (
     <Animatable.View animation="fadeIn" style={styles.backgroundScreen}>
       <Animatable.View
@@ -38,10 +32,7 @@ export default function LoadingBottomSheet(props) {
             loop={false}
             marginTop={10}
           />
-          <Text style={styles.welcomeBackText}>
-            {'\n'}
-            {props.welcomeBackText}
-          </Text>
+          <Text style={styles.welcomeBackText}>{props.welcomeBackText}</Text>
           <Animatable.View
             delay={2200}
             animation="fadeInUp"
@@ -94,7 +85,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   welcomeBackText: {
+    fontFamily: 'MontserratRegular',
     color: COLORS.linkTextGreen,
+    fontSize: 20,
     alignContent: 'center',
   },
 });

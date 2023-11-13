@@ -16,7 +16,7 @@ import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from '@/context/UserContext';
 import { login } from '@/services/auth.service';
-import LoadingBottomSheet from '@/components/BottomSheet/LoadingBottomSheet';
+import LoadingBottomSheet from '@/components/BottomSheet/LoadingBSheet';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
