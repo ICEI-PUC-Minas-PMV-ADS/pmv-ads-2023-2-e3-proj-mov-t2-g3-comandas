@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   containerLogo: {
     flex: 2,
-    opacity: 0.5,
+    opacity: 0.2,
   },
   image: {
     // height: 120,
