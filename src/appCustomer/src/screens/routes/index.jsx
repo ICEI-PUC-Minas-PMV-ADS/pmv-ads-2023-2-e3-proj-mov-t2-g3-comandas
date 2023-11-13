@@ -5,12 +5,10 @@ import { TouchableOpacity } from 'react-native';
 import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
-import CheckinRegister from '../Register/CheckinRegister';
 import UserProfile from '../UserProfile/UserProfile';
 import CheckoutLogout from '../UserProfile/CheckoutLogout';
 import DadosPessoais from '../UserProfile/DadosPessoais';
 import CarteiraDigital from '../UserProfile/CarteiraDigital';
-import CheckinPayment from '../UserProfile/CheckinPayment';
 import Cartoes from '../UserProfile/Cartoes';
 import FaleConosco from '../UserProfile/FaleConosco';
 import Problemas from '../UserProfile/Problemas';
@@ -22,11 +20,9 @@ import Home from '../Home';
 import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
 import Notifications from '../Notifications/Index';
-import CheckinLogin from '../Login/CheckinLogin';
 import CheckinFaleConosco from '../UserProfile/CheckinFaleConosco';
 import Shop from '../Shop';
 import BackArrow from '../../assets/BackArrow.svg';
-import MenuBar from '../../assets/MenuBar.svg';
 import ItemDetails from '../Shop/ItemDetails';
 
 function LeftButton({ onPress }) {
@@ -56,8 +52,6 @@ function StackNavigation() {
         name="Welcome"
         component={Welcome}
         options={{ headerShown: false }}
-        // Falar com o grupo para manter o QR Scan sempre.
-        // O usuário deve ter opção de usar o app sem criar conta, o scan deve sempre estar dispnível para ve o menu do restaurante
       />
       <Stack.Screen
         name="Login"
@@ -65,18 +59,8 @@ function StackNavigation() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="CheckinLogin"
-        component={CheckinLogin}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
         name="Signup"
         component={Signup}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CheckinRegister"
-        component={CheckinRegister}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -108,11 +92,6 @@ function StackNavigation() {
         name="PedidosAcompanhamento"
         component={PedidosAcompanhamento}
         options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="CheckinPayment"
-        component={CheckinPayment}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="DadosPessoais"

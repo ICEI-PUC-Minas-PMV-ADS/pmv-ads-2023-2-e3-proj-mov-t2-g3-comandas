@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import LottieView from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { register } from '@/services/auth.service';
 import RNDateTimePicker, {
@@ -25,6 +26,7 @@ import * as Animatable from 'react-native-animatable';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
+import Checkin from '../../assets/Checkin.json';
 
 function Signup() {
   const navigation = useNavigation();
@@ -104,10 +106,10 @@ function Signup() {
             delay={250}
             animation="fadeInUp"
             style={{
-              height: '35%',
+              height: '75%',
               backgroundColor: COLORS.neutralWhite,
-              borderTopLeftRadius: 35,
-              borderTopRightRadius: 35,
+              borderTopLeftRadius: 50,
+              borderTopRightRadius: 50,
               padding: 15,
               gap: 50,
             }}
@@ -115,17 +117,45 @@ function Signup() {
             <Text
               style={{
                 fontFamily: 'MontserratRegular',
-                fontSize: 26,
+                fontSize: 24,
                 textAlign: 'center',
               }}
             >
-              Criando conta...
+              Criando Conta...
             </Text>
             <ActivityIndicator
               color={COLORS.primary}
               style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
               size="large"
             />
+
+            <Animatable.View
+              delay={1000}
+              animation="fadeInUp"
+              style={styles.containerForm}
+            >
+              <LottieView
+                style={styles.checkInLottie}
+                source={Checkin}
+                autoPlay
+                loop={false}
+                marginTop={10}
+              />
+              <Text style={styles.textForm}>
+                Conta Criada com Sucesso.
+                <Text style={{ color: COLORS.linkTextGreen }}>
+                  {'\n'}Bem vindo!
+                </Text>
+              </Text>
+              <Animatable.View
+                delay={1800}
+                animation="fadeInUp"
+                onAnimationEnd={() =>
+                  navigation.navigate('PedidosAcompanhamento')
+                }
+                style={styles.footer}
+              />
+            </Animatable.View>
           </Animatable.View>
         </Animatable.View>
       ) : null}

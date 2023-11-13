@@ -6,13 +6,11 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-  Pressable,
+  ActivityIndicator,
   Alert,
 } from 'react-native';
-import React from 'react';
-import { useUser } from '@/context/UserContext';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import RBSheet from 'react-native-raw-bottom-sheet';
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 import Wallet from '@/components/Wallet/Wallet';
@@ -59,22 +57,19 @@ const data = [
 
 function CarteiraDigital() {
   const navigation = useNavigation();
-  // to get logged user data
-  const { user } = useUser();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSwitchChange = (itemIdx) => {
     console.log('Clicked', itemIdx);
   };
-
-  const sheetConfirmPayment = React.useRef();
-  const sheetCheckinPayment = React.useRef();
 
   const showConfirmDialog = () =>
     Alert.alert('Atenção!', 'Você confirma o Pagamento?', [
       {
         text: 'Sim',
         onPress: () => {
-          sheetCheckinPayment.current.open();
+          setIsLoading(true);
         },
       },
       {
@@ -116,23 +111,49 @@ function CarteiraDigital() {
           </View>
           <CustomSwitchGroup values={data} onPress={onSwitchChange} />
         </View>
-        {/* Code for Bottom Sheets */}
-        {/* CheckIn Payment Animation Bottom Sheet */}
-        <RBSheet
-          ref={sheetCheckinPayment}
-          customStyles={{ containerBottonSheet: styles.sheet }}
-          height={650}
-          openDuration={450}
-          closeDuration={250}
-        >
-          <View style={styles.sheetHeader}>
-            <Text style={styles.sheetHeaderTitle}>Atenção!</Text>
-          </View>
+        {/* >>>>CheckIn Payment Animation Bottom Sheet<<<< */}
+        {isLoading ? (
+          <Animatable.View
+            animation="fadeIn"
+            style={{
+              flex: 1,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              justifyContent: 'flex-end',
+              position: 'absolute',
+              width: '100%',
+              height: '110%',
+              zIndex: 100,
+            }}
+          >
+            <Animatable.View
+              delay={250}
+              animation="fadeInUp"
+              style={{
+                height: '75%',
+                backgroundColor: COLORS.neutralWhite,
+                borderTopLeftRadius: 50,
+                borderTopRightRadius: 50,
+                padding: 15,
+                gap: 50,
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: 'MontserratRegular',
+                  fontSize: 24,
+                  textAlign: 'center',
+                }}
+              >
+                Aguarde confirmação...
+              </Text>
+              <ActivityIndicator
+                color={COLORS.primary}
+                style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+                size="large"
+              />
 
-          <View style={styles.sheetBody}>
-            <View style={styles.containerBottonSheet}>
               <Animatable.View
-                delay={700}
+                delay={1000}
                 animation="fadeInUp"
                 style={styles.containerForm}
               >
@@ -144,83 +165,23 @@ function CarteiraDigital() {
                   marginTop={10}
                 />
                 <Text style={styles.textForm}>
-                  Pagamento Efetuado com Sucesso.
+                  Pagamento Realizado com Sucesso.
                   <Text style={{ color: COLORS.linkTextGreen }}>
                     {'\n'}Obrigado!
                   </Text>
                 </Text>
                 <Animatable.View
-                  delay={2000}
+                  delay={1800}
                   animation="fadeInUp"
-                  onAnimationEnd={() => {
-                    sheetCheckinPayment.current.close();
-                    navigation.navigate('PedidosAcompanhamento');
-                  }}
+                  onAnimationEnd={() =>
+                    navigation.navigate('PedidosAcompanhamento')
+                  }
                   style={styles.footer}
-                >
-                  <Text style={styles.textFooter}>
-                    Caso não seja redirecionado para a tela de Acompanhamento de
-                    Pedidos em alguns instantes
-                  </Text>
-                  <Pressable
-                    onPress={() => navigation.navigate('CarteiraDigital')}
-                  >
-                    <Text style={styles.textFooterLink}>Clique Aqui.</Text>
-                  </Pressable>
-                </Animatable.View>
+                />
               </Animatable.View>
-            </View>
-          </View>
-        </RBSheet>
-
-        {/* Payment Confirmation Bottom Sheet */}
-        <RBSheet
-          ref={sheetConfirmPayment}
-          customStyles={{ container: styles.sheet }}
-          height={450}
-          openDuration={350}
-          closeDuration={250}
-          // onClose={() => sheetCheckinPayment.current.open()}
-        >
-          <Animatable.View delay={200}>
-            <View style={styles.sheetHeader}>
-              <Text style={styles.sheetHeaderTitle}>Confirme o Pagamento</Text>
-            </View>
-
-            <View style={styles.sheetBody}>
-              <Text style={styles.sheetBodyText}>
-                {user.name}, você confirma o pagamento com{' '}
-                <Text style={{ fontWeight: '700', color: COLORS.blueDark }}>
-                  Forma de Pgto
-                </Text>
-                ?
-              </Text>
-
-              <TouchableOpacity
-                onPress={() => sheetConfirmPayment.current.close()}
-              >
-                <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
-                  <Text style={styles.btnText}>Cancelar</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  sheetConfirmPayment.current.close();
-                  sheetCheckinPayment.current.open();
-                }}
-              >
-                <View
-                  style={[
-                    styles.btn,
-                    { backgroundColor: COLORS.linkTextGreen },
-                  ]}
-                >
-                  <Text style={styles.btnText}>Confirmar</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+            </Animatable.View>
           </Animatable.View>
-        </RBSheet>
+        ) : null}
       </ScrollView>
     </SafeAreaView>
   );
@@ -404,7 +365,7 @@ const styles = StyleSheet.create({
     width: 150,
   },
   textForm: {
-    fontSize: 26,
+    fontSize: 22,
     marginHorizontal: 12,
     fontWeight: '600',
     color: COLORS.black,

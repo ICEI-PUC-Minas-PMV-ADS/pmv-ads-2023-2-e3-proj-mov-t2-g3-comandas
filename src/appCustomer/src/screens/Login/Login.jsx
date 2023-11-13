@@ -18,9 +18,11 @@ import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from '@/context/UserContext';
 import { login } from '@/services/auth.service';
+import LottieView from 'lottie-react-native';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
+import Checkin from '../../assets/Checkin.json';
 
 function Login() {
   const navigation = useNavigation();
@@ -47,7 +49,7 @@ function Login() {
             String(res.userInfo.id),
           ).catch((err) => console.log('ERRO IN handleLogin ', err));
           // Fazer lógica para o que acontecer após Login
-          navigation.navigate('CheckinLogin');
+          navigation.navigate('Home');
         } else {
           Alert.alert('Usuário ou Senha inválidos!');
         }
@@ -77,10 +79,10 @@ function Login() {
             delay={250}
             animation="fadeInUp"
             style={{
-              height: '35%',
+              height: '55%',
               backgroundColor: COLORS.neutralWhite,
-              borderTopLeftRadius: 35,
-              borderTopRightRadius: 35,
+              borderTopLeftRadius: 50,
+              borderTopRightRadius: 50,
               padding: 15,
               gap: 50,
             }}
@@ -88,7 +90,7 @@ function Login() {
             <Text
               style={{
                 fontFamily: 'MontserratRegular',
-                fontSize: 26,
+                fontSize: 24,
                 textAlign: 'center',
               }}
             >
@@ -99,6 +101,40 @@ function Login() {
               style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
               size="large"
             />
+
+            <Animatable.View
+              delay={600}
+              animation="fadeInUp"
+              style={styles.containerForm}
+            >
+              <LottieView
+                style={styles.checkInLottie}
+                source={Checkin}
+                autoPlay
+                loop={false}
+                marginTop={10}
+              />
+              <Text style={styles.textForm}>
+                Acessou a Conta com Sucesso.
+                <Text style={{ color: COLORS.linkTextGreen }}>
+                  {'\n'}Bem Vindo de Volta!
+                </Text>
+              </Text>
+              <Animatable.View
+                delay={2200}
+                animation="fadeInUp"
+                onAnimationEnd={() => navigation.navigate('Home')}
+                style={styles.footer}
+              >
+                {/* <Text style={styles.textFooter}>
+                  Caso não seja redirecionado para a tela de Login em alguns
+                  instantes
+                </Text>
+                <Pressable onPress={() => navigation.navigate('Login')}>
+                  <Text style={styles.textFooterLink}>Clique Aqui.</Text>
+                </Pressable> */}
+              </Animatable.View>
+            </Animatable.View>
           </Animatable.View>
         </Animatable.View>
       ) : null}
@@ -262,6 +298,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.linkTextGreen,
     fontWeight: 'bold',
+  },
+  checkInLottie: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 150,
+    width: 150,
+  },
+
+  containerForm: {
+    width: '100%',
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
