@@ -17,18 +17,28 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import StarComponent from '@/assets/StarComponent';
 import axios from 'axios';
 import GeneralCategoryBanner from '@/assets/GeneralCategoryBanner';
+import { useCart } from '@/context/CartContext';
+import FloatBasket from '@/components/FloatBasket/FloatBasket';
 import Clock from '../../assets/Clock.svg';
 import ItemCard from './ItemCard';
 
 export default function Shop({ route, navigation }) {
   const { shopId } = route.params;
   const { width } = useWindowDimensions();
+  const { cart } = useCart();
   const [isLoading, setIsLoading] = useState(true);
   const [menu, setMenu] = useState({});
   const [shop, setShop] = useState({});
   const [itemCategory, setItemCategory] = useState([]);
   const categoryLocation = [];
   const $scrollViewRef = useRef();
+  const basketSize = cart.reduce((totalItems, order) => {
+    const orderItemQuantity = order.items.reduce(
+      (total, item) => total + item.quantity,
+      0,
+    );
+    return totalItems + orderItemQuantity;
+  }, 0);
 
   useEffect(() => {
     async function fetchMenu() {
@@ -112,7 +122,7 @@ export default function Shop({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* {console.log(GeneralCategoryBanner.at(shop.categories[0]?.id).image)} */}
+      {cart ? <FloatBasket basketSize={basketSize} bottom={35} /> : null}
       <ParallaxScrollView
         ref={$scrollViewRef}
         showsVerticalScrollIndicator={false}
@@ -216,6 +226,7 @@ export default function Shop({ route, navigation }) {
               navigation={navigation}
               data={menu}
               location={categoryLocation}
+              shop={shop}
             />
           </View>
         </View>

@@ -3,7 +3,7 @@ import { View } from 'react-native-animatable';
 import Category from './Category';
 import Item from './Item';
 
-export default function ItemCard({ data, location, navigation }) {
+export default function ItemCard({ data, location, shop, navigation }) {
   return Object.entries(data).map(([category, items]) => (
     <View
       onLayout={(event) => {
@@ -23,6 +23,7 @@ export default function ItemCard({ data, location, navigation }) {
           key={itemInfo.id}
           navigation={navigation}
           item={itemInfo}
+          shop={shop}
         />
       ))}
     </View>

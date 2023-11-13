@@ -9,6 +9,7 @@ export default function Item({
   price,
   image,
   item,
+  shop,
   navigation,
 }) {
   return (
@@ -22,6 +23,7 @@ export default function Item({
         onPress={() =>
           navigation.navigate('ItemDetails', {
             item,
+            shop,
           })
         }
       >

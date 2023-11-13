@@ -18,6 +18,7 @@ import UserProvider from '@/context/UserContext';
 import { LogBox } from 'react-native';
 import ignoreWarnings from 'ignore-warnings';
 import LocationProvider from '@/context/LocationContext';
+import CartProvider from '@/context/CartContext';
 
 export default function App() {
   // Carregando as fontes
@@ -51,7 +52,9 @@ export default function App() {
   return (
     <LocationProvider>
       <UserProvider>
-        <Routes />
+        <CartProvider>
+          <Routes />
+        </CartProvider>
       </UserProvider>
     </LocationProvider>
   );
