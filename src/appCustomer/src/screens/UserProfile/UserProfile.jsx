@@ -7,7 +7,6 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
-  Switch,
   Alert,
 } from 'react-native';
 import { View, Text } from 'react-native-animatable';
@@ -65,13 +64,6 @@ const SECTIONS = [
         label: 'Restaurantes Favoritos',
         type: 'link',
       },
-      {
-        id: 'darkMode',
-        icon: 'moon',
-        color: COLORS.black,
-        label: 'Dark Mode',
-        type: 'toggle',
-      },
     ],
   },
   {
@@ -110,14 +102,13 @@ const SECTIONS = [
 ];
 
 export default function UserProfile({ navigation }) {
-  const [form, setForm] = React.useState({
-    // fake - não tem Dark Mode criado
-    darkMode: false,
-  });
   // to get logged user data
   const { user } = useUser();
 
   const [isLoading, setIsLoading] = useState(false);
+
+  // Action Bottom Sheets
+  const sheetDeleteAccount = React.useRef();
 
   const showConfirmDialog = () =>
     Alert.alert('Atenção!', 'Deseja Sair da sua Conta?', [
@@ -131,6 +122,31 @@ export default function UserProfile({ navigation }) {
         text: 'Não',
       },
     ]);
+
+  const showConfirmDeleteAccountDialog = () =>
+    Alert.alert(
+      'Atenção!',
+      'Confirma que deseja excluir sua conta? Não poderá desfazer esta ação!',
+      [
+        {
+          text: 'Sim',
+          onPress: () => {
+            // Handle onPress Delete Conta
+            // DELETE method for logged User
+            // logout & destroy jwt token
+            sheetDeleteAccount.current.close();
+            AsyncStorage.clear();
+            navigation.navigate('Welcome');
+          },
+        },
+        {
+          text: 'Não',
+          onPress: () => {
+            sheetDeleteAccount.current.close();
+          },
+        },
+      ],
+    );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -146,7 +162,7 @@ export default function UserProfile({ navigation }) {
             route={() => navigation.navigate('Login')}
           />
         ) : null}
-
+        {/* >>>>>Profile Avatar Picture<<<<< */}
         <View style={styles.profile}>
           <TouchableOpacity
             onPress={() => {
@@ -167,6 +183,7 @@ export default function UserProfile({ navigation }) {
 
           <Text style={styles.profileName}>{user.name}</Text>
 
+          {/* >>>>>Logout Button<<<<< */}
           <TouchableOpacity
             onPress={() => {
               // handle logout
@@ -186,6 +203,7 @@ export default function UserProfile({ navigation }) {
           </TouchableOpacity>
         </View>
 
+        {/* >>>>>Body Sections & Lists<<<<< */}
         {SECTIONS.map(({ header, items }) => (
           <View style={styles.section} key={header}>
             <Text style={styles.sectionHeader}>{header}</Text>
@@ -230,17 +248,6 @@ export default function UserProfile({ navigation }) {
 
                   <View style={{ flex: 1 }} />
 
-                  {type === 'toggle' && (
-                    <Switch
-                      value={form[id]}
-                      onValueChange={(value) =>
-                        setForm({
-                          ...form,
-                          [id]: value,
-                        })
-                      }
-                    />
-                  )}
                   {type === 'link' && (
                     <FeatherIcon
                       name="chevron-right"
@@ -253,7 +260,7 @@ export default function UserProfile({ navigation }) {
             ))}
           </View>
         ))}
-        {/* Code for Bottom Sheets */}
+
         {/* Delete Account Bottom Sheet */}
         <RBSheet
           ref={sheetDeleteAccount}
@@ -282,11 +289,7 @@ export default function UserProfile({ navigation }) {
 
             <TouchableOpacity
               onPress={() => {
-                // Handle onPress Delete Conta
-                // Falta metodo DELETE em User
-                sheetDeleteAccount.current.close();
-                AsyncStorage.clear();
-                navigation.navigate('Welcome');
+                showConfirmDeleteAccountDialog();
               }}
             >
               <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>

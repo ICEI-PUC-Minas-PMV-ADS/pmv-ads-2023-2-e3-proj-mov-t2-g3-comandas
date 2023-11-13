@@ -6,7 +6,6 @@ import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
 import UserProfile from '../UserProfile/UserProfile';
-import CheckoutLogout from '../UserProfile/CheckoutLogout';
 import DadosPessoais from '../UserProfile/DadosPessoais';
 import CarteiraDigital from '../UserProfile/CarteiraDigital';
 import Cartoes from '../UserProfile/Cartoes';
@@ -20,7 +19,6 @@ import Home from '../Home';
 import Scan from '../Scan/Index.jsx';
 import Scanner from '../Scanner/Index.jsx';
 import Notifications from '../Notifications/Index';
-import CheckinFaleConosco from '../UserProfile/CheckinFaleConosco';
 import Shop from '../Shop';
 import BackArrow from '../../assets/BackArrow.svg';
 import ItemDetails from '../Shop/ItemDetails';
@@ -76,11 +74,6 @@ function StackNavigation() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="CheckoutLogout"
-        component={CheckoutLogout}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
         name="CarteiraDigital"
         component={CarteiraDigital}
         options={{ title: '' }}
@@ -114,11 +107,6 @@ function StackNavigation() {
         name="FaleConosco"
         component={FaleConosco}
         options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="CheckinFaleConosco"
-        component={CheckinFaleConosco}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Problemas"
