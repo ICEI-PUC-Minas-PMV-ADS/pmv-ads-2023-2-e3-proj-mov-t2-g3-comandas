@@ -7,22 +7,19 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  ActivityIndicator,
 } from 'react-native';
 import React, { useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
-import * as Animatable from 'react-native-animatable';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from '@/context/UserContext';
 import { login } from '@/services/auth.service';
-import LottieView from 'lottie-react-native';
+import LoadingBottomSheet from '@/components/BottomSheet/LoadingBottomSheet';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
-import Checkin from '../../assets/Checkin.json';
 
 function Login() {
   const navigation = useNavigation();
@@ -63,80 +60,11 @@ function Login() {
   return (
     <SafeAreaView style={styles.container}>
       {isLoading ? (
-        <Animatable.View
-          animation="fadeIn"
-          style={{
-            flex: 1,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            justifyContent: 'flex-end',
-            position: 'absolute',
-            width: '100%',
-            height: '110%',
-            zIndex: 100,
-          }}
-        >
-          <Animatable.View
-            delay={250}
-            animation="fadeInUp"
-            style={{
-              height: '55%',
-              backgroundColor: COLORS.neutralWhite,
-              borderTopLeftRadius: 50,
-              borderTopRightRadius: 50,
-              padding: 15,
-              gap: 50,
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: 'MontserratRegular',
-                fontSize: 24,
-                textAlign: 'center',
-              }}
-            >
-              Acessando conta...
-            </Text>
-            <ActivityIndicator
-              color={COLORS.primary}
-              style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
-              size="large"
-            />
-
-            <Animatable.View
-              delay={600}
-              animation="fadeInUp"
-              style={styles.containerForm}
-            >
-              <LottieView
-                style={styles.checkInLottie}
-                source={Checkin}
-                autoPlay
-                loop={false}
-                marginTop={10}
-              />
-              <Text style={styles.textForm}>
-                Acessou a Conta com Sucesso.
-                <Text style={{ color: COLORS.linkTextGreen }}>
-                  {'\n'}Bem Vindo de Volta!
-                </Text>
-              </Text>
-              <Animatable.View
-                delay={2200}
-                animation="fadeInUp"
-                onAnimationEnd={() => navigation.navigate('Home')}
-                style={styles.footer}
-              >
-                {/* <Text style={styles.textFooter}>
-                  Caso não seja redirecionado para a tela de Login em alguns
-                  instantes
-                </Text>
-                <Pressable onPress={() => navigation.navigate('Login')}>
-                  <Text style={styles.textFooterLink}>Clique Aqui.</Text>
-                </Pressable> */}
-              </Animatable.View>
-            </Animatable.View>
-          </Animatable.View>
-        </Animatable.View>
+        <LoadingBottomSheet
+          headerText="Acessando a Conta..."
+          welcomeBackText="Bem vindo de volta!"
+          route={() => navigation.navigate('Home')}
+        />
       ) : null}
 
       <View style={styles.body}>
@@ -298,19 +226,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.linkTextGreen,
     fontWeight: 'bold',
-  },
-  checkInLottie: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 150,
-    width: 150,
-  },
-
-  containerForm: {
-    width: '100%',
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

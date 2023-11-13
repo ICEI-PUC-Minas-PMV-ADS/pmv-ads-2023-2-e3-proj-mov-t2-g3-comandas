@@ -15,6 +15,7 @@ import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
 import Wallet from '@/components/Wallet/Wallet';
 import CustomSwitchGroup from '@/components/SwitchToggle/CustomSwitchGroup';
+import LoadingBottomSheet from '@/components/BottomSheet/LoadingBottomSheet';
 import Checkin from '../../assets/Checkin.json';
 
 const data = [
@@ -113,74 +114,11 @@ function CarteiraDigital() {
         </View>
         {/* >>>>CheckIn Payment Animation Bottom Sheet<<<< */}
         {isLoading ? (
-          <Animatable.View
-            animation="fadeIn"
-            style={{
-              flex: 1,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              justifyContent: 'flex-end',
-              position: 'absolute',
-              width: '100%',
-              height: '110%',
-              zIndex: 100,
-            }}
-          >
-            <Animatable.View
-              delay={250}
-              animation="fadeInUp"
-              style={{
-                height: '75%',
-                backgroundColor: COLORS.neutralWhite,
-                borderTopLeftRadius: 50,
-                borderTopRightRadius: 50,
-                padding: 15,
-                gap: 50,
-              }}
-            >
-              <Text
-                style={{
-                  fontFamily: 'MontserratRegular',
-                  fontSize: 24,
-                  textAlign: 'center',
-                }}
-              >
-                Aguarde confirmação...
-              </Text>
-              <ActivityIndicator
-                color={COLORS.primary}
-                style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
-                size="large"
-              />
-
-              <Animatable.View
-                delay={1000}
-                animation="fadeInUp"
-                style={styles.containerForm}
-              >
-                <LottieView
-                  style={styles.checkInLottie}
-                  source={Checkin}
-                  autoPlay
-                  loop={false}
-                  marginTop={10}
-                />
-                <Text style={styles.textForm}>
-                  Pagamento Realizado com Sucesso.
-                  <Text style={{ color: COLORS.linkTextGreen }}>
-                    {'\n'}Obrigado!
-                  </Text>
-                </Text>
-                <Animatable.View
-                  delay={1800}
-                  animation="fadeInUp"
-                  onAnimationEnd={() =>
-                    navigation.navigate('PedidosAcompanhamento')
-                  }
-                  style={styles.footer}
-                />
-              </Animatable.View>
-            </Animatable.View>
-          </Animatable.View>
+          <LoadingBottomSheet
+            headerText="Processando Pagamento..."
+            welcomeBackText="Aprovado!"
+            route={() => navigation.navigate('PedidosAcompanhamento')}
+          />
         ) : null}
       </ScrollView>
     </SafeAreaView>

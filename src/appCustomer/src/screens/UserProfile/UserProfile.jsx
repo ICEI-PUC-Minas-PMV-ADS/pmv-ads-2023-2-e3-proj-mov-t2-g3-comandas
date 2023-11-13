@@ -1,5 +1,5 @@
 import COLORS from '@/constants/colors';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   Switch,
+  Alert,
 } from 'react-native';
 import { View, Text } from 'react-native-animatable';
 import { useUser } from '@/context/UserContext';
@@ -15,6 +16,7 @@ import { useUser } from '@/context/UserContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import LoadingBottomSheet from '@/components/BottomSheet/LoadingBottomSheet';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
 const SECTIONS = [
@@ -114,9 +116,24 @@ export default function UserProfile({ navigation }) {
   });
   // to get logged user data
   const { user } = useUser();
+
+  const [isLoading, setIsLoading] = useState(false);
+
   // Action Bottom Sheets
   const sheetDeleteAccount = React.useRef();
-  const sheetLogoutAccount = React.useRef();
+
+  const showConfirmDialog = () =>
+    Alert.alert('Atenção!', 'Deseja Sair da sua Conta?', [
+      {
+        text: 'Sim',
+        onPress: () => {
+          setIsLoading(true);
+        },
+      },
+      {
+        text: 'Não',
+      },
+    ]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -124,6 +141,15 @@ export default function UserProfile({ navigation }) {
         style={{ width: '100%' }}
         contentContainerStyle={styles.scrollContent}
       >
+        {/* >>>>>Logout Bottom Sheet<<<<< */}
+        {isLoading ? (
+          <LoadingBottomSheet
+            headerText="Saindo da Conta..."
+            welcomeBackText="Sua conta esta segura!"
+            route={() => navigation.navigate('Login')}
+          />
+        ) : null}
+
         <View style={styles.profile}>
           <TouchableOpacity
             onPress={() => {
@@ -147,7 +173,8 @@ export default function UserProfile({ navigation }) {
           <TouchableOpacity
             onPress={() => {
               // handle logout
-              sheetLogoutAccount.current.open();
+              // AsyncStorage.clear();
+              showConfirmDialog();
             }}
           >
             <View style={styles.logout}>
@@ -271,65 +298,6 @@ export default function UserProfile({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => sheetDeleteAccount.current.close()}
-            >
-              <View
-                style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
-              >
-                <Text style={styles.btnText}>Cancelar</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </RBSheet>
-
-        {/* Logout Bottom Sheet */}
-        <RBSheet
-          ref={sheetLogoutAccount}
-          customStyles={{ container: styles.sheet }}
-          height={350}
-          openDuration={450}
-          closeDuration={250}
-        >
-          <View style={styles.sheetHeader}>
-            <Text style={styles.sheetHeaderTitle}>Logout</Text>
-          </View>
-
-          <View style={styles.sheetBody}>
-            <Text style={styles.sheetBodyText}>
-              Tem certeza que deseja{' '}
-              <Text
-                style={{
-                  fontWeight: '700',
-                  color: COLORS.iconRed,
-                }}
-              >
-                Sair da sua Conta
-              </Text>
-              ?{'\n'}Clique em{' '}
-              <Text
-                style={{
-                  fontWeight: '700',
-                  color: COLORS.iconRed,
-                }}
-              >
-                Logout
-              </Text>{' '}
-              para Sair.
-            </Text>
-
-            <TouchableOpacity
-              onPress={() => {
-                // Handle onPress Logout Account
-                sheetLogoutAccount.current.close();
-                AsyncStorage.clear();
-                navigation.navigate('CheckoutLogout');
-              }}
-            >
-              <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
-                <Text style={styles.btnText}>Logout</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => sheetLogoutAccount.current.close()}
             >
               <View
                 style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
