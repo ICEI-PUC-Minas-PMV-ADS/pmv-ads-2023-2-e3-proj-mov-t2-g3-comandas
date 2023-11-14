@@ -125,7 +125,9 @@ export default function Shop({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {cart ? <FloatBasket basketSize={basketSize} bottom={35} /> : null}
+      {cart && basketSize ? (
+        <FloatBasket basketSize={basketSize} bottom={35} />
+      ) : null}
       <ParallaxScrollView
         ref={$scrollViewRef}
         showsVerticalScrollIndicator={false}
