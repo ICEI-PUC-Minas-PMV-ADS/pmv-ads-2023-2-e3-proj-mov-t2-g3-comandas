@@ -12,21 +12,18 @@ import {
   StatusBar,
   useWindowDimensions,
   Platform,
-  ActivityIndicator,
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import LottieView from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { register } from '@/services/auth.service';
 import RNDateTimePicker, {
   DateTimePickerAndroid,
 } from '@react-native-community/datetimepicker';
-import * as Animatable from 'react-native-animatable';
+import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
-import Checkin from '../../assets/Checkin.json';
 
 function Signup() {
   const navigation = useNavigation();
@@ -90,74 +87,11 @@ function Signup() {
       }}
     >
       {isLoading ? (
-        <Animatable.View
-          animation="fadeIn"
-          style={{
-            flex: 1,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            justifyContent: 'flex-end',
-            position: 'absolute',
-            width: '100%',
-            height: '110%',
-            zIndex: 100,
-          }}
-        >
-          <Animatable.View
-            delay={250}
-            animation="fadeInUp"
-            style={{
-              height: '75%',
-              backgroundColor: COLORS.neutralWhite,
-              borderTopLeftRadius: 50,
-              borderTopRightRadius: 50,
-              padding: 15,
-              gap: 50,
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: 'MontserratRegular',
-                fontSize: 24,
-                textAlign: 'center',
-              }}
-            >
-              Criando Conta...
-            </Text>
-            <ActivityIndicator
-              color={COLORS.primary}
-              style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
-              size="large"
-            />
-
-            <Animatable.View
-              delay={1000}
-              animation="fadeInUp"
-              style={styles.containerForm}
-            >
-              <LottieView
-                style={styles.checkInLottie}
-                source={Checkin}
-                autoPlay
-                loop={false}
-                marginTop={10}
-              />
-              <Text style={styles.textForm}>
-                Conta Criada com Sucesso.
-                <Text style={{ color: COLORS.linkTextGreen }}>
-                  {'\n'}Bem vindo!
-                </Text>
-              </Text>
-              <Animatable.View
-                delay={1800}
-                animation="fadeInUp"
-                onAnimationEnd={() =>
-                  navigation.navigate('PedidosAcompanhamento')
-                }
-                style={styles.footer}
-              />
-            </Animatable.View>
-          </Animatable.View>
-        </Animatable.View>
+        <LoadingBSheet
+          headerText=" Criando Conta..."
+          welcomeBackText="Conta Criada com Sucesso!"
+          route={() => navigation.navigate('PedidosAcompanhamento')}
+        />
       ) : null}
 
       <ScrollView>

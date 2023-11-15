@@ -9,10 +9,11 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { useUser } from '@/context/UserContext';
 import { useNavigation } from '@react-navigation/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
 import logoComandas from '../../assets/Comandas-icon.png';
 
 const SECTIONS = [
@@ -33,6 +34,7 @@ const SECTIONS = [
 function Problemas() {
   const navigation = useNavigation();
   const { user } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = React.useState({
     id: user.id,
     name: user.name,
@@ -54,6 +56,13 @@ function Problemas() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
+        {isLoading ? (
+          <LoadingBSheet
+            headerText="Enviando..."
+            welcomeBackText="Aguarde nosso retorno!"
+            route={() => navigation.navigate('UserProfile')}
+          />
+        ) : null}
         <View style={styles.logoArea}>
           <Image source={logoComandas} style={styles.imageStyle} />
         </View>
@@ -108,7 +117,7 @@ function Problemas() {
           <TouchableOpacity
             onPress={() => {
               // handleUploadPicture
-              navigation.navigate('CheckinFaleConosco');
+              setIsLoading(true);
             }}
           >
             <View style={styles.btnAction}>

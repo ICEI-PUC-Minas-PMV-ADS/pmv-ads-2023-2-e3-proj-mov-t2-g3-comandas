@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
 
@@ -15,42 +16,33 @@ export default function CartProvider({ children }) {
     itemPhoto,
   ) {
     setCart((prev) => {
-      // Verificando se item já exsite no carrinho
       const existingShopIndex = prev.findIndex(
         (cartShop) => cartShop.id === shopInfo.userInfo.id,
       );
 
       if (existingShopIndex !== -1) {
-        const updatedCart = [...prev];
-
-        const existingItemIndex = updatedCart[
-          existingShopIndex
-        ].items.findIndex((cartItem) => cartItem.id === itemId);
+        const existingItemIndex = prev[existingShopIndex].items.findIndex(
+          (cartItem) => cartItem.id === itemId,
+        );
 
         if (existingItemIndex !== -1) {
-          updatedCart[existingShopIndex].items[existingItemIndex].quantity +=
+          prev[existingShopIndex].items[existingItemIndex].quantity +=
             itemQuantity;
-          updatedCart[existingShopIndex].items[existingItemIndex].total =
-            Number(
-              updatedCart[existingShopIndex].items[existingItemIndex].quantity *
-                itemPrice,
-            ).toFixed(2);
-
-          return updatedCart;
+          prev[existingShopIndex].items[existingItemIndex].total = Number(
+            prev[existingShopIndex].items[existingItemIndex].quantity *
+              itemPrice,
+          ).toFixed(2);
+        } else {
+          prev[existingShopIndex].items.push({
+            id: itemId,
+            name: itemName,
+            photoUrl: itemPhoto,
+            quantity: itemQuantity,
+            total: Number(itemQuantity * itemPrice).toFixed(2),
+          });
         }
-
-        return updatedCart[existingShopIndex].items.push({
-          id: itemId,
-          name: itemName,
-          photoUrl: itemPhoto,
-          quantity: itemQuantity,
-          total: Number(itemQuantity * itemPrice).toFixed(2),
-        });
-      }
-
-      return [
-        ...prev,
-        {
+      } else {
+        prev.push({
           id: shopInfo.userInfo.id,
           name: shopInfo.userInfo.name,
           phoneNumber: shopInfo.userInfo.phoneNumber,
@@ -67,13 +59,13 @@ export default function CartProvider({ children }) {
               total: Number(itemQuantity * itemPrice).toFixed(2),
             },
           ],
-        },
-      ];
+        });
+      }
+
+      return [...prev];
     });
 
     await SecureStore.setItemAsync('CART', JSON.stringify(cart));
-
-    // console.log(JSON.stringify(cart, null, 2));
   }
   //   async function addCartItem(
   //     shopInfo,

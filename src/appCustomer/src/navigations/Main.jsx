@@ -1,16 +1,15 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import Home from '../Home/index';
-import Scan from '../Scan/Index.jsx';
-import Scanner from '../Scanner/Index.jsx';
-import Notifications from '../Notifications/Index';
+import Home from '@/screens/Home';
+import Scan from '@/screens/Scan/Index.jsx';
+import Scanner from '@/screens/Scanner/Index.jsx';
+import Notifications from '../screens/Notifications/Index';
 
 const Stack = createNativeStackNavigator();
 
-function StackNavigation() {
+function Main() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen
         name="Home"
         component={Home}
@@ -35,10 +34,4 @@ function StackNavigation() {
   );
 }
 
-export default function Routes() {
-  return (
-    <NavigationContainer>
-      <StackNavigation />
-    </NavigationContainer>
-  );
-}
+export default Main;
