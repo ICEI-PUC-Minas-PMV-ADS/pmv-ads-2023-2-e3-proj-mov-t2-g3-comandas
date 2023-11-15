@@ -17,8 +17,8 @@ import Favoritos from '../UserProfile/Favoritos';
 import PedidosAcompanhamento from '../Compras/PedidosAcompanhamento';
 import Search from '../Search/index';
 import Home from '../Home';
-import Scan from '../Scan/Index.jsx';
-import Scanner from '../Scanner/Index.jsx';
+import Scan from '../Scan/Index';
+import Scanner from '../Scanner/Index';
 import Notifications from '../Notifications/Index';
 import CheckinFaleConosco from '../UserProfile/CheckinFaleConosco';
 import Shop from '../Shop';
@@ -26,154 +26,156 @@ import BackArrow from '../../assets/BackArrow.svg';
 import ItemDetails from '../Shop/ItemDetails';
 
 function LeftButton({ onPress }) {
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={{
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        paddingHorizontal: 15,
-      }}
-    >
-      <BackArrow />
-    </TouchableOpacity>
-  );
+    return (
+        <TouchableOpacity
+            onPress={onPress}
+            style={{
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                paddingHorizontal: 15,
+            }}
+        >
+            <BackArrow />
+        </TouchableOpacity>
+    );
 }
 
 const Stack = createNativeStackNavigator();
 
 function StackNavigation() {
-  const navigation = useNavigation();
+    const navigation = useNavigation();
 
-  return (
-    <Stack.Navigator initialRouteName="Welcome">
-      <Stack.Screen
-        name="Welcome"
-        component={Welcome}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Signup"
-        component={Signup}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="UserProfile"
-        component={UserProfile}
-        options={{
-          title: '',
-        }}
-      />
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CheckoutLogout"
-        component={CheckoutLogout}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CarteiraDigital"
-        component={CarteiraDigital}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="Cartoes"
-        component={Cartoes}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="PedidosAcompanhamento"
-        component={PedidosAcompanhamento}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="DadosPessoais"
-        component={DadosPessoais}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="Address"
-        component={Address}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="Favoritos"
-        component={Favoritos}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="FaleConosco"
-        component={FaleConosco}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="CheckinFaleConosco"
-        component={CheckinFaleConosco}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Problemas"
-        component={Problemas}
-        options={{ title: '' }}
-      />
-      <Stack.Screen
-        name="Search"
-        component={Search}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Shop"
-        component={Shop}
-        options={{
-          animation: 'slide_from_right',
-          headerShadowVisible: false,
-          headerTitle: '',
-          headerTitleAlign: 'center',
-          headerLeft: () => <LeftButton onPress={() => navigation.goBack()} />,
-          headerBackButtonMenuEnabled: false,
-        }}
-      />
-      <Stack.Screen
-        name="ItemDetails"
-        component={ItemDetails}
-        options={{
-          animation: 'fade',
-          presentation: 'transparentModal',
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Scan"
-        component={Scan}
-        options={{ title: 'Escanear' }}
-      />
-      <Stack.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{ title: 'Notificações' }}
-      />
-      <Stack.Screen
-        name="Scanner"
-        component={Scanner}
-        options={{ headerShown: false }} // Ocultar a barra de navegação superior
-      />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator initialRouteName="Welcome">
+            <Stack.Screen
+                name="Welcome"
+                component={Welcome}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Signup"
+                component={Signup}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="UserProfile"
+                component={UserProfile}
+                options={{
+                    title: '',
+                }}
+            />
+            <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CheckoutLogout"
+                component={CheckoutLogout}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CarteiraDigital"
+                component={CarteiraDigital}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="Cartoes"
+                component={Cartoes}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="PedidosAcompanhamento"
+                component={PedidosAcompanhamento}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="DadosPessoais"
+                component={DadosPessoais}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="Address"
+                component={Address}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="Favoritos"
+                component={Favoritos}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="FaleConosco"
+                component={FaleConosco}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="CheckinFaleConosco"
+                component={CheckinFaleConosco}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Problemas"
+                component={Problemas}
+                options={{ title: '' }}
+            />
+            <Stack.Screen
+                name="Search"
+                component={Search}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Shop"
+                component={Shop}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShadowVisible: false,
+                    headerTitle: '',
+                    headerTitleAlign: 'center',
+                    headerLeft: () => (
+                        <LeftButton onPress={() => navigation.goBack()} />
+                    ),
+                    headerBackButtonMenuEnabled: false,
+                }}
+            />
+            <Stack.Screen
+                name="ItemDetails"
+                component={ItemDetails}
+                options={{
+                    animation: 'fade',
+                    presentation: 'transparentModal',
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Scan"
+                component={Scan}
+                options={{ title: 'Escanear' }}
+            />
+            <Stack.Screen
+                name="Notifications"
+                component={Notifications}
+                options={{ title: 'Notificações' }}
+            />
+            <Stack.Screen
+                name="Scanner"
+                component={Scanner}
+                options={{ headerShown: false }} // Ocultar a barra de navegação superior
+            />
+        </Stack.Navigator>
+    );
 }
 
 export default function Routes() {
-  return (
-    <NavigationContainer>
-      <StackNavigation />
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <StackNavigation />
+        </NavigationContainer>
+    );
 }

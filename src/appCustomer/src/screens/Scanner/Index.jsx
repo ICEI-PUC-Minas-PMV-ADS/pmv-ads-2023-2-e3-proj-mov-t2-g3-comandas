@@ -17,9 +17,13 @@ export default function Scanner({ navigation }) {
     const handleBarCodeScanned = ({ type, data }) => {
         if (type === 256) {
             try {
-                navigation.navigate('Home');
                 // eslint-disable-next-line no-alert, no-undef
-                alert(JSON.parse(data));
+                const myData = JSON.parse(data);
+
+                navigation.navigate('Shop', {
+                    shopId: myData.shopId,
+                    table: myData.table,
+                });
             } catch (e) {
                 // eslint-disable-next-line no-alert, no-undef
                 alert('Este não é um qr code válido');
