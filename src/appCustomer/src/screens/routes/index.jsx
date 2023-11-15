@@ -73,11 +73,11 @@ function StackNavigation() {
                 component={Home}
                 options={{ headerShown: false }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="CheckoutLogout"
                 component={CheckoutLogout}
                 options={{ headerShown: false }}
-            />
+            /> */}
             <Stack.Screen
                 name="CarteiraDigital"
                 component={CarteiraDigital}
@@ -113,11 +113,11 @@ function StackNavigation() {
                 component={FaleConosco}
                 options={{ title: '' }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="CheckinFaleConosco"
                 component={CheckinFaleConosco}
                 options={{ headerShown: false }}
-            />
+            /> */}
             <Stack.Screen
                 name="Problemas"
                 component={Problemas}
