@@ -104,11 +104,15 @@ export default function DadosPessoais() {
 
   function handleUpdateUser() {
     UpdateUser({
-      id: user.id,
-      name,
-      email,
-      phoneNumber: Number(phoneNumber),
-      birthday,
+      customerInfo: {
+        birthday,
+      },
+
+      userInfo: {
+        name,
+        email,
+        phoneNumber: Number(phoneNumber),
+      },
     })
       .then(() => {
         Alert.alert('Alterações realizadas com Sucesso!');

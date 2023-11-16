@@ -12,11 +12,12 @@ import React, { useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import Checkbox from 'expo-checkbox';
+// import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from '@/context/UserContext';
 import { login } from '@/services/auth.service';
 import LoadingBottomSheet from '@/components/BottomSheet/LoadingBSheet';
+import { saveSecurely } from '@/utils/storage';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
@@ -27,7 +28,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordHide, setIsPasswordHide] = useState(true);
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   function handleLogin() {
@@ -40,6 +41,7 @@ function Login() {
         if (res && res.userInfo && res.userInfo.role === 'customer') {
           setSigned(true);
           setUser(res.userInfo);
+          // await saveSecurely('profileAppUser', res.userInfo); save in storage.jsx
           await SecureStore.setItemAsync('TOKEN_KEY', res.accessToken);
           await SecureStore.setItemAsync(
             'USER_ID',
@@ -62,7 +64,7 @@ function Login() {
       {isLoading ? (
         <LoadingBottomSheet
           headerText="Acessando a Conta..."
-          welcomeBackText="Bem vindo de volta!"
+          welcomeBackText="Bem vindo!"
           route={() => navigation.navigate('Home')}
         />
       ) : null}
@@ -125,14 +127,14 @@ function Login() {
             </View>
           </View>
           <View style={styles.checkbox}>
-            <Checkbox
+            {/* <Checkbox
               style={{ marginRight: 6 }}
               value={isChecked}
               onValueChange={setIsChecked}
               color={isChecked ? COLORS.primary : undefined}
             />
 
-            <Text style={styles.checkboxText}>Salvar dados</Text>
+            <Text style={styles.checkboxText}>Salvar dados</Text> */}
           </View>
         </View>
         <View>

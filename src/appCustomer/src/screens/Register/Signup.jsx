@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useNavigation } from '@react-navigation/native';
 import { register } from '@/services/auth.service';
 import RNDateTimePicker, {
@@ -56,7 +57,7 @@ function Signup() {
       },
     })
       .then(() => {
-        navigation.navigate('CheckinRegister');
+        navigation.navigate('Login');
       })
       .catch((error) => {
         // eslint-disable-next-line default-case
@@ -90,7 +91,7 @@ function Signup() {
         <LoadingBSheet
           headerText=" Criando Conta..."
           welcomeBackText="Conta Criada com Sucesso!"
-          route={() => navigation.navigate('PedidosAcompanhamento')}
+          route={() => navigation.navigate('Login')}
         />
       ) : null}
 
@@ -100,7 +101,7 @@ function Signup() {
             <View>
               <Image source={icon} style={styles.imageStyle} />
             </View>
-
+            {/* >>>>>Name Input<<<<< */}
             <View>
               <Text style={styles.textLableInput}>
                 Nome <Text style={{ color: COLORS.primary }}>*</Text>
@@ -118,7 +119,7 @@ function Signup() {
                 />
               </View>
             </View>
-
+            {/* >>>>>Email Input<<<<< */}
             <View>
               <Text style={styles.textLableInput}>
                 Email <Text style={{ color: COLORS.primary }}>*</Text>
@@ -137,7 +138,7 @@ function Signup() {
                 />
               </View>
             </View>
-
+            {/* >>>>>Phone Input<<<<< */}
             <View>
               <Text style={styles.textLableInput}>Celular</Text>
               <View style={styles.textInput}>
@@ -153,7 +154,7 @@ function Signup() {
                 />
               </View>
             </View>
-
+            {/* >>>>>Birthday Input<<<<< */}
             <View>
               <Text style={styles.textLableInput}>Aniversário</Text>
               {/* O datePicker funciona nativamente apenas no Ios
@@ -169,7 +170,7 @@ function Signup() {
                     })
                   }
                 >
-                  <View style={styles.textInput}>
+                  <View>
                     <Text>{birthday.toLocaleDateString()}</Text>
                   </View>
                 </TouchableOpacity>
@@ -177,14 +178,14 @@ function Signup() {
                 <RNDateTimePicker
                   mode="date"
                   value={birthday}
-                  style={{ width: 25, height: 50 }}
+                  style={{ width: 130, height: 50 }}
                   onChange={(event, date) => setBirthday(date)}
                 />
               )}
             </View>
-
+            {/* >>>>>Photo Input<<<<< */}
             <View>
-              <Text style={styles.textLableInput}>Foto Avatar</Text>
+              <Text style={styles.textLableInput}>Foto</Text>
               <View style={styles.textInput}>
                 <TextInput
                   placeholder="Upload da foto do perfíl"
@@ -200,7 +201,7 @@ function Signup() {
               </View>
             </View>
           </View>
-
+          {/* >>>>>Password Input<<<<< */}
           <View>
             <View>
               <Text style={styles.textLableInput}>
