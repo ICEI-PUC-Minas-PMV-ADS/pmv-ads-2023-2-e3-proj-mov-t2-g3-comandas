@@ -19,10 +19,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
-import Avatar from '@/components/Avatar/Avatar';
-import UserImagePicker from '@/components/ImagePicker/imagePicker';
-
-// import { requestCameraPermissionsAsync } from 'expo-image-picker';
+import AvatarExemple from '../../assets/UserAvatar.png';
 
 const SECTIONS = [
   {
@@ -125,46 +122,38 @@ export default function UserProfile({ navigation }) {
   const sheetDeleteAccount = React.useRef();
 
   // Image Picker
-  const [image, setImage] = useState([]);
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    loadimage();
+    loadImages();
   }, []);
 
-  const loadimage = async () => {
+  const loadImages = async () => {
     await ensureDirExists();
     const files = await FileSystem.readDirectoryAsync(imgDir);
     if (files.length > 0) {
-      setImage(files.map((f) => imgDir + f));
+      setImages(files.map((f) => imgDir + f));
     }
   };
 
   const selectImage = async (useLibrary) => {
     let result;
-    try {
-      if (useLibrary) {
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
-        result = await ImagePicker.launchImageLibraryAsync({
-          cameraType: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-        });
-      } else {
-        await ImagePicker.requestCameraPermissionsAsync();
-        result = await ImagePicker.launchCameraAsync({
-          cameraType: ImagePicker.CameraType.front,
-          allowsEditing: true,
-          aspect: [1, 1],
-          quality: 1,
-        });
-      }
-      if (!result.canceled) {
-        saveImage(result.assets[0].uri);
-        console.log(result.assets[0].uri);
-      }
-    } catch (error) {
-      Alert(`Error uploading image: ${error.message}`);
+    const options = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    };
+    if (useLibrary) {
+      result = await ImagePicker.launchImageLibraryAsync(options);
+    } else {
+      await ImagePicker.requestCameraPermissionsAsync();
+      result = await ImagePicker.launchImageLibraryAsync(options);
+    }
+    if (!result.canceled) {
+      saveImage(result.assets[0].uri);
+      console.log(result.assets[0].uri);
     }
   };
 
@@ -177,24 +166,23 @@ export default function UserProfile({ navigation }) {
     const dest = imgDir + filename;
     // to copy creating a new file in the destination with the new filename
     await FileSystem.copyAsync({ from: uri, to: dest });
-    setImage([...image, dest]);
+    setImages([...images, dest]);
   };
 
   const deleteImage = async (uri) => {
     await FileSystem.deleteAsync(uri);
-    setImage(image.filter((i) => i !== uri));
+    setImages(images.filter((i) => i !== uri));
   };
 
   const uploadImage = async (uri) => {
-    setIsLoading(true);
-
+    setLoading(true);
     await FileSystem.uploadAsync('http://192.168.0.187:8081/upload.php', uri, {
       httpMethod: 'POST',
       uploadType: FileSystem.FileSystemUploadType.MULTIPART,
       fieldName: 'file',
     });
     console.log(uri);
-    setIsLoading(false);
+    setLoading(false);
   };
 
   // Confirmation Dialog Alerts
@@ -253,9 +241,22 @@ export default function UserProfile({ navigation }) {
 
         {/* >>>>>Profile Avatar Picture<<<<< */}
         <View style={styles.profile}>
-          <Avatar>
-            <UserImagePicker />
-          </Avatar>
+          <TouchableOpacity
+            onPress={() => {
+              selectImage(true);
+            }}
+          >
+            <View style={styles.profileAvatarWrapper}>
+              <Image
+                alt="Profile Picture"
+                source={{ setImages }}
+                style={styles.profileAvatar}
+              />
+              <View style={styles.profileAction}>
+                <FeatherIcon name="edit-3" size={15} color={COLORS.white} />
+              </View>
+            </View>
+          </TouchableOpacity>
 
           <Text style={styles.profileName}>{user.name}</Text>
 
