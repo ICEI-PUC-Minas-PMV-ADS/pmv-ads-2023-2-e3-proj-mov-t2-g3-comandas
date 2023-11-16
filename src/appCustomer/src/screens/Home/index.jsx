@@ -28,7 +28,7 @@ export default function Home({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {cart ? <FloatBasket basketSize={basketSize} /> : null}
+      {cart && basketSize ? <FloatBasket basketSize={basketSize} /> : null}
 
       <TopBar navigation={navigation} />
       <ScrollView

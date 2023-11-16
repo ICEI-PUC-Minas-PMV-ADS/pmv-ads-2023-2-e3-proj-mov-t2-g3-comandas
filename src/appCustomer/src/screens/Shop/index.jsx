@@ -32,13 +32,16 @@ export default function Shop({ route, navigation }) {
   const [itemCategory, setItemCategory] = useState([]);
   const categoryLocation = [];
   const $scrollViewRef = useRef();
-  const basketSize = cart.reduce((totalItems, order) => {
-    const orderItemQuantity = order.items.reduce(
-      (total, item) => total + item.quantity,
-      0,
-    );
-    return totalItems + orderItemQuantity;
-  }, 0);
+  const basketSize =
+    cart.length > 0
+      ? cart.reduce((totalItems, order) => {
+          const orderItemQuantity = order.items.reduce(
+            (total, item) => total + item.quantity,
+            0,
+          );
+          return totalItems + orderItemQuantity;
+        }, 0)
+      : null;
 
   useEffect(() => {
     async function fetchMenu() {
@@ -122,7 +125,9 @@ export default function Shop({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {cart ? <FloatBasket basketSize={basketSize} bottom={35} /> : null}
+      {cart && basketSize ? (
+        <FloatBasket basketSize={basketSize} bottom={35} />
+      ) : null}
       <ParallaxScrollView
         ref={$scrollViewRef}
         showsVerticalScrollIndicator={false}
