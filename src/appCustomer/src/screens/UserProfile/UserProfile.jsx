@@ -1,5 +1,5 @@
 import COLORS from '@/constants/colors';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -10,11 +10,14 @@ import {
   Alert,
 } from 'react-native';
 import { View, Text } from 'react-native-animatable';
+import * as FileSystem from 'expo-file-system';
+import * as ImagePicker from 'expo-image-picker';
 import { useUser } from '@/context/UserContext';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import RBSheet from 'react-native-raw-bottom-sheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
@@ -101,15 +104,88 @@ const SECTIONS = [
   },
 ];
 
+const imgDir = `${FileSystem.documentDirectory}images/`;
+
+const ensureDirExists = async () => {
+  const dirInfo = await FileSystem.getInfoAsync(imgDir);
+  if (!dirInfo.exists) {
+    await FileSystem.makeDirectoryAsync(imgDir, { intermediates: true });
+  }
+};
+
 export default function UserProfile({ navigation }) {
   // to get logged user data
   const { user } = useUser();
-
+  // Activity Indicator
   const [isLoading, setIsLoading] = useState(false);
-
   // Action Bottom Sheets
   const sheetDeleteAccount = React.useRef();
 
+  // Image Picker
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    loadImages();
+  }, []);
+
+  const loadImages = async () => {
+    await ensureDirExists();
+    const files = await FileSystem.readDirectoryAsync(imgDir);
+    if (files.length > 0) {
+      setImages(files.map((f) => imgDir + f));
+    }
+  };
+
+  const selectImage = async (useLibrary) => {
+    let result;
+    const options = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    };
+    if (useLibrary) {
+      result = await ImagePicker.launchImageLibraryAsync(options);
+    } else {
+      await ImagePicker.requestCameraPermissionsAsync();
+      result = await ImagePicker.launchImageLibraryAsync(options);
+    }
+    if (!result.canceled) {
+      saveImage(result.assets[0].uri);
+      console.log(result.assets[0].uri);
+    }
+  };
+
+  const saveImage = async (uri) => {
+    // check if exists a directory
+    await ensureDirExists();
+    // rename the file with date and time plus filename
+    const filename = `${new Date().getTime()}.jpg`;
+    // destination
+    const dest = imgDir + filename;
+    // to copy creating a new file in the destination with the new filename
+    await FileSystem.copyAsync({ from: uri, to: dest });
+    setImages([...images, dest]);
+  };
+
+  const deleteImage = async (uri) => {
+    await FileSystem.deleteAsync(uri);
+    setImages(images.filter((i) => i !== uri));
+  };
+
+  const uploadImage = async (uri) => {
+    setLoading(true);
+    await FileSystem.uploadAsync('http://192.168.0.187:8081/upload.php', uri, {
+      httpMethod: 'POST',
+      uploadType: FileSystem.FileSystemUploadType.MULTIPART,
+      fieldName: 'file',
+    });
+    console.log(uri);
+    setLoading(false);
+  };
+
+  // Confirmation Dialog Alerts
   const showConfirmDialog = () =>
     Alert.alert('Atenção!', 'Deseja Sair da sua Conta?', [
       {
@@ -162,17 +238,18 @@ export default function UserProfile({ navigation }) {
             route={() => navigation.navigate('Login')}
           />
         ) : null}
+
         {/* >>>>>Profile Avatar Picture<<<<< */}
         <View style={styles.profile}>
           <TouchableOpacity
             onPress={() => {
-              // handleUploadPicture
+              selectImage(true);
             }}
           >
             <View style={styles.profileAvatarWrapper}>
               <Image
                 alt="Profile Picture"
-                source={AvatarExemple}
+                source={{ setImages }}
                 style={styles.profileAvatar}
               />
               <View style={styles.profileAction}>
@@ -185,6 +262,7 @@ export default function UserProfile({ navigation }) {
 
           {/* >>>>>Logout Button<<<<< */}
           <TouchableOpacity
+            style={{ opacity: 0.75 }}
             onPress={() => {
               // handle logout
               // AsyncStorage.clear();
