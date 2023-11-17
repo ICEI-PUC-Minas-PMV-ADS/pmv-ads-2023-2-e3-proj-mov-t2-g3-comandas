@@ -62,7 +62,6 @@ function Signup() {
     if (!result.canceled) {
       setImage(result.assets[0].uri);
       setPhotoUrl(result.assets[0].uri);
-      // saveImage(result.assets[0].uri);
       console.log(result.assets[0].uri);
     }
   };

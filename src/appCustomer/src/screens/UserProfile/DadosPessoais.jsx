@@ -18,7 +18,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { UpdateUser } from '@/services/user.services';
-import AvatarExemple from '../../assets/UserAvatar.png';
+import AvatarExemple from '../../assets/UserPlaceholder02.png';
 
 const SECTIONS = [
   {
@@ -79,6 +79,7 @@ export default function DadosPessoais() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState('');
   const [birthday, setBirthday] = useState(new Date());
 
   const [form, setForm] = useState({
@@ -87,6 +88,7 @@ export default function DadosPessoais() {
     email: user.email,
     phoneNumber: user.phoneNumber,
     birthday: user.birthday,
+    photoUrl: user.photoUrl,
   });
   const [value, setValue] = useState(0);
   const { tabs, items } = useMemo(
@@ -138,7 +140,7 @@ export default function DadosPessoais() {
           <View style={styles.profileHeader}>
             <Image
               alt="Profile Picture"
-              source={AvatarExemple}
+              source={user.photoUrl ? { photoUrl } : AvatarExemple}
               style={styles.profileAvatar}
             />
             <View>
@@ -214,6 +216,14 @@ export default function DadosPessoais() {
                 <View style={{ flex: 1 }} />
                 {type === 'input' && (
                   <Text style={styles.rowValue}>{form[id]}</Text>
+                )}
+
+                {type === 'input' && label === 'Aniversário' && (
+                  <RNDateTimePicker
+                    mode="date"
+                    value={birthday}
+                    onChange={(event, date) => setBirthday(date)}
+                  />
                 )}
 
                 {type === 'toggle' && (
