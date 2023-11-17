@@ -1,5 +1,5 @@
 import COLORS from '@/constants/colors';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -10,15 +10,16 @@ import {
   Alert,
 } from 'react-native';
 import { View, Text } from 'react-native-animatable';
-// import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system';
 import * as ImagePicker from 'expo-image-picker';
 import { useUser } from '@/context/UserContext';
-import { updateCustomer } from '@/services/user.services';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import RBSheet from 'react-native-raw-bottom-sheet';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
-import AvatarExemple from '../../assets/UserAvatar.png';
+import AvatarExemple from '../../assets/UserPlaceholder02.png';
 
 const SECTIONS = [
   {
@@ -103,6 +104,15 @@ const SECTIONS = [
   },
 ];
 
+const imgDir = `${FileSystem.documentDirectory}images/`;
+
+const ensureDirExists = async () => {
+  const dirInfo = await FileSystem.getInfoAsync(imgDir);
+  if (!dirInfo.exists) {
+    await FileSystem.makeDirectoryAsync(imgDir, { intermediates: true });
+  }
+};
+
 export default function UserProfile({ navigation }) {
   // to get logged user data
   const { user } = useUser();
@@ -112,33 +122,26 @@ export default function UserProfile({ navigation }) {
   const sheetDeleteAccount = React.useRef();
 
   // Image Picker
-  const [image, setImage] = useState(AvatarExemple);
-  const [photoUrl, setPhotoUrl] = useState('');
-  // const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState([]);
 
-  function handleUpdateCustomerAvatar() {
-    updateCustomer({
-      photoUrl,
-    })
-      .then(() => {
-        Alert.alert('Alterações realizadas com Sucesso!');
-        console.log('upload');
-      })
-      .catch(() => {
-        Alert.alert('Alterações não foram salvas!', 'Tente novamente.');
-      });
-  }
+  useEffect(() => {
+    loadImages();
+  }, []);
 
-  /* useEffect(() => {
-    loadImage();
-  }, []); */
+  const loadImages = async () => {
+    await ensureDirExists();
+    const files = await FileSystem.readDirectoryAsync(imgDir);
+    if (files.length > 0) {
+      setImage(files.map((f) => imgDir + f));
+    }
+  };
 
-  const pickImage = async (useLibrary) => {
+  const selectImage = async (useLibrary) => {
     let result;
     const options = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [1, 1],
+      aspect: [4, 3],
       quality: 1,
     };
     if (useLibrary) {
@@ -148,36 +151,38 @@ export default function UserProfile({ navigation }) {
       result = await ImagePicker.launchImageLibraryAsync(options);
     }
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
-      setPhotoUrl(result.assets[0].uri);
-      handleUpdateCustomerAvatar(result.assets[0].uri);
-      // saveImage(result.assets[0].uri);
+      saveImage(result.assets[0].uri);
       console.log(result.assets[0].uri);
     }
   };
 
-  /* const saveImage = async (uri) => {
+  const saveImage = async (uri) => {
     // check if exists a directory
     await ensureDirExists();
     // rename the file with date and time plus filename
-    const filename = `${uri}`;
+    const filename = `${new Date().getTime()}.jpg`;
     // destination
     const dest = imgDir + filename;
     // to copy creating a new file in the destination with the new filename
     await FileSystem.copyAsync({ from: uri, to: dest });
     setImage([...image, dest]);
-  }; */
+  };
 
-  /* const uploadImage = async (uri) => {
-    setLoading(true);
+  const deleteImage = async (uri) => {
+    await FileSystem.deleteAsync(uri);
+    setImage(image.filter((i) => i !== uri));
+  };
+
+  const uploadImage = async (uri) => {
+    setIsLoading(true);
     await FileSystem.uploadAsync('http://192.168.0.187:8081/upload.php', uri, {
       httpMethod: 'POST',
       uploadType: FileSystem.FileSystemUploadType.MULTIPART,
       fieldName: 'file',
     });
     console.log(uri);
-    setLoading(false);
-  }; */
+    setIsLoading(false);
+  };
 
   // Confirmation Dialog Alerts
   const showConfirmDialog = () =>
@@ -235,18 +240,20 @@ export default function UserProfile({ navigation }) {
 
         {/* >>>>>Profile Avatar Picture<<<<< */}
         <View style={styles.profile}>
-          <View style={styles.profileAvatarWrapper}>
-            {image && (
+          <TouchableOpacity
+            onPress={() => {
+              selectImage(true);
+            }}
+          >
+            <View style={styles.profileAvatarWrapper}>
               <Image
                 alt="Profile Picture"
-                source={{ uri: image }}
+                source={images ? { images } : AvatarExemple}
                 style={styles.profileAvatar}
               />
-            )}
-          </View>
-          <TouchableOpacity onPress={pickImage}>
-            <View style={styles.profileAction}>
-              <FeatherIcon name="edit-3" size={15} color={COLORS.white} />
+              <View style={styles.profileAction}>
+                <FeatherIcon name="edit-3" size={15} color={COLORS.white} />
+              </View>
             </View>
           </TouchableOpacity>
 
@@ -262,13 +269,13 @@ export default function UserProfile({ navigation }) {
             }}
           >
             <View style={styles.logout}>
-              <Text style={styles.logoutLabel}>Sair</Text>
               <FeatherIcon
                 name="log-out"
-                size={26}
+                size={24}
                 label="Sair"
-                color={COLORS.iconRed}
+                color={COLORS.white}
               />
+              <Text style={styles.logoutLabel}>Sair</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -427,23 +434,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logout: {
-    flexDirection: 'row',
-    backgroundColor: COLORS.white,
-    width: 340,
-    height: 50,
+    backgroundColor: COLORS.iconRed,
+    width: 60,
+    height: 60,
     marginVertical: 20,
-
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: COLORS.iconRed,
     borderRadius: 99,
-    borderWidth: 0.2,
+    borderWidth: 3,
   },
   logoutLabel: {
-    flexDirection: 'row',
-    marginHorizontal: 12,
-    color: COLORS.iconRed,
-    fontSize: 16,
+    color: COLORS.white,
+    fontSize: 12,
     fontWeight: '600',
   },
   section: {
