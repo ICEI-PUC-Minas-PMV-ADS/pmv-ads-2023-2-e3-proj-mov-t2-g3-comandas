@@ -15,16 +15,18 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-
+import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
 import { register } from '@/services/auth.service';
 import RNDateTimePicker, {
   DateTimePickerAndroid,
 } from '@react-native-community/datetimepicker';
 import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
+import AvatarExemple from '../../assets/UserAvatar.png';
 
 function Signup() {
   const navigation = useNavigation();
@@ -38,7 +40,32 @@ function Signup() {
 
   const [isPasswordHide, setIsPasswordHide] = useState(true);
 
+  // Image Picker
+  const [image, setImage] = useState(AvatarExemple);
+
   const { height } = useWindowDimensions();
+
+  const pickImage = async (useLibrary) => {
+    let result;
+    const options = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    };
+    if (useLibrary) {
+      result = await ImagePicker.launchImageLibraryAsync(options);
+    } else {
+      await ImagePicker.requestCameraPermissionsAsync();
+      result = await ImagePicker.launchImageLibraryAsync(options);
+    }
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      setPhotoUrl(result.assets[0].uri);
+      // saveImage(result.assets[0].uri);
+      console.log(result.assets[0].uri);
+    }
+  };
 
   function handleRegister() {
     setIsLoading(true);
@@ -186,21 +213,26 @@ function Signup() {
             {/* >>>>>Photo Input<<<<< */}
             <View>
               <Text style={styles.textLableInput}>Foto</Text>
-              <View style={styles.textInput}>
-                <TextInput
-                  placeholder="Upload da foto do perfíl"
-                  placeholderTextColor={COLORS.placeholderText}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="url"
-                  style={{ width: '100%' }}
-                  value={photoUrl}
-                  setValue={setPhotoUrl}
-                  onChangeText={(text) => setPhotoUrl(text)}
-                />
+              <View>
+                <View style={styles.profileAvatarWrapper}>
+                  <TouchableOpacity
+                    onPress={pickImage}
+                    // setValue={setPhotoUrl}
+                    // onChange={setPhotoUrl}
+                  >
+                    {image && (
+                      <Image
+                        alt="Profile Picture"
+                        source={{ uri: image }}
+                        style={styles.profileAvatar}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </View>
+
           {/* >>>>>Password Input<<<<< */}
           <View>
             <View>
@@ -277,6 +309,39 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     padding: 20,
     gap: 15,
+  },
+  profile: {
+    backgroundColor: COLORS.white,
+    padding: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: -20,
+  },
+  profileAvatar: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 120,
+    height: 120,
+    borderRadius: 99,
+    borderColor: COLORS.linkTextGreen,
+    borderWidth: 0.2,
+  },
+  profileAvatarWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    position: 'relative',
+  },
+  profileAction: {
+    width: 34,
+    height: 34,
+    borderRadius: 99,
+    backgroundColor: COLORS.linkTextGreen,
+    position: 'absolute',
+    // right: -4,
+    // bottom: -10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   imageStyle: {
     alignSelf: 'center',
