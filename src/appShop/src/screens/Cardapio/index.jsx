@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-unresolved
 import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env';
 import {
@@ -10,38 +10,58 @@ import {
   TouchableOpacity,
   View,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import COLORS from '@/constants/colors';
+import { useFocusEffect } from '@react-navigation/native';
 import ImgPlaceholder from '../../assets/ItemImgPlaceholder.svg';
 
-export default function Cardapio() {
+export default function Cardapio({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [menu, setMenu] = useState({});
 
   const shopId = 1;
 
-  useEffect(() => {
-    async function fetchMenu() {
-      try {
-        setIsLoading(true);
-        const { data } = await axios.get(`${BASE_URL}shop/${shopId}/menu`, {
-          headers: {
-            'x-api-key': API_KEY,
-            Authorization: ADMIN_TOKEN,
-          },
-        });
+  useFocusEffect(
+    useCallback(() => {
+      async function fetchMenu() {
+        try {
+          setIsLoading(true);
+          const { data } = await axios.get(`${BASE_URL}shop/${shopId}/menu`, {
+            headers: {
+              'x-api-key': API_KEY,
+              Authorization: ADMIN_TOKEN,
+            },
+          });
 
-        setMenu(data);
-      } catch (error) {
-        // eslint-disable-next-line no-undef
-        alert(error);
-      } finally {
-        setIsLoading(false);
+          setMenu(
+            data.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)),
+          );
+        } catch (error) {
+          // eslint-disable-next-line no-undef
+          alert(error);
+        } finally {
+          setIsLoading(false);
+        }
       }
-    }
 
-    fetchMenu();
-  }, []);
+      fetchMenu();
+    }, []),
+  );
+
+  if (isLoading)
+    return (
+      <View
+        style={{
+          backgroundColor: COLORS.neutralWhite,
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+        }}
+      >
+        <ActivityIndicator color={COLORS.primary} size="large" />
+      </View>
+    );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,6 +71,28 @@ export default function Cardapio() {
         showsVerticalScrollIndicator={false}
         fadingEdgeLength={50}
         contentContainerStyle={{ gap: 20, padding: 12 }}
+        ListEmptyComponent={() => (
+          <Text
+            style={{
+              color: COLORS.secondary,
+              textAlign: 'center',
+              fontFamily: 'MontserratLight',
+            }}
+          >
+            Nenhum item encontrado
+          </Text>
+        )}
+        ListHeaderComponent={() => (
+          <Text
+            style={{
+              color: COLORS.secondary,
+              textAlign: 'center',
+              fontFamily: 'MontserratLight',
+            }}
+          >
+            Selecione algum item para editá-lo
+          </Text>
+        )}
         renderItem={({ item }) => (
           <View style={styles.itemCardContainer}>
             <TouchableOpacity
@@ -58,10 +100,18 @@ export default function Cardapio() {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}
+              onPress={() => navigation.navigate('ItemDetails', { item })}
             >
               <View style={{ gap: 5 }}>
                 <Text style={styles.itemName}>{item.name}</Text>
                 <Text style={styles.itemPrice}>R$ {item.price}</Text>
+                <Text
+                  numberOfLines={3}
+                  textBreakStrategy="highQuality"
+                  style={styles.itemDescription}
+                >
+                  {item.description}
+                </Text>
               </View>
 
               {item.image ? (
@@ -100,11 +150,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   itemName: {
-    fontFamily: 'Montserrat-SemiBold',
+    fontFamily: 'MontserratSemiBold',
     fontSize: 16,
   },
+  itemDescription: {
+    textAlign: 'left',
+    fontFamily: 'MontserratSemiBold',
+    fontSize: 12,
+    color: COLORS.neutralBlue,
+    width: 200,
+  },
   itemPrice: {
-    fontFamily: 'Montserrat-SemiBold',
+    fontFamily: 'MontserratSemiBold',
     fontSize: 14,
     color: COLORS.primary,
   },

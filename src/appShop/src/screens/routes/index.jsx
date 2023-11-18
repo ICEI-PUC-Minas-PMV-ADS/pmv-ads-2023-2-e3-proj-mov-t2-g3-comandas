@@ -2,22 +2,26 @@
 import React from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   DrawerContentScrollView,
   DrawerItemList,
   createDrawerNavigator,
 } from '@react-navigation/drawer';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+
+import COLORS from '@/constants/colors';
 import Home from '../Home';
-import Dashboard from '../../assets/Dashboard.svg';
-import Pedidos from '../../assets/Pedidos.svg';
-import Mesas from '../../assets/Mesas.svg';
-import Perfil from '../../assets/Perfil.svg';
+import Mesas from '../Mesas/index';
+
+import DashboardIcon from '../../assets/Dashboard.svg';
+import PedidosIcon from '../../assets/Pedidos.svg';
+import MesasIcon from '../../assets/Mesas.svg';
+import PerfilIcon from '../../assets/Perfil.svg';
 import Icon from '../../assets/icon.png';
 import Cardapio from '../Cardapio';
+import ItemDetails from '../Cardapio/ItemDetails';
+import Plus from '../../assets/Plus.svg';
 
-const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -40,6 +44,25 @@ function CardapioStackNavigation() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Cardapio" component={Cardapio} />
+      <Stack.Screen
+        name="ItemDetails"
+        component={ItemDetails}
+        options={{
+          animation: 'fade',
+          presentation: 'transparentModal',
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function MesasStackNavigation() {
+  const navigation = useNavigation();
+
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="MesasStack" component={Mesas} />
     </Stack.Navigator>
   );
 }
@@ -63,7 +86,12 @@ function CustomDrawer(props) {
               height: 50,
             }}
           />
-          <Text style={{ fontFamily: 'Montserrat-SemiBold', fontSize: 20 }}>
+          <Text
+            style={{
+              fontFamily: 'MontserratSemiBold',
+              fontSize: 20,
+            }}
+          >
             COMANDAS
           </Text>
         </View>
@@ -74,6 +102,7 @@ function CustomDrawer(props) {
 }
 
 function DrawerNavigation() {
+  const navigation = useNavigation();
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}
@@ -94,17 +123,17 @@ function DrawerNavigation() {
         options={() => ({
           drawerLabel: 'Dashboard',
           drawerIcon: ({ focused }) => (
-            <Dashboard fill={focused ? '#ff0000' : 'gray'} />
+            <DashboardIcon fill={focused ? '#ff0000' : 'gray'} />
           ),
         })}
       />
       <Drawer.Screen
         name="Mesas"
-        component={HomeStackNavigation}
+        component={MesasStackNavigation}
         options={() => ({
           drawerLabel: 'Mesas',
           drawerIcon: ({ focused }) => (
-            <Mesas fill={focused ? '#ff0000' : 'gray'} />
+            <MesasIcon fill={focused ? '#ff0000' : 'gray'} />
           ),
         })}
       />
@@ -112,9 +141,25 @@ function DrawerNavigation() {
         name="Cardápio"
         component={CardapioStackNavigation}
         options={() => ({
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ItemDetails')}
+              style={{
+                backgroundColor: COLORS.primary,
+                borderRadius: 999,
+                width: 30,
+                height: 30,
+                marginRight: 32,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Plus />
+            </TouchableOpacity>
+          ),
           drawerLabel: 'Cardápio',
           drawerIcon: ({ focused }) => (
-            <Pedidos stroke={focused ? '#ff0000' : 'gray'} />
+            <PedidosIcon stroke={focused ? '#ff0000' : 'gray'} />
           ),
         })}
       />
@@ -124,7 +169,7 @@ function DrawerNavigation() {
         options={() => ({
           drawerLabel: 'Perfil',
           drawerIcon: ({ focused }) => (
-            <Perfil fill={focused ? '#ff0000' : 'gray'} />
+            <PerfilIcon fill={focused ? '#ff0000' : 'gray'} />
           ),
         })}
       />
