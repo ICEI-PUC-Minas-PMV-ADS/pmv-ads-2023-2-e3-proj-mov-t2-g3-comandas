@@ -42,6 +42,28 @@ export const UpdateUser = async () => {
   }
 };
 
+export const updateCustomer = async () => {
+  try {
+    return await axios
+      .put(`${BASE_URL}/customer/update`, {
+        headers: {
+          'x-api-key': API_KEY,
+          Authorization: ADMIN_TOKEN,
+        },
+      })
+      .then(
+        (response) => response.data,
+        (error) => {
+          console.log(error);
+          return null;
+        },
+      );
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 /* export const deleteUser = async (id) => {
     const { user } = useUser();
     try {
