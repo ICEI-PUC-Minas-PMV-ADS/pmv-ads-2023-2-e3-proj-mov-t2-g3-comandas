@@ -2,9 +2,11 @@ import COLORS from '@/constants/colors';
 import React, { useEffect, useRef } from 'react';
 import * as Animatable from 'react-native-animatable';
 import { StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import BasketImg from '../../assets/Basket.svg';
 
 export default function FloatBasket({ basketSize, bottom }) {
+  const navigation = useNavigation();
   const $animatableView = useRef(null);
   const initialBasketSize = useRef(basketSize);
 
@@ -22,6 +24,7 @@ export default function FloatBasket({ basketSize, bottom }) {
       delay={250}
       animation="slideInLeft"
       style={styles.container(bottom)}
+      onPress={() => navigation('Cart')}
     >
       <Animatable.Text easing="ease-in-out" style={styles.count}>
         {basketSize ?? 0}

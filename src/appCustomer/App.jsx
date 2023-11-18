@@ -19,6 +19,7 @@ import { LogBox } from 'react-native';
 import ignoreWarnings from 'ignore-warnings';
 import LocationProvider from '@/context/LocationContext';
 import CartProvider from '@/context/CartContext';
+import CartScreen from '@/screens/Carrinho/CartScreen';
 
 export default function App() {
   // Carregando as fontes
