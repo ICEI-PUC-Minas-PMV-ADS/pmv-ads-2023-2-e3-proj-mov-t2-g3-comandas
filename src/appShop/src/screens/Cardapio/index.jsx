@@ -14,13 +14,15 @@ import {
 } from 'react-native';
 import COLORS from '@/constants/colors';
 import { useFocusEffect } from '@react-navigation/native';
+import { useUser } from '@/context/UserContext';
 import ImgPlaceholder from '../../assets/ItemImgPlaceholder.svg';
 
 export default function Cardapio({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [menu, setMenu] = useState({});
+  const { user } = useUser();
 
-  const shopId = 1;
+  const shopId = user.userInfo.id;
 
   useFocusEffect(
     useCallback(() => {
@@ -39,14 +41,14 @@ export default function Cardapio({ navigation }) {
           );
         } catch (error) {
           // eslint-disable-next-line no-undef
-          alert(error);
+          setMenu([]);
         } finally {
           setIsLoading(false);
         }
       }
 
       fetchMenu();
-    }, []),
+    }, [shopId]),
   );
 
   if (isLoading)

@@ -10,6 +10,8 @@ import {
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import COLORS from '@/constants/colors';
+import { useUser } from '@/context/UserContext';
+import Splash from '../../assets/splash.png';
 import Home from '../Home';
 import Mesas from '../Mesas/index';
 
@@ -21,13 +23,15 @@ import Icon from '../../assets/icon.png';
 import Cardapio from '../Cardapio';
 import ItemDetails from '../Cardapio/ItemDetails';
 import Plus from '../../assets/Plus.svg';
+import Signup from '../Register/Signup';
+import SignupAddress from '../Register/SignupAddress';
+import Login from '../Login/Login';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function HomeStackNavigation() {
   const navigation = useNavigation();
-
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -38,9 +42,31 @@ function HomeStackNavigation() {
   );
 }
 
+function AuthStackNavigation() {
+  const navigation = useNavigation();
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen
+        name="SignupAddress"
+        component={SignupAddress}
+        options={{
+          animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          animation: 'slide_from_bottom',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function CardapioStackNavigation() {
   const navigation = useNavigation();
-
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Cardapio" component={Cardapio} />
@@ -59,7 +85,6 @@ function CardapioStackNavigation() {
 
 function MesasStackNavigation() {
   const navigation = useNavigation();
-
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="MesasStack" component={Mesas} />
@@ -68,6 +93,7 @@ function MesasStackNavigation() {
 }
 
 function CustomDrawer(props) {
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1, padding: 10 }}>
       <DrawerContentScrollView {...props}>
@@ -178,9 +204,18 @@ function DrawerNavigation() {
 }
 
 export default function Routes() {
+  const { signed } = useUser();
+
+  if (typeof signed === 'object') {
+    return (
+      <View>
+        <Image source={Splash} />
+      </View>
+    );
+  }
   return (
     <NavigationContainer>
-      <DrawerNavigation />
+      {signed ? <DrawerNavigation /> : <AuthStackNavigation />}
     </NavigationContainer>
   );
 }
