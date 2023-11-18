@@ -10,49 +10,96 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 // eslint-disable-next-line import/no-unresolved
 import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env';
 import CurrencyInput from 'react-native-currency-input';
 import axios from 'axios';
+import { useUser } from '@/context/UserContext';
 import BannerPlaceholder from '../../assets/ItemBannerPlaceholder.svg';
 
 export default function ItemDetails({ navigation, route }) {
   const item = route.params?.item ?? null;
   const { width, height } = useWindowDimensions();
-  const [name, setName] = useState(item?.name ?? 'Nome');
-  const [description, setDescription] = useState(
-    item?.description ?? 'Descrição',
-  );
-  const [price, setPrice] = useState(item?.price ?? 1.99);
+  const [name, setName] = useState(item?.name ?? '');
+  const [description, setDescription] = useState(item?.description ?? '');
+  const [price, setPrice] = useState(item?.price ?? 0);
+  const { user } = useUser();
 
-  const shopId = 1;
+  const shopId = user.userInfo.id;
 
   async function handleAdd() {
-    try {
-      await axios.post(
-        `${BASE_URL}/item/create`,
-        { name, price, shopId, description },
-        { headers: { Authorization: ADMIN_TOKEN, 'x-api-key': API_KEY } },
-      );
+    if (
+      !name ||
+      name.trim().length <= 0 ||
+      !description ||
+      description.trim().length <= 0 ||
+      !price ||
+      price.toString().trim().length <= 0
+    ) {
+      // eslint-disable-next-line no-alert, no-undef
+      Alert.alert('Preencha todos os campos!');
+    } else {
+      try {
+        await axios.post(
+          `${BASE_URL}/item/create`,
+          { name, price, shopId, description: description.trim() },
+          { headers: { Authorization: ADMIN_TOKEN, 'x-api-key': API_KEY } },
+        );
 
-      alert(`Item ${name} criado !`);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      navigation.goBack();
+        // eslint-disable-next-line no-alert, no-undef
+        Alert.alert(`${name} criado !`);
+      } catch (error) {
+        console.log(
+          `ERROR IN handleAdd => [${
+            error?.response?.status
+          }]\n ${JSON.stringify(error?.response?.data, null, 2)}`,
+        );
+        throw error;
+      } finally {
+        navigation.goBack();
+      }
     }
   }
 
   async function handleEdit(itemId) {
-    try {
-      await axios.put(
-        `${BASE_URL}/item/update`,
-        { id: itemId, name, price, description },
-        { headers: { Authorization: ADMIN_TOKEN, 'x-api-key': API_KEY } },
-      );
+    if (
+      !name ||
+      name.trim().length <= 0 ||
+      !description ||
+      description.trim().length <= 0 ||
+      !price ||
+      price.toString().trim().length <= 0
+    ) {
+      // eslint-disable-next-line no-alert, no-undef
+      alert('Preencha todos os campos!');
+    } else {
+      try {
+        await axios.put(
+          `${BASE_URL}/item/update`,
+          { id: itemId, name, price, description },
+          { headers: { Authorization: ADMIN_TOKEN, 'x-api-key': API_KEY } },
+        );
 
-      alert(`Item ${name} modificado !`);
+        // eslint-disable-next-line no-alert, no-undef
+        alert(`Item ${name} modificado !`);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        navigation.goBack();
+      }
+    }
+  }
+
+  async function handleDelete(itemId) {
+    try {
+      await axios.delete(`${BASE_URL}/item/delete/${itemId}`, {
+        headers: { Authorization: ADMIN_TOKEN, 'x-api-key': API_KEY },
+      });
+
+      // eslint-disable-next-line no-alert, no-undef
+      alert(`Item ${name} excluído !`);
     } catch (error) {
       console.log(error);
     } finally {
@@ -97,14 +144,16 @@ export default function ItemDetails({ navigation, route }) {
         )}
         <View style={{ padding: 16, gap: 15 }}>
           <TextInput
+            placeholder="Nome"
             cursorColor={COLORS.primary}
             autoFocus
             style={styles.itemTitle}
             value={name}
-            onChangeText={setName}
+            onChangeText={(text) => setName(text)}
             multiline
           />
           <TextInput
+            placeholder="Descrição"
             cursorColor={COLORS.primary}
             style={styles.itemDescription}
             value={description}
@@ -145,6 +194,28 @@ export default function ItemDetails({ navigation, route }) {
                 {item ? 'Salvar' : 'Criar'}
               </Text>
             </TouchableOpacity>
+
+            {item ? (
+              <TouchableOpacity
+                style={styles.modalExcludeContainer}
+                onPress={() => {
+                  Alert.alert(
+                    'Atenção !',
+                    'Essa ação não pode ser revertida.',
+                    [
+                      {
+                        text: 'Confirmar',
+                        onPress: () => handleDelete(item.id),
+                      },
+                      { text: 'Cancelar', style: 'cancel' },
+                    ],
+                    { cancelable: true },
+                  );
+                }}
+              >
+                <Text style={styles.modalExcludeCart}>Excluir</Text>
+              </TouchableOpacity>
+            ) : null}
           </View>
         </View>
       </ScrollView>
@@ -247,9 +318,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 5,
   },
+  modalExcludeContainer: {
+    padding: 15,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: COLORS.primary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
   modalTotalCart: {
     fontFamily: 'MontserratBold',
     color: COLORS.neutralWhite,
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  modalExcludeCart: {
+    fontFamily: 'MontserratSemiBold',
+    color: COLORS.primary,
     textAlign: 'center',
     fontSize: 16,
   },

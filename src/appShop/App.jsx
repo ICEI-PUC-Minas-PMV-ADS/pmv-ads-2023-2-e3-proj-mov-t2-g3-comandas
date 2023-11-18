@@ -10,6 +10,7 @@ import {
   Montserrat_400Regular,
   Montserrat_700Bold,
 } from '@expo-google-fonts/montserrat';
+import UserProvider from '@/context/UserContext';
 
 function App() {
   const [fontsLoaded] = useFonts({
@@ -33,6 +34,10 @@ function App() {
   // Chegou aqui então fontsLoaded é true então podemos esconder a Splash
   SplashScreen.hideAsync();
 
-  return <Routes />;
+  return (
+    <UserProvider>
+      <Routes />
+    </UserProvider>
+  );
 }
 export default App;
