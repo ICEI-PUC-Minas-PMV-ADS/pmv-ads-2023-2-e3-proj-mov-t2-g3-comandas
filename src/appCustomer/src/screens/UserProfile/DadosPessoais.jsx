@@ -15,7 +15,7 @@ import React, { useState, useMemo } from 'react';
 import { useUser } from '@/context/UserContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-
+import * as ImagePicker from 'expo-image-picker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { UpdateUser } from '@/services/user.services';
 import AvatarExemple from '../../assets/UserPlaceholder02.png';
@@ -35,7 +35,7 @@ const SECTIONS = [
         type: 'input',
       },
       {
-        id: 'birthday',
+        id: 'birth-day',
         icon: 'calendar',
         label: 'Aniversário',
         type: 'input',
@@ -79,8 +79,10 @@ export default function DadosPessoais() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState(null);
-  const [photoUrl, setPhotoUrl] = useState('');
+  const [photoUrl, setPhotoUrl] = useState();
   const [birthday, setBirthday] = useState(new Date());
+  // Image Picker
+  const [image, setImage] = useState(AvatarExemple);
 
   const [form, setForm] = useState({
     id: user.id,
@@ -104,10 +106,32 @@ export default function DadosPessoais() {
   // Action Bottom Sheets
   const sheetEditProfile = React.useRef();
 
+  const pickImage = async (useLibrary) => {
+    let result;
+    const options = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    };
+    if (useLibrary) {
+      result = await ImagePicker.launchImageLibraryAsync(options);
+    } else {
+      await ImagePicker.requestCameraPermissionsAsync();
+      result = await ImagePicker.launchImageLibraryAsync(options);
+    }
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      setPhotoUrl(result.assets[0].uri);
+      console.log(result.assets[0].uri);
+    }
+  };
+
   function handleUpdateUser() {
     UpdateUser({
       customerInfo: {
         birthday,
+        photoUrl,
       },
 
       userInfo: {
@@ -138,11 +162,13 @@ export default function DadosPessoais() {
         {/* >>>>>>>>>>Edit Head<<<<<<<<<<<< */}
         <View style={styles.profile}>
           <View style={styles.profileHeader}>
-            <Image
-              alt="Profile Picture"
-              source={user.photoUrl ? { photoUrl } : AvatarExemple}
-              style={styles.profileAvatar}
-            />
+            {image && (
+              <Image
+                alt="Profile Picture"
+                source={{ uri: image }}
+                style={styles.profileAvatar}
+              />
+            )}
             <View>
               <Text style={styles.profileName}>{user.name}</Text>
               <Text style={styles.profileHandle}>{user.email}</Text>
@@ -222,7 +248,7 @@ export default function DadosPessoais() {
                   <RNDateTimePicker
                     mode="date"
                     value={birthday}
-                    onChange={(event, date) => setBirthday(date)}
+                    // onChange={(event, date) => setBirthday(date)}
                   />
                 )}
 
@@ -245,7 +271,7 @@ export default function DadosPessoais() {
         <RBSheet
           ref={sheetEditProfile}
           customStyles={{ container: styles.sheet }}
-          height={600}
+          height={800}
           openDuration={350}
           closeDuration={250}
         >
@@ -254,6 +280,24 @@ export default function DadosPessoais() {
           </View>
 
           <View style={styles.sheetBody}>
+            <View style={styles.profile}>
+              <View style={styles.profileAvatarWrapper}>
+                {image && (
+                  <Image
+                    alt="Profile Picture"
+                    source={{ uri: image }}
+                    style={styles.profileAvatar}
+                  />
+                )}
+              </View>
+
+              <TouchableOpacity onPress={pickImage}>
+                <View style={styles.profileAction}>
+                  <Text style={{ color: COLORS.white }}>Alterar Foto </Text>
+                  <FeatherIcon name="edit-3" size={15} color={COLORS.white} />
+                </View>
+              </TouchableOpacity>
+            </View>
             {items.map(({ label, type, id, icon }, index) => (
               <View key={index}>
                 <View style={styles.rowEditSheet}>
@@ -271,8 +315,7 @@ export default function DadosPessoais() {
                       style={styles.rowValue}
                       autoCorrect={false}
                       value={name}
-                      setValue={setName}
-                      onChangeText={(text) => setName(text)}
+                      onChangeText={() => setName()}
                     >
                       {form[id]}
                     </TextInput>
@@ -283,7 +326,7 @@ export default function DadosPessoais() {
                       autoCorrect={false}
                       value={email}
                       setValue={setEmail}
-                      onChangeText={(text) => setEmail(text)}
+                      onChangeText={() => setEmail()}
                     >
                       {form[id]}
                     </TextInput>
@@ -396,6 +439,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 50,
   },
+  profileAvatarWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   profileActionText: {
     fontSize: 18,
     fontWeight: '600',
@@ -467,9 +514,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
   },
   sheetHeader: {
-    paddingVertical: 14,
+    paddingTop: 14,
     paddingHorizontal: 24,
-    borderBottomWidth: 1,
     borderColor: COLORS.greyLineStyle,
     alignItems: 'center',
     justifyContent: 'center',
