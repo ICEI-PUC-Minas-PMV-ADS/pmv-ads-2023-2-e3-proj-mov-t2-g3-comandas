@@ -24,7 +24,7 @@ export default function FloatBasket({ basketSize, bottom }) {
       delay={250}
       animation="slideInLeft"
       style={styles.container(bottom)}
-      onPress={() => navigation('Cart')}
+      onPress={() => navigation.navigate('Cart')}
     >
       <Animatable.Text easing="ease-in-out" style={styles.count}>
         {basketSize ?? 0}
