@@ -12,6 +12,7 @@ import {
     Image,
 } from "react-native";
 import COLORS from "@/constants/colors";
+import Mesa from "../../components/Mesa";
 
 const filterStructure = [
     {
@@ -126,20 +127,12 @@ export default function Mesas() {
                 fadingEdgeLength={50}
                 contentContainerStyle={{ gap: 20, padding: 12 }}
                 renderItem={({ item }) => (
-                    <View style={styles.itemCardContainer}>
-                        <TouchableOpacity
-                            style={[
-                                styles.button,
-                                {
-                                    backgroundColor: item.isOccupied
-                                        ? "#F3484F"
-                                        : "#33D172",
-                                },
-                            ]}
-                        >
-                            <Text> Mesa {item.table}</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity>
+                        <Mesa
+                            tableNumber={item.table}
+                            isOccupied={item.isOccupied}
+                        />
+                    </TouchableOpacity>
                 )}
             />
         </SafeAreaView>
