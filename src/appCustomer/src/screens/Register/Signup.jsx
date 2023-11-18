@@ -214,11 +214,7 @@ function Signup() {
               <Text style={styles.textLableInput}>Foto</Text>
               <View>
                 <View style={styles.profileAvatarWrapper}>
-                  <TouchableOpacity
-                    onPress={pickImage}
-                    // setValue={setPhotoUrl}
-                    // onChange={setPhotoUrl}
-                  >
+                  <TouchableOpacity onPress={pickImage}>
                     {image && (
                       <Image
                         alt="Profile Picture"

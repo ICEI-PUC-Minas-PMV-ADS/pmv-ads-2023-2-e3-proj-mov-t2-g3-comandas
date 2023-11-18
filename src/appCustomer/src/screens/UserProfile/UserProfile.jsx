@@ -239,7 +239,7 @@ export default function UserProfile({ navigation }) {
             {image && (
               <Image
                 alt="Profile Picture"
-                source={user.photoUrl}
+                source={{ uri: image }}
                 style={styles.profileAvatar}
               />
             )}
