@@ -1,20 +1,23 @@
+/* eslint-disable camelcase */
 import React, { useEffect } from 'react';
-import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import Routes from '@/screens/routes';
+import {
+  useFonts,
+  Montserrat_500Medium,
+  Montserrat_600SemiBold,
+  Montserrat_300Light,
+  Montserrat_400Regular,
+  Montserrat_700Bold,
+} from '@expo-google-fonts/montserrat';
 
 function App() {
-  const [fontsLoaded, error] = useFonts({
-    'Poppins-Light': require('./src/assets/fonts/Poppins-Light.ttf'),
-    'Poppins-Regular': require('./src/assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Medium': require('./src/assets/fonts/Poppins-Medium.ttf'),
-    'Poppins-SemiBold': require('./src/assets/fonts/Poppins-SemiBold.ttf'),
-    'Montserrat-SemiBold': require('./src/assets/fonts/Montserrat-SemiBold.ttf'),
-    'Inter-Regular': require('./src/assets/fonts/Inter-Regular.ttf'),
-    'Inter-Medium': require('./src/assets/fonts/Inter-Medium.ttf'),
-    'Inter-SemiBold': require('./src/assets/fonts/Inter-SemiBold.ttf'),
-    'WorkSans-Regular': require('./src/assets/fonts/WorkSans-Regular.ttf'),
-    'WorkSans-Medium': require('./src/assets/fonts/WorkSans-Medium.ttf'),
+  const [fontsLoaded] = useFonts({
+    MontserratLight: Montserrat_300Light,
+    MontserratRegular: Montserrat_400Regular,
+    MontserratMedium: Montserrat_500Medium,
+    MontserratSemiBold: Montserrat_600SemiBold,
+    MontserratBold: Montserrat_700Bold,
   });
 
   // Mostrando SplashScreen até hideAsync ser chamado
@@ -25,7 +28,7 @@ function App() {
     prepare();
   }, []);
 
-  if (!fontsLoaded || error) return null;
+  if (!fontsLoaded) return null;
 
   // Chegou aqui então fontsLoaded é true então podemos esconder a Splash
   SplashScreen.hideAsync();

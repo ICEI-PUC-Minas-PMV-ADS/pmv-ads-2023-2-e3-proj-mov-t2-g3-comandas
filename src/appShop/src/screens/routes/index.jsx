@@ -2,13 +2,13 @@
 import React from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   DrawerContentScrollView,
   DrawerItemList,
   createDrawerNavigator,
 } from '@react-navigation/drawer';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import COLORS from '@/constants/colors';
 import Home from '../Home';
 import Dashboard from '../../assets/Dashboard.svg';
 import Pedidos from '../../assets/Pedidos.svg';
@@ -16,8 +16,9 @@ import Mesas from '../../assets/Mesas.svg';
 import Perfil from '../../assets/Perfil.svg';
 import Icon from '../../assets/icon.png';
 import Cardapio from '../Cardapio';
+import ItemDetails from '../Cardapio/ItemDetails';
+import Plus from '../../assets/Plus.svg';
 
-const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -40,6 +41,15 @@ function CardapioStackNavigation() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Cardapio" component={Cardapio} />
+      <Stack.Screen
+        name="ItemDetails"
+        component={ItemDetails}
+        options={{
+          animation: 'fade',
+          presentation: 'transparentModal',
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -63,7 +73,7 @@ function CustomDrawer(props) {
               height: 50,
             }}
           />
-          <Text style={{ fontFamily: 'Montserrat-SemiBold', fontSize: 20 }}>
+          <Text style={{ fontFamily: 'MontserratSemiBold', fontSize: 20 }}>
             COMANDAS
           </Text>
         </View>
@@ -74,6 +84,7 @@ function CustomDrawer(props) {
 }
 
 function DrawerNavigation() {
+  const navigation = useNavigation();
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}
@@ -112,6 +123,22 @@ function DrawerNavigation() {
         name="Cardápio"
         component={CardapioStackNavigation}
         options={() => ({
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ItemDetails')}
+              style={{
+                backgroundColor: COLORS.primary,
+                borderRadius: 999,
+                width: 30,
+                height: 30,
+                marginRight: 32,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Plus />
+            </TouchableOpacity>
+          ),
           drawerLabel: 'Cardápio',
           drawerIcon: ({ focused }) => (
             <Pedidos stroke={focused ? '#ff0000' : 'gray'} />
