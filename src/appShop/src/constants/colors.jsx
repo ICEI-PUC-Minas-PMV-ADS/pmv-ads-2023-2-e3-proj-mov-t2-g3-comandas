@@ -18,7 +18,7 @@ const COLORS = {
     linkTextGreen: "#1199AA",
 
     neutralBlue: "#75759E",
-    neutralMiddgray: "#C8C8D3",
+    neutralMidgray: "#C8C8D3",
     neutralLightgray: "#F0F1F5",
     neutralWhite: "#FFFFFF",
 
