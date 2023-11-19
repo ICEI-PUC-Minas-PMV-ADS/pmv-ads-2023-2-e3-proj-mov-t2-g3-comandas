@@ -1,14 +1,17 @@
 import COLORS from '@/constants/colors';
 import React, { useEffect, useRef } from 'react';
 import * as Animatable from 'react-native-animatable';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Animated from 'react-native-reanimated';
 import BasketImg from '../../assets/Basket.svg';
 
 export default function FloatBasket({ basketSize, bottom }) {
   const navigation = useNavigation();
   const $animatableView = useRef(null);
   const initialBasketSize = useRef(basketSize);
+
+  const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
   useEffect(() => {
     // Verifica se a propriedade desejada mudou
@@ -19,7 +22,7 @@ export default function FloatBasket({ basketSize, bottom }) {
   }, [basketSize]);
 
   return (
-    <Animatable.View
+    <AnimatedTouchable
       ref={$animatableView}
       delay={250}
       animation="slideInLeft"
@@ -30,7 +33,7 @@ export default function FloatBasket({ basketSize, bottom }) {
         {basketSize ?? 0}
       </Animatable.Text>
       <BasketImg />
-    </Animatable.View>
+    </AnimatedTouchable>
   );
 }
 

@@ -23,6 +23,7 @@ import Shop from '../Shop';
 import BackArrow from '../../assets/BackArrow.svg';
 import ItemDetails from '../Shop/ItemDetails';
 import CartScreen from '../Carrinho/CartScreen';
+import OrderList from '../Compras/PedidosAcompanhamento';
 
 function LeftButton({ onPress }) {
   return (
