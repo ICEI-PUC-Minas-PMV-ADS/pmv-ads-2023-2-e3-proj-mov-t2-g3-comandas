@@ -202,6 +202,9 @@ Atualização da Matriz de Rastreabilidade de Requisitos ao final do desenvolvim
 
 ![matriz de rastreabilidade de requisitos detalhada](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/93e2af46c20de3a6f59b3f8b0ce5005830de7aed/docs/img/00_Matriz_Rastreabilidade_V2_Etapa3.png)
 
+Abaixo segue a versão final da Matriz de Rastreabilidade de Requisitos.
+![matriz de rastreabilidade de requisitos detalhada](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/48bf5a95d33f4bafa980d6d565546c1b47f19e17/docs/img/00_Matriz_Rastreabilidade_Final.png)
+
 # Gerenciamento de Projeto
 
 De acordo com o PMBoK v6 as dez áreas que constituem os pilares para gerenciar projetos, e que caracterizam a multidisciplinaridade envolvida, são: Integração, Escopo, Cronograma (Tempo), Custos, Qualidade, Recursos, Comunicações, Riscos, Aquisições, Partes Interessadas. Para desenvolver projetos um profissional deve se preocupar em gerenciar todas essas dez áreas. Elas se complementam e se relacionam, de tal forma que não se deve apenas examinar uma área de forma estanque. É preciso considerar, por exemplo, que as áreas de Escopo, Cronograma e Custos estão muito relacionadas. Assim, se eu amplio o escopo de um projeto eu posso afetar seu cronograma e seus custos.
