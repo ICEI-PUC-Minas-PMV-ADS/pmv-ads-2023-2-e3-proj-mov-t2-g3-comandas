@@ -196,6 +196,9 @@ Estabeleceu-se também um formato auxiliar que será empregado em todos os requi
 
 ![matriz de rastreabilidade de requisitos detalhada](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/1cbb35f19683a05f910e1fe1a70540f5e487a6b5/docs/img/00_Matriz_Rastreabilidade_Requisitos_Detalhe.png)
 
+Abaixo segue a versão final da Matriz de Rastreabilidade de Requisitos.
+![matriz de rastreabilidade de requisitos detalhada](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/48bf5a95d33f4bafa980d6d565546c1b47f19e17/docs/img/00_Matriz_Rastreabilidade_Final.png)
+
 ### Gerencia de Rastreabilidade de Requisitos
 
 Atualização da Matriz de Rastreabilidade de Requisitos ao final do desenvolvimento da Etapa 3 do Projeto. A avaliação é positiva e o desenvolvimento esta a ocorrer como planejado no Gerenciamento de Projeto, Gerenciamento de Pessoal e de Tempo.
