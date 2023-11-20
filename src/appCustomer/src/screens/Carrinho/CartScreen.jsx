@@ -9,21 +9,21 @@ function CartScreen() {
   function RenderItem({ cartEntry }) {
     return (
       <View style={styles.itemContainer}>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Image source={{ uri: cartEntry.photoUrl }} style={styles.image} />
-          <Text style={styles.itemName}>{cartEntry.name}</Text>
+          <Text style={styles.shopName}>{cartEntry.name}</Text>
         </View>
         <View style={styles.infoContainer}>
           {cartEntry.items.map((entry) => (
-            <View>
+            <View style={{ gap: 10 }} key={entry.id}>
               {entry.photoUrl ? (
                 <Image source={{ uri: entry.photoUrl }} style={styles.image} />
               ) : null}
-              <Text style={styles.itemName}>{entry.name}</Text>
-              <Text style={styles.itemDetails}>
-                Quantidade: {entry.quantity}
-              </Text>
-              <Text style={styles.itemDetails}>Preço: R$ {entry.total}</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={styles.itemDetails}>{entry.quantity}x </Text>
+                <Text style={styles.itemName}>{entry.name}</Text>
+                <Text style={styles.itemPrice}>R$ {entry.total}</Text>
+              </View>
             </View>
           ))}
         </View>
@@ -35,8 +35,11 @@ function CartScreen() {
     <View style={styles.container}>
       <FlatList
         data={cart}
-        renderItem={({ item, index }) => <RenderItem cartEntry={item} />}
         keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={{ padding: 20, gap: 20 }}
+        renderItem={({ item, index }) => (
+          <RenderItem cartEntry={item} key={item.id} />
+        )}
       />
     </View>
   );
@@ -45,29 +48,43 @@ function CartScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
     backgroundColor: COLORS.neutralWhite,
   },
   itemContainer: {
-    marginBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    paddingBottom: 10,
+    backgroundColor: COLORS.neutralWhite,
+    borderRadius: 25,
+    padding: 15,
+    elevation: 2,
   },
   image: {
     width: 50,
     height: 50,
     marginRight: 10,
+    borderRadius: 15,
   },
   infoContainer: {
     justifyContent: 'center',
   },
-  itemName: {
+  shopName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    color: COLORS.primary,
+    fontFamily: 'MontserratSemiBold',
+  },
+  itemName: {
+    fontSize: 16,
+    color: COLORS.primary,
+    fontFamily: 'MontserratSemiBold',
   },
   itemDetails: {
     fontSize: 16,
+    fontFamily: 'MontserratRegular',
+  },
+  itemPrice: {
+    fontSize: 16,
+    fontFamily: 'MontserratRegular',
+    alignSelf: 'flex-end',
   },
 });
 
