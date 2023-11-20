@@ -97,10 +97,6 @@ export default function Mesas({ navigation }) {
                             onPress={() => handleFilterClick(item)}
                             style={{
                                 minWidth: 160,
-                                backgroundColor:
-                                    activeFilter === item.id
-                                        ? COLORS.neutralMiddgray
-                                        : null,
                                 borderRadius: 10,
                                 display: "flex",
                                 flexDirection: "row",
@@ -108,6 +104,7 @@ export default function Mesas({ navigation }) {
                                 justifyContent: "center",
                                 gap: 30,
                                 paddingHorizontal: 15,
+                                opacity: activeFilter === item.id ? 1 : 0.3,
                             }}
                         >
                             <Image
@@ -115,7 +112,9 @@ export default function Mesas({ navigation }) {
                                 width={30}
                                 height={30}
                             />
-                            <Text>{item.title}</Text>
+                            <Text style={{ fontWeight: "bold" }}>
+                                {item.title}
+                            </Text>
                         </TouchableOpacity>
                     )}
                 />

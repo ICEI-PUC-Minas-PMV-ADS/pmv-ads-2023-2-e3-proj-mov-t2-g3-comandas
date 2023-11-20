@@ -45,7 +45,7 @@ export default function Order({ OrderData }) {
             <View>
                 {OrderData &&
                     OrderData.items.map((item) => (
-                        <View style={{ paddingVertical: 5 }}>
+                        <View style={{ paddingVertical: 5 }} key={item.id}>
                             <View
                                 style={[styles.item, { paddingVertical: 5 }]}
                                 key={item.id}

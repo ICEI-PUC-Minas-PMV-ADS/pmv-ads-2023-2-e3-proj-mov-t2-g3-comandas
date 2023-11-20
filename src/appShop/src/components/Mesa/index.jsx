@@ -18,7 +18,9 @@ export default function Mesa({ tableNumber, isOccupied }) {
             />
             <Text style={styles.tableLabel}>Mesa {tableNumber}</Text>
             {isOccupied ? (
-                <Text style={styles.userLabel}>Francisco Peregrine</Text>
+                <Text style={styles.userLabel}>
+                    {tableNumber.}
+                </Text>
             ) : (
                 <Text style={styles.userLabel}>Esperando Clientes</Text>
             )}
