@@ -12,10 +12,12 @@ import {
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from '@/components/Buttons/Button';
+import useAuthVerify from '@/components/AuthVerify';
 
-const OrderList = () => {
+function OrderList({ navigation }) {
+  useAuthVerify(navigation);
   const [items, setItems] = useState([]);
-  const { user } = useUser();
+  const { user, signed } = useUser();
   const [isLoading, setLoading] = useState(false);
   const [DetailVisivel, setDetailVisible] = useState(false);
 
@@ -58,9 +60,8 @@ const OrderList = () => {
         }
       }
     };
-
-    fetchItemsFromAPI();
-  }, []);
+    if (signed) fetchItemsFromAPI();
+  }, [signed]);
 
   if (!isLoading) {
     return (
@@ -111,21 +112,21 @@ const OrderList = () => {
                   onPress={() => {
                     setStatus('open');
                   }}
-                ></Button>
+                />
                 <Button
                   style={{ width: 100, height: 50 }}
                   title="closed"
                   onPress={() => {
                     setStatus('closed');
                   }}
-                ></Button>
+                />
                 <Button
                   style={{ width: 100, height: 50 }}
                   title="cancelled"
                   onPress={() => {
                     setStatus('cancelled');
                   }}
-                ></Button>
+                />
               </View>
             </>
           )}
@@ -275,7 +276,7 @@ const OrderList = () => {
       </View>
     </View>
   );
-};
+}
 
 export default OrderList;
 

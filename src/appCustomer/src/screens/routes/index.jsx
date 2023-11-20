@@ -1,7 +1,11 @@
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { TouchableOpacity, Alert, View, Image } from 'react-native';
+import { useCart } from '@/context/CartContext';
+import { useUser } from '@/context/UserContext';
+import * as Animatable from 'react-native-animatable';
+import COLORS from '@/constants/colors';
 import Welcome from '../Onboarding/Welcome';
 import Login from '../Login/Login';
 import Signup from '../Register/Signup';
@@ -23,7 +27,29 @@ import Shop from '../Shop';
 import BackArrow from '../../assets/BackArrow.svg';
 import ItemDetails from '../Shop/ItemDetails';
 import CartScreen from '../Carrinho/CartScreen';
-import OrderList from '../Compras/PedidosAcompanhamento';
+import TrashCan from '../../assets/TrashCan.svg';
+import Icon from '../../assets/Comandas-icon.png';
+
+function SplashScreen() {
+  return (
+    <Animatable.View
+      animation="bounce"
+      style={{
+        flex: 1,
+        backgroundColor: COLORS.neutralWhite,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Animatable.Image
+        animation="rotate"
+        iterationCount="infinite"
+        source={Icon}
+        style={{ width: 150, height: 150 }}
+      />
+    </Animatable.View>
+  );
+}
 
 function LeftButton({ onPress }) {
   return (
@@ -41,13 +67,54 @@ function LeftButton({ onPress }) {
   );
 }
 
+function RightButton({ onPress }) {
+  return (
+    <TouchableOpacity
+      onPress={() =>
+        Alert.alert(
+          'Atenção !',
+          'Deseja realmente limpar sua sacola ?',
+          [
+            {
+              text: 'Confirmar',
+              onPress,
+            },
+            { text: 'Cancelar', style: 'cancel' },
+          ],
+          { cancelable: true },
+        )
+      }
+      style={{
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        paddingHorizontal: 15,
+      }}
+    >
+      <TrashCan />
+    </TouchableOpacity>
+  );
+}
+
 const Stack = createNativeStackNavigator();
 
 function StackNavigation() {
   const navigation = useNavigation();
+  const { clearCart } = useCart();
+  const { signed } = useUser();
+
+  useEffect(() => {
+    if (typeof signed !== 'undefined')
+      navigation.navigate(signed ? 'Home' : 'Welcome');
+  }, [signed, navigation]);
 
   return (
-    <Stack.Navigator initialRouteName="Welcome">
+    <Stack.Navigator initialRouteName="Splash">
+      <Stack.Screen
+        name="Splash"
+        component={SplashScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Welcome"
         component={Welcome}
@@ -64,22 +131,17 @@ function StackNavigation() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="UserProfile"
         component={UserProfile}
         options={{
           title: '',
         }}
       />
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-      {/* <Stack.Screen
-                name="CheckoutLogout"
-                component={CheckoutLogout}
-                options={{ headerShown: false }}
-            /> */}
       <Stack.Screen
         name="CarteiraDigital"
         component={CarteiraDigital}
@@ -115,11 +177,6 @@ function StackNavigation() {
         component={FaleConosco}
         options={{ title: '' }}
       />
-      {/* <Stack.Screen
-                name="CheckinFaleConosco"
-                component={CheckinFaleConosco}
-                options={{ headerShown: false }}
-            /> */}
       <Stack.Screen
         name="Problemas"
         component={Problemas}
@@ -166,7 +223,14 @@ function StackNavigation() {
         component={Scanner}
         options={{ headerShown: false }} // Ocultar a barra de navegação superior
       />
-      <Stack.Screen name="Cart" component={CartScreen} />
+      <Stack.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          title: 'Sacola',
+          headerRight: () => <RightButton onPress={clearCart} />,
+        }}
+      />
     </Stack.Navigator>
   );
 }

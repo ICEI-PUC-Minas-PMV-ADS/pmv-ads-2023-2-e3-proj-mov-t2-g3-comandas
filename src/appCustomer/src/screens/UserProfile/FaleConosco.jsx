@@ -80,10 +80,10 @@ function FaleConosco() {
   const { user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [form] = React.useState({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    phoneNumber: user.phoneNumber,
+    id: user.userInfo.id,
+    name: user.userInfo.name,
+    email: user.userInfo.email,
+    phoneNumber: user.userInfo.phoneNumber,
   });
   const [value, setValue] = React.useState(0);
   const [onChangeText] = React.useState();

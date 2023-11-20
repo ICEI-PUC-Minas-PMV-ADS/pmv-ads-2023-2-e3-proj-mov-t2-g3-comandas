@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useCart } from '@/context/CartContext';
+import useAuthVerify from '@/components/AuthVerify';
 import imgPlaceholder from '../../assets/PizzariaBackground.jpg';
 import BannerPlaceholder from '../../assets/ItemBannerPlaceholder.svg';
 import Plus from '../../assets/Plus.svg';
@@ -19,6 +20,7 @@ import CartPlus from '../../assets/CartPlus.svg';
 
 export default function ItemDetails({ navigation, route }) {
   // TODO Verificar se existe tableId nos params (usuário entrou pelo qrCode, se sim, adicionar ao tableId lá em baixo)
+  useAuthVerify(navigation);
   const { item, shop } = route.params;
   const { addCartItem } = useCart();
   const { width, height } = useWindowDimensions();
