@@ -4,6 +4,7 @@
 - [Cores](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Color.png)
 - [Tipografia](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Typography.png)
 - [Sombras](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Shadows.png)
+## AppCustumer
 - [Telas](#telas)
   - [Onboarding](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Onboarding%20%231.png)
   - [Onboarding 2](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Onboarding%20%232.png)
@@ -23,6 +24,18 @@
   - [Pratos Favoritos](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Pratos%20favoritos.png)
   - [Tela de Confirmação](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Tela%20de%20Fechamento.png)
   - [Perfil](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Perfil.png)
+## AppShop
+- [Telas](#telas)
+  - [Cadastro de Produto](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/3a6e8060691c792427bb692cbb044f7ed66c1877/docs/img/Cadastro%20de%20produto.png)
+  - [Continue Orders](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/3a6e8060691c792427bb692cbb044f7ed66c1877/docs/img/Continue%20orders%20.png)
+  - [Menu Drawler](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/3a6e8060691c792427bb692cbb044f7ed66c1877/docs/img/Menu%20Drawler.png)
+  - [Mesa Order View](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/3a6e8060691c792427bb692cbb044f7ed66c1877/docs/img/Mesa%20Order%20View.png)
+  - [Mesa Order Summary View](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/3a6e8060691c792427bb692cbb044f7ed66c1877/docs/img/Mesa%20OrderSumarry%20View.png)
+  - [Mesa Order Summary View 2](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/3a6e8060691c792427bb692cbb044f7ed66c1877/docs/img/Mesa%20OrderSumarry%20View2.png)
+  - [Produtos](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/3a6e8060691c792427bb692cbb044f7ed66c1877/docs/img/Produtos.png)
+  - [Visualizar Pedido Card](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/3a6e8060691c792427bb692cbb044f7ed66c1877/docs/img/Visualizar%20pedido%20Card.png)
+  - [Perfil](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/main/docs/img/Perfil.png)
+  
 
 ## Cores
 Descreva as cores principais usadas na aplicação e onde são aplicadas.

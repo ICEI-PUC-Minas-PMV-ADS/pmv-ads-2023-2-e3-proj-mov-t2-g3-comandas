@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from 'react';
 import * as Animatable from 'react-native-animatable';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Animated from 'react-native-reanimated';
 import BasketImg from '../../assets/Basket.svg';
 
 export default function FloatBasket({ basketSize, bottom }) {
@@ -11,29 +10,39 @@ export default function FloatBasket({ basketSize, bottom }) {
   const $animatableView = useRef(null);
   const initialBasketSize = useRef(basketSize);
 
-  const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
-
   useEffect(() => {
     // Verifica se a propriedade desejada mudou
-    if ($animatableView.current && basketSize !== initialBasketSize.current) {
+    if (
+      $animatableView &&
+      $animatableView.current &&
+      basketSize !== initialBasketSize.current
+    ) {
       // Aciona a animação
       $animatableView.current.bounce(500);
     }
   }, [basketSize]);
 
   return (
-    <AnimatedTouchable
+    <Animatable.View
       ref={$animatableView}
       delay={250}
       animation="slideInLeft"
       style={styles.container(bottom)}
-      onPress={() => navigation.navigate('Cart')}
     >
-      <Animatable.Text easing="ease-in-out" style={styles.count}>
-        {basketSize ?? 0}
-      </Animatable.Text>
-      <BasketImg />
-    </AnimatedTouchable>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Cart')}
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Animatable.Text easing="ease-in-out" style={styles.count}>
+          {basketSize ?? 0}
+        </Animatable.Text>
+        <BasketImg />
+      </TouchableOpacity>
+    </Animatable.View>
   );
 }
 
@@ -41,12 +50,10 @@ const styles = StyleSheet.create({
   container: (bottom) => ({
     flex: 1,
     position: 'absolute',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+
     width: '10%',
     height: '5%',
-    zIndex: 100,
+    zIndex: 999,
     bottom: bottom ?? 70,
     left: 15,
     backgroundColor: COLORS.primary,
@@ -65,8 +72,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     color: COLORS.neutralWhite,
     fontFamily: 'MontserratBold',
-    top: 0,
-    right: 0,
+    bottom: 10,
+    left: 15,
     backgroundColor: COLORS.iconRed,
     borderRadius: 25,
     padding: 2,

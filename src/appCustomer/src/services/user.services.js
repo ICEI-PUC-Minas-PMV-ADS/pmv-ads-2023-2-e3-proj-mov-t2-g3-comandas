@@ -1,12 +1,11 @@
+// eslint-disable-next-line import/no-unresolved
 import { BASE_URL, API_KEY, ADMIN_TOKEN } from '@env';
-import { useUser } from '@/context/UserContext';
 import axios from 'axios';
 
-export const GetUser = async () => {
-  const { user } = useUser();
+export const getUser = async (userId) => {
   try {
     return await axios
-      .get(`${BASE_URL}user/${user.id}`, {
+      .get(`${BASE_URL}user/${userId}`, {
         headers: {
           'x-api-key': API_KEY,
           Authorization: ADMIN_TOKEN,
@@ -14,16 +13,21 @@ export const GetUser = async () => {
       })
       .then((response) => response.data);
   } catch (error) {
-    console.log(error);
-    return null;
+    console.log(
+      `ERROR IN GetUser => [${error?.response?.status}]\n ${JSON.stringify(
+        error?.response?.data,
+        null,
+        2,
+      )}`,
+    );
+    throw error;
   }
 };
 
-export const UpdateUser = async () => {
-  const { user } = useUser();
+export const updateUser = async (userId) => {
   try {
     return await axios
-      .put(`${BASE_URL}/${user.id}/update`, {
+      .put(`${BASE_URL}/${userId}/update`, {
         headers: {
           'x-api-key': API_KEY,
           Authorization: ADMIN_TOKEN,
@@ -63,27 +67,3 @@ export const updateCustomer = async () => {
     return null;
   }
 };
-
-/* export const deleteUser = async (id) => {
-    const { user } = useUser();
-    try {
-        return await axios
-            .delete(`${BASE_URL}user/${id}`, {
-                headers: {
-                    'x-api-key': API_KEY,
-                    Authorization: ADMIN_TOKEN,
-                },
-            })
-            .then(
-                (response) => response.data,
-                (error) => {
-                    console.log(error);
-                    return null;
-                },
-            );
-    } catch (error) {
-        console.log(error);
-        return null;
-    }
-};
- */

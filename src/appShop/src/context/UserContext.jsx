@@ -21,7 +21,7 @@ export default function UserProvider({ children }) {
     };
 
     loadSigned();
-  }, []);
+  }, [signed]);
 
   return (
     <UserContext.Provider

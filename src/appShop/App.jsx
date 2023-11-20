@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import Routes from '@/screens/routes';
 import {
   useFonts,
   Montserrat_500Medium,
@@ -11,8 +10,10 @@ import {
   Montserrat_700Bold,
 } from '@expo-google-fonts/montserrat';
 import UserProvider from '@/context/UserContext';
+import Routes from '@/screens/routes';
 
 function App() {
+  // Carregar as fontes
   const [fontsLoaded] = useFonts({
     MontserratLight: Montserrat_300Light,
     MontserratRegular: Montserrat_400Regular,
@@ -21,7 +22,7 @@ function App() {
     MontserratBold: Montserrat_700Bold,
   });
 
-  // Mostrando SplashScreen até hideAsync ser chamado
+  // Preparar a SplashScreen
   useEffect(() => {
     async function prepare() {
       await SplashScreen.preventAutoHideAsync();
@@ -29,9 +30,12 @@ function App() {
     prepare();
   }, []);
 
-  if (!fontsLoaded) return null;
+  // Checar se as fontes estão carregadas
+  if (!fontsLoaded) {
+    return null;
+  }
 
-  // Chegou aqui então fontsLoaded é true então podemos esconder a Splash
+  // Esconder a SplashScreen quando as fontes estiverem carregadas
   SplashScreen.hideAsync();
 
   return (
@@ -40,4 +44,5 @@ function App() {
     </UserProvider>
   );
 }
+
 export default App;

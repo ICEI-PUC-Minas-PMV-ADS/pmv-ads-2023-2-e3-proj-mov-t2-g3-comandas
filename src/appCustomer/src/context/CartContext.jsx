@@ -1,10 +1,12 @@
 /* eslint-disable no-param-reassign */
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
+import { useUser } from './UserContext';
 
 export const CartContext = createContext();
 
 export default function CartProvider({ children }) {
+  const { signed } = useUser();
   const [cart, setCart] = useState([]);
 
   async function addCartItem(
@@ -67,18 +69,11 @@ export default function CartProvider({ children }) {
 
     await SecureStore.setItemAsync('CART', JSON.stringify(cart));
   }
-  //   async function addCartItem(
-  //     shopInfo,
-  //     itemId,
-  //     itemName,
-  //     itemQuantity,
-  //     itemPrice,
-  //     itemShopId,
-  //   ) {
-  //     await SecureStore.deleteItemAsync('CART');
 
-  //     console.log(JSON.stringify(cart, null, 2));
-  //   }
+  async function clearCart() {
+    await SecureStore.deleteItemAsync('CART');
+    setCart([]);
+  }
 
   useEffect(() => {
     // Função assíncrona para carregar o carrinho
@@ -90,7 +85,7 @@ export default function CartProvider({ children }) {
     };
 
     loadCart();
-  }, []);
+  }, [signed]);
 
   return (
     <CartContext.Provider
@@ -98,6 +93,7 @@ export default function CartProvider({ children }) {
       value={{
         cart,
         addCartItem,
+        clearCart,
       }}
     >
       {children}
@@ -107,6 +103,6 @@ export default function CartProvider({ children }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-  const { cart, addCartItem } = context;
-  return { cart, addCartItem };
+  const { cart, addCartItem, clearCart } = context;
+  return { cart, addCartItem, clearCart };
 }

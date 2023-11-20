@@ -26,13 +26,12 @@ import Plus from '../../assets/Plus.svg';
 import Signup from '../Register/Signup';
 import SignupAddress from '../Register/SignupAddress';
 import Login from '../Login/Login';
-import MesaInfo from '../MesaInfo/index';
+import OrderSummaryScreen from '../OrderSummaryScreen'; // Correção do caminho, ajuste conforme necessário
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function HomeStackNavigation() {
-  const navigation = useNavigation();
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -89,7 +88,15 @@ function MesasStackNavigation() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="MesasStack" component={Mesas} />
-      <Stack.Screen name="MesaInfo" component={MesaInfo} />
+    </Stack.Navigator>
+  );
+}
+
+function OrderSummaryStackNavigation() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="OrderSummary" component={OrderSummaryScreen} />
+      {/* Adicione outras telas aqui conforme necessário */}
     </Stack.Navigator>
   );
 }
@@ -199,6 +206,14 @@ function DrawerNavigation() {
           drawerIcon: ({ focused }) => (
             <PerfilIcon fill={focused ? '#ff0000' : 'gray'} />
           ),
+        })}
+      />
+      <Drawer.Screen
+        name="OrderSummaryDrawer"
+        component={OrderSummaryStackNavigation}
+        options={() => ({
+          drawerLabel: 'Resumo do Pedido',
+          // Adicione um ícone se necessário
         })}
       />
     </Drawer.Navigator>

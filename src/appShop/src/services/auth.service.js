@@ -3,7 +3,7 @@ import API from './webapi.service';
 export async function register(param) {
   try {
     const { data } = await API.post(`/shop/create`, param);
-    console.log(JSON.stringify(data, null, 2));
+    // console.log(JSON.stringify(data, null, 2));
     return data;
   } catch (error) {
     console.log(

@@ -2,21 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 // eslint-disable-next-line import/no-unresolved
 import { BASE_URL, API_KEY, ADMIN_TOKEN } from "@env";
-import {
-    SafeAreaView,
-    StyleSheet,
-    TouchableOpacity,
-    Text,
-    ActivityIndicator,
-    View,
-} from "react-native";
+import { SafeAreaView, StyleSheet, TouchableOpacity, Text } from "react-native";
 import COLORS from "@/constants/colors";
 import Order from "../../components/Order";
 
 export default function MesaInfo({ route, navigation }) {
     const { shopId, tableId } = route.params;
     const [isLoading, setIsLoading] = useState(true);
-    const [tableInfo, setTableInfo] = useState(undefined);
+    const [tableInfo, setTableInfo] = useState();
 
     // Escondendo a header do drawer
     useEffect(() => {
@@ -55,6 +48,7 @@ export default function MesaInfo({ route, navigation }) {
                 setIsLoading(true);
             } catch (error) {
                 // eslint-disable-next-line no-undef
+                alert(error);
             } finally {
                 setIsLoading(false);
             }
@@ -63,24 +57,14 @@ export default function MesaInfo({ route, navigation }) {
         getOrderInfo(1);
     }, [shopId, tableId]);
 
-    return isLoading ? (
-        <View
-            style={{
-                backgroundColor: "rgba(0, 0, 0, 0)",
-                justifyContent: "center",
-                alignItems: "center",
-                flex: 1,
-            }}
-        >
-            <ActivityIndicator color={COLORS.primary} size="large" />
-        </View>
-    ) : (
+    return (
         <SafeAreaView style={styles.container}>
-            {tableInfo ? (
-                <Order OrderData={tableInfo} />
-            ) : (
-                <Text style={styles.textMesaVazia}>Mesa Vazia</Text>
-            )}
+            {tableInfo && <Order OrderData={tableInfo} />}
+            {/* <TouchableOpacity style={styles.button}>
+                <Text style={{ color: COLORS.white, fontWeight: "600" }}>
+                    Finalizar
+                </Text>
+            </TouchableOpacity> */}
         </SafeAreaView>
     );
 }
@@ -101,10 +85,5 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 50,
-    },
-    textMesaVazia: {
-        fontSize: 16,
-        fontFamily: "MontserratLight",
-        color: COLORS.secondary,
     },
 });

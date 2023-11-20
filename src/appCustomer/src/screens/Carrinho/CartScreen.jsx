@@ -1,42 +1,65 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import { useCart } from '@/context/CartContext'; // Ajuste este caminho conforme necessário
 import COLORS from '@/constants/colors';
+import useAuthVerify from '@/components/AuthVerify';
+import CartItem from './CartItem';
 
-function CartScreen() {
+export default function CartScreen({ navigation }) {
+  useAuthVerify(navigation);
   const { cart } = useCart();
-
-  function RenderItem({ cartEntry }) {
-    return (
-      <View style={styles.itemContainer}>
-        <View style={{ flexDirection: 'row' }}>
-          <Image source={{ uri: cartEntry.photoUrl }} style={styles.image} />
-          <Text style={styles.itemName}>{cartEntry.name}</Text>
-        </View>
-        <View style={styles.infoContainer}>
-          {cartEntry.items.map((entry) => (
-            <View>
-              {entry.photoUrl ? (
-                <Image source={{ uri: entry.photoUrl }} style={styles.image} />
-              ) : null}
-              <Text style={styles.itemName}>{entry.name}</Text>
-              <Text style={styles.itemDetails}>
-                Quantidade: {entry.quantity}
-              </Text>
-              <Text style={styles.itemDetails}>Preço: R$ {entry.total}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-    );
-  }
 
   return (
     <View style={styles.container}>
       <FlatList
         data={cart}
-        renderItem={({ item, index }) => <RenderItem cartEntry={item} />}
         keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={{ padding: 20, gap: 20, flexGrow: 1 }}
+        renderItem={({ item }) => <CartItem cartEntry={item} key={item.id} />}
+        ListEmptyComponent={() => (
+          <Text
+            style={{
+              color: COLORS.secondary,
+              textAlign: 'center',
+              fontFamily: 'MontserratLight',
+            }}
+          >
+            Nenhum item encontrado
+          </Text>
+        )}
+        ListFooterComponentStyle={{
+          flex: 1,
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+        }}
+        ListFooterComponent={() => (
+          <TouchableOpacity
+            style={{
+              width: '80%',
+              backgroundColor: COLORS.primary,
+              borderRadius: 50,
+              padding: 20,
+              alignSelf: 'center',
+            }}
+          >
+            <Text
+              style={{
+                textAlign: 'center',
+                color: COLORS.neutralWhite,
+                fontSize: 20,
+                fontFamily: 'MontserratSemiBold',
+              }}
+            >
+              Realizar pedido
+            </Text>
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
@@ -45,30 +68,6 @@ function CartScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
     backgroundColor: COLORS.neutralWhite,
   },
-  itemContainer: {
-    marginBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    paddingBottom: 10,
-  },
-  image: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
-  },
-  infoContainer: {
-    justifyContent: 'center',
-  },
-  itemName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  itemDetails: {
-    fontSize: 16,
-  },
 });
-
-export default CartScreen;

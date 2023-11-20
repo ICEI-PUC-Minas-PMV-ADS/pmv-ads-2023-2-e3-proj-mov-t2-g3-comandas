@@ -18,6 +18,7 @@ import { updateCustomer } from '@/services/user.services';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
+import useAuthVerify from '@/components/AuthVerify';
 import AvatarExemple from '../../assets/UserAvatar.png';
 
 const SECTIONS = [
@@ -104,15 +105,18 @@ const SECTIONS = [
 ];
 
 export default function UserProfile({ navigation }) {
+  useAuthVerify(navigation);
   // to get logged user data
-  const { user } = useUser();
+  const { user, signed, logout } = useUser();
   // Activity Indicator
   const [isLoading, setIsLoading] = useState(false);
   // Action Bottom Sheets
   const sheetDeleteAccount = React.useRef();
 
   // Image Picker
-  const [image, setImage] = useState(AvatarExemple);
+  const [image, setImage] = useState(
+    'https://cdn2.iconfinder.com/data/icons/essential-web-2/50/user-ciecle-round-account-person-512.png',
+  );
   const [photoUrl, setPhotoUrl] = useState('');
   // const [loading, setLoading] = useState(false);
 
@@ -186,6 +190,7 @@ export default function UserProfile({ navigation }) {
         text: 'Sim',
         onPress: () => {
           setIsLoading(true);
+          logout();
         },
       },
       {
@@ -218,169 +223,173 @@ export default function UserProfile({ navigation }) {
       ],
     );
 
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView
-        style={{ width: '100%' }}
-        contentContainerStyle={styles.scrollContent}
-      >
-        {/* >>>>>Logout Bottom Sheet<<<<< */}
-        {isLoading ? (
-          <LoadingBSheet
-            headerText="Saindo da Conta..."
-            welcomeBackText="Sua conta esta segura!"
-            route={() => navigation.navigate('Login')}
-          />
-        ) : null}
-
-        {/* >>>>>Profile Avatar Picture<<<<< */}
-        <View style={styles.profile}>
-          <View style={styles.profileAvatarWrapper}>
-            {image && (
-              <Image
-                alt="Profile Picture"
-                source={{ uri: image }}
-                style={styles.profileAvatar}
-              />
-            )}
-          </View>
-          <TouchableOpacity onPress={pickImage}>
-            <View style={styles.profileAction}>
-              <FeatherIcon name="edit-3" size={15} color={COLORS.white} />
-            </View>
-          </TouchableOpacity>
-
-          <Text style={styles.profileName}>{user.name}</Text>
-
-          {/* >>>>>Logout Button<<<<< */}
-          <TouchableOpacity
-            style={{ opacity: 0.75 }}
-            onPress={() => {
-              // handle logout
-              // AsyncStorage.clear();
-              showConfirmDialog();
-            }}
-          >
-            <View style={styles.logout}>
-              <Text style={styles.logoutLabel}>Sair</Text>
-              <FeatherIcon
-                name="log-out"
-                size={26}
-                label="Sair"
-                color={COLORS.iconRed}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        {/* >>>>>Body Sections & Lists<<<<< */}
-        {SECTIONS.map(({ header, items }) => (
-          <View style={styles.section} key={header}>
-            <Text style={styles.sectionHeader}>{header}</Text>
-
-            {items.map(({ id, label, type, icon, color }) => (
-              <TouchableOpacity
-                key={icon}
-                onPress={() => {
-                  // handle onPress
-                  if (id === 'carteiraDigital') {
-                    navigation.navigate('CarteiraDigital');
-                  }
-                  if (id === 'cartoes') {
-                    navigation.navigate('Cartoes');
-                  }
-                  if (id === 'dadosPessoais') {
-                    navigation.navigate('DadosPessoais');
-                  }
-                  if (id === 'address') {
-                    navigation.navigate('Address');
-                  }
-                  if (id === 'favorites') {
-                    navigation.navigate('Favoritos');
-                  }
-                  if (id === 'faleConosco') {
-                    navigation.navigate('FaleConosco');
-                  }
-                  if (id === 'problemas') {
-                    navigation.navigate('Problemas');
-                  }
-                  if (id === 'delete') {
-                    sheetDeleteAccount.current.open();
-                  }
-                }}
-              >
-                <View style={styles.row}>
-                  <View style={[styles.rowIcon, { backgroundColor: color }]}>
-                    <FeatherIcon name={icon} color="#fff" size={18} />
-                  </View>
-
-                  <Text style={styles.rowLabel}>{label}</Text>
-
-                  <View style={{ flex: 1 }} />
-
-                  {type === 'link' && (
-                    <FeatherIcon
-                      name="chevron-right"
-                      color="#0c0c0c"
-                      size={22}
-                    />
-                  )}
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-        ))}
-
-        {/* Delete Account Bottom Sheet */}
-        <RBSheet
-          ref={sheetDeleteAccount}
-          customStyles={{ container: styles.sheet }}
-          height={350}
-          openDuration={450}
-          closeDuration={250}
+  if (signed && user)
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView
+          style={{ width: '100%' }}
+          contentContainerStyle={styles.scrollContent}
         >
-          <View style={styles.sheetHeader}>
-            <Text style={styles.sheetHeaderTitle}>Excluir Conta</Text>
-          </View>
+          {/* >>>>>Logout Bottom Sheet<<<<< */}
+          {isLoading ? (
+            <LoadingBSheet
+              headerText="Saindo da Conta..."
+              welcomeBackText="Sua conta esta segura!"
+              route={() => navigation.navigate('Login')}
+            />
+          ) : null}
 
-          <View style={styles.sheetBody}>
-            <Text style={styles.sheetBodyText}>
-              Tem certeza que deseja{' '}
-              <Text
-                style={{
-                  fontWeight: '700',
-                  color: COLORS.iconRed,
-                }}
-              >
-                excluir a sua conta
-              </Text>
-              ?{'\n'}Esta ação não pode ser desfeita!
-            </Text>
+          {/* >>>>>Profile Avatar Picture<<<<< */}
+          <View style={styles.profile}>
+            <View style={styles.profileAvatarWrapper}>
+              {image && (
+                <Image
+                  alt="Profile Picture"
+                  source={{ uri: image }}
+                  style={styles.profileAvatar}
+                />
+              )}
+            </View>
+            <TouchableOpacity onPress={pickImage}>
+              <View style={styles.profileAction}>
+                <FeatherIcon name="edit-3" size={15} color={COLORS.white} />
+              </View>
+            </TouchableOpacity>
 
+            <Text style={styles.profileName}>{user.userInfo.name}</Text>
+
+            {/* >>>>>Logout Button<<<<< */}
             <TouchableOpacity
+              style={{ opacity: 0.75 }}
               onPress={() => {
-                showConfirmDeleteAccountDialog();
+                // handle logout
+                // AsyncStorage.clear();
+                showConfirmDialog();
               }}
             >
-              <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
-                <Text style={styles.btnText}>Excluir Conta</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => sheetDeleteAccount.current.close()}
-            >
-              <View
-                style={[styles.btn, { backgroundColor: COLORS.linkTextGreen }]}
-              >
-                <Text style={styles.btnText}>Cancelar</Text>
+              <View style={styles.logout}>
+                <Text style={styles.logoutLabel}>Sair</Text>
+                <FeatherIcon
+                  name="log-out"
+                  size={26}
+                  label="Sair"
+                  color={COLORS.iconRed}
+                />
               </View>
             </TouchableOpacity>
           </View>
-        </RBSheet>
-      </ScrollView>
-      <StatusBar />
-    </SafeAreaView>
-  );
+
+          {/* >>>>>Body Sections & Lists<<<<< */}
+          {SECTIONS.map(({ header, items }) => (
+            <View style={styles.section} key={header}>
+              <Text style={styles.sectionHeader}>{header}</Text>
+
+              {items.map(({ id, label, type, icon, color }) => (
+                <TouchableOpacity
+                  key={icon}
+                  onPress={() => {
+                    // handle onPress
+                    if (id === 'carteiraDigital') {
+                      navigation.navigate('CarteiraDigital');
+                    }
+                    if (id === 'cartoes') {
+                      navigation.navigate('Cartoes');
+                    }
+                    if (id === 'dadosPessoais') {
+                      navigation.navigate('DadosPessoais');
+                    }
+                    if (id === 'address') {
+                      navigation.navigate('Address');
+                    }
+                    if (id === 'favorites') {
+                      navigation.navigate('Favoritos');
+                    }
+                    if (id === 'faleConosco') {
+                      navigation.navigate('FaleConosco');
+                    }
+                    if (id === 'problemas') {
+                      navigation.navigate('Problemas');
+                    }
+                    if (id === 'delete') {
+                      sheetDeleteAccount.current.open();
+                    }
+                  }}
+                >
+                  <View style={styles.row}>
+                    <View style={[styles.rowIcon, { backgroundColor: color }]}>
+                      <FeatherIcon name={icon} color="#fff" size={18} />
+                    </View>
+
+                    <Text style={styles.rowLabel}>{label}</Text>
+
+                    <View style={{ flex: 1 }} />
+
+                    {type === 'link' && (
+                      <FeatherIcon
+                        name="chevron-right"
+                        color="#0c0c0c"
+                        size={22}
+                      />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          ))}
+
+          {/* Delete Account Bottom Sheet */}
+          <RBSheet
+            ref={sheetDeleteAccount}
+            customStyles={{ container: styles.sheet }}
+            height={350}
+            openDuration={450}
+            closeDuration={250}
+          >
+            <View style={styles.sheetHeader}>
+              <Text style={styles.sheetHeaderTitle}>Excluir Conta</Text>
+            </View>
+
+            <View style={styles.sheetBody}>
+              <Text style={styles.sheetBodyText}>
+                Tem certeza que deseja{' '}
+                <Text
+                  style={{
+                    fontWeight: '700',
+                    color: COLORS.iconRed,
+                  }}
+                >
+                  excluir a sua conta
+                </Text>
+                ?{'\n'}Esta ação não pode ser desfeita!
+              </Text>
+
+              <TouchableOpacity
+                onPress={() => {
+                  showConfirmDeleteAccountDialog();
+                }}
+              >
+                <View style={[styles.btn, { backgroundColor: COLORS.iconRed }]}>
+                  <Text style={styles.btnText}>Excluir Conta</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => sheetDeleteAccount.current.close()}
+              >
+                <View
+                  style={[
+                    styles.btn,
+                    { backgroundColor: COLORS.linkTextGreen },
+                  ]}
+                >
+                  <Text style={styles.btnText}>Cancelar</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </RBSheet>
+        </ScrollView>
+        <StatusBar />
+      </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({

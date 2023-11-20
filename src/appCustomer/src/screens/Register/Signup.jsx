@@ -26,7 +26,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import COLORS from '../../constants/colors';
 import Button from '../../components/Buttons/Button';
 import icon from '../../assets/Comandas-icon.png';
-import AvatarExemple from '../../assets/UserAvatar.png';
+// import AvatarExemple from '../../assets/UserAvatar.png';
 
 function Signup() {
   const navigation = useNavigation();
@@ -41,7 +41,9 @@ function Signup() {
   const [isPasswordHide, setIsPasswordHide] = useState(true);
 
   // Image Picker
-  const [image, setImage] = useState(AvatarExemple);
+  const [image, setImage] = useState(
+    'https://cdn2.iconfinder.com/data/icons/essential-web-2/50/user-ciecle-round-account-person-512.png',
+  );
 
   const { height } = useWindowDimensions();
 

@@ -47,7 +47,7 @@ function Cartoes() {
   const [form] = React.useState({
     // Initial Data Simulated - because now the DB don't have payment data
     cardBrand: 'Visa',
-    nome: user.name,
+    nome: user.userInfo.name,
     cardNumber: '4343 5768 1234 8998',
     expDate: '12/29',
     csv: '***',

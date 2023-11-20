@@ -17,7 +17,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import * as ImagePicker from 'expo-image-picker';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
-import { UpdateUser } from '@/services/user.services';
+import { updateUser } from '@/services/user.services';
 import AvatarExemple from '../../assets/UserPlaceholder02.png';
 
 const SECTIONS = [
@@ -85,11 +85,11 @@ export default function DadosPessoais() {
   const [image, setImage] = useState(AvatarExemple);
 
   const [form, setForm] = useState({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    phoneNumber: user.phoneNumber,
-    birthday: user.birthday,
+    id: user.userInfo.id,
+    name: user.userInfo.name,
+    email: user.userInfo.email,
+    phoneNumber: user.userInfo.phoneNumber,
+    birthday: user.userInfo.birthday,
     photoUrl: user.photoUrl,
   });
   const [value, setValue] = useState(0);
@@ -128,7 +128,7 @@ export default function DadosPessoais() {
   };
 
   function handleUpdateUser() {
-    UpdateUser({
+    updateUser({
       customerInfo: {
         birthday,
         photoUrl,
@@ -170,8 +170,8 @@ export default function DadosPessoais() {
               />
             )}
             <View>
-              <Text style={styles.profileName}>{user.name}</Text>
-              <Text style={styles.profileHandle}>{user.email}</Text>
+              <Text style={styles.profileName}>{user.userInfo.name}</Text>
+              <Text style={styles.profileHandle}>{user.userInfo.email}</Text>
             </View>
           </View>
           {/* >>>>>>>>>>Edit Button<<<<<<<<<<<< */}
