@@ -10,23 +10,25 @@ import {
   FlatList,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-
 import axios from 'axios';
 import Button from '@/components/Buttons/Button';
 
-function OrderList() {
+const OrderList = () => {
   const [items, setItems] = useState([]);
   const { user } = useUser();
   const [isLoading, setLoading] = useState(false);
-
   const [DetailVisivel, setDetailVisible] = useState(false);
+
+  const [DetVisivel, setDetVisible] = useState(false);
 
   const [Valor, setValor] = useState('Shurek');
   const [Restaurante, setRestaurante] = useState('Shurek');
   const [statusPedido, setStatusPedido] = useState('open');
+  const [Status, setStatus] = useState('open');
+
+  const [GroupId, setGroupId] = useState('x');
 
   useEffect(() => {
-    // Função para buscar itens da API
     const fetchItemsFromAPI = async () => {
       try {
         const response = await axios.get(
@@ -40,11 +42,9 @@ function OrderList() {
         );
 
         if (Array.isArray(response.data) && response.data.length > 0) {
-          // Check if the response data is an array with elements
           setItems(response.data);
           setLoading(true);
         } else {
-          // Handle the case where no data is returned or the data is an empty array
           console.log('No data received from the API.');
         }
       } catch (error) {
@@ -62,18 +62,16 @@ function OrderList() {
     fetchItemsFromAPI();
   }, []);
 
-  // tela de carregamento
   if (!isLoading) {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <View>
-          <Text style={styles.profileText}>Ta carregando meu filho</Text>
+          <Text style={styles.profileName}> Carregando pedidos </Text>
         </View>
       </SafeAreaView>
     );
   }
 
-  // tela de quando o usuario nao tem pedidos
   if (items.length === 0) {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -82,58 +80,217 @@ function OrderList() {
         </View>
         <View>
           <Text style={styles.profileText}>
-            Você ainda nao possue nenhum pedido cadastrado
+            Você ainda não possui nenhum pedido cadastrado
           </Text>
         </View>
       </SafeAreaView>
     );
   }
-  // tela de pedidos do usuario
 
   return (
-    <View>
-      <Text style={styles.profileName}> Meus pedidos </Text>
+    <View style={{ backgroundColor: COLORS.neutralWhite }}>
+      <View>
+        <FlatList
+          ListHeaderComponent={() => (
+            <>
+              <View
+                style={{
+                  borderColor: '#00000020',
+                }}
+              />
+              <View
+                style={{
+                  justifyContent: 'center',
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+              >
+                <Button
+                  style={{ width: 100, height: 50 }}
+                  title="open"
+                  onPress={() => {
+                    setStatus('open');
+                  }}
+                ></Button>
+                <Button
+                  style={{ width: 100, height: 50 }}
+                  title="closed"
+                  onPress={() => {
+                    setStatus('closed');
+                  }}
+                ></Button>
+                <Button
+                  style={{ width: 100, height: 50 }}
+                  title="cancelled"
+                  onPress={() => {
+                    setStatus('cancelled');
+                  }}
+                ></Button>
+              </View>
+            </>
+          )}
+          data={items}
+          keyExtractor={(order) => order.id.toString()}
+          renderItem={({ item: order }) => (
+            <>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingHorizontal: 10,
+                  paddingVertical: 10,
+                }}
+              >
+                {Status == order.status ? (
+                  <>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <View style={{ gap: 5, flex: 1 }}>
+                        <Text style={styles.itemTitle}>
+                          {order.shop.userInfo.name}
+                        </Text>
+                        <Text
+                          numberOfLines={3}
+                          textBreakStrategy="highQuality"
+                          style={styles.itemDescription}
+                        >
+                          status: {order.status}
+                        </Text>
+                        <Text style={styles.itemPrice}>R$ {order.total}</Text>
+                      </View>
+                      <Button
+                        style={{
+                          width: 100,
+                          height: 50,
+                          marginTop: 10,
+                          borderWidth: StyleSheet.hairlineWidth,
+                          borderColor: '#00000020',
+                        }}
+                        title="Detalhe"
+                        onPress={() => {
+                          setDetVisible(!DetVisivel), setValor(order.total);
+                          setRestaurante(order.shop.userInfo.name);
+                          setStatusPedido(order.status);
+                          setGroupId(order.groupId);
+                        }}
+                      />
+                    </View>
+                    <View
+                      style={{
+                        marginTop: 0,
+                        borderWidth: StyleSheet.hairlineWidth,
+                        borderColor: '#00000020',
+                      }}
+                    />
+                  </>
+                ) : null}
+              </View>
 
-      <FlatList
-        data={items}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.wrapperContainer}>
-            <Text> R$ {item.total}</Text>
-            <Text>status: {item.status}</Text>
-            <Button
-              title="teste"
-              onPress={() => {
-                setDetailVisible(true);
-                setValor(item.total);
-                setRestaurante(item.shop.userInfo.name);
-                setStatusPedido(item.status);
-              }}
-            />
-          </View>
-        )}
-      />
-      <Modal visible={DetailVisivel} animationType="slide">
-        <Button
-          title="Fechar "
-          onPress={() => {
-            setDetailVisible(false);
-          }}
+              {/* Iterate through the items within the order */}
+              {DetVisivel === true && (
+                <>
+                  {order.items.map((orderItem) => (
+                    <View key={orderItem.id} style={{ paddingVertical: 5 }}>
+                      <View style={[styles.item, { paddingVertical: 5 }]}>
+                        <Text style={styles.textH2}>
+                          {orderItem.name} - {orderItem.status}
+                        </Text>
+                        <Text style={styles.textH2}>R$ {orderItem.total}</Text>
+                      </View>
+                      <Text numberOfLines={3} style={styles.description}>
+                        {orderItem.description}
+                      </Text>
+                    </View>
+                  ))}
+                  <View style={styles.orderFooter}>
+                    <Text style={styles.textH1}>Total: </Text>
+                    <Text style={{ color: COLORS.primary, fontWeight: 'bold' }}>
+                      R$ {Valor}
+                    </Text>
+                  </View>
+                </>
+              )}
+            </>
+          )}
         />
+        <Modal visible={DetailVisivel} animationType="slide">
+          <View style={styles.container}>
+            <View style={styles.orderHeader}>
+              <Text style={[styles.textH1, { fontSize: 16 }]}>
+                Order #{GroupId}
+              </Text>
+            </View>
+            <View style={{ display: 'flex', flexDirection: 'row' }}>
+              <Text>Status: </Text>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  color:
+                    statusPedido === 'open' ? COLORS.iconGreen : COLORS.iconRed,
+                }}
+              >
+                {statusPedido}
+              </Text>
+            </View>
+            <View>
+              {/* {order.items.map((orderItem) => (
+                <View key={orderItem.id} style={{ paddingVertical: 5 }}>
+                  <View style={[styles.item, { paddingVertical: 5 }]}>
+                    <Text style={styles.textH2}>
+                      {orderItem.name} - {orderItem.status}
+                    </Text>
+                    <Text style={styles.textH2}>R$ {orderItem.total}</Text>
+                  </View>
+                  <Text numberOfLines={3} style={styles.description}>
+                    {orderItem.description}
+                  </Text>
+                </View>
+              ))} */}
+            </View>
+            <View style={styles.orderFooter}>
+              <Text style={styles.textH1}>Total: </Text>
+              <Text style={{ color: COLORS.primary, fontWeight: 'bold' }}>
+                R$ {Valor}
+              </Text>
+            </View>
+          </View>
 
-        <Text>Restaurante: {Restaurante}</Text>
-        <Text>Valor total: {Valor}</Text>
-        <Text>Status do pedido: {statusPedido}</Text>
-      </Modal>
+          <Text>Restaurante: {Restaurante}</Text>
+          <Text>Valor total: {GroupId}</Text>
+          <Text>Status do pedido: {GroupId}</Text>
+
+          <Button
+            title="Fechar "
+            onPress={() => {
+              setDetailVisible(false);
+            }}
+          />
+        </Modal>
+      </View>
     </View>
   );
-}
+};
 
 export default OrderList;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  // Seus estilos aqui...
+  profileName: {
+    marginTop: 20,
+    marginHorizontal: 24,
+    fontSize: 22,
+    fontWeight: '700',
+    color: COLORS.linkTextGreen,
+    textAlign: 'center',
+  },
+  profileText: {
+    // Adicione estilos conforme necessário...
   },
   wrapperContainer: {
     flexDirection: 'row',
@@ -148,11 +305,10 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.8,
     shadowRadius: 1,
-
     elevation: 2,
   },
   scrollContent: {
-    flexGrow: 1, // Permite que o ScrollView cresça para preencher o espaço disponível
+    flexGrow: 1,
   },
   profile: {
     backgroundColor: COLORS.white,
@@ -161,7 +317,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: -20,
   },
-  profileName: {
+  Title: {
     marginTop: 20,
     marginHorizontal: 24,
     fontSize: 22,
@@ -169,12 +325,74 @@ const styles = StyleSheet.create({
     color: COLORS.linkTextGreen,
     textAlign: 'center',
   },
-  profileText: {
-    marginTop: 20,
-    marginHorizontal: 24,
-    fontSize: 17,
-    fontWeight: '400',
-    color: COLORS.placeholderText,
-    textAlign: 'center',
+
+  itemTitle: {
+    fontFamily: 'MontserratSemiBold',
+    fontSize: 16,
+    color: COLORS.secondary,
+  },
+  itemDescription: {
+    textAlign: 'left',
+    fontFamily: 'MontserratSemiBold',
+    fontSize: 12,
+    color: COLORS.neutralBlue,
+    width: 200,
+  },
+  itemPrice: {
+    textAlign: 'left',
+    fontFamily: 'MontserratSemiBold',
+    fontSize: 14,
+    color: COLORS.iconGreen,
+    width: 200,
+  },
+  itemImage: {
+    width: 80,
+    resizeMode: 'cover',
+    borderRadius: 15,
+    aspectRatio: 1 / 1,
+  },
+
+  container: {
+    width: '90%',
+    gap: 5,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 2,
+    shadowColor: '#000',
+    elevation: 8,
+  },
+  item: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textH1: {
+    color: COLORS.secondary,
+    fontWeight: 'bold',
+  },
+  textH2: {
+    color: COLORS.secondary,
+    fontWeight: '500',
+  },
+  description: {
+    color: COLORS.grayDark,
+    paddingHorizontal: 25,
+    lineHeight: 19,
+  },
+  orderHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    color: COLORS.primary,
+    fontWeight: 'bold',
+  },
+  orderFooter: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderTopWidth: 2,
+    borderTopColor: '#ccc',
+    borderStyle: 'dashed',
+    paddingTop: 10,
   },
 });

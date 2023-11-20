@@ -93,7 +93,7 @@ function StackNavigation() {
       <Stack.Screen
         name="PedidosAcompanhamento"
         component={PedidosAcompanhamento}
-        options={{ title: '' }}
+        options={{ headerShadowVisible: false, title: 'Meus pedidos' }}
       />
       <Stack.Screen
         name="DadosPessoais"
