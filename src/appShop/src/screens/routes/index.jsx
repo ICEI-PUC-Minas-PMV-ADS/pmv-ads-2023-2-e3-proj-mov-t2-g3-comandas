@@ -209,7 +209,7 @@ function DrawerNavigation() {
                 })}
             />
             <Drawer.Screen
-                name="Pedidos"
+                name="OrderSummaryDrawer"
                 component={OrderSummaryStackNavigation}
                 options={() => ({
                     drawerLabel: "Resumo do Pedido",

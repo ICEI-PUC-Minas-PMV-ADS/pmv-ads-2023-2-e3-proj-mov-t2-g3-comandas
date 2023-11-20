@@ -32,7 +32,7 @@ const filterStructure = [
     },
 ];
 
-export default function Mesas() {
+export default function Mesas({ navigation }) {
     const [activeFilter, setActiveFilter] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
     const [qrCodes, setQrCodes] = useState({});
@@ -127,7 +127,14 @@ export default function Mesas() {
                 fadingEdgeLength={50}
                 contentContainerStyle={{ gap: 20, padding: 12 }}
                 renderItem={({ item }) => (
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() =>
+                            navigation.navigate("MesaInfo", {
+                                tableId: item.table,
+                                shopId: item.shopId,
+                            })
+                        }
+                    >
                         <Mesa
                             tableNumber={item.table}
                             isOccupied={item.isOccupied}
