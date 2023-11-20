@@ -107,7 +107,7 @@ export default function Signup({ navigation }) {
                       [field.key]:
                         field.keyboardType === 'numeric'
                           ? text.replace(/[^0-9]/g, '')
-                          : text.trim(),
+                          : text,
                     }))
                   }
                 />

@@ -50,7 +50,6 @@ export default function SignupAddress({ navigation, route }) {
     ) {
       Alert.alert('Todos os campos devem ser preenchidos!');
     } else {
-      console.log(typeof shopInfo.tables);
       setIsLoading(true);
       register({
         shopInfo: { ...shopInfo, tables: parseInt(shopInfo.tables, 10) },
@@ -119,7 +118,7 @@ export default function SignupAddress({ navigation, route }) {
                       [field.key]:
                         field.keyboardType === 'numeric'
                           ? text.replace(/[^0-9]/g, '')
-                          : text.trim(),
+                          : text,
                     }))
                   }
                   textContentType={field.contentType ?? 'none'}
