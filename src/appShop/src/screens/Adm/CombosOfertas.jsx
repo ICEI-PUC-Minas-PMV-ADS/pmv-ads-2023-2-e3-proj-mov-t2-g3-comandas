@@ -13,44 +13,112 @@ import { useNavigation } from "@react-navigation/native";
 import CustomSwitchGroup from "@/components/SwitchToggle/CustomSwitchGroup";
 import LoadingBSheet from "@/components/LoadingBSheet";
 
-const data = [
+const dataFst = [
     {
         header: "Combo",
         id: "entrada",
-        icon: "arrow-right-circle",
-        text: "Entrada",
+        icon: "arrow-right",
+        text: "Salada",
         type: "toggle",
     },
     {
         header: "Combo",
-        id: "pratoPrincipal",
-        icon: "arrow-right-circle",
-        text: "Prato Principal",
+        id: "entrada",
+        icon: "arrow-right",
+        text: "Batatas Fritas",
         type: "toggle",
     },
     {
         header: "Combo",
-        id: "sobremesa",
-        icon: "arrow-right-circle",
-        text: "Sobremesa",
+        id: "entrada",
+        icon: "arrow-right",
+        text: "Onion Rings",
+        type: "toggle",
+    },
+    {
+        header: "Combo",
+        id: "entrada",
+        icon: "arrow-right",
+        text: "Não incluir",
+        type: "toggle",
+    },
+];
+
+const dataSnd = [
+    {
+        header: "Combo",
+        id: "Main",
+        icon: "arrow-right",
+        text: "Prato do Dia",
+        type: "toggle",
+    },
+    {
+        header: "Combo",
+        id: "Main",
+        icon: "arrow-right",
+        text: "Feijoada Completa",
+        type: "toggle",
+    },
+    {
+        header: "Combo",
+        id: "Main",
+        icon: "arrow-right",
+        text: "Feijoada Light",
+        type: "toggle",
+    },
+    {
+        header: "Combo",
+        id: "Main",
+        icon: "arrow-right",
+        text: "Feijoada Vegetariana",
+        type: "toggle",
+    },
+    {
+        header: "Combo",
+        id: "Main",
+        icon: "arrow-right",
+        text: "Não incluir",
+        type: "toggle",
+    },
+];
+
+const dataTrd = [
+    {
+        header: "Combo",
+        id: "bebida",
+        icon: "arrow-right",
+        text: "Suco Natural 330ml",
         type: "toggle",
     },
     {
         header: "Combo",
         id: "bebida",
-        icon: "arrow-right-circle",
-        text: "Babida",
+        icon: "arrow-right",
+        text: "Refrigerante 330ml",
         type: "toggle",
     },
     {
         header: "Combo",
-        id: "cafe",
-        icon: "arrow-right-circle",
+        id: "bebida",
+        icon: "arrow-right",
+        text: "Cerveja 330ml",
+        type: "toggle",
+    },
+    {
+        header: "Combo",
+        id: "bebida",
+        icon: "arrow-right",
         text: "Café",
         type: "toggle",
     },
+    {
+        header: "Combo",
+        id: "bebida",
+        icon: "arrow-right",
+        text: "Não incluir",
+        type: "toggle",
+    },
 ];
-
 function CombosOfertas() {
     const navigation = useNavigation();
 
@@ -61,7 +129,7 @@ function CombosOfertas() {
     };
 
     const showConfirmDialog = () =>
-        Alert.alert("Atenção!", "Você confirma o Pagamento?", [
+        Alert.alert("Atenção!", "Você confirma a Promoção?", [
             {
                 text: "Sim",
                 onPress: () => {
@@ -78,43 +146,72 @@ function CombosOfertas() {
             <ScrollView style={styles.scrollContent}>
                 {/* >>>>>>>>>>Header<<<<<<<<<<<< */}
                 <View style={styles.header} />
-                {/* >>>>>>>>>> Bank Card <<<<<<<<<<<< */}
-                <View style={styles.profile}>
-                    <View style={styles.profileHeader}>
-                        <Text style={styles.profileHeader}>Header</Text>
-                    </View>
-                    {/* >>>>>>>>>>Payment Button<<<<<<<<<<<< */}
-
-                    <TouchableOpacity
-                        onPress={() => {
-                            // handle payment
-                            showConfirmDialog();
-                        }}
-                    >
-                        <View style={styles.profileAction}>
-                            <Text style={styles.profileActionText}>Pagar</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
 
                 {/* >>>>>>>>>>Body<<<<<<<<<<<< */}
                 <View style={styles.container}>
                     <View style={styles.switchGroupHeader}>
                         <Text style={styles.switchGroupTextHeader}>
                             {" "}
-                            Selecione a forma de Pagamento Desejada
+                            ENTRADAS
                         </Text>
                     </View>
-                    <CustomSwitchGroup values={data} onPress={onSwitchChange} />
+                    <CustomSwitchGroup
+                        values={dataFst}
+                        onPress={onSwitchChange}
+                    />
+                </View>
+
+                <View style={styles.container}>
+                    <View style={styles.switchGroupHeader}>
+                        <Text style={styles.switchGroupTextHeader}>
+                            {" "}
+                            PRATO PRINCIPAL
+                        </Text>
+                    </View>
+                    <CustomSwitchGroup
+                        values={dataSnd}
+                        onPress={onSwitchChange}
+                    />
+                </View>
+
+                <View style={styles.container}>
+                    <View style={styles.switchGroupHeader}>
+                        <Text style={styles.switchGroupTextHeader}>
+                            {" "}
+                            BEBIDA
+                        </Text>
+                    </View>
+                    <CustomSwitchGroup
+                        values={dataTrd}
+                        onPress={onSwitchChange}
+                    />
+                </View>
+                {/* >>>>>>>>>> Bank Card <<<<<<<<<<<< */}
+                <View style={styles.profile}>
+                    <View style={styles.profileHeader}>
+                        <Text style={styles.profileHeader}>{dataFst.text}</Text>
+                    </View>
+                    {/* >>>>>>>>>>Payment Button<<<<<<<<<<<< */}
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            // handle create sale
+                            showConfirmDialog();
+                        }}
+                    >
+                        <View style={styles.profileAction}>
+                            <Text style={styles.profileActionText}>
+                                Criar Promoção
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
                 {/* >>>>CheckIn Payment Animation Bottom Sheet<<<< */}
                 {isLoading ? (
                     <LoadingBSheet
-                        headerText="Processando Pagamento..."
-                        welcomeBackText="Aprovado!"
-                        route={() =>
-                            navigation.navigate("PedidosAcompanhamento")
-                        }
+                        headerText="Criando Promoção..."
+                        welcomeBackText="Pronto!"
+                        route={() => navigation.navigate("AdmNavMenu")}
                     />
                 ) : null}
             </ScrollView>
@@ -154,7 +251,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 12,
         flexDirection: "row",
-        backgroundColor: colors.linkTextGreen,
+        backgroundColor: colors.primary,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 50,

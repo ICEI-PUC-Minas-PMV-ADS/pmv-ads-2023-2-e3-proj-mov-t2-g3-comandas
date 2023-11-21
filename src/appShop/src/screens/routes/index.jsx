@@ -77,7 +77,7 @@ function AdmStackNavigation() {
                 name="AdmNavMenu"
                 component={AdmNavMenu}
                 options={{
-                    title: "{user.name}",
+                    title: "",
                     animation: "slide_from_right",
                 }}
             />

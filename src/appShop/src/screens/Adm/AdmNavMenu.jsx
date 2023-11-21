@@ -138,12 +138,9 @@ function AdmNavMenu({ navigation }) {
                 {
                     text: "Sim",
                     onPress: () => {
-                        // Handle onPress Delete Conta
-                        // DELETE method for logged User
-                        // logout & destroy jwt token
                         sheetDeleteAccount.current.close();
-                        // AsyncStorage.clear();
-                        navigation.navigate("Login");
+                        setIsLoading(true);
+                        logout();
                     },
                 },
                 {
@@ -214,6 +211,9 @@ function AdmNavMenu({ navigation }) {
                                     }
                                     if (id === "CombosOfertas") {
                                         navigation.navigate("CombosOfertas");
+                                    }
+                                    if (id === "delete") {
+                                        sheetDeleteAccount.current.open();
                                     }
                                 }}
                             >
