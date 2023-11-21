@@ -14,6 +14,8 @@ function OrderDetailCard({ order }) {
                     {item.name} ({item.quantity})
                 </Text>
             ))}
+            {/* Adicione a descrição aqui */}
+            {order.note && <Text style={styles.note}>Nota: {order.note}</Text>}
         </View>
     );
 }
@@ -49,7 +51,12 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginTop: 10,
     },
-    // ... Outros estilos para textos e elementos dentro do cartão
+    note: {
+        marginTop: 4, // Espaçamento acima da nota
+        fontStyle: "italic", // Estilo da fonte para notas
+        color: "#333", // Cor do texto para a nota
+        fontSize: 14, // Tamanho da fonte para a nota
+    },
 });
 
 export default OrderDetailCard;

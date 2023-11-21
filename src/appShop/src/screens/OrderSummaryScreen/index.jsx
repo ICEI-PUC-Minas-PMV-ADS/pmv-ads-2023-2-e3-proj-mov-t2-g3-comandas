@@ -9,6 +9,7 @@ const mockOrders = [
         id: "45",
         status: "Finalizado",
         total: "105",
+        note: "Sem cebola, por favor",
         items: [
             { id: "a1", name: "Batata Frita", quantity: "1" },
             { id: "b2", name: "Suco de laranja", quantity: "2" },
