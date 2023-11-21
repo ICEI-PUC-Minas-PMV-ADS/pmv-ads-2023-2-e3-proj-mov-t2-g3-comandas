@@ -29,7 +29,7 @@ const inputFields = [
         keyboardType: "numeric",
         maxLength: 11,
     },
-    { label: "Cargo", key: "cargo", contentType: "cargo" },
+    { label: "Turno", key: "turno", contentType: "turno" },
 ];
 
 const initialState = {
@@ -39,7 +39,7 @@ const initialState = {
     phoneNumber: null,
 };
 
-export default function CrewSignup({ navigation }) {
+export default function AdmSignup({ navigation }) {
     const [form, setForm] = useState(initialState);
     const [isPasswordHide, setIsPasswordHide] = useState(true);
     const { height } = useWindowDimensions();

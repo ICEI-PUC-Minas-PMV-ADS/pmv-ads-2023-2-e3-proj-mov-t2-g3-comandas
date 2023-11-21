@@ -1,5 +1,6 @@
 import COLORS from "@/constants/colors";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useUser } from "@/context/UserContext";
 import {
     StyleSheet,
     ScrollView,
@@ -19,14 +20,14 @@ const SECTIONS = [
         icon: "align-center",
         items: [
             {
-                id: "SignupAdm",
+                id: "AdmSignup",
                 icon: "user-plus",
                 color: COLORS.iconGreen,
                 label: "Novo Administrador",
                 type: "link",
             },
             {
-                id: "Signup",
+                id: "CrewSignup",
                 icon: "users",
                 color: COLORS.iconGreen,
                 label: "Novo Membro da Equipe",
@@ -112,9 +113,36 @@ const SECTIONS = [
 ];
 
 function AdmNavMenu({ navigation }) {
+    const { user, signed, logout } = useUser();
     const [isLoading, setIsLoading] = useState(false);
     // Action Bottom Sheets
     const sheetDeleteAccount = React.useRef();
+
+    // to hide drawer header and show stacknavigation backPage arrow in header
+    useEffect(() => {
+        navigation.getParent()?.setOptions({
+            headerShown: false,
+        });
+        return () =>
+            navigation.getParent()?.setOptions({
+                headerShown: true,
+            });
+    }, [navigation]);
+
+    // Confirmation Dialog Alerts
+    const showConfirmDialog = () =>
+        Alert.alert("Atenção!", "Deseja Encerrar a Sessão Administrativa?", [
+            {
+                text: "Sim",
+                onPress: () => {
+                    setIsLoading(true);
+                    logout();
+                },
+            },
+            {
+                text: "Não",
+            },
+        ]);
 
     const showConfirmDeleteAccountDialog = () =>
         Alert.alert(
@@ -156,6 +184,29 @@ function AdmNavMenu({ navigation }) {
                     />
                 ) : null}
 
+                {/* >>>>>Logout Button<<<<< */}
+                <View style={styles.profile}>
+                    <TouchableOpacity
+                        style={{ opacity: 0.75 }}
+                        onPress={() => {
+                            // handle logout
+                            // AsyncStorage.clear();
+                            showConfirmDialog();
+                        }}
+                    >
+                        <View style={styles.logout}>
+                            <Text style={styles.logoutLabel}>
+                                Encerrar Sessão Adm
+                            </Text>
+                            <FeatherIcon
+                                name="log-out"
+                                size={26}
+                                label="Sair"
+                                color={COLORS.iconRed}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                </View>
                 {/* >>>>>Body Sections & Lists<<<<< */}
                 {SECTIONS.map(({ header, items }) => (
                     <View style={styles.section} key={header}>
@@ -166,13 +217,14 @@ function AdmNavMenu({ navigation }) {
                                 key={icon}
                                 onPress={() => {
                                     // handle onPress
-                                    if (id === "Signup") {
+                                    if (id === "AdmSignup") {
+                                        navigation.navigate("AdmSignup");
+                                    }
+                                    if (id === "CrewSignup") {
                                         navigation.navigate("CrewSignup");
                                     }
-                                    if (id === "SignupAddress") {
-                                        navigation.navigate(
-                                            "CrewSignupAddress",
-                                        );
+                                    if (id === "CrewList") {
+                                        navigation.navigate("CrewList");
                                     }
                                     if (id === "ItemDetails") {
                                         // navigation.navigate("ItemDetails");

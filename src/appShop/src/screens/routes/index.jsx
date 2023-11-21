@@ -14,7 +14,6 @@ import { useUser } from "@/context/UserContext";
 import Splash from "../../assets/splash.png";
 import Home from "../Home";
 import Mesas from "../Mesas/index";
-
 import DashboardIcon from "../../assets/Dashboard.svg";
 import PedidosIcon from "../../assets/Pedidos.svg";
 import MesasIcon from "../../assets/Mesas.svg";
@@ -28,6 +27,9 @@ import SignupAddress from "../Register/SignupAddress";
 import Login from "../Login/Login";
 import OrderSummaryScreen from "../OrderSummaryScreen"; // Correção do caminho, ajuste conforme necessário
 import AdmNavMenu from "../Adm/AdmNavMenu";
+import CrewSignup from "../Adm/CrewSignup";
+import AdmSignup from "../Adm/AdmSignup";
+import CrewList from "../Adm/CrewList";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -79,13 +81,18 @@ function AdmStackNavigation() {
                 }}
             />
             <Stack.Screen
-                name="CrewSignup"
-                component={Signup}
+                name="AdmSignup"
+                component={AdmSignup}
                 options={{ title: "" }}
             />
             <Stack.Screen
-                name="CrewSignupAddress"
-                component={SignupAddress}
+                name="CrewSignup"
+                component={CrewSignup}
+                options={{ title: "" }}
+            />
+            <Stack.Screen
+                name="CrewList"
+                component={CrewList}
                 options={{ title: "" }}
             />
         </Stack.Navigator>
