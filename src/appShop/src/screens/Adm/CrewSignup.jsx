@@ -29,7 +29,12 @@ const inputFields = [
         keyboardType: "numeric",
         maxLength: 11,
     },
-    { label: "Cargo", key: "cargo", contentType: "cargo" },
+    {
+        label: "Qtd. de Mesas",
+        key: "tables",
+        keyboardType: "numeric",
+        maxLength: 6,
+    },
 ];
 
 const initialState = {
@@ -37,9 +42,10 @@ const initialState = {
     email: "",
     password: "",
     phoneNumber: null,
+    tables: null,
 };
 
-export default function Signup({ navigation }) {
+export default function CrewSignup({ navigation }) {
     const [form, setForm] = useState(initialState);
     const [isPasswordHide, setIsPasswordHide] = useState(true);
     const { height } = useWindowDimensions();
@@ -59,6 +65,9 @@ export default function Signup({ navigation }) {
                     email: form.email,
                     phoneNumber: form.phoneNumber,
                 },
+                shopInfo: {
+                    tables: form.tables,
+                },
             });
         }
     };
@@ -77,11 +86,7 @@ export default function Signup({ navigation }) {
                     <View>
                         <Image source={icon} style={styles.imageStyle} />
                     </View>
-                    <View>
-                        <Text style={styles.textHeader}>
-                            Cadastro de Novo Membro da Equipe
-                        </Text>
-                    </View>
+
                     {inputFields.map((field) => (
                         <View key={field.key}>
                             <Text style={styles.textLableInput}>
@@ -186,13 +191,6 @@ const styles = StyleSheet.create({
         fontFamily: "MontserratRegular",
     },
     textInputWrapper: {
-        justifyContent: "center",
-    },
-    textHeader: {
-        fontSize: 16,
-        fontWeight: "400",
-        marginVertical: 8,
-        alignSelf: "center",
         justifyContent: "center",
     },
     textLableInput: {
