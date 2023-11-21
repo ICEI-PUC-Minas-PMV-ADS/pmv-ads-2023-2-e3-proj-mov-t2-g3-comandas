@@ -15,7 +15,9 @@ export default function BottomBar({ navigation }) {
       <TouchableOpacity onPress={() => navigation.navigate('Search')}>
         <SearchMenu />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('PedidosAcompanhamento')}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('PedidosAcompanhamento')}
+      >
         <OrderMenu />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>

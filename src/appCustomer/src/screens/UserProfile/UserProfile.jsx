@@ -19,7 +19,6 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import LoadingBSheet from '@/components/BottomSheet/LoadingBSheet';
 import useAuthVerify from '@/components/AuthVerify';
-import AvatarExemple from '../../assets/UserAvatar.png';
 
 const SECTIONS = [
   {

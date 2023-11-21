@@ -30,6 +30,7 @@ import AdmNavMenu from "../Adm/AdmNavMenu";
 import CrewSignup from "../Adm/CrewSignup";
 import AdmSignup from "../Adm/AdmSignup";
 import CrewList from "../Adm/CrewList";
+import CombosOfertas from "../Adm/CombosOfertas";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -93,6 +94,11 @@ function AdmStackNavigation() {
             <Stack.Screen
                 name="CrewList"
                 component={CrewList}
+                options={{ title: "" }}
+            />
+            <Stack.Screen
+                name="CombosOfertas"
+                component={CombosOfertas}
                 options={{ title: "" }}
             />
         </Stack.Navigator>

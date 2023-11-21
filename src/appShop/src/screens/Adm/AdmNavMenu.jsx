@@ -54,21 +54,7 @@ const SECTIONS = [
         icon: "help-circle",
         items: [
             {
-                id: "ItemDetails",
-                icon: "edit",
-                color: COLORS.iconBlue,
-                label: "Inserir Produto",
-                type: "link",
-            },
-            {
-                id: "EditItemDetails",
-                icon: "edit",
-                color: COLORS.iconBlue,
-                label: "Editar Produto",
-                type: "link",
-            },
-            {
-                id: "Combo&Ofertas",
+                id: "CombosOfertas",
                 icon: "tag",
                 color: COLORS.iconBlue,
                 label: "Combos & Ofertas",
@@ -226,8 +212,8 @@ function AdmNavMenu({ navigation }) {
                                     if (id === "CrewList") {
                                         navigation.navigate("CrewList");
                                     }
-                                    if (id === "ItemDetails") {
-                                        // navigation.navigate("ItemDetails");
+                                    if (id === "CombosOfertas") {
+                                        navigation.navigate("CombosOfertas");
                                     }
                                 }}
                             >
