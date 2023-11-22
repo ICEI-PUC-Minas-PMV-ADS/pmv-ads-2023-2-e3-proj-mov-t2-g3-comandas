@@ -1,4 +1,5 @@
 import colors from "@/constants/colors";
+import * as SecureStore from "expo-secure-store";
 import {
     StyleSheet,
     Text,
@@ -21,7 +22,12 @@ const SECTIONS = [
         icon: "book",
         items: [
             { id: "name", icon: "user", label: "Nome", type: "input" },
-            { id: "idade", icon: "git-commit", label: "Desde", type: "input" },
+            {
+                id: "phoneNumber",
+                icon: "phone",
+                label: "Contato",
+                type: "input",
+            },
             {
                 id: "sobre",
                 icon: "edit-3",
@@ -31,34 +37,55 @@ const SECTIONS = [
         ],
     },
     {
-        header: "Sugestão",
-        icon: "edit",
+        header: "Localização",
+        icon: "map",
         items: [
-            { id: "name", icon: "user", label: "Nome", type: "input" },
-            { id: "email", icon: "mail", label: "Email", type: "input" },
-            {
-                id: "sugestao",
-                icon: "edit",
-                label: "Escreva sua Sugestão",
-                type: "input",
-            },
+            { id: "street", icon: "", label: "Rua", type: "input" },
+            { id: "number", icon: "", label: "No", type: "input" },
+            { id: "city", icon: "", label: "Cidade", type: "input" },
+            { id: "state", icon: "", label: "Estado", type: "input" },
+            { id: "country", icon: "", label: "País", type: "input" },
         ],
     },
     {
-        header: "Comentário",
-        icon: "edit",
+        header: "Horários",
+        icon: "clock",
         items: [
-            { id: "name", icon: "user", label: "Nome", type: "input" },
-            { id: "email", icon: "mail", label: "Email", type: "input" },
             {
-                id: "comentario",
-                icon: "edit",
-                label: "Escreva seu Comentário",
-                type: "input",
+                id: "01",
+                icon: "sun",
+                label: "Almoço - 8:00 -> 16:00",
+                type: "toggle",
+            },
+            {
+                id: "02",
+                icon: "moon",
+                label: "Jantar - 17:00 -> 23:00",
+                type: "toggle",
             },
         ],
     },
 ];
+
+export const saveSecurely = async (key, value) => {
+    try {
+        const jsonValue = JSON.stringify.onChangeText(value);
+        await SecureStore.setItemAsync(key, jsonValue);
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
+export const fetchSecurely = async (key) => {
+    try {
+        const jsonValue = await SecureStore.getItemAsync.onChangeText(key);
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
 
 function About() {
     const navigation = useNavigation();
@@ -69,12 +96,21 @@ function About() {
         id: user.userInfo.id,
         name: user.userInfo.name,
         email: user.userInfo.email,
+        phoneNumber: user.userInfo.phoneNumber,
+        number: user.addressInfo.number,
+        street: user.addressInfo.street,
+        city: user.addressInfo.city,
+        state: user.addressInfo.state,
+        country: user.addressInfo.country,
+        neighborhood: user.addressInfo.neighborhood,
     });
     const [value, setValue] = React.useState(0);
     const [onChangeText] = React.useState();
+
     const { tabs, items } = React.useMemo(
         () => ({
-            tabs: SECTIONS.map(({ header }) => ({
+            tabs: SECTIONS.map(({ header, icon }) => ({
+                icon,
                 header,
             })),
             items: SECTIONS[value].items,
@@ -98,15 +134,16 @@ function About() {
                 <View>
                     <Text style={styles.headerText}>
                         {"   "}
-                        Se você tem alguma{" "}
+                        Esta área é dedicada à formação da página de Perfíl da
+                        Empresa na Aplicação destinada aos Consumidores. Escreva
+                        abaixo nos campos{" "}
                         <Text
                             style={{ color: colors.primary, fontWeight: "500" }}
                         >
-                            dúvida, sugestão, comentário ou reclamação,
+                            Sobre a Empresa, Localização da Empresa & Horários
+                            de Funcionamento.
                         </Text>{" "}
-                        por favor, escreva abaixo e envie à nossa equipe.
-                        Teremos todo o prazer em atendê-lo naquilo que for
-                        possível. {"\n"}
+                        {"\n"}
                     </Text>
                 </View>
 
@@ -131,10 +168,13 @@ function About() {
                                     >
                                         <View style={styles.tab}>
                                             <FeatherIcon
-                                                style={{ padding: 8 }}
+                                                style={{
+                                                    color: isActive
+                                                        ? colors.primary
+                                                        : colors.grayDark,
+                                                }}
                                                 name={icon}
-                                                size={18}
-                                                color={colors.placeholderText}
+                                                size={16}
                                             />
                                             <Text
                                                 style={
@@ -161,7 +201,7 @@ function About() {
                                     style={{ padding: 8 }}
                                     name={icon}
                                     size={18}
-                                    color={colors.placeholderText}
+                                    color={colors.grayDark}
                                 />
                                 <Text style={styles.rowLabel}>{label}</Text>
 
@@ -179,9 +219,10 @@ function About() {
                             editable
                             multiline
                             numberOfLines={12}
-                            height={90}
+                            height={50}
                             maxLength={250}
-                            onChangeText={(text) => onChangeText(text)}
+                            placeholderText={() => fetchSecurely("")}
+                            onChangeText={onChangeText}
                             value={value}
                             style={{ padding: 10 }}
                         />
@@ -189,8 +230,11 @@ function About() {
                     {/* >>>>>>>>>> Send Button <<<<<<<<<<<< */}
                     <View>
                         <TouchableOpacity
-                            style={{ marginTop: height / 11 }}
+                            style={{
+                                marginTop: height < 1300 ? "5%" : "35%",
+                            }}
                             onPress={() => {
+                                saveSecurely();
                                 setIsLoading(true);
                             }}
                         >
@@ -263,11 +307,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         paddingVertical: 10,
+        paddingHorizontal: 10,
         position: "relative",
         overflow: "hidden",
     },
     tabText: {
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: "600",
         color: colors.placeholderText,
     },
