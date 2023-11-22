@@ -61,10 +61,10 @@ const SECTIONS = [
                 type: "link",
             },
             {
-                id: "MapaMesas",
-                icon: "compass",
+                id: "Cardapio",
+                icon: "book-open",
                 color: COLORS.iconBlue,
-                label: "Mapa de Mesas",
+                label: "Editar Cardápio",
                 type: "link",
             },
             {
@@ -211,6 +211,9 @@ function AdmNavMenu({ navigation }) {
                                     }
                                     if (id === "CombosOfertas") {
                                         navigation.navigate("CombosOfertas");
+                                    }
+                                    if (id === "Cardapio") {
+                                        navigation.navigate("Cardapio");
                                     }
                                     if (id === "About") {
                                         navigation.navigate("About");

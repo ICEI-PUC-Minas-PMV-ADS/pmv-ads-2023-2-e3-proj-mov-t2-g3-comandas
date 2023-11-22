@@ -104,6 +104,14 @@ function AdmStackNavigation() {
                 options={{ title: "" }}
             />
             <Stack.Screen
+                name="Cardapio"
+                component={Cardapio}
+                options={{
+                    headerShown: true,
+                    title: "",
+                }}
+            />
+            <Stack.Screen
                 name="About"
                 component={About}
                 options={{ title: "" }}
