@@ -182,7 +182,7 @@ function FaleConosco() {
               numberOfLines={12}
               height={90}
               maxLength={250}
-              onChangeText={(text) => onChangeText(text)}
+              onChangeText={onChangeText}
               value={value}
               style={{ padding: 10 }}
             />

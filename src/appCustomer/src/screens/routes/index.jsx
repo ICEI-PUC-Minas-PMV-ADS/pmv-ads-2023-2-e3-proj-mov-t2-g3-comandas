@@ -182,11 +182,7 @@ function StackNavigation() {
         component={Problemas}
         options={{ title: '' }}
       />
-      <Stack.Screen
-        name="Search"
-        component={Search}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="Search" component={Search} options={{ title: '' }} />
       <Stack.Screen
         name="Shop"
         component={Shop}
