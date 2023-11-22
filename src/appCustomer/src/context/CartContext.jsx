@@ -8,6 +8,7 @@ export const CartContext = createContext();
 export default function CartProvider({ children }) {
   const { signed } = useUser();
   const [cart, setCart] = useState([]);
+  const [table, setTable] = useState(null);
 
   async function addCartItem(
     shopInfo,
@@ -31,16 +32,18 @@ export default function CartProvider({ children }) {
           prev[existingShopIndex].items[existingItemIndex].quantity +=
             itemQuantity;
           prev[existingShopIndex].items[existingItemIndex].total = Number(
-            prev[existingShopIndex].items[existingItemIndex].quantity *
-              itemPrice,
-          ).toFixed(2);
+            Number(
+              prev[existingShopIndex].items[existingItemIndex].quantity *
+                itemPrice,
+            ).toFixed(2),
+          );
         } else {
           prev[existingShopIndex].items.push({
-            id: itemId,
+            id: Number(itemId),
             name: itemName,
             photoUrl: itemPhoto,
             quantity: itemQuantity,
-            total: Number(itemQuantity * itemPrice).toFixed(2),
+            total: Number(Number(itemQuantity * itemPrice).toFixed(2)),
           });
         }
       } else {
@@ -54,11 +57,11 @@ export default function CartProvider({ children }) {
           note: 'nothing',
           items: [
             {
-              id: itemId,
+              id: Number(itemId),
               name: itemName,
               photoUrl: itemPhoto,
               quantity: itemQuantity,
-              total: Number(itemQuantity * itemPrice).toFixed(2),
+              total: Number(Number(itemQuantity * itemPrice).toFixed(2)),
             },
           ],
         });
@@ -73,6 +76,7 @@ export default function CartProvider({ children }) {
   async function clearCart() {
     await SecureStore.deleteItemAsync('CART');
     setCart([]);
+    setTable(null);
   }
 
   useEffect(() => {
@@ -94,6 +98,8 @@ export default function CartProvider({ children }) {
         cart,
         addCartItem,
         clearCart,
+        table,
+        setTable,
       }}
     >
       {children}
@@ -103,6 +109,6 @@ export default function CartProvider({ children }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-  const { cart, addCartItem, clearCart } = context;
-  return { cart, addCartItem, clearCart };
+  const { cart, addCartItem, clearCart, table, setTable } = context;
+  return { cart, addCartItem, clearCart, table, setTable };
 }

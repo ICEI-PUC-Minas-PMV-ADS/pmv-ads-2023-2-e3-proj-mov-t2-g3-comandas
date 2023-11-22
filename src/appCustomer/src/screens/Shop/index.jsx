@@ -23,9 +23,14 @@ import Clock from '../../assets/Clock.svg';
 import ItemCard from './ItemCard';
 
 export default function Shop({ route, navigation }) {
-  const { shopId } = route.params;
+  const { shopId, tableId } = route.params;
   const { width } = useWindowDimensions();
-  const { cart } = useCart();
+  const { cart, setTable } = useCart();
+
+  if (tableId) {
+    setTable(tableId);
+  }
+
   const [isLoading, setIsLoading] = useState(true);
   const [menu, setMenu] = useState({});
   const [shop, setShop] = useState({});

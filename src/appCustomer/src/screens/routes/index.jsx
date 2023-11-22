@@ -29,6 +29,7 @@ import ItemDetails from '../Shop/ItemDetails';
 import CartScreen from '../Carrinho/CartScreen';
 import TrashCan from '../../assets/TrashCan.svg';
 import Icon from '../../assets/Comandas-icon.png';
+import DefineTable from '../Carrinho/DefineTable';
 
 function SplashScreen() {
   return (
@@ -73,7 +74,7 @@ function RightButton({ onPress }) {
       onPress={() =>
         Alert.alert(
           'Atenção !',
-          'Deseja realmente limpar sua sacola ?',
+          'Deseja realmente limpar seu carrinho ?',
           [
             {
               text: 'Confirmar',
@@ -227,8 +228,17 @@ function StackNavigation() {
         name="Cart"
         component={CartScreen}
         options={{
-          title: 'Sacola',
+          title: 'Carrinho',
           headerRight: () => <RightButton onPress={clearCart} />,
+        }}
+      />
+      <Stack.Screen
+        name="DefineTable"
+        component={DefineTable}
+        options={{
+          animation: 'fade',
+          presentation: 'transparentModal',
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

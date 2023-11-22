@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   Modal,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -34,7 +35,7 @@ function OrderList({ navigation }) {
     const fetchItemsFromAPI = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}customer/${user.id}/order`,
+          `${BASE_URL}customer/${user.userId}/order`,
           {
             headers: {
               'x-api-key': API_KEY,
@@ -75,7 +76,7 @@ function OrderList({ navigation }) {
 
   if (items.length === 0) {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.neutralWhite }}>
         <View>
           <Text style={styles.profileName}> Olá {user.name} </Text>
         </View>
@@ -90,7 +91,7 @@ function OrderList({ navigation }) {
 
   return (
     <View style={{ backgroundColor: COLORS.neutralWhite }}>
-      <View>
+      <View style={{ backgroundColor: COLORS.neutralWhite }}>
         <FlatList
           ListHeaderComponent={() => (
             <>
@@ -104,34 +105,89 @@ function OrderList({ navigation }) {
                   justifyContent: 'center',
                   display: 'flex',
                   flexDirection: 'row',
+                  gap: 15,
+                  marginBottom: 15,
                 }}
               >
-                <Button
-                  style={{ width: 100, height: 50 }}
-                  title="open"
+                <TouchableOpacity
+                  style={{
+                    width: 100,
+                    height: 50,
+                    backgroundColor: COLORS.secondary,
+                    padding: 5,
+                    borderRadius: 25,
+                    justifyContent: 'center',
+                  }}
                   onPress={() => {
                     setStatus('open');
                   }}
-                />
-                <Button
-                  style={{ width: 100, height: 50 }}
-                  title="closed"
+                >
+                  <Text
+                    style={{
+                      color: COLORS.neutralWhite,
+                      fontFamily: 'MontserratSemiBold',
+                      fontSize: 14,
+                      textAlign: 'center',
+                    }}
+                  >
+                    Em aberto
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: 100,
+                    height: 50,
+                    backgroundColor: COLORS.secondary,
+                    padding: 5,
+                    borderRadius: 25,
+                    justifyContent: 'center',
+                  }}
                   onPress={() => {
                     setStatus('closed');
                   }}
-                />
-                <Button
-                  style={{ width: 100, height: 50 }}
+                >
+                  <Text
+                    style={{
+                      color: COLORS.neutralWhite,
+                      fontFamily: 'MontserratSemiBold',
+                      fontSize: 14,
+                      textAlign: 'center',
+                    }}
+                  >
+                    Concluídos
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    width: 100,
+                    height: 50,
+                    backgroundColor: COLORS.secondary,
+                    padding: 5,
+                    borderRadius: 25,
+                    justifyContent: 'center',
+                  }}
                   title="cancelled"
                   onPress={() => {
                     setStatus('cancelled');
                   }}
-                />
+                >
+                  <Text
+                    style={{
+                      color: COLORS.neutralWhite,
+                      fontFamily: 'MontserratSemiBold',
+                      fontSize: 14,
+                      textAlign: 'center',
+                    }}
+                  >
+                    Cancelados
+                  </Text>
+                </TouchableOpacity>
               </View>
             </>
           )}
           data={items}
           keyExtractor={(order) => order.id.toString()}
+          contentContainerStyle={{ padding: 20 }}
           renderItem={({ item: order }) => (
             <>
               <View
@@ -163,7 +219,9 @@ function OrderList({ navigation }) {
                         >
                           status: {order.status}
                         </Text>
-                        <Text style={styles.itemPrice}>R$ {order.total}</Text>
+                        <Text style={styles.itemPrice}>
+                          R$ {order.total.toFixed(2)}
+                        </Text>
                       </View>
                       <Button
                         style={{
@@ -175,7 +233,8 @@ function OrderList({ navigation }) {
                         }}
                         title="Detalhe"
                         onPress={() => {
-                          setDetVisible(!DetVisivel), setValor(order.total);
+                          setDetVisible(!DetVisivel),
+                            setValor(order.total.toFixed(2));
                           setRestaurante(order.shop.userInfo.name);
                           setStatusPedido(order.status);
                           setGroupId(order.groupId);
@@ -281,7 +340,6 @@ function OrderList({ navigation }) {
 export default OrderList;
 
 const styles = StyleSheet.create({
-  // Seus estilos aqui...
   profileName: {
     marginTop: 20,
     marginHorizontal: 24,
@@ -291,7 +349,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   profileText: {
-    // Adicione estilos conforme necessário...
+    textAlign: 'center',
   },
   wrapperContainer: {
     flexDirection: 'row',

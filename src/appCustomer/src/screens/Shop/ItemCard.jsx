@@ -19,7 +19,7 @@ export default function ItemCard({ data, location, shop, navigation }) {
           title={itemInfo.name}
           description={itemInfo.description}
           price={itemInfo.price}
-          image={itemInfo.photo_url}
+          image={itemInfo.photoUrl}
           key={itemInfo.id}
           navigation={navigation}
           item={itemInfo}
