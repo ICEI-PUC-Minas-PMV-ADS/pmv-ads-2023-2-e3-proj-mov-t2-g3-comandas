@@ -124,6 +124,21 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 
 
+| Caso de Teste      | CT-010 -   Teste de Segurança                                       |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  |  RF-001; RF-002; RF-003; RF-004; RF-005; RF-006; RF-010; RF-011; RF-012; RF-015; RF-017; RF-018; RF-020; RF-022 - Criptografia: Garantir que as informações dos usuários, como senhas e dados pessoais, estejam criptografadas e protegidas de possíveis invasões.                                    |
+| Objetivo do Teste      |  Verificar todas as brechas de possiveis ataques contra o site visando roubar informações dos usuarios.                                                                                  |
+| Passos                     | 1) Analisar o codigo fonte <br> 2) Verificar qual tipo de criptografia esta sendo utilizado no site <br> 3) Realizar testes de penetração <br> 4) Corrigir todas as brechas encontradas   |
+| Critérios de Êxito     |   Plena segurança dos dados pessoais dos usuarios.                  |
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                                  |
+
+## Resultado de teste de Segurança
+
+# Link de gif 
+
+
+
 
 > **Links Úteis**:
 > - [Ferramentas de Test para Java Script](https://geekflare.com/javascript-unit-testing/)
