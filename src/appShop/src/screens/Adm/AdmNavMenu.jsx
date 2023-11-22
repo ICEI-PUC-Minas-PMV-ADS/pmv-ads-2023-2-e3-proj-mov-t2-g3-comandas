@@ -78,7 +78,7 @@ const SECTIONS = [
                 id: "Estatisticas",
                 icon: "database",
                 color: COLORS.iconBlue,
-                label: "Estatísticas",
+                label: "Estatisticas",
                 type: "link",
             },
         ],
@@ -214,6 +214,9 @@ function AdmNavMenu({ navigation }) {
                                     }
                                     if (id === "About") {
                                         navigation.navigate("About");
+                                    }
+                                    if (id === "Estatisticas") {
+                                        navigation.navigate("Estatisticas");
                                     }
                                     if (id === "delete") {
                                         sheetDeleteAccount.current.open();

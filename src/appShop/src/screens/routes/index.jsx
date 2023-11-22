@@ -9,7 +9,7 @@ import {
 } from "@react-navigation/drawer";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-import COLORS from "@/constants/colors";
+import colors from "@/constants/colors";
 import { useUser } from "@/context/UserContext";
 import Splash from "../../assets/splash.png";
 import Home from "../Home";
@@ -32,6 +32,7 @@ import AdmSignup from "../Adm/AdmSignup";
 import CrewList from "../Adm/CrewList";
 import CombosOfertas from "../Adm/CombosOfertas";
 import About from "../Adm/About";
+import Estatisticas from "../Adm/Estatisticas";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -105,6 +106,11 @@ function AdmStackNavigation() {
             <Stack.Screen
                 name="About"
                 component={About}
+                options={{ title: "" }}
+            />
+            <Stack.Screen
+                name="Estatisticas"
+                component={Estatisticas}
                 options={{ title: "" }}
             />
         </Stack.Navigator>
@@ -226,7 +232,7 @@ function DrawerNavigation() {
                         <TouchableOpacity
                             onPress={() => navigation.navigate("ItemDetails")}
                             style={{
-                                backgroundColor: COLORS.primary,
+                                backgroundColor: colors.primary,
                                 borderRadius: 999,
                                 width: 30,
                                 height: 30,
