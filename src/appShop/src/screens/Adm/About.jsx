@@ -21,6 +21,7 @@ const SECTIONS = [
         header: "Sobre",
         icon: "book",
         items: [
+            { id: "id", icon: "info", label: "ID:", type: "input" },
             { id: "name", icon: "user", label: "Nome", type: "input" },
             {
                 id: "phoneNumber",
@@ -138,7 +139,10 @@ function About() {
                         Empresa na Aplicação destinada aos Consumidores. Escreva
                         abaixo nos campos{" "}
                         <Text
-                            style={{ color: colors.primary, fontWeight: "500" }}
+                            style={{
+                                color: colors.blueDark,
+                                fontWeight: "500",
+                            }}
                         >
                             Sobre a Empresa, Localização da Empresa & Horários
                             de Funcionamento.
@@ -159,7 +163,7 @@ function About() {
                                     style={[
                                         styles.tabWrapper,
                                         isActive && {
-                                            borderBottomColor: colors.primary,
+                                            borderBottomColor: colors.blueDark,
                                         },
                                     ]}
                                 >
@@ -170,7 +174,7 @@ function About() {
                                             <FeatherIcon
                                                 style={{
                                                     color: isActive
-                                                        ? colors.primary
+                                                        ? colors.blueDark
                                                         : colors.grayDark,
                                                 }}
                                                 name={icon}
@@ -181,7 +185,7 @@ function About() {
                                                     (styles.tabText,
                                                     {
                                                         color: isActive
-                                                            ? colors.primary
+                                                            ? colors.blueDark
                                                             : colors.grayDark,
                                                     })
                                                 }
@@ -278,7 +282,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 24,
         fontSize: 22,
         fontWeight: "700",
-        color: colors.primary,
+        color: colors.blueDark,
         textAlign: "center",
     },
     headerText: {
@@ -334,7 +338,7 @@ const styles = StyleSheet.create({
     rowValue: {
         fontSize: 16,
         fontWeight: "500",
-        color: colors.primary,
+        color: colors.blueDark,
         marginRight: 4,
     },
     textInput: {
@@ -346,7 +350,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 12,
         flexDirection: "row",
-        backgroundColor: colors.primary,
+        backgroundColor: colors.blueDark,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 50,

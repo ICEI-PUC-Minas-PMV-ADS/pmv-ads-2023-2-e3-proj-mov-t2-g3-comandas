@@ -31,7 +31,7 @@ export default function CustomSwitchGroup({ values, onPress }) {
                             <Switch
                                 key={idx}
                                 trackColor={{
-                                    true: colors.primary,
+                                    true: colors.iconBlue,
                                 }}
                                 onValueChange={() => onSwitch(idx)}
                                 value={isChecked}

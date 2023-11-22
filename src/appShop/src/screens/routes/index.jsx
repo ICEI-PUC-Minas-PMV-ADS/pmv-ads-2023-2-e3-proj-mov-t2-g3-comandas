@@ -8,6 +8,7 @@ import {
     createDrawerNavigator,
 } from "@react-navigation/drawer";
 import { Image, Text, TouchableOpacity, View } from "react-native";
+import FeatherIcon from "react-native-vector-icons/Feather";
 
 import colors from "@/constants/colors";
 import { useUser } from "@/context/UserContext";
@@ -33,6 +34,7 @@ import CrewList from "../Adm/CrewList";
 import CombosOfertas from "../Adm/CombosOfertas";
 import About from "../Adm/About";
 import Estatisticas from "../Adm/Estatisticas";
+import QRCode from "../Adm/QRCode";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -52,19 +54,19 @@ function AuthStackNavigation() {
     const navigation = useNavigation();
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{
+                    animation: "slide_from_bottom",
+                }}
+            />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen
                 name="SignupAddress"
                 component={SignupAddress}
                 options={{
                     animation: "slide_from_right",
-                }}
-            />
-            <Stack.Screen
-                name="Login"
-                component={Login}
-                options={{
-                    animation: "slide_from_bottom",
                 }}
             />
         </Stack.Navigator>
@@ -104,12 +106,9 @@ function AdmStackNavigation() {
                 options={{ title: "" }}
             />
             <Stack.Screen
-                name="Cardapio"
-                component={Cardapio}
-                options={{
-                    headerShown: true,
-                    title: "",
-                }}
+                name="QRCode"
+                component={QRCode}
+                options={{ title: "" }}
             />
             <Stack.Screen
                 name="About"
@@ -273,7 +272,13 @@ function DrawerNavigation() {
                 component={OrderSummaryStackNavigation}
                 options={() => ({
                     drawerLabel: "Resumo do Pedido",
-                    // Adicione um ícone se necessário
+                    drawerIcon: ({ focused }) => (
+                        <FeatherIcon
+                            name="activity"
+                            size={18}
+                            fill={focused ? "#ff0000" : "gray"}
+                        />
+                    ),
                 })}
             />
         </Drawer.Navigator>

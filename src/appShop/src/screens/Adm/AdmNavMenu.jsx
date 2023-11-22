@@ -74,6 +74,13 @@ const SECTIONS = [
                 label: "Inserir Produto",
                 type: "link",
             },
+            {
+                id: "QRCode",
+                icon: "slack",
+                color: COLORS.iconBlue,
+                label: "QR Code",
+                type: "link",
+            },
         ],
     },
     {
@@ -225,8 +232,8 @@ function AdmNavMenu({ navigation }) {
                                     if (id === "CombosOfertas") {
                                         navigation.navigate("CombosOfertas");
                                     }
-                                    if (id === "Cardapio") {
-                                        navigation.navigate("Cardapio");
+                                    if (id === "QRCode") {
+                                        navigation.navigate("QRCode");
                                     }
                                     if (id === "About") {
                                         navigation.navigate("About");

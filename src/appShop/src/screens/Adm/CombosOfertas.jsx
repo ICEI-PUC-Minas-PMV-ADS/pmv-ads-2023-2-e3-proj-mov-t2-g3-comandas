@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 12,
         flexDirection: "row",
-        backgroundColor: colors.primary,
+        backgroundColor: colors.iconBlue,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 50,
