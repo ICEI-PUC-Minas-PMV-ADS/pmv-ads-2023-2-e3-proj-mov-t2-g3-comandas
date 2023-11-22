@@ -81,6 +81,20 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 # Link do gif 
 
 
+| Caso de Teste      | CT-006 – Teste de funcionalidade de Registro de Produtos - para Restaurantes (empresas)                  |
+|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  | RF-006 - O sistema deve permitir que os restaurantes registrem seus produtos; RF-007 - O sistema deve permitir a edição de produtos; & RF-018 - O sistema deve permitir que os restaurantes ofereçam promoções ou descontos em produtos específicos.  |
+| Objetivo do Teste      | Verificar se o app permite o registro de um produto, a alteração de características de um produto já cadastrado, a aplicação de preço e disponibilidade. Verificar se o produto é salvo no banco de dados e se as alterações no produto também são salvas. Verificar se é possível incluir ou retirar um produto cadastrado de uma promoção.                                                              |
+| Passos                 | 1) Acessar o app. <br>2) Fazer login de uma empresa. <br>3) Acessar o campo "Publicar Produto".  <br>4) Preencher os campos: nome do produto, descrição, incluir imagem, valor, disponibilidade, seletor de promoção <br>5) Publicar o Produto. <br>6) Verificar se foi publicado com sucesso.                                              |
+| Critérios de Êxito     |   O produto deve ser publicada com sucesso apresentando todos os campos preenchidos na área do Menu do restaurante no App.                                                       |                                      
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                             |
+
+## Resultado do teste de funcionalidade  de registro de produtos  ( Restaurantes ) 
+
+# Link 
+
+
 
 > **Links Úteis**:
 > - [Ferramentas de Test para Java Script](https://geekflare.com/javascript-unit-testing/)
