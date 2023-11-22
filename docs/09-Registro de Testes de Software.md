@@ -23,5 +23,19 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 # Link do gif
 
 
+| Caso de Teste      | CT-002 -      Registro de Novo Usuario - Restaurante (empresa)                                                                                                                                                 |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  | RF-001 -  O app deve permitir que o usuário Restaurante (empresa) crie o seu perfil; RF-015 - O sistema deve permitir que os restaurantes definam horários de funcionamento.                                    |
+| Objetivo do Teste      | Verificar se todos os campos de entrada de dados do Perfíl de usuario Restaurante (empresa) estão funcionando corretamente e alimentando o Banco de Dados. |
+| Passos                 | 1) Acessar o app  <br>2) Fazer o cadastro (Novo Usuario) e Cadastrar todas as demais informações do Perfíl de usuário Restaurante (empresa). O sistema deve permitir que os restaurantes definam horários de funcionamento. <br>3) Verificar a validação das informações <br>4) Permitir o acesso e verificar dados no Banco de Dados.    |
+| Critérios de Êxito     |    Acesso ao painel de Perfil de Usuario Cliente e Restaurante (empresa) <br> Comunicação correta entre o Banco de Dados e aplicação.  |
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                                                                                                                                           | 
+
+## Resultado do teste de Registro de novo Usuario ( Restaurante ) 
+
+# Link do gif 
+
+
 > **Links Úteis**:
 > - [Ferramentas de Test para Java Script](https://geekflare.com/javascript-unit-testing/)
