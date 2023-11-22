@@ -107,7 +107,7 @@ function Problemas() {
             height={110}
             numberOfLines={12}
             maxLength={250}
-            onChangeText={(text) => onChangeText(text)}
+            onChangeText={onChangeText}
             value={value}
             style={{ padding: 10 }}
           />

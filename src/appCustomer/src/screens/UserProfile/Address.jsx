@@ -6,21 +6,116 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  Switch,
   Alert,
 } from 'react-native';
 import React from 'react';
-import MapView from 'react-native-maps';
-// import { useUser } from '@/context/UserContext';
-// import { useNavigation } from '@react-navigation/native';
+import { useUser } from '@/context/UserContext';
+import { useNavigation } from '@react-navigation/native';
 import { registerUserAddress } from '@/services/auth.service';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
+const SECTIONS = [
+  {
+    header: 'Endereço e Localização',
+    icon: 'map',
+    items: [
+      {
+        id: 'Localization',
+        icon: 'map',
+        label: 'Usar Localização Atual',
+        type: 'toggle',
+      },
+      {
+        id: 'id',
+        icon: 'chevron-right',
+        label: 'Id',
+        type: 'bottom-sheet',
+      },
+      { id: 'street', icon: 'check', label: 'Rua', type: 'bottom-sheet' },
+      { id: 'number', icon: 'check', label: 'No', type: 'bottom-sheet' },
+      {
+        id: 'neighborhood',
+        icon: 'check',
+        label: 'Bairro',
+        type: 'bottom-sheet',
+      },
+      {
+        id: 'city',
+        icon: 'check',
+        label: 'Cidade',
+        type: 'bottom-sheet',
+      },
+      {
+        id: 'state',
+        icon: 'check',
+        label: 'Estado',
+        type: 'bottom-sheet',
+      },
+      {
+        id: 'country',
+        icon: 'check',
+        label: 'País',
+        type: 'bottom-sheet',
+      },
+      {
+        id: 'zipcode',
+        icon: 'check',
+        label: 'CEP',
+        type: 'bottom-sheet',
+      },
+    ],
+  },
+];
+
 function Address() {
+  // to get logged user data
+  const { user } = useUser();
+  const navigation = useNavigation();
+  /* const [street, setStreet] = useState('');
+  const [number, setNumber] = useState();
+  const [neighborhood, setNeighborhood] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState();
+  const [country, setCountry] = useState('');
+  const [zipcode, setZipcode] = useState(); */
+
+  const [form, setForm] = React.useState({
+    // Initial Data Simulated - because now the DB don't have payment data
+    Localization: false,
+    id: user.id,
+    street: 'Monteiro Lobato',
+    number: '795',
+    neighborhood: 'Centro',
+    city: 'São Paulo',
+    state: 'São Paulo',
+    country: 'Brasil',
+    zipcode: '05614-018',
+  });
+
+  const [value] = React.useState(0);
+  const { items } = React.useMemo(
+    () => ({
+      // tabs: SECTIONS.map(() => ({})),
+      items: SECTIONS[value].items,
+    }),
+    [value],
+  );
+
   function handleRegisterUserAddress() {
-    registerUserAddress({})
+    registerUserAddress({
+      userAddressInfo: {
+        street,
+        number,
+        neighborhood,
+        city,
+        state,
+        country,
+        zipcode,
+      },
+    })
       .then(() => {
-        Alert.alert('Endereço cadastrado com Sucesso!');
-        // navigation.navigate('UserProfile');
+        navigation.navigate('UserProfile');
       })
       .catch(() => {
         Alert.alert(
@@ -29,30 +124,59 @@ function Address() {
         );
       });
   }
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={styles.scrollContent}>
-        {/* >>>>>>>>>>Edit Head<<<<<<<<<<<< */}
-        <View style={styles.mapContainer}>
-          <MapView style={styles.map} />
+        {/* >>>>>>>>>>header<<<<<<<<<<<< */}
+        <View style={styles.header}>
+          {/* <Text style={styles.title}>Cartões de Pagamento</Text>
+          <Text style={styles.subtitle}>
+            Gerencie aqui seus cartões de pagamento.
+          </Text> */}
         </View>
+        {/* >>>>>>>>>>Edit Head<<<<<<<<<<<< */}
+        <View style={styles.profile}>
+          <View style={styles.profileHeader} />
+          {/* >>>>>>>>>>Edit Button<<<<<<<<<<<< */}
+          <TouchableOpacity
+            onPress={() => {
+              // handleRegisterUserAddress
+              handleRegisterUserAddress();
+            }}
+          >
+            <View style={styles.profileAction}>
+              <Text style={styles.profileActionText}>Editar Endereço</Text>
+              <FeatherIcon name="edit-3" size={16} color={COLORS.white} />
+            </View>
+          </TouchableOpacity>
+        </View>
+
         {/* >>>>>>>>>>Body<<<<<<<<<<<< */}
         <View style={styles.content}>
-          {/* >>>>>>>>>>Edit Button<<<<<<<<<<<< */}
-          <View style={styles.profile}>
-            <TouchableOpacity
-              onPress={() => {
-                // handleRegisterUserAddress
-                handleRegisterUserAddress();
-              }}
-            >
-              <View style={styles.profileAction}>
-                <Text style={styles.profileActionText}>Adicionar Endereço</Text>
-                <FeatherIcon name="save" size={18} color={COLORS.white} />
+          {items.map(({ label, type, id, icon }, index) => (
+            <View key={index} style={styles.rowWrapper}>
+              <View style={styles.row}>
+                <FeatherIcon
+                  style={{ padding: 8 }}
+                  name={icon}
+                  size={18}
+                  color={COLORS.placeholderText}
+                />
+                <Text style={styles.rowLabel}>{label}</Text>
+
+                <View style={{ flex: 1 }} />
+                {type === 'bottom-sheet' && (
+                  <Text style={styles.rowValue}>{form[id]}</Text>
+                )}
+                {type === 'toggle' && (
+                  <Switch
+                    value={form[id]}
+                    onValueChange={(value) => setForm({ ...form, [id]: value })}
+                  />
+                )}
               </View>
-            </TouchableOpacity>
-          </View>
+            </View>
+          ))}
         </View>
         <View style={styles.footer}>
           <Text style={styles.footerText}>
@@ -72,13 +196,6 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingVertical: 24,
-  },
-  mapContainer: {
-    flex: 1,
-  },
-  map: {
-    width: '100%',
-    height: '100%',
   },
   header: {
     paddingHorizontal: 24,
@@ -143,16 +260,15 @@ const styles = StyleSheet.create({
     height: 60,
   },
   rowLabel: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginLeft: 8,
+    fontSize: 16,
+    fontWeight: '500',
     color: COLORS.placeholderText,
   },
   rowValue: {
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: 16,
+    fontWeight: '500',
     color: COLORS.linkTextGreen,
-    marginRight: 8,
+    marginRight: 4,
   },
   footer: {
     paddingVertical: 12,
