@@ -92,7 +92,22 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 ## Resultado do teste de funcionalidade  de registro de produtos  ( Restaurantes ) 
 
-# Link 
+# Link do gif
+
+
+
+| Caso de Teste      | CT-007 – Teste de funcionalidade de Processo de Compra - para Usuários Clientes                  |
+|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  | RF-008 - O sistema deve permitir que os usuários visualizem produtos dos restaurantes.; RF-009 - O sistema deve permitir que o usuário use a câmera para escanear QR-codes de restaurantes parceiros; RF-010 - O sistema deve permitir que usuário adicione produtos ao seu carrinho de compra; RF-011 - O sistema deve permitir que o usuário finalize um pedido com um ou mais produtos; RF-016 - O sistema deve permitir que os usuários avaliem e comentem sobre os restaurantes e produtos; RF-021 - O sistema deve permitir que os usuários marquem restaurantes como favoritos para acesso rápido. ;& RF-018 - O sistema deve permitir que os restaurantes ofereçam promoções ou descontos em produtos específicos.  |
+| Objetivo do Teste      | Verificar se o app permite todo o processo de compra proposto pelo projeto. Desde o cliente escanear o QR code na mesa para acessar o app e menu do restaurante, visulizar os produtos, inserir o pedido e finalizar a compra. Podendo no final do processo favoritar o restaurante e avaliá-lo no app.                                                              |
+| Passos                 | 1) Acessar o app através da leitura do QR code. <br>2) Fazer login de cliente. <br>3) Acessar um produto no Menu do restaurante e verificar todas as informações.  <br>4) Incluir o produto no pedido e finalizar o processo de compra. <br>5) Favoritar o restaurante e verificar a lista de favoritos no perfíl do usuário. <br>6) Escrever uma avaliação do restaurante e visualizar o perfíl do restaurante com a publicação.                                              |
+| Critérios de Êxito     |   Todos os passos devem ser realizados com sucesso incluindo a verificação do pedido de compra no App Shop do restaurante.                                                       |                                      
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                             |
+
+## Resultado de teste de funcionalidade de processo de com ( Cliente ) 
+
+# Link do gif 
 
 
 
