@@ -37,6 +37,22 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 # Link do gif 
 
 
+
+| Caso de Teste      | CT-003 -      Registro de Novo Usuario - Cliente                                    |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  |  RF-002 -  O app deve permitir que o usuário Cliente crie o seu perfil.  |
+| Objetivo do Teste      | Verificar se todos os campos de entrada de dados do Perfíl de usuario Cliente estão funcionando corretamente e alimentando o Banco de Dados.   |
+| Passos                 | 1) Acessar o app  <br>2) Fazer o cadastro (Novo Usuario) e Cadastrar todas as demais informações do Perfíl de usuário Cliente.  <br>3) Verificar a validação das informações <br>4) Permitir o acesso e verificar dados no Banco de Dados.    |
+| Critérios de Êxito     |    Acesso ao painel de Perfil de Usuario - Empresa (Usuário Pessoa Jurídica) <br> Comunicação correta entre o Banco de Dados e aplicação.  |
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                                                                                                                                           |
+
+## Resultado de teste de Registro de novo usúario ( Cliente) 
+
+# Link do gif
+
+
+
 | Caso de Teste      | CT-004 – Teste de funcionalidade de Edição dos dados das contas de usuários Cliente               |
 |--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Requisitos Associados  | RF-005 - O sistema deve permitir a edição dos dados das contas de Clientes.  |
