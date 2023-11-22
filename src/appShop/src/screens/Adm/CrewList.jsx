@@ -37,13 +37,13 @@ const SECTIONS = [
         items: [
             {
                 id: "01",
-                icon: "bell",
+                icon: "sun",
                 label: "Almoço - 8:00 -> 16:00",
                 type: "toggle",
             },
             {
                 id: "02",
-                icon: "bell",
+                icon: "moon",
                 label: "Jantar - 17:00 -> 23:00",
                 type: "toggle",
             },

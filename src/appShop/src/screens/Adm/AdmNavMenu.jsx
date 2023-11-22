@@ -68,7 +68,7 @@ const SECTIONS = [
                 type: "link",
             },
             {
-                id: "AboutShop",
+                id: "About",
                 icon: "book-open",
                 color: COLORS.iconBlue,
                 label: "Sobre a Empresa",
@@ -211,6 +211,9 @@ function AdmNavMenu({ navigation }) {
                                     }
                                     if (id === "CombosOfertas") {
                                         navigation.navigate("CombosOfertas");
+                                    }
+                                    if (id === "About") {
+                                        navigation.navigate("About");
                                     }
                                     if (id === "delete") {
                                         sheetDeleteAccount.current.open();
