@@ -68,16 +68,29 @@ const SECTIONS = [
                 type: "link",
             },
             {
-                id: "About",
+                id: "AddProduct",
                 icon: "book-open",
                 color: COLORS.iconBlue,
+                label: "Inserir Produto",
+                type: "link",
+            },
+        ],
+    },
+    {
+        header: "Loja - Dados",
+        icon: "help-circle",
+        items: [
+            {
+                id: "About",
+                icon: "book",
+                color: COLORS.blueDark,
                 label: "Sobre a Empresa",
                 type: "link",
             },
             {
                 id: "Estatisticas",
                 icon: "database",
-                color: COLORS.iconBlue,
+                color: COLORS.blueDark,
                 label: "Estatisticas",
                 type: "link",
             },
