@@ -37,5 +37,17 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 # Link do gif 
 
 
+| Caso de Teste      | CT-004 – Teste de funcionalidade de Edição dos dados das contas de usuários Cliente               |
+|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  | RF-005 - O sistema deve permitir a edição dos dados das contas de Clientes.  |
+| Objetivo do Teste      | Verificar se o app permite que usuários Clientes possam acessar, editar e salvar as informações de perfíl (cadastro).                                                               |
+| Passos                 | 1) Acessar o app. <br>2) Fazer login de usuário Cliente. <br>3) Acessar o botão "Editar Perfil".  <br>4) Preencher novos dados em todos os campos de perfíl de Cliente que são editáveis. <br>5) Acessar o botão "Salvar". <br>6) Verificar se a perfil do usuário Cliente foi atualizado com sucesso. <br> 7) Fazer logout de usuário Cliente. <br>8) Fazer login de usuário Cliente. <br>9) Verificar se a perfil do usuário Cliente foi atualizado com sucesso.                                            |
+| Critérios de Êxito     |   Todos os campos editáveis do perfíl de um usuário Cliente devem poder ser editados e salvos.                                                       |                                      
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                             |
+
+## Resultado teste de funcionalidade de Edição dos dados das contas de usúarios ( Cliente )
+
+# Link do gif
 > **Links Úteis**:
 > - [Ferramentas de Test para Java Script](https://geekflare.com/javascript-unit-testing/)
