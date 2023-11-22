@@ -65,5 +65,22 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 ## Resultado teste de funcionalidade de Edição dos dados das contas de usúarios ( Cliente )
 
 # Link do gif
+
+
+| Caso de Teste      | CT-005 – Teste de funcionalidade de Edição dos dados das contas de usuários Restaurantes (empresas)               |
+|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  | RF-005 - O sistema deve permitir a edição dos dados das contas de Restaurantes (empresas). RF-015 - O sistema deve permitir que os restaurantes definam horários de funcionamento. & RF-020 - O sistema deve permitir que os restaurantes definam um limite máximo de pedidos por dia ou hora.|
+| Objetivo do Teste      | Verificar se o app permite que usuários Restaurantes (empresas) possam acessar, editar e salvar as informações de perfíl (cadastro).                                                               |
+| Passos                 | 1) Acessar o app. <br>2) Fazer login de usuário Restaurante (empresa). <br>3) Acessar o botão "Editar Perfil".  <br>4) Preencher novos dados em todos os campos de perfíl de Restaurante (empresa) que são editáveis. <br>5) Acessar o botão "Salvar". <br>6) Verificar se a perfil do usuário Restaurante (empresa) foi atualizado com sucesso. <br>7) Fazer logout de usuário Restaurante (empresa). <br>8) Fazer login de usuário Restaurante (empresa). <br>9) Verificar se a perfil do usuário Restaurante (empresa) foi atualizado com sucesso.                                            |
+| Critérios de Êxito     |   Todos os campos editáveis do perfíl de um usuário Cliente devem poder ser editados e salvos.                                                       |                                      
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                             |
+
+## Resultado do teste de funcionalidade de ediçao dos dados da conta de usúarios ( Restaurantes ) 
+
+# Link do gif 
+
+
+
 > **Links Úteis**:
 > - [Ferramentas de Test para Java Script](https://geekflare.com/javascript-unit-testing/)
