@@ -110,6 +110,20 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 # Link do gif 
 
 
+| Caso de Teste      | CT-009 – Teste de funcionalidade de geolocalização   |
+|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requisitos Associados  |      RF-13 - O sistema deve identificar geograficamente o local onde o usuário está e sugerir o restaurante para o usuário. RF-019 - O sistema deve permitir a busca de restaurantes por nome, localização ou tipo de cozinha. RF-014 - O sistema deve sugerir comércios com base no usuário. |
+| Objetivo do Teste      | Verificar se a aplicação está respondendo corretamente a mudanças na localização do usuário..                                                                                                                               |
+| Passos                     | 1) Acessar o app.  <br>2) Fazer login de usuário Cliente. <br>3) Acessar a área de mapas / localização. <br>4) Verificar se aparecem restaurantes (empresas) proximos à localização atual. <br>5) Usar o filtro de resultados para tipo de comida e verificar os resultados apresentados no mapa. <br>6) Usar o filtro de resultados pela distância e verificar os resultados apresentados no mapa.                                                                                                    |
+| Critérios de Êxito     |   Exibição das Restaurantes (empresas) mais proximas da localização desejada do usuario e de acordo com as filtragens selecionadas.                                                                                                                                                      |
+| Dados de entrada   |                                                                                                                                                                                                             | 
+| Resultado Obtido   |                                                                                                                                                                                                           |
+## Resultado de teste de funcionalidade de Geolocalização 
+
+# Link do gif 
+
+
+
 
 > **Links Úteis**:
 > - [Ferramentas de Test para Java Script](https://geekflare.com/javascript-unit-testing/)
