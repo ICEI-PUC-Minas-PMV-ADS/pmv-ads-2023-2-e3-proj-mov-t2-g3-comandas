@@ -206,7 +206,8 @@ Abaixo segue a versão final da Matriz de Rastreabilidade de Requisitos.
 ![matriz de rastreabilidade de requisitos detalhada](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/48bf5a95d33f4bafa980d6d565546c1b47f19e17/docs/img/00_Matriz_Rastreabilidade_Final.png)
 
 ### Planilha de Rastreabilidade de Artefactos Produzidos - Entregáves
-![matriz de rastreabilidade de requisitos detalhada](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/b19b3aa6629e81fa6d127553dc6fe9ffae756716/docs/img/00_%20Artefatos.pdf)
+![matriz de rastreabilidade de requisitos detalhada](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/blob/cd6497a834e8f4568edb712e8e94d11b5ad80337/docs/img/00_%20Artefatos.pdf)
+
 
 # Gerenciamento de Projeto
 
