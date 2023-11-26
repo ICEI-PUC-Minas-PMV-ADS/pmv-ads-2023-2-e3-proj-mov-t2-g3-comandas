@@ -13,14 +13,17 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 | Dados de entrada   |                                                                                                                                                                                                             | 
 | Resultado Obtido   | 
 
+
 ## Resultado do teste de login de Usuarios ( Cliente ) 
 
-# Link do gif 
+[Video - Login.webm](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/bc288983-2c5d-4de1-896d-9a459163c9c6)
 
 
 ## Resultado do teste de login de Usuarios ( Restaurante)
 
-# Link do gif
+[Video - Login Restaurante.webm](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/19e65627-24e1-4cde-ab8b-256fe9a52870)
+
+
 
 
 | Caso de Teste      | CT-002 -      Registro de Novo Usuario - Restaurante (empresa)                                                                                                                                                 |
@@ -34,7 +37,7 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 ## Resultado do teste de Registro de novo Usuario ( Restaurante ) 
 
-# Link do gif 
+[Video - Registro Restaurant.webm](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/feacb6fd-3b24-4f78-b8ce-eeb4dfc8d1c5)
 
 
 
@@ -49,7 +52,7 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 ## Resultado de teste de Registro de novo usúario ( Cliente) 
 
-# Link do gif
+[Video - Registro Cliente.webm](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/bdf582fa-e334-4c6c-99db-e610ccf272ec)
 
 
 
