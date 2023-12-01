@@ -1,11 +1,5 @@
 # Instruções de utilização
 
-## Instalação do Site
+## Utilização do app
 
-O site em HTML/CSS/JS é um projeto estático, logo pode ser utilizado tanto em servidores...
-
-## Histórico de versões
-
-### [0.1.0] - DD/MM/AAAA
-#### Adicionado
-- Adicionado ...
+há dois apps, um para clientes, `appCustomer` e outro para estabelecimentos `appShop`
