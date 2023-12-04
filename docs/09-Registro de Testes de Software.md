@@ -95,8 +95,7 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 ## Resultado do teste de funcionalidade  de registro de produtos  ( Restaurantes ) 
 
-# Link do gif
-
+[Video Registro Produtos.webm](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/9edab3d6-e206-45d6-a015-a79d0a5158af)
 
 
 | Caso de Teste      | CT-007 – Teste de funcionalidade de Processo de Compra - para Usuários Clientes                  |
@@ -110,7 +109,7 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 ## Resultado de teste de funcionalidade de processo de com ( Cliente ) 
 
-# Link do gif 
+[Video Registro Processo de compra.webm](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/94e28078-93b4-4761-8230-85f6133ef32b)
 
 
 | Caso de Teste      | CT-009 – Teste de funcionalidade de geolocalização   |
@@ -123,7 +122,7 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 | Resultado Obtido   |                                                                                                                                                                                                           |
 ## Resultado de teste de funcionalidade de Geolocalização 
 
-# Link do gif 
+[Video Registro Geolocalização.webm](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/48fe3046-deab-4f3e-aac1-0a3664f7be6c)
 
 
 
