@@ -137,7 +137,11 @@ Os testes funcionais a serem realizados no aplicativo são descritos a seguir.
 
 ## Resultado de teste de Segurança
 
-# Link de gif 
+ ![teste GET item user](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/2c37a87d-871c-4006-b27b-fd7ba0c4e7b7)
+
+![teste login post ](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/7dd9042f-3318-4372-aaf9-06754b0911f6)
+
+![teste PUT user ](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas/assets/89494470/76fcf13b-bdc5-43d3-8c7c-4f0c1b635d66)
 
 
 
