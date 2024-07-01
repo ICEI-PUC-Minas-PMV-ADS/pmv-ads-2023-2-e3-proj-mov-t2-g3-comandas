@@ -1,29 +1,28 @@
 message: Please cite this software using these metadata.
-title:
+title: 
 authors:
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
+  - family-names: Soares
+    given-names:  Álvaro
+  - family-names: Azevedo Ferreira Carvalho
+    given-names: André
+  - family-names: Reinis
+    given-names: Carlos Eduardo
+  - family-names: Alves Moreira Neto
+    given-names: Florisvaldo
+  - family-names: Morais Gonçalves
+    given-names: Breno
+  - family-names: Silva Oliveira
+    given-names: Vitor
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
-  - name-suffix: Professor
-    affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Curcino de Lima
+    given-names: Mateus
 keywords:
-  - 
-  - 
-repository-code: 
+  - e-Commerce
+  - Gestão de Restaurantes
+  - Cardápio Virtual
+  - Reserva de Mesas
+  - Restaurante
+repository-code: https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t2-g3-comandas.git
 version: 1.0.0
-date-released: 2023-10-31
+date-released: 2023–12-05
